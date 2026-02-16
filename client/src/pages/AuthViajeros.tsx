@@ -14,7 +14,6 @@ import { useLocation } from "wouter";
 const AuthViajeros = () => {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
 
   // Login mutation
   const loginMutation = useMutation({
@@ -31,11 +30,10 @@ const AuthViajeros = () => {
         description: "Has iniciado sesión correctamente",
       });
       
+      if (data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+      }
 
-      
-
-      
-      // Always redirect to Portal Viajeros from viajeros auth page
       // Use location.replace to ensure proper session cookie handling
       setTimeout(() => {
         window.location.replace('/portal-viajeros');
@@ -76,9 +74,13 @@ const AuthViajeros = () => {
         description: "Te has registrado correctamente como viajero",
       });
       
+      if (data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+      }
+
       // Redirect to viajeros portal after registration
       setTimeout(() => {
-        window.location.href = '/portal-viajeros';
+        window.location.replace('/portal-viajeros');
       }, 1000);
     },
     onError: (error: any) => {
@@ -133,12 +135,12 @@ const AuthViajeros = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 mobile-content-full">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 mobile-content-full flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md mx-auto mobile-fade-in"
+        className="w-full max-w-md mobile-fade-in"
       >
         <div className="text-center mb-8">
           <motion.div
@@ -157,7 +159,7 @@ const AuthViajeros = () => {
           </p>
         </div>
 
-        <Card className="mobile-card bg-black/40 border-white/20 shadow-xl">
+        <Card className="mobile-card bg-black/40 border-white/20 shadow-xl backdrop-blur-md">
           <CardHeader className="mobile-p-4">
             <CardTitle className="text-center text-white mobile-text-xl">Acceso Viajeros</CardTitle>
           </CardHeader>
@@ -168,7 +170,7 @@ const AuthViajeros = () => {
                 <TabsTrigger value="register" className="text-white data-[state=active]:bg-green-600 data-[state=active]:text-white">Registrarse</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="login" className="space-y-4">
+              <TabsContent value="login" className="space-y-4 pt-4">
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-white mobile-text-sm">Email</Label>
@@ -177,7 +179,6 @@ const AuthViajeros = () => {
                       name="email"
                       type="email"
                       placeholder="tu@email.com"
-                      defaultValue="dahub.tech@gmail.com"
                       required
                       className="mobile-input bg-white/10 border-white/30 text-white placeholder:text-white/50"
                       data-testid="input-email-login"
@@ -190,7 +191,6 @@ const AuthViajeros = () => {
                       name="password"
                       type="password"
                       placeholder="••••••••"
-                      defaultValue="12345678"
                       required
                       className="mobile-input bg-white/10 border-white/30 text-white placeholder:text-white/50"
                       data-testid="input-password-login"
@@ -207,9 +207,9 @@ const AuthViajeros = () => {
                 </form>
               </TabsContent>
               
-              <TabsContent value="register" className="space-y-4">
+              <TabsContent value="register" className="space-y-4 pt-4">
                 <form onSubmit={handleRegister} className="mobile-form space-y-4">
-                  <div className="mobile-grid-2 gap-3">
+                  <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-2">
                       <Label htmlFor="firstName" className="text-white mobile-text-sm">Nombre</Label>
                       <Input
@@ -299,7 +299,7 @@ const AuthViajeros = () => {
                   />
                   <path
                     fill="currentColor"
-                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                   />
                 </svg>
                 Google
@@ -323,15 +323,15 @@ const AuthViajeros = () => {
           <div className="flex items-center justify-center space-x-6 text-sm text-white/50">
             <div className="flex items-center">
               <Map className="w-4 h-4 mr-2" />
-              Mapa interactivo
+              Mapa
             </div>
             <div className="flex items-center">
               <Heart className="w-4 h-4 mr-2" />
-              Experiencias únicas
+              Experiencias
             </div>
             <div className="flex items-center">
               <Plane className="w-4 h-4 mr-2" />
-              Turismo sostenible
+              Turismo
             </div>
           </div>
         </div>

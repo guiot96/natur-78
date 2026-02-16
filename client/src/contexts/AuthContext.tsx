@@ -28,12 +28,37 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser && parsedUser.id) {
+          setUser(parsedUser);
+        } else {
+          localStorage.removeItem('user');
+        }
       } catch (error) {
         localStorage.removeItem('user');
       }
     }
-    setLoading(false);
+    
+    // Check session with backend to ensure it's still valid
+    const checkSession = async () => {
+      try {
+        const response = await apiRequest('/api/auth/me', { method: 'GET' });
+        if (response.user) {
+          setUser(response.user);
+          localStorage.setItem('user', JSON.stringify(response.user));
+        } else {
+          setUser(null);
+          localStorage.removeItem('user');
+        }
+      } catch (error) {
+        // If 401, session is invalid
+        console.log("Session invalid or not found");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkSession();
   }, []);
 
   const signUp = async (email: string, password: string) => {
