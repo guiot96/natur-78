@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
@@ -23,20 +23,37 @@ import { useAuth } from '@/contexts/AuthContext';
 import AuthViajeros from "./AuthViajeros";
 
 const PortalViajerosNew = () => {
-  const { signOut } = useAuth();
-  const [activeView, setActiveView] = useState("experiencias"); // Changed default to experiencias
+  const { user: authUser, loading: authLoading, signOut } = useAuth();
+  const [activeView, setActiveView] = useState("experiencias");
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     try {
       return window.innerWidth >= 1024;
     } catch (error) {
-      return false; // Default for SSR
+      return false;
     }
   });
+
   const [, setLocation] = useLocation();
   const queryClient = useQueryClient();
 
+  // Current user data fetch with improved error handling
+  const { data: currentUser, isLoading: userLoading, error: userError } = useQuery({
+    queryKey: ['/api/auth/me'],
+    retry: false,
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
 
+  // Use the context user or fallback to query data or localStorage
+  const user = authUser || currentUser || (typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null);
+
+  // Redirección si no está logueado
+  useEffect(() => {
+    if (!authLoading && !user) {
+      window.location.replace('/portal-viajeros/auth');
+    }
+  }, [user, authLoading]);
 
   // Navigation items for traveler portal
   const navItems = [
@@ -83,27 +100,15 @@ const PortalViajerosNew = () => {
     createConversationMutation.mutate(userId);
   };
 
-  // Current user data fetch with improved error handling
-  const { data: currentUser, isLoading: userLoading, error: userError } = useQuery({
-    queryKey: ['/api/auth/me'],
-    retry: false, // Don't retry authentication failures
-    staleTime: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
-    queryFn: async () => {
-      try {
-        const response = await apiRequest('/api/auth/me');
-        return response;
-      } catch (error) {
-        // Handle auth errors gracefully
-        if (error instanceof Error && error.message.includes('401')) {
-          throw new Error('Authentication required');
-        }
-        throw error;
-      }
-    }
-  });
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
 
-  const user = (currentUser as any)?.user || currentUser;
+  if (!user) return null;
 
   // Public experiences fetch for travelers - optimized
   const { data: experiences = [], isLoading: experiencesLoading } = useQuery({

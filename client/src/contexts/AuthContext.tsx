@@ -6,6 +6,12 @@ import { apiRequest } from '@/lib/queryClient';
 interface User {
   id: string;
   email: string;
+  role?: string;
+  firstName?: string;
+  lastName?: string;
+  companyName?: string;
+  registrationComplete?: boolean;
+  emailVerified?: boolean;
 }
 
 interface AuthContextType {

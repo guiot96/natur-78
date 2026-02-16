@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { useAuth } from "@/contexts/AuthContext";
 import { 
   Search, Building2, Users, TrendingUp, MapPin, ArrowRight,
   BookOpen, Calendar, ExternalLink, Globe, Mail, Phone,
@@ -45,6 +46,7 @@ interface BlogPost {
 }
 
 export default function HomePage() {
+  const { user, loading: authLoading } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubcategory, setSelectedSubcategory] = useState("");
@@ -52,11 +54,40 @@ export default function HomePage() {
   const [selectedCity, setSelectedCity] = useState("");
   const [showFilters, setShowFilters] = useState(false);
 
+  // Redirección si no es empresa
+  useEffect(() => {
+    if (!authLoading && (!user || (user.role !== 'empresa' && user.role !== 'admin'))) {
+      window.location.replace('/auth/empresas');
+    }
+  }, [user, authLoading]);
+
   // Fetch portal statistics
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['/api/portal/stats'],
     staleTime: 5 * 60 * 1000,
   }) as { data: PortalStats; isLoading: boolean };
+
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#0a1a0a]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#cad95e]"></div>
+      </div>
+    );
+  }
+
+  // Si no hay usuario en el contexto, intentar recuperar de localStorage para rapidez
+  const effectiveUser = user || (typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null);
+
+  if (!effectiveUser) {
+    window.location.replace('/auth/empresas');
+    return null;
+  }
+
+  // Redirección si no es empresa
+  if (effectiveUser.role !== 'empresa' && effectiveUser.role !== 'admin') {
+    window.location.replace('/auth/empresas');
+    return null;
+  }
 
   // Fetch featured blogs
   const { data: blogs, isLoading: blogsLoading } = useQuery({
@@ -65,27 +96,31 @@ export default function HomePage() {
   }) as { data: BlogPost[]; isLoading: boolean };
 
   // Fetch filter options
-  const { data: categories = [] } = useQuery({
+  const { data: categoriesData = [] } = useQuery({
     queryKey: ['/api/search/filters/categories'],
     staleTime: 15 * 60 * 1000,
-  }) as { data: string[]; };
+  });
+  const categories = Array.isArray(categoriesData) ? categoriesData : [];
 
-  const { data: subcategories = [] } = useQuery({
+  const { data: subcategoriesData = [] } = useQuery({
     queryKey: ['/api/search/filters/subcategories', selectedCategory],
     enabled: !!selectedCategory,
     staleTime: 10 * 60 * 1000,
-  }) as { data: string[]; };
+  });
+  const subcategories = Array.isArray(subcategoriesData) ? subcategoriesData : [];
 
-  const { data: countries = [] } = useQuery({
+  const { data: countriesData = [] } = useQuery({
     queryKey: ['/api/search/filters/countries'],
     staleTime: 15 * 60 * 1000,
-  }) as { data: string[]; };
+  });
+  const countries = Array.isArray(countriesData) ? countriesData : [];
 
-  const { data: cities = [] } = useQuery({
+  const { data: citiesData = [] } = useQuery({
     queryKey: ['/api/search/filters/cities', selectedCountry],
     enabled: !!selectedCountry,
     staleTime: 10 * 60 * 1000,
-  }) as { data: string[]; };
+  });
+  const cities = Array.isArray(citiesData) ? citiesData : [];
 
   // Build search params
   const buildSearchParams = () => {
