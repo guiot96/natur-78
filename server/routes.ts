@@ -217,127 +217,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const address = req.body.address || '';
       const city = req.body.city || 'Bogotá';
       
+      // Hash password
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
       // Build comprehensive user data for complete empresa registration
-      const userData = insertUserSchema.parse({
+      const userData: any = {
         ...req.body,
-        firstName: firstName.charAt(0).toUpperCase() + firstName.slice(1),
-        lastName: lastName.charAt(0).toUpperCase() + lastName.slice(1),
-        companyName: req.body.companyName || req.body.businessName,
+        email,
+        password: hashedPassword,
+        firstName: firstName ? (firstName.charAt(0).toUpperCase() + firstName.slice(1)) : null,
+        lastName: lastName ? (lastName.charAt(0).toUpperCase() + lastName.slice(1)) : null,
+        companyName: req.body.companyName || req.body.businessName || null,
         role: role,
         isActive: true,
-        address,
-        city,
+        address: req.body.address || '',
+        city: req.body.city || 'Bogotá',
         country: req.body.country || 'Colombia',
-        coordinates,
-        // Complete company registration fields
-        companyDescription: req.body.companyDescription || '',
-        companyCategory: req.body.companyCategory || '',
-        companySubcategory: req.body.companySubcategory || '',
-        businessType: req.body.businessType || '',
-        yearsExperience: req.body.yearsExperience ? parseInt(req.body.yearsExperience) : null,
-        teamSize: req.body.teamSize ? parseInt(req.body.teamSize) : null,
-        bio: req.body.bio || '',
-        targetMarket: req.body.targetMarket || '',
+        coordinates: coordinates,
         phone: req.body.phone || '',
         website: req.body.website || '',
-        twitterUrl: req.body.twitterUrl || '',
-        facebookUrl: req.body.facebookUrl || '',
-        linkedinUrl: req.body.linkedinUrl || '',
-        instagramUrl: req.body.instagramUrl || '',
+        businessType: req.body.businessType || (role === 'empresa' ? 'tourism' : ''),
+        registrationComplete: role === 'viajero' ? true : (req.body.registrationComplete || false),
+        profileCompletion: role === 'viajero' ? 100 : (req.body.profileCompletion || 0),
+        isVerified: role === 'viajero' ? true : false,
+        paymentMethods: JSON.stringify(req.body.paymentMethods || []),
         certifications: req.body.certifications || [],
         sustainabilityPractices: req.body.sustainabilityPractices || [],
         accessibilityFeatures: req.body.accessibilityFeatures || [],
+        languages: req.body.languages || [],
         servicesOffered: req.body.servicesOffered || [],
         operatingHours: req.body.operatingHours || {},
         socialMedia: req.body.socialMedia || {},
         emergencyContact: req.body.emergencyContact || {},
-        profilePicture: req.body.profilePicture || '',
-        registrationComplete: req.body.registrationComplete || false,
-        profileCompletion: req.body.profileCompletion || (role === 'empresa' ? 100 : 50),
-        verificationLevel: req.body.verificationLevel || (role === 'empresa' ? 'verified' : 'basic'),
-        isContactCardVisible: req.body.isContactCardVisible ?? true,
-        isMapVisible: req.body.isMapVisible ?? true,
-        // New messaging configuration fields
-        messagingEnabled: req.body.messagingEnabled ?? true,
-        messagingBio: req.body.messagingBio || '',
-        acceptsInquiries: req.body.acceptsInquiries ?? true,
-        responseTimeHours: req.body.responseTimeHours || 24,
-        // New experience creation setup fields  
-        experienceSetupComplete: req.body.experienceSetupComplete ?? true,
-        defaultExperienceCategory: req.body.defaultExperienceCategory || '',
-        defaultMeetingPoint: req.body.defaultMeetingPoint || '',
-        defaultCancellationPolicy: req.body.defaultCancellationPolicy || '',
-        // Additional new fields from 15-step registration
-        businessLicense: req.body.businessLicense || '',
-        taxId: req.body.taxId || '',
-        languages: req.body.languages || [],
-        acceptTerms: req.body.acceptTerms || false,
-        // Payment configuration
-        paymentMethods: JSON.stringify(req.body.paymentMethods || []),
-        invoiceEmail: req.body.invoiceEmail || '',
-        taxInformation: req.body.taxInformation || '',
-        // Notification preferences
-        emailNotifications: req.body.emailNotifications ?? true,
-        smsNotifications: req.body.smsNotifications ?? false,
-        marketingEmails: req.body.marketingEmails ?? true,
-        // Security settings
-        twoFactorEnabled: req.body.twoFactorEnabled ?? false,
-        loginNotifications: req.body.loginNotifications ?? true,
-        // API settings
-        apiAccess: req.body.apiAccess ?? false,
-        webhookUrl: req.body.webhookUrl || '',
-        // Final configuration
-        setupComplete: req.body.setupComplete ?? true
-      });
-      
-      // Check if user already exists
-      const existingUser = await storage.getUserByEmail(userData.email);
-      if (existingUser) {
-        return res.status(400).json({ error: "User already exists" });
-      }
-
-      // Generate verification token for email verification
-      const verificationToken = crypto.randomBytes(32).toString('hex');
-      userData.verificationToken = verificationToken;
-      userData.emailVerified = true; // Temporarily auto-verify until SendGrid is configured
+        setupComplete: role === 'viajero' ? true : false,
+        emailVerified: true, // Auto-verify for now
+        verificationToken: crypto.randomBytes(32).toString('hex')
+      };
 
       const user = await storage.createUser(userData);
-      
-      // Send verification email for empresa users (non-blocking)
-      if (role === 'empresa' && userData.companyName) {
-        // Send emails asynchronously without blocking registration
-        Promise.resolve().then(async () => {
-          try {
-            const emailSent = await sendVerificationEmail(
-              userData.email,
-              `${userData.firstName || ''} ${userData.lastName || ''}`,
-              userData.companyName || '',
-              verificationToken
-            );
-            console.log(`📧 Verification email sent: ${emailSent ? 'Success' : 'Failed'}`);
-            
-            // Send admin notification
-            await sendAdminNotification(
-              `${userData.firstName || ''} ${userData.lastName || ''}`,
-              userData.companyName || '',
-              userData.email,
-              userData.companyCategory || 'Sin categoría'
-            );
-          } catch (emailError) {
-            console.error("⚠️ Email sending error (non-blocking):", emailError);
-            // Email errors should not affect registration success
-          }
-        });
-      }
-      
-      // For empresa users, create company profile automatically to activate all portal features
+
+      // For empresa users, create company profile automatically
       if (role === 'empresa') {
         try {
           await storage.createCompany({
             userId: user.id,
             companyName: userData.companyName || `${user.firstName} ${user.lastName}`,
-            businessType: userData.businessType || userData.companyCategory || 'tourism',
-            description: userData.companyDescription || userData.bio || `${userData.companyName} - Empresa registrada en Festival NATUR`,
+            businessType: userData.businessType || 'tourism',
+            description: userData.companyDescription || '',
             address: userData.address || '',
             city: userData.city || 'Bogotá',
             country: userData.country || 'Colombia',
@@ -346,187 +272,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
             website: userData.website || '',
             isVerified: true
           });
-          
-          console.log("✅ Complete Portal Empresas Registration - All Features Activated:");
-          console.log("1. ✅ User account created with full profile");
-          console.log("2. 🏢 Company profile created with all details");
-          console.log("3. 📋 Category and subcategory assigned");
-          console.log("4. 📍 Map location set with coordinates");
-          console.log("5. 💬 Messaging system enabled");
-          console.log("6. ✨ Experience creation available");
-          console.log("7. 📞 Contact information complete");
-          console.log("8. 🌐 Social media links integrated");
-          console.log("9. 🏆 Certifications and practices listed");
-          console.log("10. ⚙️ All portal features functional");
         } catch (companyError) {
           console.error("Company creation error:", companyError);
-          // Continue with user creation even if company fails
         }
       }
-      
+
       // Auto-login after registration
       req.session.userId = user.id;
-      
-      res.status(201).json({ 
-        user: { 
-          id: user.id, 
-          email: user.email, 
-          role: user.role, 
-          companyName: user.companyName,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          city: user.city,
-          coordinates: user.coordinates,
-          registrationComplete: user.registrationComplete,
-          profileCompletion: user.profileCompletion,
-          verificationLevel: user.verificationLevel
-        },
-        message: role === 'empresa' 
-          ? 'Registro empresarial completo. Por favor verifica tu email para activar todas las funcionalidades.'
-          : 'Registro exitoso. ¡Bienvenido a NATUR!'
-      });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
-          error: "Invalid input", 
-          details: error.errors.map(e => `${e.path.join('.')}: ${e.message}`)
+      req.session.save((err) => {
+        if (err) {
+          console.error("Session save error:", err);
+          return res.status(500).json({ error: "Registration successful but login failed" });
+        }
+        res.status(201).json({ 
+          user: { 
+            id: user.id, 
+            email: user.email, 
+            role: user.role, 
+            companyName: user.companyName,
+            firstName: user.firstName,
+            lastName: user.lastName
+          },
+          message: 'Registration successful'
         });
-      }
+      });
+    } catch (error: any) {
       console.error("Registration error:", error);
-      res.status(500).json({ error: "Internal server error" });
+      res.status(400).json({ error: error.message || "Registration failed" });
     }
   });
 
   // Company registration endpoint with email verification
-  // NOTE: Email verification temporarily disabled - users auto-verified until SendGrid is properly configured
-  app.post("/api/auth/register-company", async (req, res) => {
-    try {
-      const {
-        email, password, firstName, lastName, companyName,
-        companyDescription, companyCategory, companySubcategory,
-        servicesOffered, targetMarket, yearsExperience, teamSize,
-        address, city, country, phone, website, operatingHours
-      } = req.body;
-
-      console.log("📋 Company registration attempt:", { 
-        email, 
-        companyName, 
-        companyCategory, 
-        hasDescription: !!companyDescription,
-        servicesCount: servicesOffered?.length || 0
-      });
-
-      // Validate required fields
-      if (!email || !password || !companyName || !companyCategory) {
-        return res.status(400).json({ error: "Missing required fields" });
-      }
-
-      // Check if user already exists
-      const existingUser = await storage.getUserByEmail(email);
-      if (existingUser) {
-        return res.status(400).json({ error: "Email already registered" });
-      }
-
-      // Validate complete company information is provided (required for empresa portal access)
-      if (!companyDescription || !companyCategory || !servicesOffered || servicesOffered.length === 0) {
-        return res.status(400).json({ 
-          error: "Complete company information is required for empresa registration" 
-        });
-      }
-
-      // Hash password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Generate verification token
-      const verificationToken = crypto.randomBytes(32).toString('hex');
-      const verificationTokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
-
-      // Create user with complete company data including all new fields
-      const userData = {
-        email,
-        password: hashedPassword,
-        firstName,
-        lastName,
-        companyName,
-        role: 'empresa' as const,
-        authProvider: 'local',
-        isActive: true, // Temporarily auto-activate until SendGrid is configured
-        emailVerified: true, // Temporarily auto-verify until SendGrid is configured
-        verificationToken,
-        verificationTokenExpiry,
-        address,
-        city,
-        country: country || 'Colombia',
-        phone,
-        website,
-        companyDescription: companyDescription || '',
-        companyCategory: companyCategory || '',
-        companySubcategory: companySubcategory || '',
-        servicesOffered: servicesOffered || [],
-        targetMarket: targetMarket || '',
-        yearsExperience: yearsExperience || 0,
-        teamSize: teamSize || 0,
-        operatingHours: operatingHours || {},
-        businessType: req.body.businessType || '',
-        certifications: req.body.certifications || [],
-        socialMedia: req.body.socialMedia || {},
-        businessLicense: req.body.businessLicense || '',
-        taxId: req.body.taxId || '',
-        emergencyContact: req.body.emergencyContact || {},
-        sustainabilityPractices: req.body.sustainabilityPractices || [],
-        accessibilityFeatures: req.body.accessibilityFeatures || [],
-        languages: req.body.languages || ['Español'],
-        registrationComplete: true,
-        profileCompletion: 100,
-        isVerified: false,
-        isContactCardVisible: true,
-        isMapVisible: true,
-        verificationLevel: 'basic',
-        // Set default coordinates for Bogotá if not provided
-        coordinates: { lat: 4.7110, lng: -74.0721 }
-      };
-
-      const user = await storage.createUser(userData);
-
-      // Send verification email (non-blocking)
-      Promise.resolve().then(async () => {
-        try {
-          const emailSent = await sendVerificationEmail(
-            email,
-            `${firstName} ${lastName}`,
-            companyName,
-            verificationToken
-          );
-          console.log(`📧 Verification email sent: ${emailSent ? 'Success' : 'Failed'}`);
-          
-          // Send admin notification
-          await sendAdminNotification(
-            `${firstName} ${lastName}`,
-            companyName,
-            email,
-            companyCategory
-          );
-        } catch (emailError) {
-          console.error("⚠️ Email sending error (non-blocking):", emailError);
-        }
-      });
-
-      console.log("✅ Company Registration Complete - Email verification required");
-
-      res.status(201).json({
-        message: "Company registered successfully. Please check your email for verification.",
-        user: {
-          id: user.id,
-          email: user.email,
-          companyName: user.companyName,
-          emailVerified: user.emailVerified
-        }
-      });
-    } catch (error) {
-      console.error("Company registration error:", error);
-      res.status(500).json({ error: "Registration failed" });
-    }
-  });
 
   // Email verification endpoint
   app.get("/api/auth/verify-email", async (req, res) => {

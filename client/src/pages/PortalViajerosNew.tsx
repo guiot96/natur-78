@@ -50,10 +50,10 @@ const PortalViajerosNew = () => {
 
   // Redirección si no está logueado
   useEffect(() => {
-    if (!authLoading && !user) {
+    if (!authLoading && !user && !userLoading) {
       window.location.replace('/portal-viajeros/auth');
     }
-  }, [user, authLoading]);
+  }, [user, authLoading, userLoading]);
 
   // Navigation items for traveler portal
   const navItems = [
@@ -100,7 +100,7 @@ const PortalViajerosNew = () => {
     createConversationMutation.mutate(userId);
   };
 
-  if (authLoading) {
+  if (authLoading || userLoading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
