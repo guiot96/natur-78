@@ -15,20 +15,28 @@ if (!process.env.DATABASE_URL) {
 }
 
 // Create pool with better error handling and connection management
-export const pool = new Pool({ 
-  connectionString: process.env.DATABASE_URL,
-  max: 1, // Limit connections for serverless
-  idleTimeoutMillis: 10000,
-  connectionTimeoutMillis: 10000
-});
+let poolInstance: Pool | null = null;
+try {
+  poolInstance = new Pool({ 
+    connectionString: process.env.DATABASE_URL,
+    max: 1, // Limit connections for serverless
+    idleTimeoutMillis: 10000,
+    connectionTimeoutMillis: 5000 // Fast timeout
+  });
 
-export const db = drizzle({ client: pool, schema });
+  // Add connection error handling
+  poolInstance.on('error', (err) => {
+    console.error('Database pool error:', err);
+  });
+} catch (error) {
+  console.error('Failed to initialize database pool:', error);
+}
 
-// Add connection error handling
-pool.on('error', (err) => {
-  console.error('Database pool error:', err);
-});
+export const pool = poolInstance;
+export const db = pool ? drizzle({ client: pool, schema }) : null;
 
-pool.on('connect', () => {
-  console.log('Database connected successfully');
-});
+if (poolInstance) {
+  poolInstance.on('connect', () => {
+    console.log('Database connected successfully');
+  });
+}

@@ -1,6 +1,6 @@
 import { users, userProfiles, experiences, companies, type User, type InsertUser, type UserProfile, type InsertUserProfile, type Experience, type InsertExperience, type Company, type InsertCompany } from "@shared/schema";
 import { messages, conversations, type Message, type InsertMessage, type Conversation, type InsertConversation } from "@shared/messaging-schema";
-import { db } from "./db";
+import { db, pool } from "./db";
 import { eq, desc, or, and } from "drizzle-orm";
 
 // Storage interface with all CRUD methods needed
@@ -518,68 +518,119 @@ export class MemStorage implements IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
+  private memFallback: MemStorage | null = null;
+
+  constructor() {
+    if (!db) {
+      console.warn("Database not available, falling back to MemStorage");
+      this.memFallback = new MemStorage();
+    }
+  }
+
   async getUser(id: number): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
-    return result[0];
+    if (this.memFallback) return this.memFallback.getUser(id);
+    try {
+      const result = await db!.select().from(users).where(eq(users.id, id)).limit(1);
+      return result[0];
+    } catch (error) {
+      console.error("DB Error in getUser, switching to MemStorage:", error);
+      if (!this.memFallback) this.memFallback = new MemStorage();
+      return this.memFallback.getUser(id);
+    }
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.email, email)).limit(1);
-    return result[0];
+    if (this.memFallback) return this.memFallback.getUserByEmail(email);
+    try {
+      const result = await db!.select().from(users).where(eq(users.email, email)).limit(1);
+      return result[0];
+    } catch (error) {
+      console.error("DB Error in getUserByEmail:", error);
+      if (!this.memFallback) this.memFallback = new MemStorage();
+      return this.memFallback.getUserByEmail(email);
+    }
   }
 
   async getUserByVerificationToken(token: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.verificationToken, token)).limit(1);
-    return result[0];
+    if (this.memFallback) return this.memFallback.getUserByVerificationToken(token);
+    try {
+      const result = await db!.select().from(users).where(eq(users.verificationToken, token)).limit(1);
+      return result[0];
+    } catch (error) {
+      console.error("DB Error in getUserByVerificationToken:", error);
+      if (!this.memFallback) this.memFallback = new MemStorage();
+      return this.memFallback.getUserByVerificationToken(token);
+    }
   }
 
   async verifyUserEmail(userId: number): Promise<User> {
-    const result = await db
-      .update(users)
-      .set({ 
-        emailVerified: true, 
-        verificationToken: null,
-        updatedAt: new Date()
-      })
-      .where(eq(users.id, userId))
-      .returning();
-    
-    if (result.length === 0) {
-      throw new Error('User not found');
+    if (this.memFallback) return this.memFallback.verifyUserEmail(userId);
+    try {
+      const result = await db!
+        .update(users)
+        .set({ 
+          emailVerified: true, 
+          verificationToken: null,
+          updatedAt: new Date()
+        })
+        .where(eq(users.id, userId))
+        .returning();
+      
+      if (result.length === 0) {
+        throw new Error('User not found');
+      }
+      
+      return result[0];
+    } catch (error) {
+      console.error("DB Error in verifyUserEmail:", error);
+      if (!this.memFallback) this.memFallback = new MemStorage();
+      return this.memFallback.verifyUserEmail(userId);
     }
-    
-    return result[0];
   }
 
   async getUserByGoogleId(googleId: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.googleId, googleId)).limit(1);
-    return result[0];
+    if (this.memFallback) return this.memFallback.getUserByGoogleId(googleId);
+    try {
+      const result = await db!.select().from(users).where(eq(users.googleId, googleId)).limit(1);
+      return result[0];
+    } catch (error) {
+      console.error("DB Error in getUserByGoogleId:", error);
+      if (!this.memFallback) this.memFallback = new MemStorage();
+      return this.memFallback.getUserByGoogleId(googleId);
+    }
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const result = await db.insert(users).values(insertUser).returning();
-    const user = result[0];
-    
-    // If user is empresa role, automatically create company profile
-    if (user.role === 'empresa' && user.companyName) {
-      try {
-        await this.createCompany({
-          userId: user.id,
-          companyName: user.companyName,
-          address: user.address || '',
-          city: user.city || '',
-          country: user.country || 'Colombia',
-          coordinates: user.coordinates || null,
-          businessType: 'tourism',
-          status: 'active',
-          isVerified: true // Auto-verify for smooth UX
-        });
-      } catch (error) {
-        // Error handling optimized
+    if (this.memFallback) return this.memFallback.createUser(insertUser);
+    try {
+      const result = await db!.insert(users).values(insertUser).returning();
+      const user = result[0];
+      
+      // If user is empresa role, automatically create company profile
+      if (user.role === 'empresa' && user.companyName) {
+        try {
+          await this.createCompany({
+            userId: user.id,
+            companyName: user.companyName,
+            address: user.address || '',
+            city: user.city || '',
+            country: user.country || 'Colombia',
+            coordinates: user.coordinates || null,
+            businessType: 'tourism',
+            status: 'active',
+            isVerified: true // Auto-verify for smooth UX
+          });
+        } catch (error) {
+          console.error("Error creating company profile:", error);
+        }
       }
+      
+      return user;
+    } catch (error) {
+      console.error("DB Error in createUser:", error);
+      if (!this.memFallback) this.memFallback = new MemStorage();
+      return this.memFallback.createUser(insertUser);
     }
-    
-    return user;
   }
 
   async createGoogleUser(userData: any): Promise<User> {
