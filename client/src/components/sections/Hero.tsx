@@ -5,7 +5,7 @@ import { User, Menu, Calendar, Ticket, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrutalistMenu } from "@/components/ui/BrutalistMenu";
 
-import Festival_NATUR from "@assets/Festival-NATUR.png";
+import Festival_NATUR from "@assets/2026_1771518463695.png";
 
 export function Hero() {
 
