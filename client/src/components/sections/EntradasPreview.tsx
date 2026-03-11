@@ -7,7 +7,7 @@ const P = {
   dark:      '#191C0F',
   darkGreen: '#1a4a1e',
   midGreen:  '#2d7a32',
-  lime:      '#cad95e',
+  lime:      '#f5e03a',
   cream:     '#FCF8EE',
   rose:      '#f2c4c8',
   roseDeep:  '#c45870',
@@ -100,7 +100,7 @@ export function EntradasPreview() {
         <img src={portraitImg} alt="Festival NATUR 2026"
           className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(160deg, rgba(25,28,15,0.2) 0%, transparent 40%, rgba(25,28,15,0.65) 100%)' }} />
+          style={{ background: 'rgba(25,28,15,0.42)' }} />
 
         <div className="absolute top-5 left-5 sm:top-7 sm:left-7">
           <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.38)', ...mono }}>02/06</span>
@@ -184,7 +184,7 @@ export function EntradasPreview() {
         <img src={landscapeImg} alt="Festival NATUR — Kinder"
           className="absolute inset-0 w-full h-full object-cover object-top" />
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top, rgba(25,28,15,0.72) 0%, transparent 52%)' }} />
+          style={{ background: 'rgba(25,28,15,0.42)' }} />
 
         <div className="absolute top-5 right-5 sm:top-7 sm:right-7">
           <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.35)', ...mono }}>04/06</span>

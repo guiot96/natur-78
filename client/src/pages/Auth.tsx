@@ -1423,7 +1423,7 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a1a0a] via-[#1a2f1a] to-[#0f2a0f] relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#cad95e]/10 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#f5e03a]/10 via-transparent to-transparent"></div>
       <div className="absolute top-0 left-0 w-full h-full opacity-20"></div>
       
       {/* Back to Home */}

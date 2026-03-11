@@ -112,7 +112,7 @@ const ProfileHeader = () => {
             
             <Button 
               variant="outline" 
-              className="border-[#cad95e] text-[#cad95e] hover:bg-[#cad95e]/10"
+              className="border-[#f5e03a] text-[#f5e03a] hover:bg-[#f5e03a]/10"
               onClick={() => setIsEditing(true)}
             >
               <Edit className="h-4 w-4 mr-2" />
@@ -139,7 +139,7 @@ const ProfileHeader = () => {
                   href={profileData.website.startsWith('http') ? profileData.website : `https://${profileData.website}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#cad95e]"
+                  className="hover:text-[#f5e03a]"
                 >
                   {profileData.website.replace(/^(https?:\/\/)?(www\.)?/i, '')}
                 </a>
@@ -151,7 +151,7 @@ const ProfileHeader = () => {
                 <Mail className="h-4 w-4 mr-1" />
                 <a 
                   href={`mailto:${profileData.email}`}
-                  className="hover:text-[#cad95e]"
+                  className="hover:text-[#f5e03a]"
                 >
                   {profileData.email}
                 </a>

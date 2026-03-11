@@ -251,7 +251,7 @@ const Experiencias = () => {
                       <Badge 
                         key={index}
                         variant="outline" 
-                        className="border-[#cad95e]/30 text-[#cad95e]"
+                        className="border-[#f5e03a]/30 text-[#f5e03a]"
                       >
                         {tag.trim()}
                       </Badge>
@@ -296,7 +296,7 @@ const Experiencias = () => {
               </p>
               <Button
                 onClick={() => setShowCreateForm(true)}
-                className="bg-[#cad95e] text-[#222408] hover:bg-[#cad95e]/90"
+                className="bg-[#f5e03a] text-[#222408] hover:bg-[#f5e03a]/90"
               >
                 Crear Primera Experiencia
               </Button>

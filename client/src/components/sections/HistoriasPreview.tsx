@@ -6,21 +6,21 @@ const pillars = [
     num: "01",
     title: "Naturaleza",
     desc: "Destinos que respiran: ecosistemas, paisajes y territorios que demuestran que Colombia es el país más biodiverso del mundo.",
-    accent: "#cad95e",
+    accent: "#f5e03a",
     bg: "#1a4a1e",
   },
   {
     num: "02",
     title: "Comunidades",
     desc: "Historias de personas y pueblos que han hecho del turismo una herramienta de vida, cultura y preservación del territorio.",
-    accent: "#cad95e",
+    accent: "#f5e03a",
     bg: "#191C0F",
   },
   {
     num: "03",
     title: "Futuro",
     desc: "Proyectos, modelos y visiones que están redefiniendo la forma en que Colombia se muestra al mundo — desde adentro.",
-    accent: "#cad95e",
+    accent: "#f5e03a",
     bg: "#2d7a32",
   },
 ];
@@ -36,7 +36,7 @@ export function HistoriasPreview() {
         <div className="px-8 md:px-14 pt-16 pb-14 md:pt-20 md:pb-16 border-b md:border-b-0 md:border-r border-white/8">
           <p
             className="text-[10px] tracking-[0.35em] uppercase font-bold mb-5"
-            style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+            style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
           >
             Blog · Editorial
           </p>
@@ -45,7 +45,7 @@ export function HistoriasPreview() {
             style={{ fontSize: "clamp(2.4rem, 8vw, 6.5rem)" }}
           >
             HISTORIAS<br />
-            <span style={{ color: "#cad95e" }}>NATUR</span>
+            <span style={{ color: "#f5e03a" }}>NATUR</span>
           </h2>
         </div>
 
@@ -56,12 +56,12 @@ export function HistoriasPreview() {
               className="flex-shrink-0 w-8 h-8 flex items-center justify-center mt-0.5"
               style={{ background: "rgba(202,217,94,0.12)", border: "1px solid rgba(202,217,94,0.25)" }}
             >
-              <Feather className="w-3.5 h-3.5" style={{ color: "#cad95e" }} />
+              <Feather className="w-3.5 h-3.5" style={{ color: "#f5e03a" }} />
             </div>
             <div>
               <p
                 className="text-[9px] font-bold uppercase tracking-widest mb-3"
-                style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+                style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
               >
                 Próximamente · Agosto 2026
               </p>
@@ -150,7 +150,7 @@ export function HistoriasPreview() {
         <Link to="/historias">
           <button
             className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-7 py-3.5 hover:opacity-80 transition-opacity whitespace-nowrap"
-            style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+            style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
           >
             <ArrowRight className="w-3 h-3" />
             Saber más

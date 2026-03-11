@@ -39,7 +39,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <Sheet open={showLogin} onOpenChange={setShowLogin}>
         <SheetContent side="right" className="bg-[#222408] text-[#FCF8EE] w-80">
           <SheetHeader className="text-left">
-            <SheetTitle className="font-gasoek text-2xl text-[#cad95e] tracking-wide uppercase">
+            <SheetTitle className="font-gasoek text-2xl text-[#f5e03a] tracking-wide uppercase">
               Iniciar Sesión
             </SheetTitle>
             <SheetDescription>

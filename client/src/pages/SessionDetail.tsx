@@ -11,7 +11,7 @@ const createAgendaData = () => ({
     subtitle: "Charlas NATUR • Rooftop + Zona de Comidas • Emprendimientos Sostenibles • Zona Chill • Foro Colombia Sostenible 2025",
     horario: "9:00 a.m. – 6:00 p.m.",
     lugar: "Acceso Libre - Todos los Espacios",
-    color: "#cad95e",
+    color: "#f5e03a",
     days: [
       {
         day: "Día 1: Sábado 15 de marzo",
@@ -104,7 +104,7 @@ const findSession = (sessionId: string): { session: Session | null, agendaType: 
       }
     }
   }
-  return { session: null, agendaType: '', color: '#cad95e' };
+  return { session: null, agendaType: '', color: '#f5e03a' };
 };
 
 export default function SessionDetail() {

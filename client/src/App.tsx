@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Router, Route, Switch } from "wouter";
-import { ContrastEnhancer } from "@/components/accessibility/ContrastEnhancer";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Agenda from "./pages/Agenda";
@@ -56,7 +55,6 @@ const App = () => {
             <Toaster />
             <Sonner />
             <Router>
-              <ContrastEnhancer />
               <Switch>
                 {/* ── Main public pages ── */}
                 <Route path="/" component={Index} />

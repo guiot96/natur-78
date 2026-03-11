@@ -586,10 +586,10 @@ body {
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.8);
     --text-tertiary: rgba(255, 255, 255, 0.6);
-    --text-accent: #cad95e;
+    --text-accent: #f5e03a;
     
     /* Interactive Elements */
-    --accent-primary: #cad95e;
+    --accent-primary: #f5e03a;
     --accent-glow: rgba(202, 217, 94, 0.4);
     --success-green: #4A9B3B;
     --warning-amber: #FFA500;
@@ -603,7 +603,7 @@ body {
     /* Legacy NATUR Colors for Backward Compatibility */
     --color-bg: #0a1a0a;
     --color-text: #ffffff;
-    --color-accent: #cad95e;
+    --color-accent: #f5e03a;
     --color-surface: rgba(255, 255, 255, 0.1);
     --color-border: rgba(255, 255, 255, 0.2);
     --color-nav-bg: #0a1a0a;
@@ -623,13 +623,13 @@ body {
     --primary: 72 61% 58%;
     --primary-foreground: 0 0% 0%;
 
-    --secondary: 72 61% 58%;        /* #cad95e */
+    --secondary: 72 61% 58%;        /* #f5e03a */
     --secondary-foreground: 0 0% 0%;
 
     --muted: 50 40% 95%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 72 61% 58%;           /* #cad95e */
+    --accent: 72 61% 58%;           /* #f5e03a */
     --accent-foreground: 0 0% 0%;
 
     --destructive: 0 84.2% 60.2%;
@@ -646,7 +646,7 @@ body {
     /* NATUR Design Tokens - Dark Mode (Inverted/Adapted) */
     --color-bg: #0a1a0a;           /* Very dark green */
     --color-text: #ffffff;         /* White text for contrast */
-    --color-accent: #cad95e;       /* Keep NATUR green for brand consistency */
+    --color-accent: #f5e03a;       /* Keep NATUR green for brand consistency */
     --color-surface: #0f2d0f;      /* Slightly lighter dark green for surfaces */
     --color-border: #1a3d1a;       /* Dark green border */
     
@@ -1024,7 +1024,7 @@ body {
 }
 
 .contrast-high button,
-.contrast-high .bg-\[#cad95e\] {
+.contrast-high .bg-\[#f5e03a\] {
   background-color: var(--accent-color) !important;
   color: var(--bg-primary) !important;
 }
@@ -1047,7 +1047,7 @@ body {
 }
 
 .contrast-ultra button,
-.contrast-ultra .bg-\[#cad95e\] {
+.contrast-ultra .bg-\[#f5e03a\] {
   background-color: var(--accent-color) !important;
   color: var(--bg-primary) !important;
   border: 3px solid var(--text-primary) !important;
@@ -1110,7 +1110,7 @@ body {
 
 /* High Focus Visibility */
 .high-focus *:focus {
-  outline: 4px solid #cad95e !important;
+  outline: 4px solid #f5e03a !important;
   outline-offset: 2px !important;
   border-radius: 4px !important;
 }
@@ -1128,7 +1128,7 @@ body {
   position: absolute;
   top: -40px;
   left: 6px;
-  background: #cad95e;
+  background: #f5e03a;
   color: #0a1a0a;
   padding: 8px 16px;
   text-decoration: none;
@@ -1158,7 +1158,7 @@ body {
 /* Better Focus Indicators for Dark Theme */
 @media (prefers-color-scheme: dark) {
   .high-focus *:focus {
-    outline-color: #cad95e !important;
+    outline-color: #f5e03a !important;
   }
 }
 
@@ -1199,13 +1199,13 @@ body {
 }
 
 /* Better Color Indicators */
-.contrast-high .text-\[#cad95e\],
-.contrast-ultra .text-\[#cad95e\] {
+.contrast-high .text-\[#f5e03a\],
+.contrast-ultra .text-\[#f5e03a\] {
   color: var(--accent-color) !important;
 }
 
-.contrast-high .border-\[#cad95e\],
-.contrast-ultra .border-\[#cad95e\] {
+.contrast-high .border-\[#f5e03a\],
+.contrast-ultra .border-\[#f5e03a\] {
   border-color: var(--accent-color) !important;
 }
 
@@ -1227,7 +1227,7 @@ body {
 .high-focus input:focus,
 .high-focus textarea:focus,
 .high-focus select:focus {
-  border-color: #cad95e !important;
+  border-color: #f5e03a !important;
   background-color: rgba(202, 217, 94, 0.1) !important;
 }
 

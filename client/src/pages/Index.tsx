@@ -93,14 +93,14 @@ const Index = () => {
             <p className="text-[8px] uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "Unbounded, sans-serif" }}>
               Festival NATUR 2026
             </p>
-            <p className="text-[10px] font-bold" style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}>
+            <p className="text-[10px] font-bold" style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}>
               14 y 15 de agosto · Bogotá
             </p>
           </div>
           <Link to="/tickets">
             <button
               className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-3 whitespace-nowrap"
-              style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+              style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
             >
               <Ticket className="w-3.5 h-3.5" />
               Entradas

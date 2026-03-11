@@ -11,7 +11,7 @@ const sections = [
     title: "Agenda Académica",
     description:
       "Charlas, paneles y talleres con líderes del turismo sostenible, emprendedores regenerativos y expertos en naturaleza. Aprende, debate y llévate herramientas reales para transformar tu forma de viajar y hacer negocios.",
-    color: "#cad95e",
+    color: "#f5e03a",
     bg: "#191C0F",
     items: [
       "Conferencias magistrales",
@@ -26,7 +26,7 @@ const sections = [
     title: "Nuestra Rumba y sus Manifestaciones",
     description:
       "Música en vivo, arte urbano, gastronomía local y expresiones culturales que celebran la diversidad de Colombia. Una fiesta que conecta territorios, artistas y comunidades en un solo escenario.",
-    color: "#cad95e",
+    color: "#f5e03a",
     bg: "#1a4a1e",
     items: [
       "Música en vivo",
@@ -42,7 +42,7 @@ const sections = [
     description:
       "Conoce personas y proyectos que están cambiando la narrativa del turismo en Colombia y el mundo. Historias reales de impacto positivo que demuestran que viajar con conciencia es posible y rentable.",
     color: "#191C0F",
-    bg: "#cad95e",
+    bg: "#f5e03a",
     items: [
       "Testimonios de emprendedores",
       "Proyectos de impacto comunitario",
@@ -61,7 +61,7 @@ const QueVasAEncontrar = () => {
       <section className="relative min-h-[50vh] flex items-center justify-center bg-[#191C0F] pt-20">
         <div className="text-center px-6 py-16 max-w-3xl mx-auto">
           <p
-            className="text-[#cad95e] text-xs sm:text-sm tracking-[0.3em] uppercase mb-4 font-bold"
+            className="text-[#f5e03a] text-xs sm:text-sm tracking-[0.3em] uppercase mb-4 font-bold"
             style={{ fontFamily: "Unbounded, sans-serif" }}
           >
             Festival NATUR 2026 — Bogotá
@@ -70,7 +70,7 @@ const QueVasAEncontrar = () => {
             className="font-gasoek text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white uppercase leading-tight mb-6"
           >
             ¿Qué vas a{" "}
-            <span className="text-[#cad95e]">encontrar?</span>
+            <span className="text-[#f5e03a]">encontrar?</span>
           </h1>
           <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
             Tres mundos en un solo festival. Conocimiento, cultura e inspiración
@@ -174,7 +174,7 @@ const QueVasAEncontrar = () => {
       </section>
 
       {/* CTA bottom */}
-      <section className="bg-[#cad95e] py-16 px-6 text-center">
+      <section className="bg-[#f5e03a] py-16 px-6 text-center">
         <h2 className="font-gasoek text-3xl sm:text-4xl md:text-5xl text-[#191C0F] uppercase mb-4">
           ¡Nos vemos el 14 y 15 de agosto!
         </h2>
@@ -182,7 +182,7 @@ const QueVasAEncontrar = () => {
           Kinder — Calle 59 #6-21, Chapinero, Bogotá
         </p>
         <Link to="/tickets">
-          <Button className="bg-[#191C0F] hover:bg-black text-[#cad95e] rounded-none font-gasoek text-sm tracking-wider uppercase px-10 py-4">
+          <Button className="bg-[#191C0F] hover:bg-black text-[#f5e03a] rounded-none font-gasoek text-sm tracking-wider uppercase px-10 py-4">
             <ArrowRight className="w-4 h-4 mr-2" />
             COMPRAR ENTRADAS
           </Button>

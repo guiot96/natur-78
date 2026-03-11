@@ -27,7 +27,7 @@ const Register = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-green-600 border-b border-green-700 shadow-lg">
         <div className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center space-x-4">
-            <span className="font-bold text-2xl font-gasoek" style={{ color: '#cad95e' }}>N</span>
+            <span className="font-bold text-2xl font-gasoek" style={{ color: '#f5e03a' }}>N</span>
           </div>
           
           <div className="flex items-center space-x-4">
@@ -53,15 +53,15 @@ const Register = () => {
               <Link to="/auth/empresas">
                 <Button 
                   variant="outline" 
-                  className="border-2 border-[#cad95e] bg-transparent text-[#cad95e] hover:bg-[#cad95e]/10 font-bold text-sm sm:text-base px-6 py-2 sm:px-8 sm:py-3 backdrop-blur-sm"
+                  className="border-2 border-[#f5e03a] bg-transparent text-[#f5e03a] hover:bg-[#f5e03a]/10 font-bold text-sm sm:text-base px-6 py-2 sm:px-8 sm:py-3 backdrop-blur-sm"
                 >
                   Ya tengo cuenta - Iniciar sesión
                 </Button>
               </Link>
-              <div className="backdrop-blur-sm bg-white/5 border border-[#cad95e]/30 rounded-lg p-3 sm:p-4">
-                <p className="text-[#cad95e] text-sm sm:text-base font-medium">
+              <div className="backdrop-blur-sm bg-white/5 border border-[#f5e03a]/30 rounded-lg p-3 sm:p-4">
+                <p className="text-[#f5e03a] text-sm sm:text-base font-medium">
                   ¿Eres un viajero?{" "}
-                  <Link to="/con-sentidos" className="text-[#cad95e] hover:text-white underline font-bold">
+                  <Link to="/con-sentidos" className="text-[#f5e03a] hover:text-white underline font-bold">
                     Únete a Con-Sentidos
                   </Link>
                 </p>

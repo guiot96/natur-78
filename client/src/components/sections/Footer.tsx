@@ -21,7 +21,7 @@ export function Footer() {
         {/* Brand */}
         <div className="lg:col-span-1">
           <Link to="/">
-            <h3 className="font-gasoek text-2xl text-[#cad95e] uppercase tracking-widest mb-2 cursor-pointer hover:opacity-80 transition-opacity">
+            <h3 className="font-gasoek text-2xl text-[#f5e03a] uppercase tracking-widest mb-2 cursor-pointer hover:opacity-80 transition-opacity">
               FESTIVAL<br />NATUR
             </h3>
           </Link>
@@ -40,7 +40,7 @@ export function Footer() {
             {NAV.map((item) => (
               <li key={item.href}>
                 <Link to={item.href}>
-                  <span className="text-sm text-white/60 hover:text-[#cad95e] transition-colors cursor-pointer">
+                  <span className="text-sm text-white/60 hover:text-[#f5e03a] transition-colors cursor-pointer">
                     {item.label}
                   </span>
                 </Link>
@@ -56,7 +56,7 @@ export function Footer() {
             <li>
               <a
                 href="mailto:info@festivalnatur.com"
-                className="flex items-center gap-3 text-sm text-white/60 hover:text-[#cad95e] transition-colors"
+                className="flex items-center gap-3 text-sm text-white/60 hover:text-[#f5e03a] transition-colors"
               >
                 <Mail className="w-4 h-4 flex-shrink-0" />
                 info@festivalnatur.com
@@ -67,7 +67,7 @@ export function Footer() {
                 href="https://wa.me/573000000000"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-3 text-sm text-white/60 hover:text-[#cad95e] transition-colors"
+                className="flex items-center gap-3 text-sm text-white/60 hover:text-[#f5e03a] transition-colors"
               >
                 <MessageCircle className="w-4 h-4 flex-shrink-0" />
                 WhatsApp
@@ -97,7 +97,7 @@ export function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-3 text-sm text-white/60 hover:text-[#cad95e] transition-colors"
+                className="flex items-center gap-3 text-sm text-white/60 hover:text-[#f5e03a] transition-colors"
               >
                 <s.icon className="w-4 h-4 flex-shrink-0" />
                 {s.label}

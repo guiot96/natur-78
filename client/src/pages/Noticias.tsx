@@ -6,7 +6,7 @@ import { ArrowRight, Calendar, User } from 'lucide-react';
 
 const P = {
   dark: '#191C0F', darkGreen: '#1a4a1e', midGreen: '#2d7a32',
-  lime: '#cad95e', yellow: '#cad95e', cream: '#FCF8EE',
+  lime: '#f5e03a', yellow: '#f5e03a', cream: '#FCF8EE',
 };
 
 const articles = [
@@ -108,7 +108,7 @@ export default function Noticias() {
                   <div className="flex items-center gap-2 text-xs" style={{ color: 'rgba(25,28,15,0.35)' }}>
                     <User className="w-3 h-3" />{a.author}
                   </div>
-                  <ArrowRight className="w-4 h-4 group-hover:text-[#cad95e] transition-colors"
+                  <ArrowRight className="w-4 h-4 group-hover:text-[#f5e03a] transition-colors"
                     style={{ color: 'rgba(25,28,15,0.25)' }} />
                 </div>
               </article>

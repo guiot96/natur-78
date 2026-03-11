@@ -33,7 +33,7 @@ export default function ContactForm() {
           <div className="flex flex-col justify-center px-8 md:px-14 py-20">
             <span
               className="inline-block text-[9px] tracking-[0.32em] uppercase font-bold px-2.5 py-[3px] mb-6"
-              style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+              style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
             >
               Enviado
             </span>
@@ -45,7 +45,7 @@ export default function ContactForm() {
             </p>
             <p className="text-sm" style={{ color: "rgba(255,255,255,0.38)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
               Te responderemos pronto a través de<br />
-              <span style={{ color: "#cad95e" }}>info@festivalnatur.com</span>
+              <span style={{ color: "#f5e03a" }}>info@festivalnatur.com</span>
             </p>
           </div>
           <div className="hidden md:block" style={{ background: "#1a4a1e" }} />
@@ -63,7 +63,7 @@ export default function ContactForm() {
               <div>
                 <p
                   className="text-[9px] uppercase tracking-[0.35em] font-bold mb-6"
-                  style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+                  style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
                 >
                   Escríbenos
                 </p>
@@ -161,7 +161,7 @@ export default function ContactForm() {
                   type="submit"
                   disabled={loading}
                   className="flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-widest px-7 py-3.5 hover:opacity-85 transition-opacity disabled:opacity-40"
-                  style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+                  style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
                 >
                   <ArrowRight className="w-3.5 h-3.5" />
                   {loading ? "Enviando…" : "Enviar"}

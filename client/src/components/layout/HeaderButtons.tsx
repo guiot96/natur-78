@@ -71,7 +71,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                   className="text-[9px] xl:text-[10px] font-bold uppercase tracking-[0.12em] transition-colors duration-150 cursor-pointer whitespace-nowrap"
                   style={{
                     fontFamily: 'Unbounded, sans-serif',
-                    color: isActive(item.href) ? '#cad95e' : 'rgba(255,255,255,0.42)',
+                    color: isActive(item.href) ? '#f5e03a' : 'rgba(255,255,255,0.42)',
                   }}
                   onMouseEnter={e => { if (!isActive(item.href)) (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.9)'; }}
                   onMouseLeave={e => { if (!isActive(item.href)) (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.42)'; }}
@@ -88,7 +88,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
             <Link to="/tickets" className="hidden md:block">
               <button
                 className="flex items-center gap-1.5 text-[9px] xl:text-[10px] font-bold uppercase tracking-[0.12em] px-3.5 py-2 transition-opacity hover:opacity-80"
-                style={{ background: '#cad95e', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}
+                style={{ background: '#f5e03a', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}
               >
                 <Ticket className="w-3 h-3" />
                 Entradas
@@ -100,7 +100,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
               onClick={() => setOpen(v => !v)}
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
               className="flex items-center gap-1.5 transition-colors duration-150 md:hidden"
-              style={{ color: open ? '#cad95e' : 'rgba(255,255,255,0.7)' }}
+              style={{ color: open ? '#f5e03a' : 'rgba(255,255,255,0.7)' }}
             >
               {open ? (
                 <X className="w-5 h-5" />
@@ -137,7 +137,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                       className="text-[9px] w-5 text-right flex-shrink-0 tabular-nums transition-colors"
                       style={{
                         fontFamily: 'Unbounded, sans-serif',
-                        color: active ? '#cad95e' : 'rgba(255,255,255,0.15)',
+                        color: active ? '#f5e03a' : 'rgba(255,255,255,0.15)',
                       }}
                     >
                       {String(i + 1).padStart(2, '0')}
@@ -150,7 +150,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                         fontFamily: active ? 'Gasoek One, sans-serif' : 'Unbounded, sans-serif',
                         fontWeight: active ? 400 : 300,
                         fontSize: 'clamp(1.1rem, 4.5vw, 3.5rem)',
-                        color: active ? '#cad95e' : 'rgba(255,255,255,0.75)',
+                        color: active ? '#f5e03a' : 'rgba(255,255,255,0.75)',
                         letterSpacing: active ? '-0.01em' : '0.02em',
                       }}
                     >
@@ -160,7 +160,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                     {/* Arrow */}
                     <span
                       className="text-base transition-all duration-150 opacity-0 group-hover:opacity-100"
-                      style={{ color: '#cad95e' }}
+                      style={{ color: '#f5e03a' }}
                     >
                       →
                     </span>
@@ -185,7 +185,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
             <Link to="/tickets" onClick={() => setOpen(false)}>
               <button
                 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-6 py-3 hover:opacity-85 transition-opacity"
-                style={{ background: '#cad95e', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}
+                style={{ background: '#f5e03a', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}
               >
                 <Ticket className="w-3.5 h-3.5" />
                 COMPRAR ENTRADAS

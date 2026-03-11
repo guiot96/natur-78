@@ -17,7 +17,7 @@
 }
 
 .contrast-high button,
-.contrast-high .bg-\[#cad95e\] {
+.contrast-high .bg-\[#f5e03a\] {
   background-color: var(--accent-color) !important;
   color: var(--bg-primary) !important;
 }
@@ -40,7 +40,7 @@
 }
 
 .contrast-ultra button,
-.contrast-ultra .bg-\[#cad95e\] {
+.contrast-ultra .bg-\[#f5e03a\] {
   background-color: var(--accent-color) !important;
   color: var(--bg-primary) !important;
   border: 3px solid var(--text-primary) !important;
@@ -103,7 +103,7 @@
 
 /* High Focus Visibility */
 .high-focus *:focus {
-  outline: 4px solid #cad95e !important;
+  outline: 4px solid #f5e03a !important;
   outline-offset: 2px !important;
   border-radius: 4px !important;
 }
@@ -121,7 +121,7 @@
   position: absolute;
   top: -40px;
   left: 6px;
-  background: #cad95e;
+  background: #f5e03a;
   color: #0a1a0a;
   padding: 8px 16px;
   text-decoration: none;
@@ -151,7 +151,7 @@
 /* Better Focus Indicators for Dark Theme */
 @media (prefers-color-scheme: dark) {
   .high-focus *:focus {
-    outline-color: #cad95e !important;
+    outline-color: #f5e03a !important;
   }
 }
 
@@ -192,13 +192,13 @@
 }
 
 /* Better Color Indicators */
-.contrast-high .text-\[#cad95e\],
-.contrast-ultra .text-\[#cad95e\] {
+.contrast-high .text-\[#f5e03a\],
+.contrast-ultra .text-\[#f5e03a\] {
   color: var(--accent-color) !important;
 }
 
-.contrast-high .border-\[#cad95e\],
-.contrast-ultra .border-\[#cad95e\] {
+.contrast-high .border-\[#f5e03a\],
+.contrast-ultra .border-\[#f5e03a\] {
   border-color: var(--accent-color) !important;
 }
 
@@ -220,6 +220,6 @@
 .high-focus input:focus,
 .high-focus textarea:focus,
 .high-focus select:focus {
-  border-color: #cad95e !important;
+  border-color: #f5e03a !important;
   background-color: rgba(202, 217, 94, 0.1) !important;
 }

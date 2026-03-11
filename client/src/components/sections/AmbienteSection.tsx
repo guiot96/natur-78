@@ -4,86 +4,67 @@ import crowdImg from "@assets/generated_images/natur_crowd.png";
 
 export function AmbienteSection() {
   return (
-    <section className="relative w-full overflow-hidden" style={{ minHeight: "65vh" }}>
+    <section className="relative w-full overflow-hidden" style={{ minHeight: "60vh" }}>
 
-      {/* Full-bleed background */}
       <img
         src={crowdImg}
         alt="Ambiente Festival NATUR 2026"
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
-
-      {/* Gradient overlay */}
       <div
         className="absolute inset-0"
-        style={{ background: "linear-gradient(to bottom, rgba(25,28,15,0.35) 0%, rgba(25,28,15,0.6) 100%)" }}
+        style={{ background: "rgba(25,28,15,0.52)" }}
       />
 
-      {/* Content — editorial bottom-left anchored */}
       <div
         className="relative z-10 flex flex-col justify-between px-7 sm:px-14 py-12 sm:py-16 md:py-20"
-        style={{ minHeight: "65vh" }}
+        style={{ minHeight: "60vh" }}
       >
         {/* Top label */}
         <div className="flex items-center justify-between">
           <span
-            className="text-[10px] tracking-[0.35em] uppercase font-bold"
-            style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+            className="text-[9px] tracking-[0.35em] uppercase font-bold"
+            style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
           >
             Agosto 14 y 15 · 2026
           </span>
           <span
-            className="text-[10px] tracking-[0.25em] uppercase"
-            style={{ color: "rgba(255,255,255,0.35)", fontFamily: "Unbounded, sans-serif" }}
+            className="text-[9px] tracking-[0.25em] uppercase hidden sm:block"
+            style={{ color: "rgba(255,255,255,0.3)", fontFamily: "Unbounded, sans-serif" }}
           >
             Kinder · Chapinero · Bogotá
           </span>
         </div>
 
-        {/* Bottom — massive text + CTA */}
+        {/* Bottom — text + CTA */}
         <div className="mt-auto">
-          <h2 className="font-gasoek text-[15vw] sm:text-[18vw] md:text-[10vw] uppercase leading-[0.85] text-white mb-1">
+          <h2 className="font-gasoek text-[12vw] sm:text-[14vw] md:text-[8vw] uppercase leading-[0.88] text-white mb-1">
             VIVE
           </h2>
-          <h2 className="font-unbounded font-extralight text-[7vw] sm:text-[9vw] md:text-[5vw] uppercase leading-[1.1] tracking-widest mb-8"
-            style={{ color: "#cad95e" }}>
+          <h2
+            className="font-unbounded font-extralight uppercase leading-[1.1] tracking-widest mb-7"
+            style={{ fontSize: "clamp(1rem, 5vw, 3.2rem)", color: "#f5e03a" }}
+          >
             LA EXPERIENCIA
           </h2>
 
-          {/* Info + CTA row */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
             <Link to="/tickets">
               <button
-                className="flex items-center gap-3 font-bold text-[11px] uppercase tracking-widest px-9 py-4 hover:opacity-90 transition-opacity"
-                style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+                className="flex items-center gap-2.5 font-bold text-[11px] uppercase tracking-widest px-7 py-3.5 hover:brightness-110 transition-all"
+                style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
               >
-                <Ticket className="w-4 h-4" />
+                <Ticket className="w-3.5 h-3.5" />
                 Comprar entradas
               </button>
             </Link>
-
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-px" style={{ background: "rgba(255,255,255,0.4)" }} />
-                <p className="text-white/50 text-xs tracking-wide"
-                  style={{ fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
-                  2 días · Música, charlas, naturaleza
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-px" style={{ background: "rgba(255,255,255,0.4)" }} />
-                <p className="text-white/50 text-xs tracking-wide"
-                  style={{ fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
-                  Primer festival de turismo sostenible de Colombia
-                </p>
-              </div>
-            </div>
-
             <Link to="/agenda">
-              <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest hover:gap-3 transition-all ml-0 sm:ml-auto"
-                style={{ color: "rgba(255,255,255,0.5)", fontFamily: "Unbounded, sans-serif" }}>
-                <ArrowRight className="w-3.5 h-3.5" />
-                Ver agenda
+              <div
+                className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:gap-3 transition-all cursor-pointer"
+                style={{ color: "rgba(255,255,255,0.45)", fontFamily: "Unbounded, sans-serif" }}
+              >
+                <ArrowRight className="w-3 h-3" />
+                Ver agenda completa
               </div>
             </Link>
           </div>

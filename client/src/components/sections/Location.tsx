@@ -15,7 +15,7 @@ export function Location() {
         />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, rgba(25,28,15,0.75) 0%, transparent 55%)" }}
+          style={{ background: "rgba(25,28,15,0.4)" }}
         />
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
           <p className="font-gasoek text-[8vw] md:text-[3.5vw] uppercase leading-none text-white mb-2">
@@ -34,13 +34,13 @@ export function Location() {
       {/* ── Right: venue editorial info ── */}
       <div
         className="flex flex-col justify-between p-8 md:p-12 min-h-[60vw] md:min-h-[42vw]"
-        style={{ background: "#cad95e" }}
+        style={{ background: "#f5e03a" }}
       >
         {/* Top */}
         <div>
           <span
             className="inline-block text-[9px] tracking-[0.32em] uppercase font-bold px-2.5 py-[3px] mb-8"
-            style={{ background: "#191C0F", color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+            style={{ background: "#191C0F", color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
           >
             Sede del festival
           </span>

@@ -40,45 +40,45 @@ export function Countdown() {
       <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/8">
 
         {/* ── Left: copy ── */}
-        <div className="flex flex-col justify-between px-8 md:px-14 py-16 md:py-20 border-b md:border-b-0 border-r-0 md:border-r border-white/8">
+        <div className="flex flex-col justify-between px-8 md:px-14 py-14 md:py-18 border-b md:border-b-0 border-r-0 md:border-r border-white/8">
           <div>
             <span
-              className="inline-block text-[9px] tracking-[0.35em] uppercase font-bold px-2.5 py-[3px] mb-8"
-              style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+              className="inline-block text-[9px] tracking-[0.35em] uppercase font-bold px-2.5 py-[3px] mb-6"
+              style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
             >
               Cuenta regresiva
             </span>
-            <h2 className="uppercase leading-[1.05] mb-6" style={{ fontFamily: "Unbounded, sans-serif" }}>
+            <h2 className="uppercase leading-[1.08] mb-5" style={{ fontFamily: "Unbounded, sans-serif" }}>
               <span
                 className="block font-extralight tracking-widest mb-1"
-                style={{ fontSize: "clamp(1.2rem, 4vw, 3rem)", color: "rgba(255,255,255,0.45)" }}
+                style={{ fontSize: "clamp(1rem, 3vw, 2rem)", color: "rgba(255,255,255,0.4)" }}
               >
                 El festival
               </span>
               <span
                 className="block font-bold tracking-tight"
-                style={{ fontSize: "clamp(2.4rem, 8vw, 6rem)", color: "#cad95e" }}
+                style={{ fontSize: "clamp(1.8rem, 5.5vw, 4.5rem)", color: "#f5e03a" }}
               >
                 SE ACERCA
               </span>
             </h2>
             <p
-              className="text-sm leading-relaxed max-w-sm"
-              style={{ color: "rgba(255,255,255,0.35)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+              className="text-sm leading-relaxed max-w-xs"
+              style={{ color: "rgba(255,255,255,0.38)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
             >
               14 y 15 de agosto de 2026<br />
-              Kinder · Calle 59 #6-21 · Chapinero · Bogotá
+              Kinder · Chapinero · Bogotá
             </p>
           </div>
 
-          <div className="mt-10 md:mt-0">
+          <div className="mt-8 md:mt-0">
             <Link to="/tickets">
               <button
-                className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-widest px-8 py-4 hover:opacity-85 transition-opacity"
-                style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+                className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-widest px-7 py-3.5 hover:brightness-110 transition-all"
+                style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
               >
                 <Ticket className="w-3.5 h-3.5" />
-                Comprar entradas ya
+                Comprar entradas
               </button>
             </Link>
           </div>
@@ -92,8 +92,8 @@ export function Countdown() {
               className="flex flex-col items-center justify-center py-10 sm:py-12 px-4"
             >
               <span
-                className="font-unbounded font-bold text-[11vw] sm:text-[12vw] md:text-[6vw] leading-none tabular-nums"
-                style={{ color: "#cad95e" }}
+                className="font-unbounded font-bold text-[11vw] sm:text-[10vw] md:text-[5.5vw] leading-none tabular-nums"
+                style={{ color: "#f5e03a" }}
               >
                 <Pad n={value} />
               </span>

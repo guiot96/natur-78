@@ -357,7 +357,7 @@ const EnhancedRegistrationForm: React.FC<EnhancedRegistrationFormProps> = ({ onS
         </div>
       </div>
 
-      <Card className="backdrop-blur-sm bg-gray-900/40 border-2 border-[#cad95e]">
+      <Card className="backdrop-blur-sm bg-gray-900/40 border-2 border-[#f5e03a]">
         <CardHeader>
           <CardTitle className="text-white text-center">
             <Building className="w-6 h-6 mx-auto mb-2" />

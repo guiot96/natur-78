@@ -9,7 +9,7 @@ const WORDS = [
 
 const text = [...WORDS, ...WORDS, ...WORDS].join(" · ");
 
-export function Ticker({ bg = "#1a4a1e", color = "#cad95e", reverse = false }: {
+export function Ticker({ bg = "#1a4a1e", color = "#f5e03a", reverse = false }: {
   bg?: string;
   color?: string;
   reverse?: boolean;

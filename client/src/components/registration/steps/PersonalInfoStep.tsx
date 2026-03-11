@@ -30,18 +30,18 @@ const PersonalInfoStep = ({ formData, updateFormData, onNext, onBack }: Personal
           onClick={onBack}
           type="button"
           className="hover:bg-transparent p-0 mr-4"
-          style={{ color: '#cad95e' }}
+          style={{ color: '#f5e03a' }}
         >
           <ArrowLeft className="h-5 w-5" />
         </Button>
-        <h2 className="text-xl sm:text-2xl font-gasoek tracking-wide uppercase font-bold" style={{ color: '#cad95e' }}>
+        <h2 className="text-xl sm:text-2xl font-gasoek tracking-wide uppercase font-bold" style={{ color: '#f5e03a' }}>
           Datos personales / de organización
         </h2>
       </div>
 
       <div className="space-y-4">
         <div>
-          <Label htmlFor="name" className="font-bold text-base sm:text-lg" style={{ color: '#cad95e' }}>
+          <Label htmlFor="name" className="font-bold text-base sm:text-lg" style={{ color: '#f5e03a' }}>
             Nombre completo / Nombre de la organización*
           </Label>
           <Input
@@ -51,13 +51,13 @@ const PersonalInfoStep = ({ formData, updateFormData, onNext, onBack }: Personal
             onChange={handleChange}
             required
             placeholder="Ingresa tu nombre completo o el de tu organización"
-            className="border-2 border-[#cad95e] focus:border-[#cad95e] bg-transparent font-medium mt-2"
-            style={{ color: '#cad95e' }}
+            className="border-2 border-[#f5e03a] focus:border-[#f5e03a] bg-transparent font-medium mt-2"
+            style={{ color: '#f5e03a' }}
           />
         </div>
         
         <div>
-          <Label htmlFor="email" className="font-bold text-base sm:text-lg" style={{ color: '#cad95e' }}>
+          <Label htmlFor="email" className="font-bold text-base sm:text-lg" style={{ color: '#f5e03a' }}>
             Correo electrónico*
           </Label>
           <Input
@@ -68,13 +68,13 @@ const PersonalInfoStep = ({ formData, updateFormData, onNext, onBack }: Personal
             onChange={handleChange}
             required
             placeholder="correo@ejemplo.com"
-            className="border-2 border-[#cad95e] focus:border-[#cad95e] bg-transparent font-medium mt-2"
-            style={{ color: '#cad95e' }}
+            className="border-2 border-[#f5e03a] focus:border-[#f5e03a] bg-transparent font-medium mt-2"
+            style={{ color: '#f5e03a' }}
           />
         </div>
         
         <div>
-          <Label htmlFor="phone" className="font-bold text-base sm:text-lg" style={{ color: '#cad95e' }}>
+          <Label htmlFor="phone" className="font-bold text-base sm:text-lg" style={{ color: '#f5e03a' }}>
             Número de contacto (WhatsApp opcional)
           </Label>
           <Input
@@ -83,13 +83,13 @@ const PersonalInfoStep = ({ formData, updateFormData, onNext, onBack }: Personal
             value={formData.phone}
             onChange={handleChange}
             placeholder="+57 300 000 0000"
-            className="border-2 border-[#cad95e] focus:border-[#cad95e] bg-transparent font-medium mt-2"
-            style={{ color: '#cad95e' }}
+            className="border-2 border-[#f5e03a] focus:border-[#f5e03a] bg-transparent font-medium mt-2"
+            style={{ color: '#f5e03a' }}
           />
         </div>
         
         <div>
-          <Label htmlFor="location" className="font-bold text-base sm:text-lg" style={{ color: '#cad95e' }}>
+          <Label htmlFor="location" className="font-bold text-base sm:text-lg" style={{ color: '#f5e03a' }}>
             Ciudad y país*
           </Label>
           <Input
@@ -99,13 +99,13 @@ const PersonalInfoStep = ({ formData, updateFormData, onNext, onBack }: Personal
             onChange={handleChange}
             required
             placeholder="Bogotá, Colombia"
-            className="border-2 border-[#cad95e] focus:border-[#cad95e] bg-transparent font-medium mt-2"
-            style={{ color: '#cad95e' }}
+            className="border-2 border-[#f5e03a] focus:border-[#f5e03a] bg-transparent font-medium mt-2"
+            style={{ color: '#f5e03a' }}
           />
         </div>
         
         <div>
-          <Label htmlFor="website" className="font-bold text-base sm:text-lg" style={{ color: '#cad95e' }}>
+          <Label htmlFor="website" className="font-bold text-base sm:text-lg" style={{ color: '#f5e03a' }}>
             Página web / redes sociales (opcional)
           </Label>
           <Input
@@ -114,13 +114,13 @@ const PersonalInfoStep = ({ formData, updateFormData, onNext, onBack }: Personal
             value={formData.website}
             onChange={handleChange}
             placeholder="https://example.com o @username"
-            className="border-2 border-[#cad95e] focus:border-[#cad95e] bg-transparent font-medium mt-2"
-            style={{ color: '#cad95e' }}
+            className="border-2 border-[#f5e03a] focus:border-[#f5e03a] bg-transparent font-medium mt-2"
+            style={{ color: '#f5e03a' }}
           />
         </div>
         
         <div>
-          <Label htmlFor="referral" className="font-bold text-base sm:text-lg" style={{ color: '#cad95e' }}>
+          <Label htmlFor="referral" className="font-bold text-base sm:text-lg" style={{ color: '#f5e03a' }}>
             ¿Cómo te enteraste del Festival NATUR?*
           </Label>
           <Input
@@ -130,8 +130,8 @@ const PersonalInfoStep = ({ formData, updateFormData, onNext, onBack }: Personal
             onChange={handleChange}
             required
             placeholder="Redes sociales, amigos, etc."
-            className="border-2 border-[#cad95e] focus:border-[#cad95e] bg-transparent font-medium mt-2"
-            style={{ color: '#cad95e' }}
+            className="border-2 border-[#f5e03a] focus:border-[#f5e03a] bg-transparent font-medium mt-2"
+            style={{ color: '#f5e03a' }}
           />
         </div>
       </div>
@@ -139,8 +139,8 @@ const PersonalInfoStep = ({ formData, updateFormData, onNext, onBack }: Personal
       <div className="flex justify-end">
         <Button 
           type="submit" 
-          className="border-2 border-[#cad95e] bg-transparent hover:bg-[#cad95e]/10 font-bold px-6 py-3 text-base shadow-lg"
-          style={{ color: '#cad95e' }}
+          className="border-2 border-[#f5e03a] bg-transparent hover:bg-[#f5e03a]/10 font-bold px-6 py-3 text-base shadow-lg"
+          style={{ color: '#f5e03a' }}
         >
           Continuar
         </Button>

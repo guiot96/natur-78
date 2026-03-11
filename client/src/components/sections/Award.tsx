@@ -19,7 +19,7 @@ export function Award() {
                 MÁS QUE UN PREMIO, UN RECONOCIMIENTO QUE INSPIRA Y VISIBILIZA LO QUE MERECE MULTIPLICARSE. PORQUE OTRO TURISMO ES POSIBLE… Y YA ESTÁ PASANDO.
               </h4>
             </div>
-            <a href="#" className="inline-block bg-[#cad95e] hover:bg-[#cad95e]/90 transition text-[#191C0F] text-xs sm:text-sm font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-none shadow-md font-jakarta tracking-tight uppercase text-center">
+            <a href="#" className="inline-block bg-[#f5e03a] hover:bg-[#f5e03a]/90 transition text-[#191C0F] text-xs sm:text-sm font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-none shadow-md font-jakarta tracking-tight uppercase text-center">
               RESERVA TU STAND PARA PARTICIPAR
             </a>
           </div>
@@ -54,11 +54,11 @@ export function Award() {
             </p>
             <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
               {/* Jury slots for layout visual only */}
-              {Array(4).fill(null).map((_, i) => <div key={i} className="bg-[#cad95e] h-[40px] sm:h-[50px] w-full rounded-none"></div>)}
+              {Array(4).fill(null).map((_, i) => <div key={i} className="bg-[#f5e03a] h-[40px] sm:h-[50px] w-full rounded-none"></div>)}
             </div>
           </div>
           
-          <a href="#download" className="block bg-[#cad95e] hover:bg-[#cad95e]/90 transition text-[#191C0F] text-xs sm:text-sm font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-none text-center font-jakarta tracking-tight uppercase">
+          <a href="#download" className="block bg-[#f5e03a] hover:bg-[#f5e03a]/90 transition text-[#191C0F] text-xs sm:text-sm font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-none text-center font-jakarta tracking-tight uppercase">
             DESCARGA AQUÍ EL INSTRUCTIVO PARA PARTICIPAR
           </a>
         </div>

@@ -501,15 +501,15 @@ const ProfileSetupStep = ({
           variant="ghost" 
           onClick={onBack}
           type="button"
-          className="text-[#FCF8EE] hover:text-[#cad95e] hover:bg-transparent p-0 mr-4"
+          className="text-[#FCF8EE] hover:text-[#f5e03a] hover:bg-transparent p-0 mr-4"
         >
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h2 className="text-2xl font-gasoek text-[#cad95e] tracking-wide uppercase">
+          <h2 className="text-2xl font-gasoek text-[#f5e03a] tracking-wide uppercase">
             Configura tu perfil en la plataforma
           </h2>
-          <Badge variant="outline" className="mt-2 bg-[#cad95e]/10 text-[#cad95e] border-[#cad95e]/20">
+          <Badge variant="outline" className="mt-2 bg-[#f5e03a]/10 text-[#f5e03a] border-[#f5e03a]/20">
             {category === 'startup' && 'Startup'}
             {category === 'ecosystem' && 'Ecosistema'}
             {category === 'sponsor' && 'Patrocinador'}
@@ -570,13 +570,13 @@ const ProfileSetupStep = ({
 
       {successMessage ? (
         <div className="space-y-4">
-          <div className="bg-[#cad95e]/10 border border-[#cad95e] rounded-md p-4 text-[#cad95e]">
+          <div className="bg-[#f5e03a]/10 border border-[#f5e03a] rounded-md p-4 text-[#f5e03a]">
             {successMessage}
           </div>
           <div className="flex justify-center">
             <Button 
               onClick={() => window.location.href = '/heart'}
-              className="bg-[#cad95e] text-[#191C0F] hover:bg-[#CEDD9F] px-8 py-6 text-lg font-gasoek tracking-wide uppercase flex items-center gap-2"
+              className="bg-[#f5e03a] text-[#191C0F] hover:bg-[#CEDD9F] px-8 py-6 text-lg font-gasoek tracking-wide uppercase flex items-center gap-2"
             >
               <Heart className="h-5 w-5" />
               Corazón NATUR
@@ -587,7 +587,7 @@ const ProfileSetupStep = ({
         <div className="flex justify-end">
           <Button 
             type="submit" 
-            className="bg-[#cad95e] text-[#191C0F] hover:bg-[#CEDD9F] px-8 py-6 text-lg"
+            className="bg-[#f5e03a] text-[#191C0F] hover:bg-[#CEDD9F] px-8 py-6 text-lg"
           >
             Finalizar Registro
           </Button>

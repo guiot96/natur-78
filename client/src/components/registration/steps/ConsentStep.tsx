@@ -31,11 +31,11 @@ const ConsentStep = ({ formData, updateFormData, onSubmit, onBack, onNext }: Con
           onClick={onBack}
           type="button"
           className="hover:bg-transparent p-0 mr-4"
-          style={{ color: '#cad95e' }}
+          style={{ color: '#f5e03a' }}
         >
           <ArrowLeft className="h-5 w-5" />
         </Button>
-        <h2 className="text-xl sm:text-2xl font-gasoek tracking-wide uppercase font-bold" style={{ color: '#cad95e' }}>
+        <h2 className="text-xl sm:text-2xl font-gasoek tracking-wide uppercase font-bold" style={{ color: '#f5e03a' }}>
           Consentimiento y envío
         </h2>
       </div>
@@ -49,11 +49,11 @@ const ConsentStep = ({ formData, updateFormData, onSubmit, onBack, onNext }: Con
             required
           />
           <div className="space-y-1 leading-none">
-            <Label htmlFor="acceptTerms" className="font-bold text-base flex flex-col gap-2" style={{ color: '#cad95e' }}>
+            <Label htmlFor="acceptTerms" className="font-bold text-base flex flex-col gap-2" style={{ color: '#f5e03a' }}>
               <span className="flex items-center gap-1">
                 Acepto los términos y condiciones de participación*
               </span>
-              <div className="font-medium text-sm" style={{ color: '#cad95e' }}>
+              <div className="font-medium text-sm" style={{ color: '#f5e03a' }}>
                 <p>Al aceptar, confirmas que has leído y estás de acuerdo con nuestras políticas de privacidad
                 y los términos de participación en el Festival NATUR.</p>
                 <div className="mt-2">
@@ -71,9 +71,9 @@ const ConsentStep = ({ formData, updateFormData, onSubmit, onBack, onNext }: Con
             onCheckedChange={handleAcceptUpdates}
           />
           <div className="space-y-1 leading-none">
-            <Label htmlFor="acceptUpdates" className="font-bold text-base flex flex-col gap-2" style={{ color: '#cad95e' }}>
+            <Label htmlFor="acceptUpdates" className="font-bold text-base flex flex-col gap-2" style={{ color: '#f5e03a' }}>
               <span>Deseo recibir noticias y actualizaciones del Festival NATUR</span>
-              <span className="font-medium text-sm" style={{ color: '#cad95e' }}>
+              <span className="font-medium text-sm" style={{ color: '#f5e03a' }}>
                 Te mantendremos informado sobre novedades, eventos y oportunidades relacionadas con el festival.
                 Puedes darte de baja en cualquier momento.
               </span>
@@ -86,8 +86,8 @@ const ConsentStep = ({ formData, updateFormData, onSubmit, onBack, onNext }: Con
         <Button 
           type="submit" 
           disabled={!formData.acceptTerms}
-          className="border-2 border-[#cad95e] bg-transparent hover:bg-[#cad95e]/10 font-bold px-6 py-3 text-base disabled:opacity-50 shadow-lg"
-          style={{ color: '#cad95e' }}
+          className="border-2 border-[#f5e03a] bg-transparent hover:bg-[#f5e03a]/10 font-bold px-6 py-3 text-base disabled:opacity-50 shadow-lg"
+          style={{ color: '#f5e03a' }}
         >
           Continuar
         </Button>
