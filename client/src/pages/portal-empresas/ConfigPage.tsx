@@ -354,78 +354,66 @@ export default function ConfigPage() {
   );
 
   const renderAccountSection = () => (
-    <div className="space-y-6">
-      <h3 className="text-lg font-semibold text-white mb-4">Configuración de Cuenta</h3>
+    <div className="space-y-5">
+      <h3 className="text-lg font-semibold text-white">Configuración de Cuenta</h3>
       
-      <div className="space-y-4">
-        <Card className="bg-white/5 border-white/10">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 className="text-white font-medium">Cambiar Contraseña</h4>
-                <p className="text-white/60 text-sm">Actualiza tu contraseña por seguridad</p>
-              </div>
-              <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-                <Key className="w-4 h-4 mr-2" />
-                Cambiar
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
+        <div>
+          <h4 className="text-white font-medium">Cambiar Contraseña</h4>
+          <p className="text-white/60 text-sm">Actualiza tu contraseña por seguridad</p>
+        </div>
+        <Button variant="outline" size="sm" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+          <Key className="w-4 h-4 mr-2" />
+          Cambiar
+        </Button>
+      </div>
 
-        <Card className="bg-white/5 border-white/10">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 className="text-white font-medium">Exportar Datos</h4>
-                <p className="text-white/60 text-sm">Descarga una copia de tus datos</p>
-              </div>
-              <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-                <Download className="w-4 h-4 mr-2" />
-                Exportar
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
+        <div>
+          <h4 className="text-white font-medium">Exportar Datos</h4>
+          <p className="text-white/60 text-sm">Descarga una copia de tus datos</p>
+        </div>
+        <Button variant="outline" size="sm" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+          <Download className="w-4 h-4 mr-2" />
+          Exportar
+        </Button>
+      </div>
 
-        <Separator className="bg-white/20" />
+      <Separator className="bg-white/20" />
 
-        <Card className="bg-red-600/10 border-red-500/20">
-          <CardContent className="p-4">
-            <h4 className="text-red-400 font-medium mb-2">Zona de Peligro</h4>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white font-medium">Cerrar Sesión</p>
-                  <p className="text-white/60 text-sm">Cerrar sesión en este dispositivo</p>
-                </div>
-                <Button 
-                  variant="outline" 
-                  onClick={signOut}
-                  className="bg-orange-600/20 border-orange-500/30 text-orange-400 hover:bg-orange-600/30"
-                  data-testid="button-sign-out"
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Cerrar Sesión
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white font-medium">Eliminar Cuenta</p>
-                  <p className="text-white/60 text-sm">Elimina permanentemente tu cuenta</p>
-                </div>
-                <Button 
-                  variant="outline" 
-                  className="bg-red-600/20 border-red-500/30 text-red-400 hover:bg-red-600/30"
-                  data-testid="button-delete-account"
-                >
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  Eliminar
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="space-y-3">
+        <h4 className="text-red-400 font-medium">Zona de Peligro</h4>
+        <div className="flex items-center justify-between p-4 bg-red-600/5 rounded-lg border border-red-500/15">
+          <div>
+            <p className="text-white font-medium text-sm">Cerrar Sesión</p>
+            <p className="text-white/60 text-xs">Cerrar sesión en este dispositivo</p>
+          </div>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={signOut}
+            className="bg-orange-600/20 border-orange-500/30 text-orange-400 hover:bg-orange-600/30"
+            data-testid="button-sign-out"
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Salir
+          </Button>
+        </div>
+        <div className="flex items-center justify-between p-4 bg-red-600/5 rounded-lg border border-red-500/15">
+          <div>
+            <p className="text-white font-medium text-sm">Eliminar Cuenta</p>
+            <p className="text-white/60 text-xs">Elimina permanentemente tu cuenta</p>
+          </div>
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="bg-red-600/20 border-red-500/30 text-red-400 hover:bg-red-600/30"
+            data-testid="button-delete-account"
+          >
+            <Trash2 className="w-4 h-4 mr-2" />
+            Eliminar
+          </Button>
+        </div>
       </div>
     </div>
   );

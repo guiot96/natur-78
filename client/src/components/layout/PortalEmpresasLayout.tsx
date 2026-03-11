@@ -212,7 +212,7 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
               </div>
               {user.companyCategory && (
                 <div className="flex items-center gap-1">
-                  <Star className="h-3 w-3 text-white/60" />
+                  <Building2 className="h-3 w-3 text-white/60" />
                   <span className="text-xs text-white/60" data-testid="dropdown-company-category">{user.companyCategory}</span>
                 </div>
               )}
