@@ -33,7 +33,7 @@ export function QueVasPreview() {
               style={{ color: '#2d7a32', fontFamily: "Unbounded, sans-serif" }}>
               Festival NATUR 2026
             </p>
-            <h2 className="font-unbounded font-extralight text-4xl sm:text-5xl leading-tight" style={{ color: '#191C0F' }}>
+            <h2 className="font-gasoek text-5xl sm:text-6xl md:text-7xl uppercase leading-none" style={{ color: '#191C0F' }}>
               ¿Qué vas a encontrar?
             </h2>
           </div>
@@ -60,7 +60,7 @@ export function QueVasPreview() {
                     {item.tag}
                   </span>
                 </div>
-                <h3 className="font-unbounded font-extralight text-lg leading-snug" style={{ color: '#191C0F' }}>{item.title}</h3>
+                <h3 className="font-gasoek text-2xl sm:text-3xl uppercase leading-tight" style={{ color: '#191C0F' }}>{item.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'rgba(25,28,15,0.6)' }}>{item.desc}</p>
               </div>
             );

@@ -112,7 +112,7 @@ const QueVasAEncontrar = () => {
                 </div>
 
                 <h2
-                  className="font-gasoek text-3xl sm:text-4xl md:text-5xl uppercase leading-tight mb-5"
+                  className="font-gasoek text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase leading-[0.9] mb-5"
                   style={{ color: section.color }}
                 >
                   {section.title}
