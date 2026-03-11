@@ -4,7 +4,7 @@ import crowdImg from "@assets/generated_images/natur_crowd.png";
 
 export function AmbienteSection() {
   return (
-    <section className="relative w-full overflow-hidden" style={{ minHeight: "85vh" }}>
+    <section className="relative w-full overflow-hidden" style={{ minHeight: "65vh" }}>
 
       {/* Full-bleed background */}
       <img
@@ -16,13 +16,13 @@ export function AmbienteSection() {
       {/* Gradient overlay */}
       <div
         className="absolute inset-0"
-        style={{ background: "linear-gradient(to bottom, rgba(25,28,15,0.35) 0%, rgba(25,28,15,0.55) 100%)" }}
+        style={{ background: "linear-gradient(to bottom, rgba(25,28,15,0.35) 0%, rgba(25,28,15,0.6) 100%)" }}
       />
 
       {/* Content — editorial bottom-left anchored */}
       <div
-        className="relative z-10 flex flex-col justify-between px-8 sm:px-14 py-16 md:py-20"
-        style={{ minHeight: "85vh" }}
+        className="relative z-10 flex flex-col justify-between px-7 sm:px-14 py-12 sm:py-16 md:py-20"
+        style={{ minHeight: "65vh" }}
       >
         {/* Top label */}
         <div className="flex items-center justify-between">

@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "wouter";
+import { Ticket } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { Ticker } from "@/components/sections/Ticker";
 import { Countdown } from "@/components/sections/Countdown";
@@ -14,6 +16,14 @@ import { HeaderButtons } from "@/components/layout/HeaderButtons";
 import ContactForm from "@/components/sections/ContactForm";
 
 const Index = () => {
+  const [showMobileCta, setShowMobileCta] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowMobileCta(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useEffect(() => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -70,6 +80,34 @@ const Index = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* ── Mobile sticky CTA — only on small screens, appears after scroll ── */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-40 md:hidden transition-transform duration-300 ${
+          showMobileCta ? "translate-y-0" : "translate-y-full"
+        }`}
+        style={{ background: "#191C0F", borderTop: "1px solid rgba(202,217,94,0.25)" }}
+      >
+        <div className="flex items-center justify-between px-5 py-3 gap-3">
+          <div>
+            <p className="text-[8px] uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "Unbounded, sans-serif" }}>
+              Festival NATUR 2026
+            </p>
+            <p className="text-[10px] font-bold" style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}>
+              14 y 15 de agosto · Bogotá
+            </p>
+          </div>
+          <Link to="/tickets">
+            <button
+              className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-5 py-3 whitespace-nowrap"
+              style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+            >
+              <Ticket className="w-3.5 h-3.5" />
+              Entradas
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

@@ -83,7 +83,7 @@ export function QueVasPreview() {
         {pillars.map((p, i) => (
           <div
             key={p.num}
-            className="relative flex flex-col justify-between p-8 md:p-10 min-h-[70vw] md:min-h-[42vw]"
+            className="relative flex flex-col justify-between p-7 sm:p-10 min-h-[56vw] md:min-h-[42vw]"
             style={{
               background: p.bg,
               borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : undefined,

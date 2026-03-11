@@ -20,7 +20,7 @@ export function Stand() {
             RESERVA<br />TU STAND
           </h2>
           <p
-            className="font-unbounded font-extralight text-[3.5vw] md:text-[1.2vw] mt-4 max-w-sm leading-relaxed"
+            className="font-unbounded font-extralight text-xs sm:text-[3.5vw] md:text-[1.2vw] mt-4 max-w-sm leading-relaxed"
             style={{ color: "rgba(25,28,15,0.55)" }}
           >
             Conecta directamente con viajeros, aliados e inversores en el primer festival de turismo sostenible de Colombia.

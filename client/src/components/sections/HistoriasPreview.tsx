@@ -89,7 +89,7 @@ export function HistoriasPreview() {
         {pillars.map((p, i) => (
           <div
             key={p.num}
-            className="flex flex-col justify-between p-10 md:p-12 min-h-[64vw] md:min-h-[34vw]"
+            className="flex flex-col justify-between p-7 sm:p-10 md:p-12 min-h-[52vw] md:min-h-[34vw]"
             style={{
               background: p.bg,
               borderRight: i < 2 ? "1px solid rgba(255,255,255,0.06)" : undefined,

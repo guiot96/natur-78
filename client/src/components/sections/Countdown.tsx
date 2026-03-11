@@ -79,10 +79,10 @@ export function Countdown() {
           {units.map(({ label, value }) => (
             <div
               key={label}
-              className="flex flex-col items-center justify-center py-10 px-4"
+              className="flex flex-col items-center justify-center py-8 sm:py-10 px-4"
             >
               <span
-                className="font-gasoek text-[14vw] md:text-[6vw] leading-none tabular-nums"
+                className="font-gasoek text-[11vw] sm:text-[12vw] md:text-[6vw] leading-none tabular-nums"
                 style={{ color: "#cad95e" }}
               >
                 <Pad n={value} />
