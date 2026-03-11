@@ -22,7 +22,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import mapBackgroundImage from '@assets/stock_images/world_map_background_96663005.jpg';
 
 interface PortalEmpresasLayoutProps {
   children: React.ReactNode;
@@ -252,16 +251,7 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
 
   return (
     <TooltipProvider>
-      <div className="portal-empresas-full-image min-h-screen relative overflow-hidden" 
-           style={{ backgroundImage: `url(${mapBackgroundImage})` }}>
-        {/* Background Map with Glassmorphism */}
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 opacity-15 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${mapBackgroundImage})` }}
-          ></div>
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-        </div>
+      <div className="min-h-screen relative overflow-hidden bg-[#0d1a0f]">
         
         {/* Enhanced Top Menu Bar */}
         <div className="fixed top-0 left-0 right-0 z-50">

@@ -72,34 +72,16 @@ export default function HomePage() {
         )}
       </div>
 
-      {/* Stats row */}
-      <div className="flex gap-3">
-        <div className="flex-1 bg-white/10 backdrop-blur-lg border border-white/15 rounded-2xl p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-600/30 flex items-center justify-center">
-              <Building2 className="w-5 h-5 text-emerald-400" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-white">
-                {statsLoading ? "–" : stats?.totalCompanies || 0}
-              </p>
-              <p className="text-white/50 text-xs">Empresas</p>
-            </div>
-          </div>
-        </div>
-        <div className="flex-1 bg-white/10 backdrop-blur-lg border border-white/15 rounded-2xl p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-600/30 flex items-center justify-center">
-              <Users className="w-5 h-5 text-blue-400" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-white">
-                {statsLoading ? "–" : stats?.totalTravelers || 0}
-              </p>
-              <p className="text-white/50 text-xs">Viajeros</p>
-            </div>
-          </div>
-        </div>
+      {/* Stats chips */}
+      <div className="flex gap-2">
+        <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/10 rounded-full px-3 py-1.5 text-sm text-white/80">
+          <Building2 className="w-3.5 h-3.5 text-emerald-400" />
+          Empresas: <span className="font-semibold text-white">{statsLoading ? "–" : stats?.totalCompanies || 0}</span>
+        </span>
+        <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/10 rounded-full px-3 py-1.5 text-sm text-white/80">
+          <Users className="w-3.5 h-3.5 text-blue-400" />
+          Viajeros: <span className="font-semibold text-white">{statsLoading ? "–" : stats?.totalTravelers || 0}</span>
+        </span>
       </div>
 
       {/* Quick actions */}
@@ -108,7 +90,7 @@ export default function HomePage() {
           const Icon = action.icon;
           return (
             <Link key={action.label} href={action.path}>
-              <div className="bg-white/10 backdrop-blur-lg border border-white/15 rounded-2xl p-4 lg:p-5 text-center hover:bg-white/15 transition-colors active:scale-95 cursor-pointer">
+              <div className="bg-white/10 border border-white/10 rounded-2xl p-4 lg:p-5 text-center hover:bg-white/15 transition-colors active:scale-95 cursor-pointer">
                 <div className={`w-12 h-12 ${action.color} rounded-2xl flex items-center justify-center mx-auto mb-3`}>
                   <Icon className="w-6 h-6 text-white" />
                 </div>
@@ -121,7 +103,7 @@ export default function HomePage() {
       </div>
 
       {/* Festival NATUR 2026 banner */}
-      <div className="bg-gradient-to-r from-emerald-900/60 to-emerald-800/40 border border-emerald-500/20 rounded-2xl p-5 lg:p-6">
+      <div className="bg-emerald-900/40 border border-emerald-500/20 rounded-2xl p-5 lg:p-6">
         <div className="flex items-start justify-between">
           <div>
             <p className="text-[#f5e03a] font-semibold text-xs uppercase tracking-wider">Próximo evento</p>
