@@ -7,6 +7,8 @@ import { Countdown } from "@/components/sections/Countdown";
 import { QueVasPreview } from "@/components/sections/QueVasPreview";
 import { EntradasPreview } from "@/components/sections/EntradasPreview";
 import { Participation } from "@/components/sections/Participation";
+import { Benefits } from "@/components/sections/Benefits";
+import { Manifiesto } from "@/components/sections/Manifiesto";
 import { AmbienteSection } from "@/components/sections/AmbienteSection";
 import { Stand } from "@/components/sections/Stand";
 import { HistoriasPreview } from "@/components/sections/HistoriasPreview";
@@ -52,6 +54,9 @@ const Index = () => {
       {/* Countdown */}
       <Countdown />
 
+      {/* Manifiesto — ¿Qué es Festival NATUR? */}
+      <Manifiesto />
+
       {/* 2. ¿Qué vas a encontrar? */}
       <QueVasPreview />
 
@@ -66,6 +71,9 @@ const Index = () => {
 
       {/* 4. Ambiente — foto del festival */}
       <AmbienteSection />
+
+      {/* ¿Por qué ser parte de esta tribu? */}
+      <Benefits />
 
       {/* 5. Reserva tu Stand */}
       <Stand />
