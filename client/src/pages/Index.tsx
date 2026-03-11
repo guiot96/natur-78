@@ -6,6 +6,7 @@ import { Ticker } from "@/components/sections/Ticker";
 import { Countdown } from "@/components/sections/Countdown";
 import { QueVasPreview } from "@/components/sections/QueVasPreview";
 import { EntradasPreview } from "@/components/sections/EntradasPreview";
+import { Participation } from "@/components/sections/Participation";
 import { AmbienteSection } from "@/components/sections/AmbienteSection";
 import { Stand } from "@/components/sections/Stand";
 import { HistoriasPreview } from "@/components/sections/HistoriasPreview";
@@ -53,6 +54,9 @@ const Index = () => {
 
       {/* 2. ¿Qué vas a encontrar? */}
       <QueVasPreview />
+
+      {/* Para quién es NATUR */}
+      <Participation />
 
       {/* 3. Entradas */}
       <EntradasPreview />

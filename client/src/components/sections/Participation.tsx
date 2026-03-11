@@ -1,46 +1,119 @@
-
-import React from "react";
 import { Link } from "wouter";
-const PARTICIPANTS = ["Agencias y operadores", "Hoteles y hostales", "Emprendimientos de turismo comunitario o local", "Guías turísticos", "Proyectos, fundaciones y organizaciones", "Empresas comprometidos con la sostenibilidad", "Instituciones gubernamentales y atractivos turísticos", "Restaurantes con proposito", "Startups"];
+import { ArrowRight } from "lucide-react";
+
+const PARTICIPANTS = [
+  "Agencias y operadores turísticos",
+  "Hoteles y hostales",
+  "Emprendimientos de turismo comunitario",
+  "Guías turísticos",
+  "Proyectos, fundaciones y organizaciones",
+  "Empresas comprometidas con la sostenibilidad",
+  "Instituciones gubernamentales y atractivos turísticos",
+  "Restaurantes con propósito",
+  "Startups",
+];
+
 export function Participation() {
-  return <section className="w-full px-4 sm:px-6 md:px-12 py-12 md:py-16 lg:py-20 flex justify-center items-center font-jakarta bg-[#191c0f]">
-      <div className="w-full max-w-6xl">
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-6 md:gap-8">
-          <h1 style={{
-          lineHeight: 1.1,
-          fontWeight: 700,
-          letterSpacing: 1.5
-        }} className="font-gasoek text-[#f5e03a] text-center lg:text-left text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal leading-tight tracking-wide uppercase mb-4 sm:mb-6">
-            BUSCAMOS INICIATIVAS QUE HAGAN TURISMO SOSTENIBLE
-          </h1>
+  return (
+    <section className="w-full" style={{ background: "#191C0F" }}>
 
-          <div className="lg:w-[40%]">
-            <h4 className="text-[#CEDD9F] text-xs sm:text-sm md:text-base tracking-wide leading-relaxed"
-                style={{ fontFamily: 'Unbounded, sans-serif', fontWeight: '300' }}>
-              Si haces parte de la cadena turística y quieres aprender del turismo con propósito, este festival es para ti
-            </h4>
+      <div className="border-b" style={{ borderColor: "rgba(245,224,58,0.10)" }}>
+        <div className="flex items-start md:items-center flex-col md:flex-row">
+          <div
+            className="hidden md:flex items-center justify-center flex-shrink-0 px-4 self-stretch border-r"
+            style={{
+              background: "#f5e03a",
+              writingMode: "vertical-rl",
+              transform: "rotate(180deg)",
+              borderColor: "rgba(245,224,58,0.10)",
+            }}
+          >
+            <span
+              className="text-[8px] font-bold uppercase tracking-[0.3em]"
+              style={{ color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+            >
+              ¿Para quién?
+            </span>
           </div>
-        </div>
 
-        {/* Participants Grid */}
-        <div className="w-full mt-8 md:mt-12 flex flex-col items-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 w-full">
-            {PARTICIPANTS.map((label, idx) => <div key={idx} className="backdrop-blur-sm bg-white/5 border border-[#CEDD9F]/30 rounded-3xl text-[#CEDD9F] text-center font-jakarta text-sm sm:text-base md:text-lg font-medium px-4 py-6 sm:px-6 sm:py-8 flex items-center justify-center hover:border-[#f5e03a]/60 hover:bg-white/10 transition-all duration-300">
-                {label}
-              </div>)}
+          <div className="flex-1 px-8 md:px-14 py-10 md:py-12">
+            <h2
+              className="font-unbounded font-bold uppercase leading-[0.92] tracking-tight"
+              style={{ fontSize: "clamp(1.1rem, 3.2vw, 3.2rem)", color: "#f5e03a" }}
+            >
+              BUSCAMOS INICIATIVAS{" "}
+              <span style={{ WebkitTextStroke: "1.5px #f5e03a", color: "transparent" }}>
+                QUE HAGAN TURISMO SOSTENIBLE
+              </span>
+            </h2>
           </div>
-        </div>
-
-        {/* Button */}
-        <div className="w-full flex justify-center mt-8 md:mt-12">
-          <Link to="/reserva" className="w-full max-w-[400px] bg-[#f5e03a] text-[#232611] rounded-none text-sm sm:text-base md:text-lg font-bold uppercase px-6 py-3 sm:px-8 sm:py-4 tracking-tight hover:bg-[#f5e03a]/90 transition-all duration-300 shadow-lg text-center" style={{
-          letterSpacing: 0,
-          fontFamily: 'Unbounded, sans-serif',
-          fontWeight: '300'
-        }}>
-            ¡Reserva tu stand o patrocina!
-          </Link>
         </div>
       </div>
-    </section>;
+
+      <div className="px-8 md:px-14 py-8 border-b" style={{ borderColor: "rgba(245,224,58,0.10)" }}>
+        <p
+          className="text-sm md:text-base leading-relaxed max-w-2xl"
+          style={{ color: "rgba(252,248,238,0.50)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+        >
+          Si haces parte de la cadena turística y quieres aprender del turismo
+          con propósito, este festival es para ti.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {PARTICIPANTS.map((label, idx) => (
+          <div
+            key={idx}
+            className="group flex items-center gap-4 px-8 md:px-10 py-7 transition-colors duration-200"
+            style={{
+              borderBottom: "1px solid rgba(245,224,58,0.08)",
+              borderRight: "1px solid rgba(245,224,58,0.08)",
+              background: "rgba(255,255,255,0.02)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(245,224,58,0.06)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+            }}
+          >
+            <span
+              className="flex-shrink-0 text-[10px] font-bold tabular-nums opacity-25"
+              style={{ color: "#f5e03a", fontFamily: "monospace" }}
+            >
+              {String(idx + 1).padStart(2, "0")}
+            </span>
+            <span
+              className="text-sm font-medium leading-snug"
+              style={{ color: "#FCF8EE", fontFamily: "Unbounded, sans-serif", fontWeight: 300 }}
+            >
+              {label}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 px-8 md:px-14 py-8"
+        style={{ borderTop: "1px solid rgba(245,224,58,0.10)" }}
+      >
+        <Link to="/portal-empresas">
+          <button
+            className="flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-widest px-7 py-3.5 hover:brightness-110 transition-all"
+            style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+          >
+            <ArrowRight className="w-3 h-3" />
+            Reserva tu Stand
+          </button>
+        </Link>
+        <span
+          className="text-[9px] uppercase tracking-[0.25em]"
+          style={{ color: "rgba(252,248,238,0.20)", fontFamily: "Unbounded, sans-serif" }}
+        >
+          9 categorías · Cupos limitados
+        </span>
+      </div>
+
+    </section>
+  );
 }
