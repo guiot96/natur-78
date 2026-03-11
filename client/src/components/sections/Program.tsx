@@ -3,7 +3,7 @@ export function Program() {
   const [openSection, setOpenSection] = useState<number | null>(null);
   const programSections = [{
     icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/9aa4c09513a8f8b7186acc435c2e81b4e2093a2e?placeholderIfAbsent=true",
-    title: "Agenda académica",
+    title: "Conocimiento Abierto para Todos",
     content: "Conferencias, talleres y paneles sobre turismo sostenible"
   }, {
     icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/5719a2e82cbd26f2a191685bd082642b93367bae?placeholderIfAbsent=true",

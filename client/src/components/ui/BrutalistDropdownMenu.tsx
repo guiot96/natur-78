@@ -52,7 +52,7 @@ const desktopMenuData: MenuCategory[] = [
     title: 'FESTIVAL NATUR BOGOTÁ 2025',
     subcategories: [
       // VIVE NATUR
-      { label: 'Charlas NATUR (Agenda Académica)', url: '/charlas' },
+      { label: 'Charlas NATUR (Conocimiento Abierto para Todos)', url: '/charlas' },
       { label: 'Rooftop + Zona de Comidas', url: '/rooftop' },
       { label: 'Emprendimientos Sostenibles', url: '/emprendimientos' },
       { label: 'Zona Chill', url: '/zona-chill' },

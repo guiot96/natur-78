@@ -8,7 +8,7 @@ const sections = [
   {
     icon: BookOpen,
     tag: "CONOCIMIENTO",
-    title: "Agenda Académica",
+    title: "Conocimiento Abierto para Todos",
     description:
       "Charlas, paneles y talleres con líderes del turismo sostenible, emprendedores regenerativos y expertos en naturaleza. Aprende, debate y llévate herramientas reales para transformar tu forma de viajar y hacer negocios.",
     color: "#f5e03a",
