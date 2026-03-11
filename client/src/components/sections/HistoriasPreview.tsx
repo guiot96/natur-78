@@ -1,17 +1,28 @@
 import { Link } from "wouter";
-import { ArrowRight, Lock } from "lucide-react";
+import { ArrowRight, Feather } from "lucide-react";
 
-const stories = [
-  { num: "01", tag: "Ecosistemas",   title: "Caño Cristales — El Río de los Cinco Colores",            region: "Meta" },
-  { num: "02", tag: "Patrimonio",    title: "Eje Cafetero — Patrimonio Cultural de la Humanidad",      region: "Caldas / Quindío" },
-  { num: "03", tag: "Costa",         title: "Tayrona — Donde la Selva Abraza el Mar",                 region: "Magdalena" },
-  { num: "04", tag: "Amazonia",      title: "Amazonas — El Pulmón Verde del Mundo",                   region: "Amazonas" },
-  { num: "05", tag: "Desierto",      title: "Guajira — El Desierto que Respira",                      region: "La Guajira" },
-  { num: "06", tag: "Insular",       title: "Providencia — La Isla Libre de Plástico",                region: "San Andrés" },
-  { num: "07", tag: "Biodiversidad", title: "Los Llanos — Sabanas Vivas de la Orinoquía",             region: "Casanare / Vichada" },
-  { num: "08", tag: "Montaña",       title: "Sierra Nevada — La Montaña Costera más Alta del Mundo",  region: "Santa Marta" },
-  { num: "09", tag: "Comunidades",   title: "Pueblos Arhuacos — Guardianes del Territorio",           region: "Sierra Nevada" },
-  { num: "10", tag: "Slow Travel",   title: "Jardín, Antioquia — El Turismo que Protege",             region: "Antioquia" },
+const pillars = [
+  {
+    num: "01",
+    title: "Naturaleza",
+    desc: "Destinos que respiran: ecosistemas, paisajes y territorios que demuestran que Colombia es el país más biodiverso del mundo.",
+    accent: "#cad95e",
+    bg: "#1a4a1e",
+  },
+  {
+    num: "02",
+    title: "Comunidades",
+    desc: "Historias de personas y pueblos que han hecho del turismo una herramienta de vida, cultura y preservación del territorio.",
+    accent: "#f5e03a",
+    bg: "#191C0F",
+  },
+  {
+    num: "03",
+    title: "Futuro",
+    desc: "Proyectos, modelos y visiones que están redefiniendo la forma en que Colombia se muestra al mundo — desde adentro.",
+    accent: "#cad95e",
+    bg: "#2d7a32",
+  },
 ];
 
 export function HistoriasPreview() {
@@ -19,109 +30,123 @@ export function HistoriasPreview() {
     <section className="w-full" style={{ background: "#191C0F" }}>
 
       {/* ── Header ── */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-8 md:px-14 pt-16 pb-10 border-b border-white/8">
-        <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 border-b border-white/8">
+
+        {/* Left: heading */}
+        <div className="px-8 md:px-14 pt-14 pb-10 border-b md:border-b-0 md:border-r border-white/8">
           <p
-            className="text-[10px] tracking-[0.35em] uppercase font-bold mb-3"
+            className="text-[10px] tracking-[0.35em] uppercase font-bold mb-4"
             style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
           >
-            Blog · Artículos
+            Blog · Editorial
           </p>
-          <h2 className="font-gasoek text-5xl sm:text-6xl md:text-7xl uppercase leading-none text-white">
+          <h2 className="font-gasoek uppercase leading-[0.88] text-white"
+            style={{ fontSize: "clamp(2.8rem, 9vw, 7rem)" }}>
             HISTORIAS<br />
             <span style={{ color: "#f5e03a" }}>NATUR</span>
           </h2>
         </div>
 
-        {/* Próximamente badge */}
-        <div className="flex flex-col items-start sm:items-end gap-3">
-          <div
-            className="flex items-center gap-2 px-4 py-2"
-            style={{ background: "rgba(245,224,58,0.1)", border: "1px solid rgba(245,224,58,0.25)" }}
-          >
-            <Lock className="w-3 h-3" style={{ color: "#f5e03a" }} />
-            <span
-              className="text-[10px] font-bold uppercase tracking-widest"
-              style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
+        {/* Right: intro */}
+        <div className="flex flex-col justify-between px-8 md:px-12 py-10 gap-6">
+          <div className="flex items-start gap-3">
+            <div
+              className="flex-shrink-0 w-8 h-8 flex items-center justify-center mt-0.5"
+              style={{ background: "rgba(202,217,94,0.12)", border: "1px solid rgba(202,217,94,0.25)" }}
             >
-              Próximamente
-            </span>
+              <Feather className="w-3.5 h-3.5" style={{ color: "#cad95e" }} />
+            </div>
+            <div>
+              <p
+                className="text-[9px] font-bold uppercase tracking-widest mb-2"
+                style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+              >
+                Próximamente · Agosto 2026
+              </p>
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "rgba(255,255,255,0.45)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+              >
+                Historias NATUR será el espacio editorial del festival — crónicas, reportajes y entrevistas sobre el turismo sostenible colombiano. Voces desde el territorio, proyectos que transforman y destinos que inspiran.
+              </p>
+            </div>
           </div>
-          <p
-            className="text-[9px] uppercase tracking-widest text-right"
-            style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Unbounded, sans-serif" }}
-          >
-            10 historias · Agosto 2026
-          </p>
+
+          <div>
+            <div className="w-full h-px mb-4" style={{ background: "rgba(255,255,255,0.07)" }} />
+            <p
+              className="text-[9px] uppercase tracking-widest"
+              style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Unbounded, sans-serif" }}
+            >
+              Las primeras historias se publican en agosto 2026 — junto al festival.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* ── Story list ── */}
-      <div className="divide-y" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-        {stories.map((s, i) => (
+      {/* ── Three thematic pillars ── */}
+      <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/8">
+        {pillars.map((p, i) => (
           <div
-            key={s.num}
-            className="group flex items-center gap-5 md:gap-8 px-8 md:px-14 py-5 transition-colors hover:bg-white/3 cursor-default"
+            key={p.num}
+            className="flex flex-col justify-between p-8 md:p-10 min-h-[60vw] md:min-h-[32vw]"
+            style={{
+              background: p.bg,
+              borderRight: i < 2 ? "1px solid rgba(255,255,255,0.06)" : undefined,
+              borderBottom: "1px solid rgba(255,255,255,0.06)",
+            }}
           >
-            {/* Number */}
-            <span
-              className="font-gasoek text-3xl md:text-4xl leading-none w-10 flex-shrink-0 opacity-20 group-hover:opacity-40 transition-opacity tabular-nums"
-              style={{ color: "#cad95e" }}
-            >
-              {s.num}
-            </span>
-
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-3 mb-1">
-                <span
-                  className="text-[8px] font-bold uppercase tracking-widest px-2 py-[2px]"
-                  style={{ background: "rgba(202,217,94,0.1)", color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
-                >
-                  {s.tag}
-                </span>
-                <span
-                  className="text-[8px] uppercase tracking-widest"
-                  style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Unbounded, sans-serif" }}
-                >
-                  {s.region}
-                </span>
-              </div>
-              <h3
-                className="font-gasoek text-lg md:text-2xl uppercase leading-tight truncate"
-                style={{ color: "rgba(255,255,255,0.55)" }}
+            {/* Top */}
+            <div className="flex items-start justify-between">
+              <span
+                className="text-[9px] font-bold uppercase tracking-widest px-2 py-[2px]"
+                style={{ background: `${p.accent}18`, color: p.accent, border: `1px solid ${p.accent}30`, fontFamily: "Unbounded, sans-serif" }}
               >
-                {s.title}
+                Eje temático
+              </span>
+              <span className="font-gasoek text-5xl leading-none opacity-10 text-white">{p.num}</span>
+            </div>
+
+            {/* Middle: giant category name */}
+            <div className="py-4">
+              <h3
+                className="font-gasoek uppercase leading-[0.88]"
+                style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "rgba(255,255,255,0.85)" }}
+              >
+                {p.title}
               </h3>
             </div>
 
-            {/* Locked indicator */}
-            <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
-              <Lock className="w-3.5 h-3.5" style={{ color: "rgba(255,255,255,0.2)" }} />
+            {/* Bottom */}
+            <div>
+              <div className="w-full h-px mb-3" style={{ background: "rgba(255,255,255,0.08)" }} />
+              <p className="text-xs leading-relaxed"
+                style={{ color: "rgba(255,255,255,0.38)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
+                {p.desc}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* ── Bottom CTA strip ── */}
+      {/* ── CTA strip ── */}
       <div
-        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-8 md:px-14 py-8 border-t"
-        style={{ borderColor: "rgba(255,255,255,0.08)", background: "rgba(202,217,94,0.04)" }}
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-8 md:px-14 py-7"
+        style={{ background: "rgba(202,217,94,0.04)", borderTop: "1px solid rgba(255,255,255,0.06)" }}
       >
         <p
           className="text-xs leading-relaxed"
-          style={{ color: "rgba(255,255,255,0.3)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+          style={{ color: "rgba(255,255,255,0.28)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
         >
-          Las 10 historias más importantes del turismo sostenible en Colombia.<br />
-          Publicadas en agosto 2026 — Festival NATUR.
+          Sé el primero en leer — las historias llegan con el festival.
         </p>
         <Link to="/historias">
           <button
-            className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest px-7 py-4 hover:opacity-80 transition-opacity whitespace-nowrap"
+            className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-7 py-3.5 hover:opacity-80 transition-opacity whitespace-nowrap"
             style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
           >
-            <ArrowRight className="w-3.5 h-3.5" />
-            Ver todas
+            <ArrowRight className="w-3 h-3" />
+            Saber más
           </button>
         </Link>
       </div>

@@ -14,56 +14,43 @@ export function Partners() {
   return (
     <section className="w-full" style={{ background: "#FCF8EE" }}>
 
-      {/* ── Full-width label strip ── */}
-      <div
-        className="flex items-center justify-between px-8 md:px-14 py-5 border-b border-black/10"
-        style={{ background: "#FCF8EE" }}
-      >
-        <span
-          className="font-gasoek text-[6vw] md:text-[3vw] uppercase leading-none"
-          style={{ color: "#191C0F" }}
-        >
+      {/* ── Header strip ── */}
+      <div className="flex items-center justify-between px-8 md:px-14 py-5 border-b border-black/10">
+        <span className="font-gasoek uppercase leading-none"
+          style={{ fontSize: "clamp(1.4rem, 5vw, 3.5rem)", color: "#191C0F" }}>
           NUESTROS ALIADOS
         </span>
-        <span
-          className="text-[9px] uppercase tracking-widest hidden md:block"
-          style={{ color: "rgba(25,28,15,0.3)", fontFamily: "Unbounded, sans-serif" }}
-        >
+        <span className="text-[9px] uppercase tracking-widest hidden md:block"
+          style={{ color: "rgba(25,28,15,0.3)", fontFamily: "Unbounded, sans-serif" }}>
           Turismo sostenible · Colombia
         </span>
       </div>
 
-      {/* ── Logo strip — no rounded cards, pure brutalist row ── */}
-      <div className="flex flex-wrap border-b border-black/10"
+      {/* ── Logo grid: 2-col mobile / 3-col md+ ── */}
+      <div className="grid grid-cols-2 md:grid-cols-3 border-b border-black/10"
         style={{ borderLeft: "1px solid rgba(25,28,15,0.08)" }}>
         {partnerLogos.map((logo, i) => (
           <div
             key={i}
-            className="flex items-center justify-center border-r border-b border-black/8 hover:bg-black/4 transition-colors cursor-pointer"
-            style={{
-              width: "calc(100% / 3)",
-              minWidth: "120px",
-              padding: "clamp(1.5rem, 3vw, 2.5rem)",
-            }}
+            className="flex items-center justify-center border-r border-b border-black/8 hover:bg-black/4 transition-colors"
+            style={{ padding: "clamp(1.2rem, 3.5vw, 2.5rem)" }}
           >
             <img
               src={logo}
               alt={`Aliado ${i + 1}`}
-              className="object-contain opacity-60 hover:opacity-100 transition-opacity"
-              style={{ height: "clamp(24px, 3vw, 40px)", maxWidth: "120px" }}
+              className="object-contain opacity-55 hover:opacity-90 transition-opacity"
+              style={{ height: "clamp(22px, 3.5vw, 42px)", maxWidth: "100%" }}
             />
           </div>
         ))}
 
-        {/* Fill empty cell if odd count */}
+        {/* "Tu marca aquí" filler */}
         <div
-          className="flex-1 border-r border-b border-black/8 flex items-center justify-center"
-          style={{ minWidth: "120px", padding: "clamp(1.5rem, 3vw, 2.5rem)", background: "#1a4a1e" }}
+          className="flex items-center justify-center border-r border-b border-black/8"
+          style={{ padding: "clamp(1.2rem, 3.5vw, 2.5rem)", background: "#1a4a1e" }}
         >
-          <span
-            className="text-[9px] uppercase tracking-widest text-center"
-            style={{ color: "rgba(202,217,94,0.4)", fontFamily: "Unbounded, sans-serif" }}
-          >
+          <span className="text-[9px] uppercase tracking-widest text-center"
+            style={{ color: "rgba(202,217,94,0.45)", fontFamily: "Unbounded, sans-serif" }}>
             Tu marca<br />aquí
           </span>
         </div>

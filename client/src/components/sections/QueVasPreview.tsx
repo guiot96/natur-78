@@ -56,11 +56,11 @@ export function QueVasPreview() {
 
           <div className="flex-1 px-8 md:px-14 py-10 md:py-12">
             <h2
-              className="font-gasoek uppercase leading-[0.85] whitespace-nowrap overflow-visible"
-              style={{ fontSize: "clamp(3rem, 10vw, 9rem)", color: "#191C0F" }}
+              className="font-gasoek uppercase leading-[0.85]"
+              style={{ fontSize: "clamp(2.4rem, 8vw, 9rem)", color: "#191C0F" }}
             >
-              ¿QUÉ VAS&nbsp;
-              <span style={{ WebkitTextStroke: "2px #1a4a1e", color: "transparent" }}>
+              ¿QUÉ VAS{" "}
+              <span className="inline-block" style={{ WebkitTextStroke: "2px #1a4a1e", color: "transparent" }}>
                 A ENCONTRAR?
               </span>
             </h2>
