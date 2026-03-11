@@ -26,7 +26,7 @@ const sections = [
     title: "Nuestra Rumba y sus Manifestaciones",
     description:
       "Música en vivo, arte urbano, gastronomía local y expresiones culturales que celebran la diversidad de Colombia. Una fiesta que conecta territorios, artistas y comunidades en un solo escenario.",
-    color: "#f5e03a",
+    color: "#cad95e",
     bg: "#1a4a1e",
     items: [
       "Música en vivo",

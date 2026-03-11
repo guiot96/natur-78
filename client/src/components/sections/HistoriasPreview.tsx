@@ -13,7 +13,7 @@ const pillars = [
     num: "02",
     title: "Comunidades",
     desc: "Historias de personas y pueblos que han hecho del turismo una herramienta de vida, cultura y preservación del territorio.",
-    accent: "#f5e03a",
+    accent: "#cad95e",
     bg: "#191C0F",
   },
   {
@@ -33,7 +33,7 @@ export function HistoriasPreview() {
       <div className="grid grid-cols-1 md:grid-cols-2 border-b border-white/8">
 
         {/* Left: heading */}
-        <div className="px-8 md:px-14 pt-14 pb-10 border-b md:border-b-0 md:border-r border-white/8">
+        <div className="px-8 md:px-14 pt-16 pb-14 border-b md:border-b-0 md:border-r border-white/8">
           <p
             className="text-[10px] tracking-[0.35em] uppercase font-bold mb-4"
             style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
@@ -43,12 +43,12 @@ export function HistoriasPreview() {
           <h2 className="font-gasoek uppercase leading-[0.88] text-white"
             style={{ fontSize: "clamp(2.8rem, 9vw, 7rem)" }}>
             HISTORIAS<br />
-            <span style={{ color: "#f5e03a" }}>NATUR</span>
+            <span style={{ color: "#cad95e" }}>NATUR</span>
           </h2>
         </div>
 
         {/* Right: intro */}
-        <div className="flex flex-col justify-between px-8 md:px-12 py-10 gap-6">
+        <div className="flex flex-col justify-between px-8 md:px-12 py-14 md:py-16 gap-6">
           <div className="flex items-start gap-3">
             <div
               className="flex-shrink-0 w-8 h-8 flex items-center justify-center mt-0.5"
@@ -89,7 +89,7 @@ export function HistoriasPreview() {
         {pillars.map((p, i) => (
           <div
             key={p.num}
-            className="flex flex-col justify-between p-8 md:p-10 min-h-[60vw] md:min-h-[32vw]"
+            className="flex flex-col justify-between p-10 md:p-12 min-h-[64vw] md:min-h-[34vw]"
             style={{
               background: p.bg,
               borderRight: i < 2 ? "1px solid rgba(255,255,255,0.06)" : undefined,

@@ -8,7 +8,7 @@ const P = {
   darkGreen: '#1a4a1e',
   midGreen:  '#2d7a32',
   lime:      '#cad95e',
-  yellow:    '#f5e03a',
+  yellow:    '#cad95e',
   cream:     '#FCF8EE',
   rose:      '#f2c4c8',
   roseDeep:  '#c45870',

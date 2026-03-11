@@ -20,7 +20,7 @@ const pillars = [
     title: "RUMBA Y\nMANIFES-\nTACIONES",
     desc: "Música en vivo, arte urbano, gastronomía y cultura colombiana.",
     bg: "#1a4a1e",
-    accent: "#f5e03a",
+    accent: "#cad95e",
     textColor: "#FCF8EE",
     detail: "Música · Arte · Gastronomía",
   },
@@ -54,7 +54,7 @@ export function QueVasPreview() {
             </span>
           </div>
 
-          <div className="flex-1 px-8 md:px-14 py-10 md:py-12">
+          <div className="flex-1 px-8 md:px-14 py-12 md:py-14">
             <h2
               className="font-gasoek uppercase leading-[0.85]"
               style={{ fontSize: "clamp(2.4rem, 8vw, 9rem)", color: "#191C0F" }}

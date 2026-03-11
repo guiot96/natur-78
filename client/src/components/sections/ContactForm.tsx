@@ -20,8 +20,8 @@ export default function ContactForm() {
       {/* ── Giant heading — Sound Ethics style ── */}
       <div className="overflow-hidden border-b border-white/8">
         <h2
-          className="font-gasoek uppercase leading-[0.82] px-8 md:px-14 pt-12 pb-10 text-white"
-          style={{ fontSize: "clamp(3.5rem, 14vw, 13rem)", letterSpacing: "-0.02em" }}
+          className="font-gasoek uppercase leading-[0.82] px-8 md:px-14 pt-14 pb-12 text-white"
+          style={{ fontSize: "clamp(2.6rem, 9vw, 9rem)", letterSpacing: "-0.02em" }}
         >
           HABLE-<br />MOS
         </h2>

@@ -5,7 +5,7 @@ import { Mail, MapPin, Phone, Send, Instagram } from 'lucide-react';
 
 const P = {
   dark: '#191C0F', darkGreen: '#1a4a1e', midGreen: '#2d7a32',
-  lime: '#cad95e', yellow: '#f5e03a', cream: '#FCF8EE',
+  lime: '#cad95e', yellow: '#cad95e', cream: '#FCF8EE',
 };
 
 const info = [

@@ -46,7 +46,7 @@ export function AmbienteSection() {
             VIVE
           </h2>
           <h2 className="font-gasoek text-[12vw] md:text-[6.5vw] uppercase leading-[0.85] mb-8"
-            style={{ color: "#f5e03a" }}>
+            style={{ color: "#cad95e" }}>
             LA EXPERIENCIA
           </h2>
 

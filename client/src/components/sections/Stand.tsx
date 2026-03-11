@@ -4,14 +4,14 @@ import standImg from "@assets/generated_images/natur_stand.png";
 
 export function Stand() {
   return (
-    <section className="w-full grid grid-cols-1 md:grid-cols-2" style={{ background: "#f5e03a" }}>
+    <section className="w-full grid grid-cols-1 md:grid-cols-2" style={{ background: "#cad95e" }}>
 
       {/* ── Left: editorial text block ── */}
       <div className="flex flex-col justify-between p-10 md:p-14 min-h-[60vw] md:min-h-[45vw]">
         <div>
           <span
             className="inline-block text-[9px] tracking-[0.32em] uppercase font-bold px-2.5 py-[3px] mb-8"
-            style={{ background: "#191C0F", color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
+            style={{ background: "#191C0F", color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
           >
             Participa como marca
           </span>
@@ -51,7 +51,7 @@ export function Stand() {
             <Link to="/contacto">
               <button
                 className="flex items-center justify-between gap-6 font-bold text-[11px] uppercase tracking-widest px-8 py-4 hover:opacity-85 transition-opacity"
-                style={{ background: "#191C0F", color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
+                style={{ background: "#191C0F", color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
               >
                 <span className="flex items-center gap-2.5">
                   <ArrowRight className="w-3.5 h-3.5" />

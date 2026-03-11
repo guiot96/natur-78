@@ -42,7 +42,7 @@ Preferred communication style: Simple, everyday language.
 - **State Management**: React Context for authentication, TanStack Query for server state.
 - **Form Handling**: React Hook Form with Zod validation.
 - **Design Philosophy**: Emphasizes brutalist and glassmorphism aesthetics. Features include organic background textures, interactive cards, and consistent typography. White themes are used for marketplace and dashboards, with dark themes for immersive experiences.
-- **Color System**: Two-mode design token system using cream (#FCF8EE) for light mode, dark green (#0a1a0a) for dark mode, and NATUR brand green (#cad95e) as an accent.
+- **Color System**: Single accent color `#cad95e` (NATUR lime) used consistently throughout all pages. Supporting palette: `#191C0F` near-black, `#1a4a1e` dark green, `#2d7a32` mid green, `#FCF8EE` cream, `#f2c4c8` rose (tickets only). No secondary yellow — all accent usage unified to `#cad95e`.
 
 ### Backend Architecture
 - **Runtime**: Node.js with TypeScript.

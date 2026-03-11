@@ -40,7 +40,7 @@ export function Countdown() {
       <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/8">
 
         {/* ── Left: copy ── */}
-        <div className="flex flex-col justify-between px-8 md:px-14 py-12 border-b md:border-b-0 border-r-0 md:border-r border-white/8">
+        <div className="flex flex-col justify-between px-8 md:px-14 py-14 md:py-18 border-b md:border-b-0 border-r-0 md:border-r border-white/8">
           <div>
             <span
               className="inline-block text-[9px] tracking-[0.35em] uppercase font-bold px-2.5 py-[3px] mb-6"
@@ -50,7 +50,7 @@ export function Countdown() {
             </span>
             <h2 className="font-gasoek text-[10vw] md:text-[4.5vw] uppercase leading-[0.88] text-white mb-4">
               EL FESTIVAL<br />
-              <span style={{ color: "#f5e03a" }}>SE ACERCA</span>
+              <span style={{ color: "#cad95e" }}>SE ACERCA</span>
             </h2>
             <p
               className="text-sm leading-relaxed max-w-sm"
