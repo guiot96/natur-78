@@ -1,7 +1,22 @@
 # Festival NATUR - Full Stack Application
 
 ## Overview
-Festival NATUR is a full-stack web application creating an ecosystem for sustainable tourism and regenerative practices. It connects startups, investors, mentors, digital nomads, and other stakeholders. The platform offers modules for networking, education, a marketplace, experiences, fundraising, and an accelerator program, aiming to be the leading resource for sustainable tourism, fostering connections and facilitating growth within the sector.
+Festival NATUR is the official website for the first sustainable tourism festival in Colombia, taking place on August 14–15, 2026 at Kinder (Calle 59 #6-21, Chapinero, Bogotá). The platform serves as a public-facing festival site with ticket sales, agenda, editorial content, and a B2B portal for companies and sponsors.
+
+## Site Structure (8 pages only)
+- **HOME** — `/`
+- **ENTRADAS** — `/tickets`
+- **AGENDA** — `/agenda`
+- **¿QUÉ VAS A ENCONTRAR?** — `/que-vas-a-encontrar`
+- **HISTORIAS NATUR** — `/historias` (maps to Noticias.tsx)
+- **NOSOTROS** — `/nosotros` (maps to About.tsx)
+- **CONTACTO** — `/contacto` (maps to Contact.tsx)
+- **PORTAL EMPRESAS** — `/portal-empresas`
+
+### Navigation Requirements
+- Logo always directs to HOME
+- Menu visible at all times (sticky fixed header)
+- Fully responsive (desktop + tablet + mobile)
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

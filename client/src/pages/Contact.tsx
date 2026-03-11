@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from 'wouter';
+import { HeaderButtons } from '@/components/layout/HeaderButtons';
 import { 
   TreePine, Mail, Phone, MapPin, Clock, 
   MessageCircle, Send, Instagram, Twitter, 
@@ -13,32 +14,10 @@ import {
 const Contact = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900">
-      {/* Header */}
-      <div className="bg-black/50 backdrop-blur-sm border-b border-white/10">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-                <TreePine className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h1 className="font-bold text-white text-lg">Festival NATUR</h1>
-                <p className="text-xs text-white/60">Contacto</p>
-              </div>
-            </Link>
-            <nav className="hidden md:flex items-center space-x-6">
-              <Link to="/" className="text-white/70 hover:text-white transition-colors">Inicio</Link>
-              <Link to="/about" className="text-white/70 hover:text-white transition-colors">Acerca de</Link>
-              <Link to="/agenda" className="text-white/70 hover:text-white transition-colors">Agenda</Link>
-              <Link to="/tickets" className="text-white/70 hover:text-white transition-colors">Entradas</Link>
-              <span className="text-green-400 font-medium">Contacto</span>
-            </nav>
-          </div>
-        </div>
-      </div>
+      <HeaderButtons />
 
       {/* Hero Section */}
-      <section className="py-20">
+      <section className="py-20 pt-28">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
