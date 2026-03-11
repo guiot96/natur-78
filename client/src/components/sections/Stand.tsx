@@ -7,28 +7,29 @@ export function Stand() {
     <section className="w-full grid grid-cols-1 md:grid-cols-2" style={{ background: "#cad95e" }}>
 
       {/* ── Left: editorial text block ── */}
-      <div className="flex flex-col justify-between p-10 md:p-14 min-h-[60vw] md:min-h-[45vw]">
+      <div className="flex flex-col justify-between p-10 md:p-16 min-h-[60vw] md:min-h-[45vw]">
         <div>
           <span
-            className="inline-block text-[9px] tracking-[0.32em] uppercase font-bold px-2.5 py-[3px] mb-8"
+            className="inline-block text-[9px] tracking-[0.32em] uppercase font-bold px-2.5 py-[3px] mb-10"
             style={{ background: "#191C0F", color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
           >
             Participa como marca
           </span>
-          <h2 className="font-gasoek text-[11vw] md:text-[5.5vw] uppercase leading-[0.88]"
-            style={{ color: "#191C0F" }}>
+          <h2
+            className="font-unbounded font-bold uppercase leading-[0.95] tracking-tight mb-5"
+            style={{ fontSize: "clamp(2.2rem, 8vw, 5rem)", color: "#191C0F" }}
+          >
             RESERVA<br />TU STAND
           </h2>
           <p
-            className="font-unbounded font-extralight text-xs sm:text-[3.5vw] md:text-[1.2vw] mt-4 max-w-sm leading-relaxed"
+            className="font-unbounded font-extralight text-sm leading-relaxed max-w-sm"
             style={{ color: "rgba(25,28,15,0.55)" }}
           >
             Conecta directamente con viajeros, aliados e inversores en el primer festival de turismo sostenible de Colombia.
           </p>
         </div>
 
-        <div className="space-y-5 mt-8">
-          {/* Info rows */}
+        <div className="space-y-6 mt-10">
           <div className="space-y-2">
             {[
               ["Fecha", "14 y 15 de Agosto 2026"],
@@ -80,9 +81,8 @@ export function Stand() {
         />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, transparent 60%, rgba(245,224,58,0.4) 100%)" }}
+          style={{ background: "linear-gradient(to bottom, transparent 60%, rgba(202,217,94,0.4) 100%)" }}
         />
-        {/* Bottom caption */}
         <div className="absolute bottom-8 left-8 right-8">
           <div className="flex items-center justify-between">
             <span

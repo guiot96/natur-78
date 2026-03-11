@@ -33,22 +33,24 @@ export function HistoriasPreview() {
       <div className="grid grid-cols-1 md:grid-cols-2 border-b border-white/8">
 
         {/* Left: heading */}
-        <div className="px-8 md:px-14 pt-16 pb-14 border-b md:border-b-0 md:border-r border-white/8">
+        <div className="px-8 md:px-14 pt-16 pb-14 md:pt-20 md:pb-16 border-b md:border-b-0 md:border-r border-white/8">
           <p
-            className="text-[10px] tracking-[0.35em] uppercase font-bold mb-4"
+            className="text-[10px] tracking-[0.35em] uppercase font-bold mb-5"
             style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
           >
             Blog · Editorial
           </p>
-          <h2 className="font-gasoek uppercase leading-[0.88] text-white"
-            style={{ fontSize: "clamp(2.8rem, 9vw, 7rem)" }}>
+          <h2
+            className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight text-white"
+            style={{ fontSize: "clamp(2.4rem, 8vw, 6.5rem)" }}
+          >
             HISTORIAS<br />
             <span style={{ color: "#cad95e" }}>NATUR</span>
           </h2>
         </div>
 
         {/* Right: intro */}
-        <div className="flex flex-col justify-between px-8 md:px-12 py-14 md:py-16 gap-6">
+        <div className="flex flex-col justify-between px-8 md:px-12 py-14 md:py-16 gap-8">
           <div className="flex items-start gap-3">
             <div
               className="flex-shrink-0 w-8 h-8 flex items-center justify-center mt-0.5"
@@ -58,7 +60,7 @@ export function HistoriasPreview() {
             </div>
             <div>
               <p
-                className="text-[9px] font-bold uppercase tracking-widest mb-2"
+                className="text-[9px] font-bold uppercase tracking-widest mb-3"
                 style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
               >
                 Próximamente · Agosto 2026
@@ -89,7 +91,7 @@ export function HistoriasPreview() {
         {pillars.map((p, i) => (
           <div
             key={p.num}
-            className="flex flex-col justify-between p-7 sm:p-10 md:p-12 min-h-[52vw] md:min-h-[34vw]"
+            className="flex flex-col justify-between p-8 sm:p-10 md:p-12 min-h-[52vw] md:min-h-[34vw]"
             style={{
               background: p.bg,
               borderRight: i < 2 ? "1px solid rgba(255,255,255,0.06)" : undefined,
@@ -104,14 +106,19 @@ export function HistoriasPreview() {
               >
                 Eje temático
               </span>
-              <span className="font-gasoek text-5xl leading-none opacity-10 text-white">{p.num}</span>
+              <span
+                className="text-4xl leading-none opacity-10 text-white tabular-nums"
+                style={{ fontFamily: "monospace" }}
+              >
+                {p.num}
+              </span>
             </div>
 
             {/* Middle: giant category name */}
-            <div className="py-4">
+            <div className="py-6">
               <h3
-                className="font-gasoek uppercase leading-[0.88]"
-                style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "rgba(255,255,255,0.85)" }}
+                className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
+                style={{ fontSize: "clamp(2rem, 6.5vw, 4.5rem)", color: "rgba(255,255,255,0.9)" }}
               >
                 {p.title}
               </h3>
@@ -119,7 +126,7 @@ export function HistoriasPreview() {
 
             {/* Bottom */}
             <div>
-              <div className="w-full h-px mb-3" style={{ background: "rgba(255,255,255,0.08)" }} />
+              <div className="w-full h-px mb-4" style={{ background: "rgba(255,255,255,0.08)" }} />
               <p className="text-xs leading-relaxed"
                 style={{ color: "rgba(255,255,255,0.38)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
                 {p.desc}
@@ -131,7 +138,7 @@ export function HistoriasPreview() {
 
       {/* ── CTA strip ── */}
       <div
-        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-8 md:px-14 py-7"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-8 md:px-14 py-8"
         style={{ background: "rgba(202,217,94,0.04)", borderTop: "1px solid rgba(255,255,255,0.06)" }}
       >
         <p

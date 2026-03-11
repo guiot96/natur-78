@@ -8,7 +8,6 @@ const P = {
   darkGreen: '#1a4a1e',
   midGreen:  '#2d7a32',
   lime:      '#cad95e',
-  yellow:    '#cad95e',
   cream:     '#FCF8EE',
   rose:      '#f2c4c8',
   roseDeep:  '#c45870',
@@ -56,7 +55,7 @@ export function EntradasPreview() {
     <section className="w-full grid grid-cols-1 md:grid-cols-3">
 
       {/* ═══ CELL 1 — dark green · identity ═══ */}
-      <div className="relative flex flex-col justify-between p-7 sm:p-9 min-h-[70vw] md:min-h-[38vw]"
+      <div className="relative flex flex-col justify-between p-8 sm:p-10 min-h-[70vw] md:min-h-[38vw]"
         style={{ background: P.darkGreen }}>
 
         <div className="flex items-start justify-between">
@@ -64,15 +63,18 @@ export function EntradasPreview() {
           <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.22)', ...mono }}>01/06</span>
         </div>
 
-        <div className="flex-1 flex flex-col justify-center py-4">
-          <p className="text-[9px] uppercase tracking-[0.28em] mb-1"
+        <div className="flex-1 flex flex-col justify-center py-6">
+          <p className="text-[9px] uppercase tracking-[0.28em] mb-2"
             style={{ color: 'rgba(255,255,255,0.32)', ...ub }}>
             Turismo Sostenible · Col
           </p>
-          <h2 className="font-gasoek text-[17vw] sm:text-[14vw] md:text-[7vw] uppercase leading-[0.88] text-white">
+          <h2
+            className="font-unbounded font-extralight uppercase leading-[0.9] tracking-widest text-white"
+            style={{ fontSize: 'clamp(3rem, 14vw, 7rem)' }}
+          >
             NATUR
           </h2>
-          <p className="text-[10px] mt-2"
+          <p className="text-[10px] mt-3"
             style={{ color: 'rgba(255,255,255,0.38)', ...ub, fontWeight: 200 }}>
             Agosto 2026 · Bogotá
           </p>
@@ -103,8 +105,11 @@ export function EntradasPreview() {
         <div className="absolute top-5 left-5 sm:top-7 sm:left-7">
           <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.38)', ...mono }}>02/06</span>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 space-y-2">
-          <p className="font-gasoek text-[4.5vw] sm:text-[3.5vw] md:text-[1.8vw] uppercase leading-tight text-white">
+        <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 space-y-2">
+          <p
+            className="font-unbounded font-extralight uppercase leading-snug tracking-wide text-white"
+            style={{ fontSize: 'clamp(1rem, 3.5vw, 1.8rem)' }}
+          >
             Cultura · Naturaleza
           </p>
           <Rule />
@@ -116,21 +121,24 @@ export function EntradasPreview() {
       </div>
 
       {/* ═══ CELL 3 — lime · 2 días ═══ */}
-      <div className="relative flex flex-col justify-between p-7 sm:p-9 min-h-[70vw] md:min-h-[38vw]"
-        style={{ background: P.yellow }}>
+      <div className="relative flex flex-col justify-between p-8 sm:p-10 min-h-[70vw] md:min-h-[38vw]"
+        style={{ background: P.lime }}>
 
         <div className="flex items-start justify-between">
-          <Tag bg={P.dark} color={P.yellow}>Recomendado</Tag>
+          <Tag bg={P.dark} color={P.lime}>Recomendado</Tag>
           <span className="text-[9px]" style={{ color: 'rgba(25,28,15,0.28)', ...mono }}>03/06</span>
         </div>
 
-        <div className="flex-1 flex flex-col justify-center py-4">
-          <p className="text-[9px] uppercase tracking-[0.28em] mb-1"
+        <div className="flex-1 flex flex-col justify-center py-6">
+          <p className="text-[9px] uppercase tracking-[0.28em] mb-2"
             style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>Entrada</p>
-          <h3 className="font-gasoek text-[15vw] sm:text-[12vw] md:text-[6.5vw] uppercase leading-[0.88]" style={{ color: P.dark }}>
+          <h3
+            className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
+            style={{ fontSize: 'clamp(2.8rem, 12vw, 6.5rem)', color: P.dark }}
+          >
             2 DÍAS
           </h3>
-          <div className="flex items-baseline justify-between mt-2 gap-2">
+          <div className="flex items-baseline justify-between mt-3 gap-2">
             <p className="text-[10px]"
               style={{ color: 'rgba(25,28,15,0.48)', ...ub, fontWeight: 200 }}>Acceso completo</p>
             <div className="text-right flex-shrink-0">
@@ -147,7 +155,12 @@ export function EntradasPreview() {
             <InfoRow light label="Cupos"     value="Limitados" />
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="font-gasoek text-[9vw] sm:text-[8vw] md:text-[4.2vw] leading-none" style={{ color: P.dark }}>$70.000</span>
+            <span
+              className="font-unbounded font-bold leading-none"
+              style={{ fontSize: 'clamp(1.8rem, 7vw, 4rem)', color: P.dark }}
+            >
+              $70.000
+            </span>
             <div className="flex flex-col">
               <span className="text-[8px] font-bold" style={{ color: 'rgba(25,28,15,0.42)', ...ub }}>COP</span>
               <span className="text-[8px]" style={{ color: 'rgba(25,28,15,0.32)', ...ub }}>p. persona</span>
@@ -155,7 +168,7 @@ export function EntradasPreview() {
           </div>
           <Link to="/tickets">
             <div className="flex items-center justify-between w-full px-4 py-3.5 font-bold text-[9px] uppercase tracking-widest hover:opacity-85 transition-opacity cursor-pointer"
-              style={{ background: P.dark, color: P.yellow, ...ub }}>
+              style={{ background: P.dark, color: P.lime, ...ub }}>
               <span className="flex items-center gap-2"><Ticket className="w-3 h-3" />Comprar</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
@@ -176,8 +189,11 @@ export function EntradasPreview() {
         <div className="absolute top-5 right-5 sm:top-7 sm:right-7">
           <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.35)', ...mono }}>04/06</span>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 space-y-2">
-          <p className="font-gasoek text-[4.5vw] sm:text-[3.5vw] md:text-[1.8vw] uppercase leading-tight text-white">
+        <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 space-y-2">
+          <p
+            className="font-unbounded font-extralight uppercase leading-snug tracking-wide text-white"
+            style={{ fontSize: 'clamp(1rem, 3.5vw, 1.8rem)' }}
+          >
             Kinder · Chapinero
           </p>
           <Rule />
@@ -193,7 +209,7 @@ export function EntradasPreview() {
       </div>
 
       {/* ═══ CELL 5 — rose · 1 día ═══ */}
-      <div className="relative flex flex-col justify-between p-7 sm:p-9 min-h-[70vw] md:min-h-[38vw]"
+      <div className="relative flex flex-col justify-between p-8 sm:p-10 min-h-[70vw] md:min-h-[38vw]"
         style={{ background: P.rose }}>
 
         <div className="flex items-start justify-between">
@@ -201,13 +217,16 @@ export function EntradasPreview() {
           <span className="text-[9px]" style={{ color: 'rgba(25,28,15,0.28)', ...mono }}>05/06</span>
         </div>
 
-        <div className="flex-1 flex flex-col justify-center py-4">
-          <p className="text-[9px] uppercase tracking-[0.28em] mb-1"
+        <div className="flex-1 flex flex-col justify-center py-6">
+          <p className="text-[9px] uppercase tracking-[0.28em] mb-2"
             style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>Entrada</p>
-          <h3 className="font-gasoek text-[15vw] sm:text-[12vw] md:text-[6.5vw] uppercase leading-[0.88]" style={{ color: P.dark }}>
+          <h3
+            className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
+            style={{ fontSize: 'clamp(2.8rem, 12vw, 6.5rem)', color: P.dark }}
+          >
             1 DÍA
           </h3>
-          <div className="flex items-baseline justify-between mt-2 gap-2">
+          <div className="flex items-baseline justify-between mt-3 gap-2">
             <p className="text-[10px]"
               style={{ color: 'rgba(25,28,15,0.48)', ...ub, fontWeight: 200 }}>Elige tu jornada</p>
             <div className="text-right flex-shrink-0">
@@ -224,7 +243,12 @@ export function EntradasPreview() {
             <InfoRow light label="Cupos"     value="Limitados" />
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="font-gasoek text-[9vw] sm:text-[8vw] md:text-[4.2vw] leading-none" style={{ color: P.dark }}>$50.000</span>
+            <span
+              className="font-unbounded font-bold leading-none"
+              style={{ fontSize: 'clamp(1.8rem, 7vw, 4rem)', color: P.dark }}
+            >
+              $50.000
+            </span>
             <div className="flex flex-col">
               <span className="text-[8px] font-bold" style={{ color: 'rgba(25,28,15,0.42)', ...ub }}>COP</span>
               <span className="text-[8px]" style={{ color: 'rgba(25,28,15,0.32)', ...ub }}>p. persona</span>
@@ -244,7 +268,7 @@ export function EntradasPreview() {
       </div>
 
       {/* ═══ CELL 6 — cream · venue info ═══ */}
-      <div className="relative flex flex-col justify-between p-7 sm:p-9 min-h-[70vw] md:min-h-[38vw]"
+      <div className="relative flex flex-col justify-between p-8 sm:p-10 min-h-[70vw] md:min-h-[38vw]"
         style={{ background: P.cream }}>
 
         <div className="flex items-start justify-between">
@@ -252,13 +276,16 @@ export function EntradasPreview() {
           <span className="text-[9px]" style={{ color: 'rgba(25,28,15,0.25)', ...mono }}>06/06</span>
         </div>
 
-        <div className="flex-1 flex flex-col justify-center py-4">
-          <p className="text-[9px] uppercase tracking-[0.28em] mb-1"
+        <div className="flex-1 flex flex-col justify-center py-6">
+          <p className="text-[9px] uppercase tracking-[0.28em] mb-2"
             style={{ color: 'rgba(25,28,15,0.32)', ...ub }}>Sede del festival</p>
-          <h3 className="font-gasoek text-[9vw] sm:text-[7vw] md:text-[3.8vw] uppercase leading-[0.9]" style={{ color: P.darkGreen }}>
+          <h3
+            className="font-unbounded font-bold uppercase leading-[0.92] tracking-tight"
+            style={{ fontSize: 'clamp(1.8rem, 7vw, 3.8rem)', color: P.darkGreen }}
+          >
             Kinder<br />Chapinero
           </h3>
-          <p className="text-[10px] mt-3"
+          <p className="text-[10px] mt-4"
             style={{ color: 'rgba(25,28,15,0.42)', ...ub, fontWeight: 200 }}>
             Calle 59 #6-21<br />Bogotá, Colombia
           </p>

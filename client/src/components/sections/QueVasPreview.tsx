@@ -2,7 +2,6 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import speakerImg from "@assets/generated_images/natur_speaker.png";
 
-/* ── Three giant vertical pillars — like stage modules ── */
 const pillars = [
   {
     num: "01",
@@ -40,7 +39,7 @@ export function QueVasPreview() {
   return (
     <section className="w-full" style={{ background: "#FCF8EE" }}>
 
-      {/* ── Overflowing headline banner ── */}
+      {/* ── Heading banner ── */}
       <div className="overflow-hidden border-b border-black/10" style={{ background: "#FCF8EE" }}>
         <div className="flex items-center gap-0">
           {/* Rotated label */}
@@ -54,10 +53,10 @@ export function QueVasPreview() {
             </span>
           </div>
 
-          <div className="flex-1 px-8 md:px-14 py-12 md:py-14">
+          <div className="flex-1 px-8 md:px-14 py-12 md:py-16">
             <h2
-              className="font-gasoek uppercase leading-[0.85]"
-              style={{ fontSize: "clamp(2.4rem, 8vw, 9rem)", color: "#191C0F" }}
+              className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
+              style={{ fontSize: "clamp(2rem, 6.5vw, 8rem)", color: "#191C0F" }}
             >
               ¿QUÉ VAS{" "}
               <span className="inline-block" style={{ WebkitTextStroke: "2px #1a4a1e", color: "transparent" }}>
@@ -83,7 +82,7 @@ export function QueVasPreview() {
         {pillars.map((p, i) => (
           <div
             key={p.num}
-            className="relative flex flex-col justify-between p-7 sm:p-10 min-h-[56vw] md:min-h-[42vw]"
+            className="relative flex flex-col justify-between p-8 sm:p-10 min-h-[56vw] md:min-h-[42vw]"
             style={{
               background: p.bg,
               borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : undefined,
@@ -98,19 +97,19 @@ export function QueVasPreview() {
                 {p.tag}
               </span>
               <span
-                className="font-gasoek text-5xl leading-none opacity-15"
-                style={{ color: p.textColor }}
+                className="text-4xl leading-none opacity-10 tabular-nums"
+                style={{ color: p.textColor, fontFamily: "monospace" }}
               >
                 {p.num}
               </span>
             </div>
 
             {/* Middle: giant title */}
-            <div className="flex-1 flex items-center py-4">
+            <div className="flex-1 flex items-center py-6">
               <h3
-                className="font-gasoek uppercase leading-[0.88] whitespace-pre-line"
+                className="font-unbounded font-bold uppercase leading-[0.92] tracking-tight whitespace-pre-line"
                 style={{
-                  fontSize: "clamp(2rem, 6vw, 4.5rem)",
+                  fontSize: "clamp(1.8rem, 5.5vw, 4rem)",
                   color: p.textColor,
                 }}
               >
@@ -135,7 +134,7 @@ export function QueVasPreview() {
         ))}
       </div>
 
-      {/* ── Photo band: speaker image full-bleed with stat row ── */}
+      {/* ── Photo band ── */}
       <div className="relative overflow-hidden" style={{ height: "38vw", minHeight: "240px", maxHeight: "480px" }}>
         <img
           src={speakerImg}
@@ -146,7 +145,7 @@ export function QueVasPreview() {
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(25,28,15,0.82) 0%, rgba(25,28,15,0.3) 60%, transparent 100%)" }} />
 
         {/* Left overlay */}
-        <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-center px-8 md:px-14 gap-2">
+        <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-center px-8 md:px-14 gap-3">
           <p className="text-[9px] uppercase tracking-[0.35em] font-bold" style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}>
             Conferencistas &amp; Ponentes
           </p>
@@ -159,8 +158,8 @@ export function QueVasPreview() {
         <div className="absolute right-0 top-0 bottom-0 hidden md:flex flex-col justify-center gap-6 px-14">
           {[["3", "Escenarios"], ["20+", "Ponentes"], ["2", "Días"]].map(([n, l]) => (
             <div key={l} className="text-right">
-              <p className="font-gasoek text-4xl leading-none text-white">{n}</p>
-              <p className="text-[9px] uppercase tracking-widest text-white/35 mt-0.5" style={{ fontFamily: "Unbounded, sans-serif" }}>{l}</p>
+              <p className="font-unbounded font-bold text-4xl leading-none text-white">{n}</p>
+              <p className="text-[9px] uppercase tracking-widest text-white/35 mt-1" style={{ fontFamily: "Unbounded, sans-serif" }}>{l}</p>
             </div>
           ))}
         </div>

@@ -17,7 +17,7 @@ export default function ContactForm() {
   return (
     <section className="w-full" id="contact" style={{ background: "#191C0F" }}>
 
-      {/* ── Giant heading — Sound Ethics style ── */}
+      {/* ── Giant heading — Gasoek only here ── */}
       <div className="overflow-hidden border-b border-white/8">
         <h2
           className="font-gasoek uppercase leading-[0.82] px-8 md:px-14 pt-14 pb-12 text-white"
@@ -37,7 +37,10 @@ export default function ContactForm() {
             >
               Enviado
             </span>
-            <p className="font-gasoek text-4xl md:text-5xl uppercase leading-tight text-white mb-4">
+            <p
+              className="font-unbounded font-bold uppercase leading-[0.95] tracking-tight text-white mb-5"
+              style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)" }}
+            >
               ¡Mensaje<br />recibido!
             </p>
             <p className="text-sm" style={{ color: "rgba(255,255,255,0.38)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
@@ -54,17 +57,20 @@ export default function ContactForm() {
 
             {/* Left col: info */}
             <div
-              className="flex flex-col justify-between px-8 md:px-14 py-12 border-b md:border-b-0 border-r-0 md:border-r border-white/8"
+              className="flex flex-col justify-between px-8 md:px-14 py-12 md:py-16 border-b md:border-b-0 border-r-0 md:border-r border-white/8"
               style={{ background: "#1a4a1e" }}
             >
               <div>
                 <p
-                  className="text-[9px] uppercase tracking-[0.35em] font-bold mb-5"
+                  className="text-[9px] uppercase tracking-[0.35em] font-bold mb-6"
                   style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
                 >
                   Escríbenos
                 </p>
-                <p className="font-gasoek text-3xl md:text-4xl uppercase leading-tight text-white mb-4">
+                <p
+                  className="font-unbounded font-bold uppercase leading-[0.95] tracking-tight text-white mb-5"
+                  style={{ fontSize: "clamp(1.6rem, 4.5vw, 3rem)" }}
+                >
                   ¿Tienes preguntas<br />sobre el festival?
                 </p>
                 <p
@@ -87,7 +93,6 @@ export default function ContactForm() {
 
             {/* Right col: fields */}
             <div className="flex flex-col gap-0 divide-y divide-white/8">
-              {/* Name + email row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-white/8">
                 <div className="flex flex-col">
                   <label className="text-[8px] uppercase tracking-widest px-8 pt-6 pb-1"
@@ -119,7 +124,6 @@ export default function ContactForm() {
                 </div>
               </div>
 
-              {/* Phone */}
               <div className="flex flex-col">
                 <label className="text-[8px] uppercase tracking-widest px-8 pt-6 pb-1"
                   style={{ color: "rgba(255,255,255,0.3)", fontFamily: "Unbounded, sans-serif" }}>
@@ -134,7 +138,6 @@ export default function ContactForm() {
                 />
               </div>
 
-              {/* Message */}
               <div className="flex flex-col flex-1">
                 <label className="text-[8px] uppercase tracking-widest px-8 pt-6 pb-1"
                   style={{ color: "rgba(255,255,255,0.3)", fontFamily: "Unbounded, sans-serif" }}>
@@ -150,7 +153,6 @@ export default function ContactForm() {
                 />
               </div>
 
-              {/* Submit strip */}
               <div className="flex items-center justify-between px-8 py-5">
                 <p className="text-[9px] uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Unbounded, sans-serif" }}>
                   Respuesta en 48h
