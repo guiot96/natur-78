@@ -1,351 +1,172 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Link } from 'wouter';
+import React, { useState } from 'react';
 import { HeaderButtons } from '@/components/layout/HeaderButtons';
-import { 
-  TreePine, Mail, Phone, MapPin, Clock, 
-  MessageCircle, Send, Instagram, Twitter, 
-  Facebook, Linkedin, ExternalLink
-} from 'lucide-react';
+import { Footer } from '@/components/sections/Footer';
+import { Mail, MapPin, Phone, Send, Instagram } from 'lucide-react';
 
-const Contact = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900">
-      <HeaderButtons />
-
-      {/* Hero Section */}
-      <section className="py-20 pt-28">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <Badge className="mb-6 bg-green-400/20 text-green-400 border-green-400/30 text-sm px-4 py-2">
-              Contáctanos
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Hablemos del
-              <span className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent block">
-                Futuro Sostenible
-              </span>
-            </h1>
-            <p className="text-xl text-white/80 mb-8 leading-relaxed">
-              ¿Tienes una pregunta, propuesta o quieres formar parte del movimiento NATUR? 
-              Nos encantaría conectar contigo y explorar cómo podemos colaborar.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Contact Information & Form */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Contact Information */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <div className="space-y-8">
-                  <div>
-                    <h2 className="text-3xl font-bold text-white mb-4">Información de Contacto</h2>
-                    <p className="text-white/70 text-lg">
-                      Múltiples formas de conectar con nuestro equipo
-                    </p>
-                  </div>
-
-                  {/* Contact Cards */}
-                  <div className="space-y-6">
-                    <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                      <CardContent className="p-6">
-                        <div className="flex items-start space-x-4">
-                          <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <Mail className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="text-white font-semibold mb-2">Email Principal</h3>
-                            <p className="text-white/80 mb-1">info@festivalnatur.co</p>
-                            <p className="text-white/60 text-sm">Consultas generales y colaboraciones</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                      <CardContent className="p-6">
-                        <div className="flex items-start space-x-4">
-                          <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <Phone className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="text-white font-semibold mb-2">Teléfono</h3>
-                            <p className="text-white/80 mb-1">+57 300 123 4567</p>
-                            <p className="text-white/60 text-sm">Lunes a Viernes, 9:00 AM - 6:00 PM</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                      <CardContent className="p-6">
-                        <div className="flex items-start space-x-4">
-                          <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <MapPin className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="text-white font-semibold mb-2">Ubicación</h3>
-                            <p className="text-white/80 mb-1">CEFE Chapinero</p>
-                            <p className="text-white/80 mb-1">Carrera 13 #63-42</p>
-                            <p className="text-white/60 text-sm">Bogotá, Colombia</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                      <CardContent className="p-6">
-                        <div className="flex items-start space-x-4">
-                          <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <MessageCircle className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="text-white font-semibold mb-2">WhatsApp</h3>
-                            <p className="text-white/80 mb-1">+57 300 123 4567</p>
-                            <p className="text-white/60 text-sm">Respuesta inmediata</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  {/* Social Media */}
-                  <div>
-                    <h3 className="text-white font-semibold mb-4">Síguenos en Redes Sociales</h3>
-                    <div className="flex space-x-4">
-                      <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10">
-                        <Instagram className="w-4 h-4 mr-2" />
-                        @FestivalNatur
-                      </Button>
-                      <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10">
-                        <Twitter className="w-4 h-4 mr-2" />
-                        @NaturFest
-                      </Button>
-                      <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10">
-                        <Linkedin className="w-4 h-4 mr-2" />
-                        Festival NATUR
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Contact Form */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                  <CardContent className="p-8">
-                    <div className="mb-6">
-                      <h2 className="text-2xl font-bold text-white mb-2">Envíanos un Mensaje</h2>
-                      <p className="text-white/70">
-                        Completa el formulario y nos pondremos en contacto contigo pronto
-                      </p>
-                    </div>
-
-                    <form className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">
-                            Nombre *
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                            placeholder="Tu nombre completo"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">
-                            Email *
-                          </label>
-                          <input
-                            type="email"
-                            required
-                            className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                            placeholder="tu@email.com"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-white/80 text-sm font-medium mb-2">
-                          Organización
-                        </label>
-                        <input
-                          type="text"
-                          className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                          placeholder="Nombre de tu empresa u organización"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-white/80 text-sm font-medium mb-2">
-                          Tipo de Consulta *
-                        </label>
-                        <select
-                          required
-                          className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-                        >
-                          <option value="">Selecciona una opción</option>
-                          <option value="participacion">Participación en el Festival</option>
-                          <option value="patrocinio">Oportunidades de Patrocinio</option>
-                          <option value="colaboracion">Propuesta de Colaboración</option>
-                          <option value="prensa">Consultas de Prensa</option>
-                          <option value="general">Consulta General</option>
-                          <option value="otro">Otro</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-white/80 text-sm font-medium mb-2">
-                          Mensaje *
-                        </label>
-                        <textarea
-                          required
-                          rows={6}
-                          className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent resize-none"
-                          placeholder="Cuéntanos más sobre tu consulta, propuesta o cómo te gustaría colaborar con Festival NATUR..."
-                        />
-                      </div>
-
-                      <div className="flex items-start space-x-3">
-                        <input
-                          type="checkbox"
-                          id="privacy"
-                          required
-                          className="mt-1 w-4 h-4 text-green-400 border-white/30 rounded focus:ring-green-400"
-                        />
-                        <label htmlFor="privacy" className="text-white/70 text-sm">
-                          Acepto la{' '}
-                          <a href="#" className="text-green-400 hover:text-green-300 underline">
-                            política de privacidad
-                          </a>{' '}
-                          y el tratamiento de mis datos personales para responder a mi consulta.
-                        </label>
-                      </div>
-
-                      <Button 
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white py-3"
-                      >
-                        <Send className="w-4 h-4 mr-2" />
-                        Enviar Mensaje
-                      </Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 bg-white/5 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Preguntas Frecuentes</h2>
-              <p className="text-white/70">
-                Respuestas a las consultas más comunes sobre Festival NATUR
-              </p>
-            </motion.div>
-
-            <div className="space-y-6">
-              {[
-                {
-                  question: "¿Cómo puedo participar como expositor en Festival NATUR?",
-                  answer: "Las inscripciones para expositores están abiertas hasta el 1 de noviembre. Puedes aplicar a través de nuestro portal de empresas o contactándonos directamente. Evaluamos propuestas que estén alineadas con los principios de turismo sostenible."
-                },
-                {
-                  question: "¿Qué incluye la entrada al festival?",
-                  answer: "La entrada VIVE NATUR incluye acceso a todas las charlas abiertas, zona de comidas, programación cultural y networking. El pase NATUR PRO adicional incluye talleres especializados, networking VIP y acceso a las ruedas de negocios."
-                },
-                {
-                  question: "¿Hay opciones de patrocinio disponibles?",
-                  answer: "Sí, ofrecemos diferentes niveles de patrocinio desde nivel Semilla hasta nivel Bosque. Cada nivel incluye beneficios específicos de visibilidad, networking y participación. Contáctanos para conocer las opciones disponibles."
-                },
-                {
-                  question: "¿El evento es presencial o virtual?",
-                  answer: "Festival NATUR 2025 es un evento presencial que se realizará en CEFE Chapinero, Bogotá. Algunas conferencias magistrales serán transmitidas en vivo para audiencia global."
-                },
-                {
-                  question: "¿Cómo puedo proponer una charla o taller?",
-                  answer: "Tenemos un proceso de selección de contenido. Envíanos tu propuesta detallada incluyendo tema, objetivos, perfil del ponente y alineación con turismo sostenible. El plazo cierra el 20 de octubre."
-                }
-              ].map((faq, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                    <CardContent className="p-6">
-                      <h3 className="text-white font-semibold mb-3">{faq.question}</h3>
-                      <p className="text-white/80 leading-relaxed">{faq.answer}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <Card className="bg-gradient-to-r from-green-600/20 to-blue-600/20 backdrop-blur-sm border-green-400/30 max-w-4xl mx-auto">
-            <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                ¿Listo para Ser Parte del Cambio?
-              </h3>
-              <p className="text-white/80 mb-6">
-                Únete al movimiento que está transformando el turismo hacia un futuro más sostenible
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild className="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white">
-                  <Link to="/tickets">
-                    Obtener Entradas
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                  <Link to="/portal-empresas">
-                    Portal Empresas
-                  </Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-    </div>
-  );
+const P = {
+  dark: '#191C0F', darkGreen: '#1a4a1e', midGreen: '#2d7a32',
+  lime: '#cad95e', yellow: '#f5e03a', cream: '#FCF8EE',
 };
 
-export default Contact;
+const info = [
+  { icon: Mail,    label: 'Email',     value: 'info@festivalnatur.com' },
+  { icon: MapPin,  label: 'Sede',      value: 'Kinder, Calle 59 #6-21, Chapinero, Bogotá' },
+  { icon: Phone,   label: 'WhatsApp',  value: '+57 300 000 0000' },
+  { icon: Instagram, label: 'Instagram', value: '@festivalnatur' },
+];
+
+export default function Contact() {
+  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
+  return (
+    <div className="min-h-screen overflow-x-hidden" style={{ background: P.cream }}>
+      <HeaderButtons />
+
+      {/* Hero */}
+      <section className="pt-28 pb-16 px-6" style={{ background: P.darkGreen }}>
+        <div className="max-w-5xl mx-auto">
+          <p className="text-xs tracking-[0.35em] uppercase mb-4 font-bold"
+            style={{ color: P.lime, fontFamily: 'Unbounded, sans-serif' }}>
+            Hablemos
+          </p>
+          <h1 className="font-gasoek text-5xl sm:text-6xl md:text-7xl uppercase leading-none text-white mb-4">
+            CONTACTO
+          </h1>
+          <p className="text-white/55 text-base max-w-xl">
+            ¿Tienes una pregunta, propuesta o quieres ser parte del Festival NATUR 2026?
+            Escríbenos y te respondemos pronto.
+          </p>
+        </div>
+      </section>
+
+      {/* Content */}
+      <section className="py-16 px-6 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-5 gap-12">
+
+          {/* Info */}
+          <div className="lg:col-span-2 space-y-2">
+            {info.map((item, i) => (
+              <div key={i} className="flex items-start gap-5 px-6 py-5 border-b"
+                style={{ borderColor: 'rgba(26,74,30,0.12)' }}>
+                <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center mt-0.5"
+                  style={{ background: i % 2 === 0 ? P.lime : P.yellow }}>
+                  <item.icon className="w-4 h-4" style={{ color: P.dark }} />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest font-bold mb-0.5"
+                    style={{ color: P.midGreen }}>{item.label}</p>
+                  <p className="text-sm" style={{ color: P.dark }}>{item.value}</p>
+                </div>
+              </div>
+            ))}
+
+            {/* Festival info */}
+            <div className="mt-8 p-6" style={{ background: P.darkGreen }}>
+              <p className="font-gasoek text-lg uppercase text-white mb-2">Festival NATUR 2026</p>
+              <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                14 y 15 de agosto · Kinder, Chapinero, Bogotá.<br />
+                El primer Festival Nacional de Turismo Sostenible de Colombia.
+              </p>
+            </div>
+          </div>
+
+          {/* Form */}
+          <div className="lg:col-span-3">
+            {sent ? (
+              <div className="flex flex-col items-center justify-center h-80 text-center">
+                <div className="w-16 h-16 flex items-center justify-center mb-6"
+                  style={{ background: P.lime }}>
+                  <Send className="w-7 h-7" style={{ color: P.dark }} />
+                </div>
+                <h2 className="font-gasoek text-2xl uppercase mb-2" style={{ color: P.dark }}>
+                  ¡Mensaje enviado!
+                </h2>
+                <p style={{ color: 'rgba(25,28,15,0.55)' }}>
+                  Te responderemos pronto a <strong>{form.email}</strong>
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-5">
+                  {(['name', 'email'] as const).map((field) => (
+                    <div key={field} className="flex flex-col gap-1.5">
+                      <label className="text-xs uppercase tracking-wider font-bold"
+                        style={{ color: P.midGreen }}>
+                        {field === 'name' ? 'Nombre' : 'Email'}
+                      </label>
+                      <input
+                        name={field}
+                        type={field === 'email' ? 'email' : 'text'}
+                        required
+                        value={form[field]}
+                        onChange={handleChange}
+                        className="border px-4 py-3 text-sm focus:outline-none"
+                        style={{
+                          borderColor: 'rgba(26,74,30,0.2)',
+                          background: 'white',
+                          color: P.dark,
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs uppercase tracking-wider font-bold" style={{ color: P.midGreen }}>
+                    Asunto
+                  </label>
+                  <select
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
+                    required
+                    className="border px-4 py-3 text-sm focus:outline-none"
+                    style={{ borderColor: 'rgba(26,74,30,0.2)', background: 'white', color: P.dark }}>
+                    <option value="">Selecciona un asunto</option>
+                    <option>Compra de entradas</option>
+                    <option>Reserva de stand</option>
+                    <option>Alianzas y patrocinios</option>
+                    <option>Prensa y medios</option>
+                    <option>Otro</option>
+                  </select>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs uppercase tracking-wider font-bold" style={{ color: P.midGreen }}>
+                    Mensaje
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={6}
+                    required
+                    value={form.message}
+                    onChange={handleChange}
+                    placeholder="Cuéntanos más..."
+                    className="border px-4 py-3 text-sm focus:outline-none resize-none"
+                    style={{ borderColor: 'rgba(26,74,30,0.2)', background: 'white', color: P.dark }}
+                  />
+                </div>
+                <button type="submit"
+                  className="w-full flex items-center justify-center gap-2 py-4 font-gasoek text-sm uppercase tracking-wider hover:opacity-90 transition-opacity"
+                  style={{ background: P.darkGreen, color: P.lime }}>
+                  <Send className="w-4 h-4" />
+                  ENVIAR MENSAJE
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}

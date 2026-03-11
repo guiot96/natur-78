@@ -1,854 +1,283 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Clock, MapPin, Users, Calendar, ChevronRight, Play, User, Star, Filter, X, Eye } from "lucide-react";
-import { Link } from "wouter";
-import { HeaderButtons } from "@/components/layout/HeaderButtons";
+import { Clock, MapPin, Users, Calendar, ChevronRight, User, Star, Ticket } from 'lucide-react';
+import { Link } from 'wouter';
+import { HeaderButtons } from '@/components/layout/HeaderButtons';
+import posterImg from '@assets/WhatsApp_Image_2026-03-10_at_9.37.22_PM_1773257877040.jpeg';
 
+/* ── palette ── */
+const P = {
+  dark:      '#191C0F',
+  darkGreen: '#1a4a1e',
+  midGreen:  '#2d7a32',
+  lime:      '#cad95e',
+  yellow:    '#f5e03a',
+  cream:     '#FCF8EE',
+};
 
-// Session type definition
-interface Session {
-  time: string;
-  title: string;
-  speakers: string[];
-  type: string;
-  image: string;
-  description?: string;
-  moderator?: string;
-  id: string;
-}
+/* ── session type tags ── */
+const typeConfig: Record<string, { label: string; color: string }> = {
+  charla:        { label: 'Charla',       color: P.lime },
+  experiencia:   { label: 'Experiencia',  color: P.midGreen },
+  taller:        { label: 'Taller',       color: P.yellow },
+  showcase:      { label: 'Showcase',     color: P.lime },
+  foro:          { label: 'Foro',         color: P.yellow },
+  bienestar:     { label: 'Bienestar',    color: P.midGreen },
+  vip:           { label: 'VIP',          color: P.yellow },
+  arte:          { label: 'Arte',         color: P.lime },
+  startup:       { label: 'Startup',      color: P.yellow },
+  wellness:      { label: 'Wellness',     color: P.midGreen },
+  musica:        { label: 'Música',       color: P.lime },
+  rumba:         { label: 'Rumba',        color: P.yellow },
+  ritual:        { label: 'Ritual',       color: P.midGreen },
+  pitch:         { label: 'Pitch',        color: P.yellow },
+  gastronomia:   { label: 'Gastronomía',  color: P.lime },
+  ceremonia:     { label: 'Ceremonia',    color: P.yellow },
+  entretenimiento:{ label: 'Cultura',    color: P.lime },
+};
 
-// Agenda data structure
 const agendaData = {
-  "vive-natur": {
-    title: "VIVE NATUR - Agenda Abierta",
-    subtitle: "Charlas NATUR • Rooftop + Zona de Comidas • Emprendimientos Sostenibles • Zona Chill • Foro Colombia Sostenible 2025 • Programación Cultural",
-    horario: "9:00 a.m. – 6:00 p.m.",
-    lugar: "Acceso Libre - Todos los Espacios",
-    color: "#cad95e",
+  'vive': {
+    label: 'VIVE NATUR',
+    subtitle: 'Agenda Abierta — 9:00 a.m. a 6:00 p.m.',
+    desc: 'Charlas · Talleres · Feria de Emprendimientos · Cultura · Zona Chill',
+    accent: P.lime,
     days: [
       {
-        day: "Día 1: Jueves 14 de noviembre",
+        label: 'Día 1 — Jueves 14 de agosto',
         sessions: [
-          {
-            time: "9:00 - 9:30",
-            title: "Charlas NATUR: Apertura del Festival",
-            speakers: ["Brigitte Baptiste", "Equipo Festival NATUR"],
-            type: "charla",
-            image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Ceremonia de apertura del Festival NATUR 2025 con la participación especial de Brigitte Baptiste, reconocida bióloga y experta en biodiversidad. Un momento histórico para dar inicio a la celebración del turismo sostenible en Colombia.",
-            id: "charlas-apertura-festival"
-          },
-          {
-            time: "10:00 - 11:30",
-            title: "Rooftop + Zona de Comidas: Networking Gastronómico",
-            speakers: ["Chefs Sostenibles", "Productores Locales"],
-            type: "experiencia",
-            image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Experiencia gastronómica única en el rooftop del CEFE Chapinero. Degusta productos locales y conoce a productores sostenibles mientras disfrutas de una vista panorámica de Bogotá. Networking con enfoque en gastronomía responsable.",
-            id: "rooftop-networking-gastronomico"
-          },
-          {
-            time: "11:30 - 13:00",
-            title: "Emprendimientos Sostenibles: Showcase de Proyectos",
-            speakers: ["Startups Verdes", "Emprendedores Locales"],
-            type: "showcase",
-            image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Plataforma de exhibición para emprendimientos sostenibles colombianos. Conoce proyectos innovadores que están transformando el turismo y el medio ambiente. Oportunidad de networking con emprendedores y posibles inversores.",
-            id: "showcase-emprendimientos-sostenibles"
-          },
-          {
-            time: "14:00 - 15:30",
-            title: "Zona Chill: Música y Relajación",
-            speakers: ["Artistas Locales", "DJs Orgánicos"],
-            type: "entretenimiento",
-            image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Espacio de relajación con música en vivo de artistas locales comprometidos con la sostenibilidad. DJs que utilizan energía renovable y promueven mensajes ambientales a través de su arte.",
-            id: "zona-chill-musica-relajacion"
-          },
-          {
-            time: "10:00",
-            title: "Taller Tintes naturales y estampados",
-            description: "Extrae pigmentos de plantas y estampa con elementos botánicos. Diseña tu tela inspirada en los colores de la tierra.",
-            speakers: ["Artesanos textiles"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-tintes-naturales"
-          },
-          {
-            time: "11:00",
-            title: "Taller Bombas de Semillas",
-            description: "Aprende a crear bombas de vida con barro y semillas nativas para reforestar.",
-            speakers: ["Facilitadores ambientales"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-bombas-semillas"
-          },
-          {
-            time: "11:00",
-            title: "Taller Crea tu propio terrario",
-            description: "Diseña tu ecosistema en miniatura con plantas, tierra y piedras. Te llevas tu terrario.",
-            speakers: ["Jardineros urbanos"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-terrario"
-          },
-          {
-            time: "11:00",
-            title: "Origami del agua",
-            description: "Plegado artístico con mensajes por el agua, la vida y el territorio.",
-            speakers: ["Artistas del papel"],
-            type: "arte",
-            image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "origami-agua"
-          },
-          {
-            time: "14:00",
-            title: "Círculo de tambores",
-            description: "Toca, escucha y siente el ritmo colectivo con instrumentos de percusión.",
-            speakers: ["Músicos tradicionales"],
-            type: "musica",
-            image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "circulo-tambores"
-          },
-          {
-            time: "16:00",
-            title: "Ritual colectivo del agua",
-            description: "Ceremonia simbólica para agradecer y proteger el agua, guiada por sabedores.",
-            speakers: ["Sabedores del agua"],
-            type: "ritual",
-            image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "ritual-colectivo-agua"
-          },
-          {
-            time: "16:00 - 18:00",
-            title: "Foro Colombia Sostenible 2025: Panel Nacional",
-            speakers: ["Expertos en Sostenibilidad", "Gobierno Nacional", "Academia"],
-            type: "foro",
-            image: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Panel de alto nivel sobre el futuro de la sostenibilidad en Colombia. Participan expertos gubernamentales, académicos y líderes del sector privado para discutir políticas y estrategias hacia un desarrollo sostenible.",
-            id: "foro-colombia-sostenible-2025"
-          },
-          {
-            time: "9:00 - 11:00",
-            title: "Taller Bombas de Semillas",
-            description: "Aprende a crear bombas de vida con barro y semillas nativas para reforestar.",
-            speakers: ["Facilitadores ambientales"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-bombas-semillas-vive"
-          },
-          {
-            time: "11:00",
-            title: "Taller Crea tu propio terrario",
-            description: "Diseña tu ecosistema en miniatura con plantas, tierra y piedras. Te llevas tu terrario.",
-            speakers: ["Jardineros urbanos"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-terrario-vive"
-          },
-          {
-            time: "14:00",
-            title: "Círculo de tambores",
-            description: "Toca, escucha y siente el ritmo colectivo con instrumentos de percusión.",
-            speakers: ["Músicos tradicionales"],
-            type: "musica",
-            image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "circulo-tambores-vive"
-          },
-          {
-            time: "16:00",
-            title: "Ritual colectivo del agua",
-            description: "Ceremonia simbólica para agradecer y proteger el agua, guiada por sabedores.",
-            speakers: ["Sabedores del agua"],
-            type: "ritual",
-            image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "ritual-colectivo-agua-vive"
-          }
-        ]
+          { time: '9:00', title: 'Apertura del Festival — Charlas NATUR', speakers: ['Brigitte Baptiste', 'Equipo NATUR'], type: 'charla' },
+          { time: '10:00', title: 'Networking Gastronómico — Rooftop', speakers: ['Chefs Sostenibles', 'Productores Locales'], type: 'gastronomia' },
+          { time: '10:00', title: 'Taller: Tintes naturales y estampados', speakers: ['Artesanos textiles'], type: 'taller' },
+          { time: '11:00', title: 'Taller: Bombas de Semillas', speakers: ['Facilitadores ambientales'], type: 'taller' },
+          { time: '11:00', title: 'Taller: Crea tu propio terrario', speakers: ['Jardineros urbanos'], type: 'taller' },
+          { time: '11:00', title: 'Origami del agua', speakers: ['Artistas del papel'], type: 'arte' },
+          { time: '11:30', title: 'Showcase de Emprendimientos Sostenibles', speakers: ['Startups Verdes', 'Emprendedores Locales'], type: 'showcase' },
+          { time: '14:00', title: 'Zona Chill: Música y Relajación', speakers: ['Artistas Locales', 'DJs Orgánicos'], type: 'musica' },
+          { time: '14:00', title: 'Círculo de tambores', speakers: ['Músicos tradicionales'], type: 'musica' },
+          { time: '16:00', title: 'Foro Colombia Sostenible 2026: Panel Nacional', speakers: ['Expertos en Sostenibilidad', 'Gobierno', 'Academia'], type: 'foro' },
+          { time: '16:00', title: 'Ritual colectivo del agua', speakers: ['Sabedores del agua'], type: 'ritual' },
+        ],
       },
       {
-        day: "Día 2: Viernes 15 de noviembre",
+        label: 'Día 2 — Viernes 15 de agosto',
         sessions: [
-          {
-            time: "9:00 - 10:30",
-            title: "Charlas NATUR: Turismo Regenerativo",
-            speakers: ["Expertos Internacionales", "Comunidades Locales"],
-            type: "charla",
-            image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Conferencia magistral sobre turismo regenerativo con expertos internacionales y líderes de comunidades locales. Aprende sobre prácticas que van más allá de la sostenibilidad para regenerar ecosistemas y culturas.",
-            id: "charlas-turismo-regenerativo"
-          },
-          {
-            time: "11:00 - 12:30",
-            title: "Emprendimientos Sostenibles: Pitch Session",
-            speakers: ["Emprendedores", "Inversionistas"],
-            type: "pitch",
-            image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Sesión de pitches donde emprendedores sostenibles presentan sus proyectos ante inversionistas y expertos del sector. Oportunidad única para encontrar financiación y mentorías para proyectos verdes.",
-            id: "pitch-emprendimientos-sostenibles"
-          },
-          {
-            time: "13:00 - 14:30",
-            title: "Rooftop + Zona de Comidas: Almuerzo Sostenible",
-            speakers: ["Restaurantes Km0", "Cocineros Tradicionales"],
-            type: "gastronomia",
-            image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Almuerzo especial preparado por restaurantes kilómetro cero y cocineros tradicionales. Degusta sabores auténticos colombianos mientras aprendes sobre cadenas alimentarias sostenibles y agricultura local.",
-            id: "almuerzo-sostenible-rooftop"
-          },
-          {
-            time: "15:00 - 16:30",
-            title: "Zona Chill: Actividades de Cierre",
-            speakers: ["Artistas", "Facilitadores Wellness"],
-            type: "bienestar",
-            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Actividades de relajación y bienestar para cerrar la experiencia VIVE NATUR. Incluye sesiones de mindfulness, yoga al aire libre y reflexiones grupales sobre el impacto del festival.",
-            id: "zona-chill-actividades-cierre"
-          },
-          {
-            time: "17:00 - 18:00",
-            title: "Ceremonia de Clausura VIVE NATUR",
-            speakers: ["Equipo Festival NATUR", "Participantes"],
-            type: "ceremonia",
-            image: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            description: "Ceremonia de clausura de la experiencia VIVE NATUR con reflexiones sobre los aprendizajes, compromisos adquiridos y la construcción de una red de turismo sostenible en Colombia.",
-            id: "ceremonia-clausura-vive-natur"
-          }
-        ]
-      }
-    ]
+          { time: '9:00', title: 'Charlas NATUR: Turismo Regenerativo', speakers: ['Expertos Internacionales', 'Comunidades Locales'], type: 'charla' },
+          { time: '11:00', title: 'Pitch Session — Emprendimientos Sostenibles', speakers: ['Emprendedores', 'Inversionistas'], type: 'pitch' },
+          { time: '11:00', title: 'Taller: Bombas de Semillas', speakers: ['Facilitadores ambientales'], type: 'taller' },
+          { time: '11:00', title: 'Taller: Terrario urbano', speakers: ['Jardineros urbanos'], type: 'taller' },
+          { time: '13:00', title: 'Almuerzo Sostenible — Rooftop', speakers: ['Restaurantes Km0', 'Cocineros Tradicionales'], type: 'gastronomia' },
+          { time: '14:00', title: 'Círculo de tambores', speakers: ['Músicos tradicionales'], type: 'musica' },
+          { time: '15:00', title: 'Zona Chill: Actividades de Cierre', speakers: ['Artistas', 'Facilitadores Wellness'], type: 'bienestar' },
+          { time: '16:00', title: 'Ritual colectivo del agua', speakers: ['Sabedores del agua'], type: 'ritual' },
+          { time: '17:00', title: 'Ceremonia de Clausura VIVE NATUR', speakers: ['Equipo NATUR', 'Participantes'], type: 'ceremonia' },
+        ],
+      },
+    ],
   },
-  "natur-pro": {
-    title: "NATUR PRO - Agenda Especializada",
-    subtitle: "Todo VIVE NATUR + Cartel de Artistas • Talleres • Zona Startups • Coffee Talks • Rumba • Zona Wellness • Experiencia NATUR • Zona VIP",
-    horario: "8:00 a.m. – 10:00 p.m.",
-    lugar: "Acceso VIP - Experiencia Completa",
-    color: "#aa3b1e",
+  'pro': {
+    label: 'NATUR PRO',
+    subtitle: 'Agenda Especializada — 8:00 a.m. a 10:00 p.m.',
+    desc: 'Todo VIVE NATUR + VIP Breakfasts · Startups · Wellness · Rumba · Zona VIP',
+    accent: P.yellow,
     days: [
       {
-        day: "Día 1: Jueves 14 de noviembre",
+        label: 'Día 1 — Jueves 14 de agosto',
         sessions: [
-          {
-            time: "8:00 - 9:00",
-            title: "Desayuno VIP + Coffee Talks Exclusivos",
-            description: "Networking privado con líderes del sector turístico y sostenibilidad",
-            speakers: ["Expertos VIP", "CEOs Turismo Sostenible"],
-            type: "vip",
-            image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "desayuno-vip-coffee-talks"
-          },
-          {
-            time: "9:00 - 10:30",
-            title: "Cartel de Artistas: Presentaciones Matutinas",
-            description: "Música en vivo y performances artísticas exclusivas para NATUR PRO",
-            speakers: ["Artistas Nacionales", "Músicos Sostenibles"],
-            type: "arte",
-            image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "cartel-artistas-matutinas"
-          },
-          {
-            time: "10:30 - 12:00",
-            title: "Talleres Especializados: Turismo Regenerativo",
-            description: "Workshops prácticos sobre implementación de turismo regenerativo",
-            speakers: ["Facilitadores Expertos", "Consultores Internacionales"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "talleres-turismo-regenerativo"
-          },
-          {
-            time: "12:00 - 13:30",
-            title: "Zona Startups: Pitch y Demo Day",
-            description: "Presentaciones de startups de turismo sostenible y networking con inversionistas",
-            speakers: ["Startups Seleccionadas", "Fondos de Inversión"],
-            type: "startup",
-            image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "zona-startups-pitch-demo"
-          },
-          {
-            time: "14:00 - 15:30",
-            title: "Zona Wellness: Experiencias de Bienestar",
-            description: "Sesiones de yoga, meditación y conexión con la naturaleza",
-            speakers: ["Instructores Wellness", "Terapeutas Holísticos"],
-            type: "wellness",
-            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "zona-wellness-bienestar"
-          },
-          {
-            time: "16:00 - 17:30",
-            title: "Experiencia NATUR: Actividad Inmersiva",
-            description: "Experiencia única de turismo sostenible in situ",
-            speakers: ["Guías Especializados", "Comunidades Locales"],
-            type: "experiencia",
-            image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "experiencia-natur-inmersiva"
-          },
-          {
-            time: "10:00",
-            title: "Taller Tintes naturales y estampados",
-            description: "Extrae pigmentos de plantas y estampa con elementos botánicos. Diseña tu tela inspirada en los colores de la tierra.",
-            speakers: ["Artesanos textiles"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-tintes-naturales-pro"
-          },
-          {
-            time: "11:00",
-            title: "Taller Bombas de Semillas",
-            description: "Aprende a crear bombas de vida con barro y semillas nativas para reforestar.",
-            speakers: ["Facilitadores ambientales"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-bombas-semillas-pro"
-          },
-          {
-            time: "11:00",
-            title: "Origami del agua",
-            description: "Plegado artístico con mensajes por el agua, la vida y el territorio.",
-            speakers: ["Artistas del papel"],
-            type: "arte",
-            image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "origami-agua-pro"
-          },
-          {
-            time: "14:00",
-            title: "Círculo de tambores",
-            description: "Toca, escucha y siente el ritmo colectivo con instrumentos de percusión.",
-            speakers: ["Músicos tradicionales"],
-            type: "musica",
-            image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "circulo-tambores-pro"
-          },
-          {
-            time: "16:00",
-            title: "Ritual colectivo del agua",
-            description: "Ceremonia simbólica para agradecer y proteger el agua, guiada por sabedores.",
-            speakers: ["Sabedores del agua"],
-            type: "ritual",
-            image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "ritual-colectivo-agua-pro"
-          },
-          {
-            time: "19:00 - 22:00",
-            title: "Rumba y Manifestaciones Culturales",
-            description: "Fiesta exclusiva con música tradicional y contemporánea",
-            speakers: ["DJs", "Grupos Folclóricos"],
-            type: "rumba",
-            image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "rumba-manifestaciones-culturales"
-          }
-        ]
+          { time: '8:00',  title: 'Desayuno VIP + Coffee Talks Exclusivos', speakers: ['Líderes del sector turístico'], type: 'vip' },
+          { time: '9:00',  title: 'Cartel de Artistas: Presentaciones Matutinas', speakers: ['Artistas Nacionales', 'Músicos Sostenibles'], type: 'arte' },
+          { time: '10:00', title: 'Taller: Tintes naturales y estampados (VIP)', speakers: ['Artesanos textiles'], type: 'taller' },
+          { time: '10:30', title: 'Talleres Especializados: Turismo Regenerativo', speakers: ['Facilitadores Expertos', 'Consultores Internacionales'], type: 'taller' },
+          { time: '11:00', title: 'Taller: Bombas de Semillas Premium', speakers: ['Facilitadores ambientales'], type: 'taller' },
+          { time: '11:00', title: 'Origami del agua', speakers: ['Artistas del papel'], type: 'arte' },
+          { time: '12:00', title: 'Zona Startups: Pitch y Demo Day', speakers: ['Startups Seleccionadas', 'Fondos de Inversión'], type: 'startup' },
+          { time: '14:00', title: 'Círculo de tambores', speakers: ['Músicos tradicionales'], type: 'musica' },
+          { time: '14:00', title: 'Zona Wellness: Bienestar y Naturaleza', speakers: ['Instructores Wellness', 'Terapeutas Holísticos'], type: 'wellness' },
+          { time: '16:00', title: 'Experiencia NATUR: Actividad Inmersiva', speakers: ['Guías Especializados', 'Comunidades Locales'], type: 'experiencia' },
+          { time: '16:00', title: 'Ritual colectivo del agua', speakers: ['Sabedores del agua'], type: 'ritual' },
+          { time: '19:00', title: 'Rumba y Manifestaciones Culturales', speakers: ['DJs', 'Grupos Folclóricos'], type: 'rumba' },
+        ],
       },
-
       {
-        day: "Día 2: Viernes 15 de noviembre",
+        label: 'Día 2 — Viernes 15 de agosto',
         sessions: [
-          {
-            time: "8:00 - 9:00",
-            title: "Coffee Talks VIP: Desayuno de Cierre",
-            description: "Reflexiones y networking final con líderes del sector",
-            speakers: ["Panelistas Destacados", "Invitados Especiales"],
-            type: "vip",
-            image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "coffee-talks-vip-cierre"
-          },
-          {
-            time: "9:00 - 10:30",
-            title: "Talleres Especializados: Implementación de Proyectos",
-            description: "Sesiones prácticas para llevar las ideas a la realidad",
-            speakers: ["Mentores Expertos", "Facilitadores"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "talleres-implementacion-proyectos"
-          },
-          {
-            time: "10:30 - 12:00",
-            title: "Zona Startups: Demo Final y Premiación",
-            description: "Presentaciones finales y reconocimientos a mejores proyectos",
-            speakers: ["Jurado de Expertos", "Startups Finalistas"],
-            type: "startup",
-            image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "zona-startups-demo-final"
-          },
-          {
-            time: "12:00 - 13:30",
-            title: "Experiencia NATUR: Inmersión Completa",
-            description: "Actividad experimental de turismo regenerativo",
-            speakers: ["Guías Especializados", "Comunidades Anfitrionas"],
-            type: "experiencia",
-            image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "experiencia-natur-inmersion-completa"
-          },
-          {
-            time: "14:00 - 15:30",
-            title: "Zona Wellness: Sesión de Integración",
-            description: "Mindfulness, yoga y reflexión sobre el impacto del festival",
-            speakers: ["Terapeutas", "Instructores Certificados"],
-            type: "wellness",
-            image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "zona-wellness-integracion"
-          },
-          {
-            time: "10:00",
-            title: "Taller Tintes naturales y estampados VIP",
-            description: "Extrae pigmentos de plantas y estampa con elementos botánicos. Experiencia premium con materiales exclusivos.",
-            speakers: ["Artesanos textiles maestros"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-tintes-naturales-vip"
-          },
-          {
-            time: "11:00",
-            title: "Taller Bombas de Semillas Premium",
-            description: "Crea bombas de vida con barro especial y semillas nativas premium para reforestar.",
-            speakers: ["Facilitadores ambientales expertos"],
-            type: "taller",
-            image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "taller-bombas-semillas-pro"
-          },
-          {
-            time: "14:00",
-            title: "Círculo de tambores ceremonial",
-            description: "Sesión premium de percusión con instrumentos artesanales y guías ceremoniales.",
-            speakers: ["Músicos tradicionales maestros"],
-            type: "musica",
-            image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "circulo-tambores-pro"
-          },
-          {
-            time: "16:00",
-            title: "Ritual colectivo del agua VIP",
-            description: "Ceremonia exclusiva para agradecer y proteger el agua, guiada por sabedores ancestrales.",
-            speakers: ["Sabedores del agua ancestrales"],
-            type: "ritual",
-            image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "ritual-colectivo-agua-pro"
-          },
-          {
-            time: "16:00 - 17:30",
-            title: "Cartel de Artistas: Presentaciones de Cierre",
-            description: "Conciertos y performances para concluir el festival",
-            speakers: ["Artistas Principales", "Invitados Especiales"],
-            type: "arte",
-            image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "cartel-artistas-cierre"
-          },
-          {
-            time: "18:00 - 22:00",
-            title: "Zona VIP: Cena de Gala y After Party",
-            description: "Evento exclusivo de clausura con cena de gala y rumba final",
-            speakers: ["Chefs Estrella", "DJs Internacionales"],
-            type: "vip",
-            image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            id: "zona-vip-cena-gala"
-          }
-        ]
-      }
-    ]
-  }
+          { time: '8:00',  title: 'Coffee Talks VIP: Desayuno de Cierre', speakers: ['Panelistas Destacados', 'Invitados Especiales'], type: 'vip' },
+          { time: '9:00',  title: 'Talleres Especializados: Implementación de Proyectos', speakers: ['Mentores Expertos', 'Facilitadores'], type: 'taller' },
+          { time: '10:00', title: 'Taller: Tintes naturales VIP', speakers: ['Artesanos maestros'], type: 'taller' },
+          { time: '10:30', title: 'Zona Startups: Demo Final y Premiación', speakers: ['Jurado de Expertos', 'Startups Finalistas'], type: 'startup' },
+          { time: '11:00', title: 'Taller: Bombas de Semillas Premium', speakers: ['Facilitadores expertos'], type: 'taller' },
+          { time: '12:00', title: 'Experiencia NATUR: Inmersión Completa', speakers: ['Guías Especializados', 'Comunidades Anfitrionas'], type: 'experiencia' },
+          { time: '14:00', title: 'Círculo de tambores ceremonial', speakers: ['Músicos tradicionales maestros'], type: 'musica' },
+          { time: '14:00', title: 'Zona Wellness: Sesión de Integración', speakers: ['Terapeutas', 'Instructores Certificados'], type: 'wellness' },
+          { time: '16:00', title: 'Cartel de Artistas: Presentaciones de Cierre', speakers: ['Artistas Principales', 'Invitados Especiales'], type: 'arte' },
+          { time: '16:00', title: 'Ritual colectivo del agua VIP', speakers: ['Sabedores ancestrales'], type: 'ritual' },
+          { time: '18:00', title: 'Zona VIP: Cena de Gala y After Party', speakers: ['Chefs Estrella', 'DJs Internacionales'], type: 'vip' },
+        ],
+      },
+    ],
+  },
 };
 
-const getTypeIcon = (type: string) => {
-  switch (type) {
-    case 'ceremonia': return <Calendar className="w-4 h-4" />;
-    case 'panel': return <Users className="w-4 h-4" />;
-    case 'conversatorio': return <Users className="w-4 h-4" />;
-    case 'charla': return <User className="w-4 h-4" />;
-    case 'ponencia': return <User className="w-4 h-4" />;
-    case 'relatos': return <Play className="w-4 h-4" />;
-    case 'mesa-redonda': return <Users className="w-4 h-4" />;
-    case 'demo': return <Play className="w-4 h-4" />;
-    case 'ritual': return <Star className="w-4 h-4" />;
-    case 'taller': return <Users className="w-4 h-4" />;
-    case 'arte': return <Star className="w-4 h-4" />;
-    case 'musica': return <Play className="w-4 h-4" />;
-    case 'actividad': return <Users className="w-4 h-4" />;
-    case 'juego': return <Play className="w-4 h-4" />;
-    case 'bienestar': return <User className="w-4 h-4" />;
-    default: return <Clock className="w-4 h-4" />;
-  }
-};
-
-const getTypeColor = (type: string) => {
-  switch (type) {
-    case 'ceremonia': return 'bg-purple-100 text-purple-800';
-    case 'panel': return 'bg-blue-100 text-blue-800';
-    case 'conversatorio': return 'bg-green-100 text-green-800';
-    case 'charla': return 'bg-orange-100 text-orange-800';
-    case 'ponencia': return 'bg-red-100 text-red-800';
-    case 'relatos': return 'bg-yellow-100 text-yellow-800';
-    case 'mesa-redonda': return 'bg-indigo-100 text-indigo-800';
-    case 'demo': return 'bg-pink-100 text-pink-800';
-    case 'ritual': return 'bg-pink-100 text-pink-800';
-    case 'taller': return 'bg-orange-100 text-orange-800';
-    case 'arte': return 'bg-purple-100 text-purple-800';
-    case 'musica': return 'bg-green-100 text-green-800';
-    case 'actividad': return 'bg-cyan-100 text-cyan-800';
-    case 'juego': return 'bg-yellow-100 text-yellow-800';
-    case 'bienestar': return 'bg-teal-100 text-teal-800';
-    case 'vip': return 'bg-yellow-100 text-yellow-800';
-    case 'startup': return 'bg-blue-100 text-blue-800';
-    case 'wellness': return 'bg-teal-100 text-teal-800';
-    case 'experiencia': return 'bg-green-100 text-green-800';
-    case 'rumba': return 'bg-pink-100 text-pink-800';
-    case 'gastronomia': return 'bg-orange-100 text-orange-800';
-    case 'showcase': return 'bg-purple-100 text-purple-800';
-    case 'entretenimiento': return 'bg-cyan-100 text-cyan-800';
-    case 'foro': return 'bg-indigo-100 text-indigo-800';
-    case 'pitch': return 'bg-red-100 text-red-800';
-    default: return 'bg-gray-100 text-gray-800';
-  }
-};
-
-export function Agenda() {
-  const [selectedSession, setSelectedSession] = useState<Session | null>(null);
-  const [activeTab, setActiveTab] = useState('vive-natur');
-  const [filterType, setFilterType] = useState<string>('all');
-  const [myAgenda, setMyAgenda] = useState<Set<string>>(new Set());
-
-  const addToAgenda = (sessionTitle: string) => {
-    const newAgenda = new Set(myAgenda);
-    if (newAgenda.has(sessionTitle)) {
-      newAgenda.delete(sessionTitle);
-    } else {
-      newAgenda.add(sessionTitle);
-    }
-    setMyAgenda(newAgenda);
-  };
-
+/* ── Session row ── */
+function SessionRow({ session, accent }: { session: any; accent: string }) {
+  const cfg = typeConfig[session.type] || { label: session.type, color: P.lime };
   return (
-    <div className="min-h-screen bg-[#FCF8EE] relative overflow-hidden">
-      {/* Add HeaderButtons with the same menu as homepage */}
-      <HeaderButtons showPortalButtons={true} />
-
-      {/* Organic Background Textures - Same as homepage */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 opacity-5">
-          <svg className="w-full h-full" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="organic" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                <path d="M20,50 Q50,20 80,50 Q50,80 20,50" fill="none" stroke="#cad95e" strokeWidth="0.5" opacity="0.3"/>
-                <circle cx="30" cy="30" r="2" fill="#cad95e" opacity="0.2"/>
-                <path d="M60,70 L80,60 L70,80 Z" fill="#181c0d" opacity="0.1"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#organic)"/>
-          </svg>
-        </div>
-        
-        {/* Nature background with heavy blur */}
-        <img 
-          src="/lovable-uploads/96c8e76d-00c8-4cd5-b263-4b779aa85181.jpg" 
-          alt="Festival NATUR Background"
-          className="w-full h-full object-cover opacity-10 blur-3xl"
-        />
-        
-        {/* Homepage-style Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FCF8EE]/90 via-[#f5f0e4]/80 to-[#eee8db]/90"></div>
+    <div className="flex gap-4 sm:gap-8 py-5 border-b last:border-b-0 group hover:bg-black/[0.02] transition-colors px-4 sm:px-8"
+      style={{ borderColor: 'rgba(26,74,30,0.1)' }}>
+      {/* Time */}
+      <div className="flex-shrink-0 w-14 sm:w-20 pt-0.5">
+        <span className="font-gasoek text-base sm:text-lg leading-none" style={{ color: P.darkGreen }}>
+          {session.time}
+        </span>
       </div>
-
-      {/* Mobile-First Title Section */}
-      <header className="relative z-20 mobile-p-4 md:px-6 py-8 md:py-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 md:mb-16">
-            <div className="inline-block">
-              <h1 className="text-4xl md:text-6xl lg:text-8xl font-unbounded font-light mb-4 md:mb-6 tracking-wider leading-none" style={{ color: '#191C0F', textShadow: '0 0 20px rgba(202, 217, 94, 0.3)' }}>
-                AGENDA
-              </h1>
-              <div className="w-full h-1 bg-gradient-to-r from-transparent via-[#cad95e]/50 to-transparent mb-4"></div>
-            </div>
-            <p className="mobile-text-sm md:text-lg text-[#191C0F]/80 max-w-2xl mx-auto mt-6 md:mt-8 font-mono">
-              Festival NATUR 2025 • Turismo Sostenible • Noviembre 14-15
-            </p>
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile-First Controls Bar */}
-      <div className="relative z-20 mobile-p-4 md:px-6 mb-8 md:mb-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-4 md:gap-6 bg-white/40 backdrop-blur-xl border border-[#cad95e]/20 mobile-p-4 md:p-6 rounded-lg shadow-lg">
-            
-            {/* Agenda Tabs - Brutalist Style */}
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full lg:w-auto">
-              <TabsList className="grid w-full grid-cols-2 bg-transparent border border-[#cad95e]/30 p-1 rounded-lg">
-                <TabsTrigger 
-                  value="vive-natur" 
-                  className="data-[state=active]:bg-[#cad95e] data-[state=active]:text-[#191C0F] text-[#191C0F]/70 font-mono text-sm tracking-wide rounded-md border-r border-[#cad95e]/20"
-                >
-                  VIVE NATUR
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="natur-pro"
-                  className="data-[state=active]:bg-[#cad95e] data-[state=active]:text-[#191C0F] text-[#191C0F]/70 font-mono text-sm tracking-wide rounded-md"
-                >
-                  NATUR PRO
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-
-            {/* Filter Controls */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Filter className="w-4 h-4 text-[#191C0F]/50" />
-                <select 
-                  value={filterType} 
-                  onChange={(e) => setFilterType(e.target.value)}
-                  className="bg-white/60 border border-[#cad95e]/30 text-[#191C0F] text-sm px-4 py-2 rounded-lg font-mono tracking-wide focus:outline-none focus:border-[#cad95e]/60"
-                >
-                  <option value="all">TODOS</option>
-                  <option value="panel">PANELS</option>
-                  <option value="charla">CHARLAS</option>
-                  <option value="conversatorio">CONVERSATORIOS</option>
-                  <option value="ponencia">PONENCIAS</option>
-                  <option value="demo">DEMOS</option>
-                  <option value="ritual">RITUALES</option>
-                  <option value="taller">TALLERES</option>
-                  <option value="arte">ARTE</option>
-                  <option value="musica">MÚSICA</option>
-                  <option value="actividad">ACTIVIDADES</option>
-                  <option value="juego">JUEGOS</option>
-                  <option value="bienestar">BIENESTAR</option>
-                </select>
-              </div>
-              
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="bg-transparent border-white/20 text-white/70 hover:bg-white/10 rounded-none font-mono tracking-wide"
-              >
-                MI AGENDA ({myAgenda.size})
-              </Button>
-            </div>
-          </div>
+      {/* Dot */}
+      <div className="flex-shrink-0 flex flex-col items-center pt-2 gap-1">
+        <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: accent }} />
+        <div className="w-px flex-1" style={{ background: 'rgba(26,74,30,0.15)' }} />
+      </div>
+      {/* Content */}
+      <div className="flex-1 min-w-0 pb-4">
+        <h3 className="font-gasoek text-base sm:text-lg uppercase leading-tight mb-1.5" style={{ color: P.dark }}>
+          {session.title}
+        </h3>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs px-2 py-0.5 font-bold uppercase tracking-wider"
+            style={{ background: cfg.color, color: P.dark }}>
+            {cfg.label}
+          </span>
+          {session.speakers?.map((s: string, i: number) => (
+            <span key={i} className="text-xs" style={{ color: 'rgba(25,28,15,0.5)' }}>
+              {i > 0 ? '· ' : ''}{s}
+            </span>
+          ))}
         </div>
       </div>
-
-      {/* Main Content */}
-      <main className="relative z-10 px-6 pb-20">
-        <div className="max-w-7xl mx-auto">
-          
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-
-            {Object.entries(agendaData).map(([key, agenda]) => (
-              <TabsContent key={key} value={key} className="mt-8">
-                {/* Agenda Header - Homepage style */}
-                <Card className="bg-white/80 backdrop-blur-md border-[#cad95e]/30 mb-8 shadow-lg">
-                  <CardHeader className="text-center">
-                    <CardTitle className="text-2xl md:text-3xl font-sans text-[#191C0F] mb-2">
-                      {agenda.title}
-                    </CardTitle>
-                    <p className="text-lg text-[#191C0F]/80 mb-4">{agenda.subtitle}</p>
-                    <div className="flex flex-wrap justify-center gap-4 text-sm text-[#191C0F]/70">
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        {agenda.horario}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4" />
-                        {agenda.lugar}
-                      </div>
-                    </div>
-                  </CardHeader>
-                </Card>
-
-                {/* Days and Sessions */}
-                {agenda.days.map((day, dayIndex) => (
-                  <div key={dayIndex} className="mb-12">
-                    <h2 className="text-3xl font-sans mb-6 text-center text-[#191C0F]">
-                      {day.day}
-                    </h2>
-                    
-                    {/* Brutalist Card Grid */}
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                      {day.sessions
-                        .filter(session => filterType === 'all' || session.type === filterType)
-                        .map((session, sessionIndex) => (
-                        <Card 
-                          key={sessionIndex}
-                          className="bg-white/90 backdrop-blur-sm border-2 border-[#cad95e]/20 hover:border-[#cad95e]/50 transition-all duration-500 group rounded-lg overflow-hidden hover:shadow-2xl hover:shadow-[#cad95e]/20"
-                        >
-                          <div className="relative overflow-hidden">
-                            <img 
-                              src={session.image} 
-                              alt={session.title}
-                              className="w-full h-48 object-cover grayscale hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
-                            />
-                            
-                            {/* Light overlay for homepage style */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#191C0F]/50 via-transparent to-transparent opacity-60"></div>
-                            
-                            {/* Type badge - homepage style */}
-                            <div className="absolute top-4 left-4">
-                              <div className="bg-[#cad95e] border border-[#cad95e] px-3 py-1 font-mono text-xs tracking-widest text-[#191C0F]">
-                                {session.type.toUpperCase()}
-                              </div>
-                            </div>
-                            
-                            {/* Time badge - homepage style */}
-                            <div className="absolute top-4 right-4">
-                              <div className="bg-white/90 border border-[#cad95e] px-3 py-1 font-mono text-xs tracking-widest text-[#191C0F]">
-                                {session.time}
-                              </div>
-                            </div>
-                            
-                            {/* Add to agenda button */}
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                addToAgenda(session.title);
-                              }}
-                              className={`absolute bottom-4 right-4 w-8 h-8 border-2 flex items-center justify-center transition-all duration-300 rounded-md ${
-                                myAgenda.has(session.title) 
-                                  ? 'bg-[#cad95e] border-[#cad95e] text-[#191C0F]' 
-                                  : 'bg-white/80 border-[#cad95e]/30 text-[#191C0F] hover:border-[#cad95e]'
-                              }`}
-                            >
-                              <Star className="w-4 h-4" fill={myAgenda.has(session.title) ? 'currentColor' : 'transparent'} />
-                            </button>
-                          </div>
-                          
-                          <CardContent className="p-6 space-y-4">
-                            <h3 className="font-sans font-medium text-[#191C0F] text-lg leading-tight group-hover:text-[#97b53f] transition-colors duration-300">
-                              {session.title}
-                            </h3>
-                            
-                            {session.description && (
-                              <p className="text-sm text-[#191C0F]/70 leading-relaxed">
-                                {session.description}
-                              </p>
-                            )}
-                            
-                            {/* Speakers - homepage style */}
-                            <div className="space-y-2">
-                              <div className="flex items-center gap-2 text-xs text-[#191C0F]/60 font-mono tracking-wider">
-                                <Users className="w-3 h-3" />
-                                SPEAKERS
-                              </div>
-                              {session.speakers.slice(0, 2).map((speaker, speakerIndex) => (
-                                <div key={speakerIndex} className="text-sm text-[#191C0F]/80 font-mono">
-                                  {speaker}
-                                </div>
-                              ))}
-                              
-                              {session.speakers.length > 2 && (
-                                <div className="text-xs text-[#191C0F]/50 font-mono">
-                                  +{session.speakers.length - 2} MÁS
-                                </div>
-                              )}
-                              
-                              {session.moderator && (
-                                <div className="pt-2 border-t border-[#cad95e]/20">
-                                  <div className="text-xs text-[#191C0F]/60 font-mono tracking-wider mb-1">
-                                    MODERACIÓN
-                                  </div>
-                                  <div className="text-sm text-[#191C0F]/80 font-mono">
-                                    {session.moderator}
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                            
-                            {/* Action buttons */}
-                            <div className="flex gap-2 pt-4">
-                              <Button 
-                                asChild
-                                variant="outline" 
-                                size="sm" 
-                                className="w-full bg-transparent border-[#cad95e]/30 text-[#191C0F]/70 hover:bg-[#cad95e]/10 hover:border-[#cad95e] rounded-lg font-mono text-xs tracking-wider"
-                              >
-                                <Link to={`/evento/${session.id}`}>
-                                  <Eye className="w-3 h-3 mr-2" />
-                                  VER MÁS
-                                </Link>
-                              </Button>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </TabsContent>
-            ))}
-          </Tabs>
-        </div>
-      </main>
-
-      {/* Session Detail Modal - Homepage style */}
-      {selectedSession && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#191C0F]/80 backdrop-blur-sm">
-          <Card className="bg-white/95 backdrop-blur-md border-[#cad95e]/30 max-w-2xl w-full max-h-[90vh] overflow-auto shadow-2xl">
-            <div className="relative">
-              <img 
-                src={selectedSession.image} 
-                alt={selectedSession.title}
-                className="w-full h-60 object-cover rounded-t-lg"
-              />
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="absolute top-4 right-4 bg-white/90 text-[#191C0F] hover:bg-white border border-[#cad95e]/30"
-                onClick={() => setSelectedSession(null)}
-              >
-                <X className="w-4 h-4" />
-              </Button>
-            </div>
-            
-            <CardContent className="p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Badge className={`${getTypeColor(selectedSession.type)} font-medium`}>
-                  <span className="flex items-center gap-1">
-                    {getTypeIcon(selectedSession.type)}
-                    {selectedSession.type.charAt(0).toUpperCase() + selectedSession.type.slice(1)}
-                  </span>
-                </Badge>
-                <Badge className="bg-[#cad95e]/20 text-[#191C0F] border-[#cad95e]/30">
-                  {selectedSession.time}
-                </Badge>
-              </div>
-              
-              <h2 className="text-2xl font-sans font-medium text-[#191C0F] mb-4">
-                {selectedSession.title}
-              </h2>
-              
-              {selectedSession.description && (
-                <p className="text-[#191C0F]/80 mb-6">
-                  {selectedSession.description}
-                </p>
-              )}
-              
-              <div className="space-y-4">
-                <h3 className="text-lg font-sans font-normal text-[#191C0F]">Speakers:</h3>
-                {selectedSession.speakers.map((speaker: string, index: number) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#cad95e]/20 flex items-center justify-center">
-                      <User className="w-5 h-5 text-[#191C0F]" />
-                    </div>
-                    <span className="text-[#191C0F]/80">{speaker}</span>
-                  </div>
-                ))}
-                
-                {selectedSession.moderator && (
-                  <div className="pt-4 border-t border-[#cad95e]/20">
-                    <h4 className="text-sm font-sans font-normal text-[#191C0F]/70 mb-2">Moderación:</h4>
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-[#cad95e]/10 flex items-center justify-center">
-                        <Users className="w-4 h-4 text-[#191C0F]/70" />
-                      </div>
-                      <span className="text-[#191C0F]/70">{selectedSession.moderator}</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
     </div>
   );
 }
 
-export default Agenda;
+/* ── Page ── */
+export default function Agenda() {
+  const [track, setTrack] = useState<'vive' | 'pro'>('vive');
+  const [day, setDay] = useState(0);
+
+  const current = agendaData[track];
+  const currentDay = current.days[day];
+
+  return (
+    <div className="min-h-screen overflow-x-hidden" style={{ background: P.cream }}>
+      <HeaderButtons />
+
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden pt-16" style={{ background: P.darkGreen }}>
+        <img src={posterImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-15 object-center" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(26,74,30,0.55) 0%, rgba(26,74,30,0.97) 80%)' }} />
+        <div className="relative z-10 text-center px-6 py-14 sm:py-20">
+          <p className="text-xs tracking-[0.35em] uppercase mb-4 font-bold"
+            style={{ color: P.lime, fontFamily: 'Unbounded, sans-serif' }}>
+            Festival NATUR 2026
+          </p>
+          <h1 className="font-gasoek text-6xl sm:text-7xl md:text-8xl uppercase leading-none mb-4 text-white">
+            AGENDA
+          </h1>
+          <div className="flex items-center justify-center gap-3 flex-wrap mt-4">
+            <span className="px-4 py-1.5 text-sm font-bold uppercase tracking-wider font-gasoek"
+              style={{ background: P.yellow, color: P.dark }}>
+              14 Y 15 AGOSTO
+            </span>
+            <span className="text-white/40">·</span>
+            <span className="text-white/60 text-sm">Kinder, Chapinero, Bogotá</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Track selector ── */}
+      <div className="sticky top-16 z-30 border-b" style={{ background: P.dark, borderColor: 'rgba(255,255,255,0.08)' }}>
+        <div className="max-w-5xl mx-auto flex items-stretch">
+          {(['vive', 'pro'] as const).map((t) => {
+            const a = agendaData[t];
+            const isActive = track === t;
+            return (
+              <button key={t} onClick={() => setTrack(t)}
+                className="flex-1 py-4 px-6 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 transition-all relative"
+                style={{ borderBottom: isActive ? `3px solid ${a.accent}` : '3px solid transparent' }}>
+                <span className="font-gasoek text-lg sm:text-xl uppercase leading-none"
+                  style={{ color: isActive ? a.accent : 'rgba(255,255,255,0.45)' }}>
+                  {a.label}
+                </span>
+                <span className="text-xs hidden sm:block" style={{ color: isActive ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.25)' }}>
+                  {a.subtitle}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Content ── */}
+      <div className="max-w-5xl mx-auto px-0 sm:px-6 py-10">
+        {/* Track description */}
+        <div className="px-4 sm:px-0 mb-8">
+          <p className="text-sm" style={{ color: 'rgba(25,28,15,0.55)', fontFamily: 'Unbounded, sans-serif' }}>
+            {current.desc}
+          </p>
+        </div>
+
+        {/* Day tabs */}
+        <div className="flex gap-2 mb-8 px-4 sm:px-0">
+          {current.days.map((d, i) => (
+            <button key={i} onClick={() => setDay(i)}
+              className="px-5 py-2.5 font-gasoek text-sm uppercase tracking-wide transition-all"
+              style={day === i
+                ? { background: current.accent, color: P.dark }
+                : { background: 'transparent', color: P.darkGreen, border: `1px solid ${P.darkGreen}` }
+              }>
+              DÍA {i + 1}
+            </button>
+          ))}
+        </div>
+
+        {/* Day label */}
+        <div className="mb-6 px-4 sm:px-0">
+          <div className="flex items-center gap-3">
+            <Calendar className="w-4 h-4" style={{ color: current.accent }} />
+            <h2 className="font-gasoek text-xl sm:text-2xl uppercase" style={{ color: P.darkGreen }}>
+              {currentDay.label}
+            </h2>
+          </div>
+        </div>
+
+        {/* Sessions */}
+        <div className="border rounded-none overflow-hidden" style={{ borderColor: 'rgba(26,74,30,0.15)', background: 'white' }}>
+          {currentDay.sessions.map((s, i) => (
+            <SessionRow key={i} session={s} accent={current.accent} />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-12 px-4 sm:px-0 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between py-8 border-t"
+          style={{ borderColor: 'rgba(26,74,30,0.15)' }}>
+          <div>
+            <p className="font-gasoek text-xl uppercase" style={{ color: P.darkGreen }}>
+              ¿Listo para vivir el festival?
+            </p>
+            <p className="text-sm mt-1" style={{ color: 'rgba(25,28,15,0.55)' }}>
+              Compra tu entrada y asegura tu lugar en NATUR 2026.
+            </p>
+          </div>
+          <Link to="/tickets">
+            <button className="flex items-center gap-2 font-gasoek text-sm uppercase tracking-wider px-8 py-4 hover:opacity-90 transition-opacity"
+              style={{ background: P.darkGreen, color: P.lime }}>
+              <Ticket className="w-4 h-4" />
+              COMPRAR ENTRADAS
+            </button>
+          </Link>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="py-6 text-center text-xs" style={{ background: P.dark, color: 'rgba(255,255,255,0.3)' }}>
+        <p>© {new Date().getFullYear()} Festival NATUR · Todos los derechos reservados</p>
+      </footer>
+    </div>
+  );
+}
