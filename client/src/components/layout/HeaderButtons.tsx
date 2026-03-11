@@ -127,7 +127,7 @@ export function HeaderButtons({
               {NAV_ITEMS.map((item) => (
                 <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="w-full">
                   <button
-                    className={`w-full text-center px-4 py-2.5 text-sm font-gasoek tracking-wide uppercase transition-colors duration-150 rounded ${
+                    className={`w-full text-center px-4 py-2.5 text-sm font-gasoek tracking-normal uppercase transition-colors duration-150 rounded ${
                       isActive(item.href)
                         ? "text-[#cad95e]"
                         : item.href === "/portal-empresas"
