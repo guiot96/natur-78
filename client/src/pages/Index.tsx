@@ -1,6 +1,6 @@
-
 import React, { useEffect } from "react";
 import { Hero } from "@/components/sections/Hero";
+import { Ticker } from "@/components/sections/Ticker";
 import { QueVasPreview } from "@/components/sections/QueVasPreview";
 import { EntradasPreview } from "@/components/sections/EntradasPreview";
 import { AmbienteSection } from "@/components/sections/AmbienteSection";
@@ -34,11 +34,17 @@ const Index = () => {
       {/* 1. Hero */}
       <Hero />
 
+      {/* Ticker — lime on dark green */}
+      <Ticker />
+
       {/* 2. ¿Qué vas a encontrar? */}
       <QueVasPreview />
 
       {/* 3. Entradas */}
       <EntradasPreview />
+
+      {/* Ticker between sections — reversed */}
+      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
 
       {/* 4. Ambiente — foto del festival */}
       <AmbienteSection />
@@ -49,13 +55,13 @@ const Index = () => {
       {/* 6. Historias */}
       <HistoriasPreview />
 
-      {/* 6. Aliados */}
+      {/* 7. Aliados */}
       <Partners />
 
-      {/* 7. Ubicación */}
+      {/* 8. Ubicación */}
       <Location />
 
-      {/* 8. Contacto */}
+      {/* 9. Contacto */}
       <ContactForm />
 
       {/* Footer */}

@@ -1,64 +1,103 @@
-import React from "react";
 import { Link } from "wouter";
-import { ArrowRight, Store } from "lucide-react";
-
-/* Mini decorative sun — matches the poster's red sun motif */
-function SunDecor() {
-  return (
-    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" className="w-28 h-28 opacity-20 absolute right-8 top-8 pointer-events-none select-none hidden lg:block">
-      {[0,30,60,90,120,150,180,210,240,270,300,330].map((a, i) => (
-        <line key={i}
-          x1="60" y1="60"
-          x2={60 + Math.cos(a * Math.PI / 180) * 58}
-          y2={60 + Math.sin(a * Math.PI / 180) * 58}
-          stroke="white" strokeWidth="3" />
-      ))}
-      <circle cx="60" cy="60" r="26" fill="white" />
-    </svg>
-  );
-}
+import { ArrowRight } from "lucide-react";
+import standImg from "@assets/generated_images/natur_stand.png";
 
 export function Stand() {
   return (
-    <section className="w-full py-20 px-6 relative overflow-hidden" style={{ background: '#1a4a1e' }}>
-      <SunDecor />
-      <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 relative z-10">
-        {/* Left */}
-        <div className="flex-1">
-          <p
-            className="text-xs tracking-[0.3em] uppercase mb-4 font-bold"
-            style={{ color: 'rgba(202,217,94,0.85)', fontFamily: "Unbounded, sans-serif" }}
+    <section className="w-full grid grid-cols-1 md:grid-cols-2" style={{ background: "#f5e03a" }}>
+
+      {/* ── Left: editorial text block ── */}
+      <div className="flex flex-col justify-between p-10 md:p-14 min-h-[60vw] md:min-h-[45vw]">
+        <div>
+          <span
+            className="inline-block text-[9px] tracking-[0.32em] uppercase font-bold px-2.5 py-[3px] mb-8"
+            style={{ background: "#191C0F", color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
           >
             Participa como marca
-          </p>
-          <h2 className="font-unbounded font-extralight text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-6">
-            Reserva tu stand
+          </span>
+          <h2 className="font-gasoek text-[11vw] md:text-[5.5vw] uppercase leading-[0.88]"
+            style={{ color: "#191C0F" }}>
+            RESERVA<br />TU STAND
           </h2>
-          <p className="text-base sm:text-lg leading-relaxed max-w-lg" style={{ color: 'rgba(202,217,94,0.75)' }}>
-            Sé parte de los emprendimientos y marcas que están construyendo el
-            futuro del turismo sostenible. Conecta directamente con viajeros,
-            aliados e inversores en el primer festival de turismo sostenible de
-            Colombia.
+          <p
+            className="font-unbounded font-extralight text-[3.5vw] md:text-[1.2vw] mt-4 max-w-sm leading-relaxed"
+            style={{ color: "rgba(25,28,15,0.55)" }}
+          >
+            Conecta directamente con viajeros, aliados e inversores en el primer festival de turismo sostenible de Colombia.
           </p>
         </div>
 
-        {/* Right */}
-        <div className="flex flex-col items-center lg:items-end gap-6">
-          <div className="flex items-center gap-3" style={{ color: 'rgba(202,217,94,0.85)' }}>
-            <Store className="w-8 h-8" />
-            <span className="text-sm font-bold uppercase tracking-wider" style={{ fontFamily: 'Unbounded, sans-serif' }}>Kinder · Agosto 2026</span>
+        <div className="space-y-5 mt-8">
+          {/* Info rows */}
+          <div className="space-y-2">
+            {[
+              ["Fecha", "14 y 15 de Agosto 2026"],
+              ["Sede", "Kinder · Chapinero · Bogotá"],
+              ["Cupos", "Limitados"],
+            ].map(([label, value]) => (
+              <div key={label} className="flex items-baseline justify-between border-b pb-2"
+                style={{ borderColor: "rgba(25,28,15,0.15)" }}>
+                <span className="text-[9px] uppercase tracking-widest" style={{ color: "rgba(25,28,15,0.45)", fontFamily: "Unbounded, sans-serif" }}>
+                  {label}
+                </span>
+                <span className="text-[10px] font-bold" style={{ color: "rgba(25,28,15,0.75)", fontFamily: "Unbounded, sans-serif" }}>
+                  {value}
+                </span>
+              </div>
+            ))}
           </div>
-          <Link to="/contacto">
-            <button className="text-sm font-bold uppercase tracking-wider px-10 py-4 hover:opacity-90 transition-opacity flex items-center gap-2" style={{ background: '#f5e03a', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}>
-              <ArrowRight className="w-4 h-4" />
-              RESERVAR STAND
-            </button>
-          </Link>
-          <p className="text-xs text-center max-w-[220px]" style={{ color: 'rgba(255,200,180,0.6)' }}>
-            Cupos limitados · info@festivalnatur.com
-          </p>
+
+          <div className="flex flex-col sm:flex-row items-start gap-4">
+            <Link to="/contacto">
+              <button
+                className="flex items-center justify-between gap-6 font-bold text-[11px] uppercase tracking-widest px-8 py-4 hover:opacity-85 transition-opacity"
+                style={{ background: "#191C0F", color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
+              >
+                <span className="flex items-center gap-2.5">
+                  <ArrowRight className="w-3.5 h-3.5" />
+                  Reservar stand
+                </span>
+              </button>
+            </Link>
+            <a
+              href="mailto:info@festivalnatur.com?subject=Stand Festival NATUR 2026"
+              className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all"
+              style={{ color: "rgba(25,28,15,0.5)", fontFamily: "Unbounded, sans-serif" }}
+            >
+              <ArrowRight className="w-3 h-3" />
+              info@festivalnatur.com
+            </a>
+          </div>
         </div>
       </div>
+
+      {/* ── Right: stand photo ── */}
+      <div className="relative overflow-hidden min-h-[65vw] md:min-h-[45vw]">
+        <img
+          src={standImg}
+          alt="Stand Festival NATUR"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to bottom, transparent 60%, rgba(245,224,58,0.4) 100%)" }}
+        />
+        {/* Bottom caption */}
+        <div className="absolute bottom-8 left-8 right-8">
+          <div className="flex items-center justify-between">
+            <span
+              className="inline-block text-[9px] tracking-[0.3em] uppercase font-bold px-2.5 py-[3px]"
+              style={{ background: "#1a4a1e", color: "white", fontFamily: "Unbounded, sans-serif" }}
+            >
+              Feria de emprendimientos
+            </span>
+            <span className="text-[9px]" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>
+              AGO 2026
+            </span>
+          </div>
+        </div>
+      </div>
+
     </section>
   );
 }
