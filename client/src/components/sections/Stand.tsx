@@ -17,7 +17,7 @@ export function Stand() {
           </span>
           <h2
             className="font-unbounded font-bold uppercase leading-[0.95] tracking-tight mb-5"
-            style={{ fontSize: "clamp(2.2rem, 8vw, 5rem)", color: "#191C0F" }}
+            style={{ fontSize: "clamp(1.6rem, 5.5vw, 3.5rem)", color: "#191C0F" }}
           >
             RESERVA<br />TU STAND
           </h2>

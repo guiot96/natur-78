@@ -38,12 +38,12 @@ export function AmbienteSection() {
 
         {/* Bottom — text + CTA */}
         <div className="mt-auto">
-          <h2 className="font-gasoek text-[12vw] sm:text-[14vw] md:text-[8vw] uppercase leading-[0.88] text-white mb-1">
+          <h2 className="font-gasoek text-[8vw] sm:text-[9vw] md:text-[5.5vw] uppercase leading-[0.88] text-white mb-1">
             VIVE
           </h2>
           <h2
             className="font-unbounded font-extralight uppercase leading-[1.1] tracking-widest mb-7"
-            style={{ fontSize: "clamp(1rem, 5vw, 3.2rem)", color: "#f5e03a" }}
+            style={{ fontSize: "clamp(0.75rem, 2.8vw, 1.6rem)", color: "#f5e03a" }}
           >
             LA EXPERIENCIA
           </h2>

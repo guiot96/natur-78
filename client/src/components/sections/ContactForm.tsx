@@ -21,7 +21,7 @@ export default function ContactForm() {
       <div className="overflow-hidden border-b border-white/8">
         <h2
           className="font-gasoek uppercase leading-[0.82] px-8 md:px-14 pt-14 pb-12 text-white"
-          style={{ fontSize: "clamp(2.6rem, 9vw, 9rem)", letterSpacing: "-0.02em" }}
+          style={{ fontSize: "clamp(2rem, 6.5vw, 6rem)", letterSpacing: "-0.02em" }}
         >
           HABLE-<br />MOS
         </h2>
@@ -39,7 +39,7 @@ export default function ContactForm() {
             </span>
             <p
               className="font-unbounded font-bold uppercase leading-[0.95] tracking-tight text-white mb-5"
-              style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)" }}
+              style={{ fontSize: "clamp(1.2rem, 3.2vw, 2.2rem)" }}
             >
               ¡Mensaje<br />recibido!
             </p>
@@ -69,7 +69,7 @@ export default function ContactForm() {
                 </p>
                 <p
                   className="font-unbounded font-bold uppercase leading-[0.95] tracking-tight text-white mb-5"
-                  style={{ fontSize: "clamp(1.6rem, 4.5vw, 3rem)" }}
+                  style={{ fontSize: "clamp(1.1rem, 3vw, 1.9rem)" }}
                 >
                   ¿Tienes preguntas<br />sobre el festival?
                 </p>

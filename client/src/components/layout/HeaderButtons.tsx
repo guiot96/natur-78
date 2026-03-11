@@ -149,7 +149,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                       style={{
                         fontFamily: active ? 'Gasoek One, sans-serif' : 'Unbounded, sans-serif',
                         fontWeight: active ? 400 : 300,
-                        fontSize: 'clamp(1.1rem, 4.5vw, 3.5rem)',
+                        fontSize: 'clamp(0.9rem, 3.2vw, 2.2rem)',
                         color: active ? '#f5e03a' : 'rgba(255,255,255,0.75)',
                         letterSpacing: active ? '-0.01em' : '0.02em',
                       }}

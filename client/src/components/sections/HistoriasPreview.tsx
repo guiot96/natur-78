@@ -42,7 +42,7 @@ export function HistoriasPreview() {
           </p>
           <h2
             className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight text-white"
-            style={{ fontSize: "clamp(2.4rem, 8vw, 6.5rem)" }}
+            style={{ fontSize: "clamp(1.8rem, 5.5vw, 4.2rem)" }}
           >
             HISTORIAS<br />
             <span style={{ color: "#f5e03a" }}>NATUR</span>
@@ -118,7 +118,7 @@ export function HistoriasPreview() {
             <div className="py-6">
               <h3
                 className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
-                style={{ fontSize: "clamp(2rem, 6.5vw, 4.5rem)", color: "rgba(255,255,255,0.9)" }}
+                style={{ fontSize: "clamp(1.4rem, 4vw, 2.8rem)", color: "rgba(255,255,255,0.9)" }}
               >
                 {p.title}
               </h3>

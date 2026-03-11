@@ -51,13 +51,13 @@ export function Countdown() {
             <h2 className="uppercase leading-[1.08] mb-5" style={{ fontFamily: "Unbounded, sans-serif" }}>
               <span
                 className="block font-extralight tracking-widest mb-1"
-                style={{ fontSize: "clamp(1rem, 3vw, 2rem)", color: "rgba(255,255,255,0.4)" }}
+                style={{ fontSize: "clamp(0.7rem, 2vw, 1.1rem)", color: "rgba(255,255,255,0.4)" }}
               >
                 El festival
               </span>
               <span
                 className="block font-bold tracking-tight"
-                style={{ fontSize: "clamp(1.8rem, 5.5vw, 4.5rem)", color: "#f5e03a" }}
+                style={{ fontSize: "clamp(1.3rem, 3.8vw, 3rem)", color: "#f5e03a" }}
               >
                 SE ACERCA
               </span>
@@ -92,7 +92,7 @@ export function Countdown() {
               className="flex flex-col items-center justify-center py-10 sm:py-12 px-4"
             >
               <span
-                className="font-unbounded font-bold text-[11vw] sm:text-[10vw] md:text-[5.5vw] leading-none tabular-nums"
+                className="font-unbounded font-bold text-[8vw] sm:text-[7vw] md:text-[4vw] leading-none tabular-nums"
                 style={{ color: "#f5e03a" }}
               >
                 <Pad n={value} />

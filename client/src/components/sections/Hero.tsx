@@ -22,7 +22,7 @@ export function Hero() {
         >
           Festival Nacional de Turismo Sostenible
         </p>
-        <h1 className="font-gasoek text-[13vw] md:text-[6vw] uppercase leading-[0.88] text-white">
+        <h1 className="font-gasoek text-[10vw] md:text-[5vw] uppercase leading-[0.88] text-white">
           NATUR<br />
           <span style={{ color: "#f5e03a" }}>2026</span>
         </h1>

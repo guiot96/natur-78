@@ -70,7 +70,7 @@ export function EntradasPreview() {
           </p>
           <h2
             className="font-unbounded font-extralight uppercase leading-[0.9] tracking-widest text-white"
-            style={{ fontSize: 'clamp(3rem, 14vw, 7rem)' }}
+            style={{ fontSize: 'clamp(2rem, 8vw, 4.5rem)' }}
           >
             NATUR
           </h2>
@@ -134,7 +134,7 @@ export function EntradasPreview() {
             style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>Entrada</p>
           <h3
             className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
-            style={{ fontSize: 'clamp(2.8rem, 12vw, 6.5rem)', color: P.dark }}
+            style={{ fontSize: 'clamp(2rem, 8vw, 4rem)', color: P.dark }}
           >
             2 DÍAS
           </h3>
@@ -157,7 +157,7 @@ export function EntradasPreview() {
           <div className="flex items-baseline gap-2">
             <span
               className="font-unbounded font-bold leading-none"
-              style={{ fontSize: 'clamp(1.8rem, 7vw, 4rem)', color: P.dark }}
+              style={{ fontSize: 'clamp(1.4rem, 5vw, 2.8rem)', color: P.dark }}
             >
               $70.000
             </span>
@@ -222,7 +222,7 @@ export function EntradasPreview() {
             style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>Entrada</p>
           <h3
             className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
-            style={{ fontSize: 'clamp(2.8rem, 12vw, 6.5rem)', color: P.dark }}
+            style={{ fontSize: 'clamp(2rem, 8vw, 4rem)', color: P.dark }}
           >
             1 DÍA
           </h3>
@@ -245,7 +245,7 @@ export function EntradasPreview() {
           <div className="flex items-baseline gap-2">
             <span
               className="font-unbounded font-bold leading-none"
-              style={{ fontSize: 'clamp(1.8rem, 7vw, 4rem)', color: P.dark }}
+              style={{ fontSize: 'clamp(1.4rem, 5vw, 2.8rem)', color: P.dark }}
             >
               $50.000
             </span>
@@ -281,7 +281,7 @@ export function EntradasPreview() {
             style={{ color: 'rgba(25,28,15,0.32)', ...ub }}>Sede del festival</p>
           <h3
             className="font-unbounded font-bold uppercase leading-[0.92] tracking-tight"
-            style={{ fontSize: 'clamp(1.8rem, 7vw, 3.8rem)', color: P.darkGreen }}
+            style={{ fontSize: 'clamp(1.3rem, 4vw, 2.5rem)', color: P.darkGreen }}
           >
             Kinder<br />Chapinero
           </h3>

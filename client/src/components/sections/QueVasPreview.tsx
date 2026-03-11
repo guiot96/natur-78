@@ -55,7 +55,7 @@ export function QueVasPreview() {
           <div className="flex-1 px-8 md:px-14 py-10 md:py-12">
             <h2
               className="font-unbounded font-bold uppercase leading-[0.92] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 5vw, 6rem)", color: "#191C0F" }}
+              style={{ fontSize: "clamp(1.2rem, 3.5vw, 3.8rem)", color: "#191C0F" }}
             >
               ¿QUÉ VAS{" "}
               <span style={{ WebkitTextStroke: "2px #1a4a1e", color: "transparent" }}>
@@ -102,7 +102,7 @@ export function QueVasPreview() {
             <div className="flex-1 flex items-center py-5">
               <h3
                 className="font-unbounded font-bold uppercase leading-[0.94] tracking-tight whitespace-pre-line"
-                style={{ fontSize: "clamp(1.4rem, 4.5vw, 3rem)", color: p.textColor }}
+                style={{ fontSize: "clamp(1rem, 3vw, 2rem)", color: p.textColor }}
               >
                 {p.title}
               </h3>
