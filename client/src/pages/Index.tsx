@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Hero } from "@/components/sections/Hero";
 import { Ticker } from "@/components/sections/Ticker";
+import { Countdown } from "@/components/sections/Countdown";
 import { QueVasPreview } from "@/components/sections/QueVasPreview";
 import { EntradasPreview } from "@/components/sections/EntradasPreview";
 import { AmbienteSection } from "@/components/sections/AmbienteSection";
@@ -36,6 +37,9 @@ const Index = () => {
 
       {/* Ticker — lime on dark green */}
       <Ticker />
+
+      {/* Countdown */}
+      <Countdown />
 
       {/* 2. ¿Qué vas a encontrar? */}
       <QueVasPreview />

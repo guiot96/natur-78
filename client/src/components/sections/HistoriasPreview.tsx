@@ -1,54 +1,30 @@
 import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 
-const articles = [
-  {
-    num: "01",
-    slug: "turismo-regenerativo-futuro",
-    tag: "Sostenibilidad",
-    tagColor: "#cad95e",
-    tagBg: "#1a4a1e",
-    title: "Turismo Regenerativo: El Futuro del Viaje Consciente",
-    excerpt: "Cómo el turismo regenerativo está transformando la industria, creando experiencias que restauran ecosistemas y comunidades.",
-    bg: "#191C0F",
-    textColor: "#FCF8EE",
-    accentColor: "#cad95e",
-  },
-  {
-    num: "02",
-    slug: "experiencias-autenticas-colombia",
-    tag: "Experiencias",
-    tagColor: "#191C0F",
-    tagBg: "#f5e03a",
-    title: "Experiencias Auténticas: el Alma de Colombia",
-    excerpt: "Más allá del turismo tradicional: conexiones profundas con la cultura, la naturaleza y las comunidades locales.",
-    bg: "#1a4a1e",
-    textColor: "#FCF8EE",
-    accentColor: "#f5e03a",
-  },
-  {
-    num: "03",
-    slug: "economia-circular-turismo",
-    tag: "Innovación",
-    tagColor: "#191C0F",
-    tagBg: "#cad95e",
-    title: "Economía Circular en el Turismo",
-    excerpt: "Modelos de negocio que convierten residuos en recursos y construyen destinos más resilientes.",
-    bg: "#FCF8EE",
-    textColor: "#191C0F",
-    accentColor: "#1a4a1e",
-  },
+const stories = [
+  { num: "01", tag: "Ecosistemas",   title: "Caño Cristales — El Río de los Cinco Colores",            region: "Meta" },
+  { num: "02", tag: "Patrimonio",    title: "Eje Cafetero — Patrimonio Cultural de la Humanidad",      region: "Caldas / Quindío" },
+  { num: "03", tag: "Costa",         title: "Tayrona — Donde la Selva Abraza el Mar",                 region: "Magdalena" },
+  { num: "04", tag: "Amazonia",      title: "Amazonas — El Pulmón Verde del Mundo",                   region: "Amazonas" },
+  { num: "05", tag: "Desierto",      title: "Guajira — El Desierto que Respira",                      region: "La Guajira" },
+  { num: "06", tag: "Insular",       title: "Providencia — La Isla Libre de Plástico",                region: "San Andrés" },
+  { num: "07", tag: "Biodiversidad", title: "Los Llanos — Sabanas Vivas de la Orinoquía",             region: "Casanare / Vichada" },
+  { num: "08", tag: "Montaña",       title: "Sierra Nevada — La Montaña Costera más Alta del Mundo",  region: "Santa Marta" },
+  { num: "09", tag: "Comunidades",   title: "Pueblos Arhuacos — Guardianes del Territorio",           region: "Sierra Nevada" },
+  { num: "10", tag: "Slow Travel",   title: "Jardín, Antioquia — El Turismo que Protege",             region: "Antioquia" },
 ];
 
 export function HistoriasPreview() {
   return (
     <section className="w-full" style={{ background: "#191C0F" }}>
 
-      {/* ── Header row ── */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-8 md:px-14 pt-16 pb-10 border-b border-white/10">
+      {/* ── Header ── */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-8 md:px-14 pt-16 pb-10 border-b border-white/8">
         <div>
-          <p className="text-[10px] tracking-[0.35em] uppercase font-bold mb-3"
-            style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}>
+          <p
+            className="text-[10px] tracking-[0.35em] uppercase font-bold mb-3"
+            style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+          >
             Blog · Artículos
           </p>
           <h2 className="font-gasoek text-5xl sm:text-6xl md:text-7xl uppercase leading-none text-white">
@@ -56,65 +32,100 @@ export function HistoriasPreview() {
             <span style={{ color: "#f5e03a" }}>NATUR</span>
           </h2>
         </div>
+
+        {/* Próximamente badge */}
+        <div className="flex flex-col items-start sm:items-end gap-3">
+          <div
+            className="flex items-center gap-2 px-4 py-2"
+            style={{ background: "rgba(245,224,58,0.1)", border: "1px solid rgba(245,224,58,0.25)" }}
+          >
+            <Lock className="w-3 h-3" style={{ color: "#f5e03a" }} />
+            <span
+              className="text-[10px] font-bold uppercase tracking-widest"
+              style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
+            >
+              Próximamente
+            </span>
+          </div>
+          <p
+            className="text-[9px] uppercase tracking-widest text-right"
+            style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Unbounded, sans-serif" }}
+          >
+            10 historias · Agosto 2026
+          </p>
+        </div>
+      </div>
+
+      {/* ── Story list ── */}
+      <div className="divide-y" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+        {stories.map((s, i) => (
+          <div
+            key={s.num}
+            className="group flex items-center gap-5 md:gap-8 px-8 md:px-14 py-5 transition-colors hover:bg-white/3 cursor-default"
+          >
+            {/* Number */}
+            <span
+              className="font-gasoek text-3xl md:text-4xl leading-none w-10 flex-shrink-0 opacity-20 group-hover:opacity-40 transition-opacity tabular-nums"
+              style={{ color: "#cad95e" }}
+            >
+              {s.num}
+            </span>
+
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-3 mb-1">
+                <span
+                  className="text-[8px] font-bold uppercase tracking-widest px-2 py-[2px]"
+                  style={{ background: "rgba(202,217,94,0.1)", color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+                >
+                  {s.tag}
+                </span>
+                <span
+                  className="text-[8px] uppercase tracking-widest"
+                  style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Unbounded, sans-serif" }}
+                >
+                  {s.region}
+                </span>
+              </div>
+              <h3
+                className="font-gasoek text-lg md:text-2xl uppercase leading-tight truncate"
+                style={{ color: "rgba(255,255,255,0.55)" }}
+              >
+                {s.title}
+              </h3>
+            </div>
+
+            {/* Locked indicator */}
+            <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+              <Lock className="w-3.5 h-3.5" style={{ color: "rgba(255,255,255,0.2)" }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Bottom CTA strip ── */}
+      <div
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-8 md:px-14 py-8 border-t"
+        style={{ borderColor: "rgba(255,255,255,0.08)", background: "rgba(202,217,94,0.04)" }}
+      >
+        <p
+          className="text-xs leading-relaxed"
+          style={{ color: "rgba(255,255,255,0.3)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+        >
+          Las 10 historias más importantes del turismo sostenible en Colombia.<br />
+          Publicadas en agosto 2026 — Festival NATUR.
+        </p>
         <Link to="/historias">
-          <button className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest px-7 py-4 hover:opacity-80 transition-opacity whitespace-nowrap"
-            style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}>
+          <button
+            className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest px-7 py-4 hover:opacity-80 transition-opacity whitespace-nowrap"
+            style={{ background: "#cad95e", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
+          >
             <ArrowRight className="w-3.5 h-3.5" />
             Ver todas
           </button>
         </Link>
       </div>
 
-      {/* ── Article grid ── */}
-      <div className="grid grid-cols-1 md:grid-cols-3">
-        {articles.map((a, i) => (
-          <Link key={a.slug} to={`/historias/${a.slug}`}>
-            <article
-              className="group flex flex-col justify-between p-9 md:p-10 min-h-[420px] cursor-pointer transition-opacity hover:opacity-90 border-b md:border-b-0 border-white/10"
-              style={{
-                background: a.bg,
-                borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : undefined,
-              }}
-            >
-              {/* Top row */}
-              <div className="flex items-start justify-between mb-8">
-                <span
-                  className="text-[8px] font-bold uppercase tracking-widest px-2.5 py-1"
-                  style={{ background: a.tagBg, color: a.tagColor, fontFamily: "Unbounded, sans-serif" }}
-                >
-                  {a.tag}
-                </span>
-                <span
-                  className="font-gasoek text-5xl leading-none opacity-20"
-                  style={{ color: a.textColor }}
-                >
-                  {a.num}
-                </span>
-              </div>
-
-              {/* Title */}
-              <div className="flex-1">
-                <h3
-                  className="font-gasoek text-3xl md:text-4xl uppercase leading-[0.92] mb-4"
-                  style={{ color: a.textColor }}
-                >
-                  {a.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: `${a.textColor}99` }}>
-                  {a.excerpt}
-                </p>
-              </div>
-
-              {/* Bottom link */}
-              <div className="mt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest group-hover:gap-3 transition-all"
-                style={{ color: a.accentColor, fontFamily: "Unbounded, sans-serif" }}>
-                <ArrowRight className="w-3 h-3" />
-                Leer artículo
-              </div>
-            </article>
-          </Link>
-        ))}
-      </div>
     </section>
   );
 }

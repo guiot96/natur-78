@@ -63,18 +63,18 @@ export function HeaderButtons({}: HeaderButtonsProps) {
               className="h-7 sm:h-8 w-auto object-contain" />
           </Link>
 
-          {/* Desktop nav — minimal thin text links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {NAV.filter(n => n.href !== '/portal-empresas').map((item) => (
+          {/* Desktop nav — all items compact */}
+          <nav className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6">
+            {NAV.map((item) => (
               <Link key={item.href} to={item.href}>
                 <span
-                  className="text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-150 cursor-pointer whitespace-nowrap"
+                  className="text-[9px] xl:text-[10px] font-bold uppercase tracking-[0.12em] transition-colors duration-150 cursor-pointer whitespace-nowrap"
                   style={{
                     fontFamily: 'Unbounded, sans-serif',
-                    color: isActive(item.href) ? '#cad95e' : 'rgba(255,255,255,0.45)',
+                    color: isActive(item.href) ? '#cad95e' : 'rgba(255,255,255,0.42)',
                   }}
                   onMouseEnter={e => { if (!isActive(item.href)) (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.9)'; }}
-                  onMouseLeave={e => { if (!isActive(item.href)) (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.45)'; }}
+                  onMouseLeave={e => { if (!isActive(item.href)) (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.42)'; }}
                 >
                   {item.short}
                 </span>
@@ -84,13 +84,13 @@ export function HeaderButtons({}: HeaderButtonsProps) {
 
           {/* Right: CTA + burger */}
           <div className="flex items-center gap-3">
-            {/* Buy tickets — desktop only */}
-            <Link to="/tickets" className="hidden sm:block">
+            {/* Buy tickets */}
+            <Link to="/tickets" className="hidden md:block">
               <button
-                className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.15em] px-4 py-2 transition-opacity hover:opacity-80"
+                className="flex items-center gap-1.5 text-[9px] xl:text-[10px] font-bold uppercase tracking-[0.12em] px-3.5 py-2 transition-opacity hover:opacity-80"
                 style={{ background: '#cad95e', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}
               >
-                <Ticket className="w-3.5 h-3.5" />
+                <Ticket className="w-3 h-3" />
                 Entradas
               </button>
             </Link>
@@ -99,7 +99,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
             <button
               onClick={() => setOpen(v => !v)}
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
-              className="flex items-center gap-2 transition-colors duration-150"
+              className="flex items-center gap-1.5 transition-colors duration-150 md:hidden"
               style={{ color: open ? '#cad95e' : 'rgba(255,255,255,0.7)' }}
             >
               {open ? (
@@ -111,10 +111,6 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                   <span className="block w-full h-px bg-current" />
                 </div>
               )}
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] hidden sm:block"
-                style={{ fontFamily: 'Unbounded, sans-serif' }}>
-                {open ? 'Cerrar' : 'Menú'}
-              </span>
             </button>
           </div>
         </div>
