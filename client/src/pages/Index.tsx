@@ -1,14 +1,15 @@
 
 import React, { useEffect } from "react";
 import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
-import { Benefits } from "@/components/sections/Benefits";
-import { Participation } from "@/components/sections/Participation";
-import { Program } from "@/components/sections/Program";
-import { Location } from "@/components/sections/Location";
+import { QueVasPreview } from "@/components/sections/QueVasPreview";
+import { EntradasPreview } from "@/components/sections/EntradasPreview";
+import { Stand } from "@/components/sections/Stand";
+import { HistoriasPreview } from "@/components/sections/HistoriasPreview";
 import { Partners } from "@/components/sections/Partners";
-import { Contact } from "@/components/sections/Contact";
+import { Location } from "@/components/sections/Location";
+import { Footer } from "@/components/sections/Footer";
 import { HeaderButtons } from "@/components/layout/HeaderButtons";
+import ContactForm from "@/components/sections/ContactForm";
 
 const Index = () => {
   useEffect(() => {
@@ -27,58 +28,34 @@ const Index = () => {
 
   return (
     <div className="overflow-x-hidden w-full">
-      <div className="w-full">
-        <HeaderButtons />
+      <HeaderButtons />
 
-        <Hero />
+      {/* 1. Hero */}
+      <Hero />
 
-        <div id="about">
-          <About />
-        </div>
+      {/* 2. ¿Qué vas a encontrar? */}
+      <QueVasPreview />
 
-        <div id="benefits">
-          <Benefits />
-        </div>
+      {/* 3. Entradas */}
+      <EntradasPreview />
 
-        <div id="participate">
-          <Participation />
-        </div>
+      {/* 4. Reserva tu Stand */}
+      <Stand />
 
-        <div id="program">
-          <Program />
-        </div>
+      {/* 5. Historias */}
+      <HistoriasPreview />
 
-        <div id="location">
-          <Location />
-        </div>
+      {/* 6. Aliados */}
+      <Partners />
 
-        <div id="partners">
-          <Partners />
-        </div>
+      {/* 7. Ubicación */}
+      <Location />
 
-        <div id="contact">
-          <Contact />
-        </div>
+      {/* 8. Contacto */}
+      <ContactForm />
 
-        <footer className="bg-[#191C0F] text-[#FCF8EE] py-10 w-full">
-          <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <p className="font-gasoek text-lg text-[#cad95e] tracking-widest uppercase mb-1">FESTIVAL NATUR</p>
-              <p className="text-sm text-white/50">14 y 15 de agosto, 2026 · Kinder, Bogotá</p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm text-white/40">
-              <a href="/tickets" className="hover:text-[#cad95e] transition-colors">Entradas</a>
-              <a href="/agenda" className="hover:text-[#cad95e] transition-colors">Agenda</a>
-              <a href="/nosotros" className="hover:text-[#cad95e] transition-colors">Nosotros</a>
-              <a href="/contacto" className="hover:text-[#cad95e] transition-colors">Contacto</a>
-              <a href="/portal-empresas" className="hover:text-[#cad95e] transition-colors">Portal Empresas</a>
-            </div>
-            <p className="text-xs text-white/30 text-center">
-              © {new Date().getFullYear()} Festival NATUR · Todos los derechos reservados
-            </p>
-          </div>
-        </footer>
-      </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

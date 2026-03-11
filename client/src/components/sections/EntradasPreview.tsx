@@ -1,0 +1,80 @@
+import React from "react";
+import { Link } from "wouter";
+import { Ticket, ArrowRight, Calendar, MapPin } from "lucide-react";
+
+export function EntradasPreview() {
+  return (
+    <section className="w-full bg-[#191C0F] py-20 px-6">
+      <div className="max-w-5xl mx-auto">
+        {/* Title */}
+        <div className="text-center mb-12">
+          <p
+            className="text-[#cad95e] text-xs tracking-[0.3em] uppercase mb-3 font-bold"
+            style={{ fontFamily: "Unbounded, sans-serif" }}
+          >
+            14 y 15 de agosto · Bogotá
+          </p>
+          <h2 className="font-gasoek text-4xl sm:text-5xl text-white uppercase leading-tight">
+            ENTRADAS
+          </h2>
+        </div>
+
+        {/* Cards */}
+        <div className="grid sm:grid-cols-2 gap-6 mb-10">
+          {/* 1 día */}
+          <div className="border border-[#cad95e]/20 p-8 flex flex-col gap-6">
+            <div>
+              <p className="text-[#cad95e]/60 text-xs uppercase tracking-widest mb-1">Entrada</p>
+              <h3 className="font-gasoek text-3xl text-white uppercase">1 DÍA</h3>
+            </div>
+            <div className="flex items-baseline gap-1">
+              <span className="font-gasoek text-5xl text-[#cad95e]">$50.000</span>
+              <span className="text-white/40 text-sm">COP</span>
+            </div>
+            <ul className="space-y-2 text-white/70 text-sm flex-1">
+              {["Charlas y conferencias", "Conciertos en vivo", "Feria de emprendimientos", "Experiencias sostenibles"].map((f) => (
+                <li key={f} className="flex items-center gap-2">
+                  <span className="w-1 h-1 bg-[#cad95e] rounded-full" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 2 días */}
+          <div className="bg-[#cad95e] p-8 flex flex-col gap-6 relative">
+            <div className="absolute top-4 right-4 bg-[#191C0F] text-[#cad95e] text-[10px] font-bold px-3 py-1 font-gasoek uppercase tracking-widest">
+              RECOMENDADO
+            </div>
+            <div>
+              <p className="text-[#191C0F]/60 text-xs uppercase tracking-widest mb-1">Entrada</p>
+              <h3 className="font-gasoek text-3xl text-[#191C0F] uppercase">2 DÍAS</h3>
+            </div>
+            <div className="flex items-baseline gap-1">
+              <span className="font-gasoek text-5xl text-[#191C0F]">$70.000</span>
+              <span className="text-[#191C0F]/50 text-sm">COP</span>
+            </div>
+            <ul className="space-y-2 text-[#191C0F]/80 text-sm flex-1">
+              {["Acceso completo ambos días", "Todas las actividades", "Conciertos y programación", "Zona especial y networking"].map((f) => (
+                <li key={f} className="flex items-center gap-2">
+                  <span className="w-1 h-1 bg-[#191C0F] rounded-full" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center">
+          <Link to="/tickets">
+            <button className="bg-[#cad95e] text-[#191C0F] font-gasoek text-sm uppercase tracking-wider px-12 py-4 hover:bg-[#b8c94d] transition-colors flex items-center gap-2 mx-auto">
+              <Ticket className="w-4 h-4" />
+              COMPRAR ENTRADAS
+            </button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}

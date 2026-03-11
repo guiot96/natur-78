@@ -1,0 +1,387 @@
+3. SECCIONES A ELIMINAR
+
+Eliminar completamente:
+
+Portal Viajeros
+
+Portal Personas
+
+Premio NATUR
+
+Eliminar:
+
+Páginas
+Links
+Imágenes
+PDFs
+Textos
+Base de datos asociada
+
+4. HOME — ESTRUCTURA COMPLETA
+Sección 1 — HERO
+
+Imagen o video principal
+
+Botón:
+
+COMPRAR ENTRADAS
+
+Sección 2 — ¿QUÉ VAS A ENCONTRAR?
+
+Subsecciones:
+
+Agenda Académica
+
+Nuestra rumba y sus manifestaciones
+
+Historias transformadoras del turismo sostenible
+
+Botón:
+
+DESCUBRIR
+
+Sección 3 — ENTRADAS
+
+Resumen visual
+
+Botón:
+
+COMPRAR
+
+Sección 4 — RESERVA TU STAND
+
+Texto:
+
+Sé parte de los emprendimientos y marcas que están construyendo el futuro del turismo sostenible.
+
+Botón:
+
+RESERVAR STAND
+
+Sección 5 — HISTORIAS
+
+Preview artículos
+
+Botón:
+
+VER HISTORIAS
+
+Sección 6 — ALIADOS
+
+Grid de logos
+
+Categorías:
+
+Aliados principales
+
+Patrocinadores
+
+Emprendimientos
+
+Institucionales
+
+Sección 7 — CONTACTO
+
+Formulario rápido
+
+5. PÁGINA ENTRADAS
+
+IMPORTANTE:
+
+NO EXISTEN ENTRADAS GRATIS
+
+Entrada 1 día
+
+Precio:
+
+50.000 COP
+
+Incluye:
+
+Charlas
+
+Conciertos
+
+Feria
+
+Experiencias
+
+Entrada 2 días
+
+Precio:
+
+70.000 COP
+
+Incluye:
+
+Acceso completo
+
+Todas las actividades
+
+Zona especial
+
+Incluir:
+
+Poster oficial
+
+PDF informativo
+
+6. PASARELA DE PAGO
+
+Integrar:
+
+Stripe
+
+Wompi
+
+MercadoPago
+
+ePayco
+
+Permitir:
+
+Tarjeta
+
+PSE
+
+Nequi
+
+Daviplata
+
+Enviar confirmación automática
+
+7. PÁGINA AGENDA
+
+Contenido:
+
+Día 1
+
+Horario
+
+Artista
+
+Actividad
+
+Día 2
+
+Horario
+
+Artista
+
+Actividad
+
+8. PÁGINA ¿QUÉ VAS A ENCONTRAR?
+
+Contiene:
+
+Agenda académica
+
+Nuestra rumba
+
+Historias transformadoras
+
+9. PÁGINA NOSOTROS
+
+Texto institucional
+
+Historia
+
+Propósito
+
+Visión
+
+10. PÁGINA HISTORIAS NATUR
+
+Formato blog
+
+Artículos
+
+Entrevistas
+
+Experiencias
+
+11. PÁGINA CONTACTO
+
+Formulario
+
+Nombre
+
+Email
+
+Teléfono
+
+Mensaje
+
+Email destino:
+
+info@festivalnatur.com
+
+12. PORTAL EMPRESAS
+
+Página exclusiva para:
+
+Patrocinadores
+
+Stands
+
+Aliados
+
+Formulario completo incluye:
+
+Información empresa
+
+Contacto
+
+Tipo participación
+
+Presupuesto
+
+Sostenibilidad
+
+Logística
+
+Material
+
+Mensaje
+
+Integración SendGrid
+
+Enviar email automático
+
+Confirmación usuario
+
+13. SECCIÓN RESERVA TU STAND
+
+Formulario:
+
+Marca
+
+Contacto
+
+Email
+
+Teléfono
+
+Mensaje
+
+14. SECCIÓN ALIADOS
+
+Mostrar logos
+
+Grid responsive
+
+SVG o PNG
+
+Con links opcionales
+
+15. FOOTER COMPLETO
+
+Debe contener:
+
+Logo
+
+Festival NATUR
+
+Menú
+
+Home
+
+Entradas
+
+Agenda
+
+Qué vas a encontrar
+
+Historias
+
+Nosotros
+
+Contacto
+
+Portal Empresas
+
+Contacto
+
+Email
+
+WhatsApp
+
+Ciudad
+
+Redes sociales
+
+Instagram
+
+Facebook
+
+YouTube
+
+TikTok
+
+Legal
+
+Privacidad
+
+Términos
+
+Copyright
+
+Festival NATUR
+
+Todos los derechos reservados
+
+16. TEXTOS B2C — TRIBU
+
+Texto:
+
+Conecta con personas que ven el mundo diferente.
+
+Vive experiencias.
+
+Descubre nuevas formas de vivir.
+
+Sé parte del cambio.
+
+17. ELEMENTOS A SUBIR
+
+Poster oficial
+
+PDF entradas
+
+PDF programación
+
+Logos aliados
+
+Fotos
+
+Videos
+
+18. FUNCIONALIDADES TÉCNICAS
+
+Responsive
+
+Optimización velocidad
+
+SEO básico
+
+Integración pagos
+
+Integración email
+
+Formularios funcionales
+
+19. DISEÑO GENERAL
+
+Estilo:
+
+Premium
+
+Natural
+
+Editorial
+
+Contemporáneo
+
+Inspirado en:
+
+Festivales internacionales

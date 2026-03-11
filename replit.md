@@ -4,19 +4,31 @@
 Festival NATUR is the official website for the first sustainable tourism festival in Colombia, taking place on August 14–15, 2026 at Kinder (Calle 59 #6-21, Chapinero, Bogotá). The platform serves as a public-facing festival site with ticket sales, agenda, editorial content, and a B2B portal for companies and sponsors.
 
 ## Site Structure (8 pages only)
-- **HOME** — `/`
-- **ENTRADAS** — `/tickets`
+- **HOME** — `/` — 7 sections: Hero, ¿Qué vas a encontrar?, Entradas, Stand, Historias, Aliados, Contacto + Footer
+- **ENTRADAS** — `/tickets` — 1 día $50.000 / 2 días $70.000 (NO tickets gratis)
 - **AGENDA** — `/agenda`
 - **¿QUÉ VAS A ENCONTRAR?** — `/que-vas-a-encontrar`
-- **HISTORIAS NATUR** — `/historias` (maps to Noticias.tsx)
-- **NOSOTROS** — `/nosotros` (maps to About.tsx)
-- **CONTACTO** — `/contacto` (maps to Contact.tsx)
+- **HISTORIAS NATUR** — `/historias` (Noticias.tsx)
+- **NOSOTROS** — `/nosotros` (About.tsx)
+- **CONTACTO** — `/contacto` (Contact.tsx)
 - **PORTAL EMPRESAS** — `/portal-empresas`
+
+### Homepage Sections (Index.tsx)
+1. Hero — full-screen bg image + logo + botón COMPRAR ENTRADAS
+2. QueVasPreview — preview de 3 subsecciones + botón DESCUBRIR
+3. EntradasPreview — resumen visual 1-día/2-días + botón COMPRAR
+4. Stand — sección Reserva tu Stand
+5. HistoriasPreview — 3 artículos preview + botón VER HISTORIAS
+6. Partners — grid de logos aliados
+7. Location — venue Kinder
+8. ContactForm — formulario rápido (email destino: info@festivalnatur.com)
+9. Footer — logo, menú completo, contacto, redes, legal
 
 ### Navigation Requirements
 - Logo always directs to HOME
 - Menu visible at all times (sticky fixed header)
 - Fully responsive (desktop + tablet + mobile)
+- Portal Viajeros REMOVED from navigation
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
