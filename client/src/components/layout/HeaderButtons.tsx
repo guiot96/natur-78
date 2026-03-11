@@ -63,7 +63,7 @@ export function HeaderButtons({
             <img
               src={logoImg}
               alt="Festival NATUR 2026"
-              className="h-9 sm:h-11 w-auto object-contain"
+              className="h-8 sm:h-10 w-auto object-contain max-w-[110px] sm:max-w-[140px]"
             />
           </Link>
 
