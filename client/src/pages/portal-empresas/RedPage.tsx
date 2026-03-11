@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { Search, Building2, MapPin, MessageCircle, Users, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,7 @@ export default function RedPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const queryClient = useQueryClient();
+  const [, navigate] = useLocation();
 
   // Fetch all companies
   const { data: allCompanies = [], isLoading: companiesLoading } = useQuery({
@@ -28,8 +30,13 @@ export default function RedPage() {
         headers: { 'Content-Type': 'application/json' }
       });
     },
-    onSuccess: () => {
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ['/api/conversations'] });
+      if (data?.id) {
+        navigate(`/portal-empresas/mensajes?conversation=${data.id}`);
+      } else {
+        navigate('/portal-empresas/mensajes');
+      }
     }
   });
 

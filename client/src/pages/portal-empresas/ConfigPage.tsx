@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
   Settings, Bell, Shield, Eye, Globe, Smartphone, 
@@ -24,10 +24,10 @@ export default function ConfigPage() {
   const queryClient = useQueryClient();
 
   // Fetch current user
-  const { data: currentUser, isLoading } = useQuery({
+  const { data: currentUser } = useQuery({
     queryKey: ['/api/auth/me'],
     staleTime: 10 * 60 * 1000,
-  }) as { data: any; isLoading: boolean };
+  }) as { data: any };
 
   // Form states for different sections
   const [profileData, setProfileData] = useState({
@@ -38,6 +38,9 @@ export default function ConfigPage() {
     phone: "",
     description: "",
     website: "",
+    city: "",
+    country: "",
+    address: "",
   });
 
   const [notificationSettings, setNotificationSettings] = useState({
@@ -81,7 +84,7 @@ export default function ConfigPage() {
   });
 
   // Load user data into form when available
-  useState(() => {
+  useEffect(() => {
     if (currentUser) {
       setProfileData({
         firstName: currentUser.firstName || "",
@@ -89,11 +92,14 @@ export default function ConfigPage() {
         companyName: currentUser.companyName || "",
         email: currentUser.email || "",
         phone: currentUser.phone || "",
-        description: currentUser.description || "",
+        description: currentUser.companyDescription || currentUser.bio || "",
         website: currentUser.website || "",
+        city: currentUser.city || "",
+        country: currentUser.country || "",
+        address: currentUser.address || "",
       });
     }
-  });
+  }, [currentUser]);
 
   const sections = [
     { id: "profile", label: "Perfil", icon: User },
@@ -104,7 +110,8 @@ export default function ConfigPage() {
   ];
 
   const handleSaveProfile = () => {
-    updateProfileMutation.mutate(profileData);
+    const { description, ...rest } = profileData;
+    updateProfileMutation.mutate({ ...rest, companyDescription: description, bio: description });
   };
 
   const renderProfileSection = () => (
@@ -166,6 +173,48 @@ export default function ConfigPage() {
           rows={4}
           data-testid="textarea-description"
         />
+      </div>
+
+      <div>
+        <h3 className="text-base font-semibold text-white/90 mb-3 flex items-center gap-2">
+          <MapPin className="w-4 h-4 text-green-400" />
+          Ubicación
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="address" className="text-white/80">Dirección</Label>
+            <Input
+              id="address"
+              value={profileData.address}
+              onChange={(e) => setProfileData(prev => ({ ...prev, address: e.target.value }))}
+              className="bg-white/10 border-white/20 text-white"
+              placeholder="Calle 59 #6-21, Chapinero"
+              data-testid="input-address"
+            />
+          </div>
+          <div>
+            <Label htmlFor="city" className="text-white/80">Ciudad</Label>
+            <Input
+              id="city"
+              value={profileData.city}
+              onChange={(e) => setProfileData(prev => ({ ...prev, city: e.target.value }))}
+              className="bg-white/10 border-white/20 text-white"
+              placeholder="Bogotá"
+              data-testid="input-city"
+            />
+          </div>
+          <div>
+            <Label htmlFor="country" className="text-white/80">País</Label>
+            <Input
+              id="country"
+              value={profileData.country}
+              onChange={(e) => setProfileData(prev => ({ ...prev, country: e.target.value }))}
+              className="bg-white/10 border-white/20 text-white"
+              placeholder="Colombia"
+              data-testid="input-country"
+            />
+          </div>
+        </div>
       </div>
 
       <Button 
@@ -391,22 +440,6 @@ export default function ConfigPage() {
       default: return renderProfileSection();
     }
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 p-4 lg:p-6">
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10">
-          <CardContent className="p-8">
-            <div className="animate-pulse">
-              <div className="h-8 bg-white/20 rounded mb-4"></div>
-              <div className="h-4 bg-white/20 rounded mb-2"></div>
-              <div className="h-4 bg-white/20 rounded w-3/4"></div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 p-4 lg:p-6">

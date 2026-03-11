@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useSearch } from "wouter";
 import { Search, MessageCircle, Send, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,13 +11,23 @@ import { WhatsAppChat } from "@/components/messaging/WhatsAppChat";
 export default function MensajesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedConversation, setSelectedConversation] = useState<number | null>(null);
+  const searchStr = useSearch();
 
   // Fetch conversations
   const { data: conversations = [], isLoading: conversationsLoading } = useQuery({
     queryKey: ['/api/conversations'],
-    staleTime: 30 * 1000, // 30 seconds
-    refetchInterval: 30 * 1000, // Auto-refresh every 30 seconds
+    staleTime: 30 * 1000,
+    refetchInterval: 30 * 1000,
   }) as { data: any[]; isLoading: boolean };
+
+  // Auto-select conversation from URL param ?conversation=ID
+  useEffect(() => {
+    const params = new URLSearchParams(searchStr);
+    const convId = params.get('conversation');
+    if (convId) {
+      setSelectedConversation(parseInt(convId));
+    }
+  }, [searchStr]);
 
   // Filter conversations
   const filteredConversations = conversations.filter((conv: any) => {

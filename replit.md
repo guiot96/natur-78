@@ -102,6 +102,15 @@ Preferred communication style: Simple, everyday language.
 - **React hooks violation in `HomePage`** — Restructured to call all hooks before any conditional returns.
 - **Central auth guard in `PortalEmpresasLayout`** — Redirects unauthenticated users to `/auth/empresas` centrally.
 - **Fixed `ConfigPage` profile update** — Changed endpoint from non-existent `/api/users/profile` to `/api/auth/update-profile`.
+- **Fixed `ConfigPage` form never loading data** — Changed `useState(() => {...})` (incorrect) to `useEffect(() => {...}, [currentUser])` so form fields populate when user data arrives.
+- **ConfigPage no longer blocks on loading skeleton** — Removed full-page loading block; form renders immediately and populates via useEffect.
+- **Added location fields to ConfigPage** — City, country, address inputs added to profile section so users can update their map position.
+- **ConfigPage `handleSaveProfile`** — Maps `description` field to both `companyDescription` and `bio` on save.
+- **RedPage messaging navigation** — After creating a conversation, automatically navigates to `/portal-empresas/mensajes?conversation=<id>`.
+- **MensajesPage URL param support** — Reads `?conversation=ID` query param on load and auto-selects that conversation.
+- **ProfileMap WebGL crash** — Added try-catch around Mapbox initialization; shows coordinate/name fallback card when WebGL is unavailable.
+- **ProfileMap accent color** — Updated marker color from `#CAD95E` (lime) to `#f5e03a` (NATUR yellow).
+- **Test user** — `96studio.live96@gmail.com` / `natur2026` (empresa role, 96 Studio company, Bogotá coordinates).
 
 ## External Dependencies
 
