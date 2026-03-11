@@ -93,6 +93,18 @@ Preferred communication style: Simple, everyday language.
 - Enhanced map view with improved mobile map point visibility and coordinate validation
 - Automated default values for removed registration steps to maintain data integrity
 
+### Portal Empresas Mobile Optimization (March 2026)
+- **Layout fix** — Sidebar hidden on mobile (`hidden lg:block`), content full-width (`lg:ml-20`), map full-width (`lg:left-20`)
+- **Navigation** — Removed "Experiencias" tab; 4 tabs only: Inicio, Mapa, Red, Chat
+- **Removed Mobile Current Page Indicator** — Redundant bar below header eliminated
+- **Header** — Compact avatar-only profile trigger on mobile; full dropdown on desktop
+- **HomePage rewrite** — Replaced 918-line full-screen hero + search/filter dashboard with ~160-line minimal dashboard: greeting, 2 stat cards, 3 quick-action tiles, Festival NATUR 2026 banner, recent companies list
+- **Fixed "Festival NATUR 2025"** → "Festival NATUR 2026"
+- **RedPage** — Horizontal scroll category chips on mobile, tighter card spacing
+- **ConfigPage** — Horizontal tab chips on mobile (replaces sidebar nav), desktop sidebar preserved
+- **PerfilPage** — Compact avatar, reduced spacing, max-w-3xl constraint
+- **All pages** — Consistent `max-w-3xl mx-auto` on mobile, `p-4 lg:p-6` padding pattern
+
 ### Portal Empresas Bug Fixes (March 2026)
 - **AuthContext session check bug** — Fixed: `/api/auth/me` returns user directly, not `{user: ...}`. Now checks `response.id` to validate session.
 - **Login no longer blocks without `registrationComplete`** — Empresa users can log in immediately after registering; removed the `registrationComplete` gate.

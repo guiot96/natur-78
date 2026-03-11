@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { Search, Building2, MapPin, MessageCircle, Users, Filter } from "lucide-react";
+import { Search, Building2, MapPin, MessageCircle, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -69,69 +69,50 @@ export default function RedPage() {
   ];
 
   return (
-    <div className="portal-empresas-content min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 p-4 lg:p-6">
+    <div className="min-h-screen p-4 lg:p-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="mb-6">
-        <Card className="bg-white/10 backdrop-blur-xl border-white/20">
-          <CardContent className="p-4 lg:p-6">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-              <div>
-                <h1 className="text-2xl lg:text-3xl font-bold text-white mb-2">Red de Empresas</h1>
-                <p className="text-white/70">Conecta con otras empresas de turismo sostenible</p>
-              </div>
-              
-              <div className="flex items-center gap-2 text-white/60">
-                <Users className="w-5 h-5" />
-                <span>{filteredCompanies.length} empresas</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="mb-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl lg:text-2xl font-bold text-white">Red de Empresas</h1>
+            <p className="text-white/50 text-sm">{filteredCompanies.length} empresas</p>
+          </div>
+        </div>
       </div>
 
-      {/* Filters */}
-      <div className="mb-6">
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10">
-          <CardContent className="p-4">
-            <div className="flex flex-col lg:flex-row gap-4">
-              {/* Search */}
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 w-4 h-4" />
-                <Input
-                  placeholder="Buscar empresas por nombre, tipo..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60 pl-10"
-                  data-testid="input-search-network"
-                />
-              </div>
-              
-              {/* Category Filter */}
-              <div className="flex items-center gap-2 flex-wrap">
-                <Filter className="w-4 h-4 text-white/60" />
-                {categories.map((category) => (
-                  <Button
-                    key={category.id}
-                    size="sm"
-                    variant={selectedCategory === category.id ? "default" : "outline"}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={selectedCategory === category.id 
-                      ? "bg-green-600 text-white" 
-                      : "bg-white/10 border-white/20 text-white/80 hover:bg-white/20"
-                    }
-                    data-testid={`filter-${category.id}`}
-                  >
-                    {category.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      {/* Search */}
+      <div className="relative mb-3">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+        <Input
+          placeholder="Buscar empresas..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="bg-white/10 border-white/15 text-white placeholder:text-white/40 pl-10 rounded-xl h-10"
+          data-testid="input-search-network"
+        />
+      </div>
+
+      {/* Category chips — horizontal scroll on mobile */}
+      <div className="flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-hide">
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            onClick={() => setSelectedCategory(category.id)}
+            className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-colors flex-shrink-0
+              ${selectedCategory === category.id 
+                ? "bg-emerald-600 text-white" 
+                : "bg-white/10 text-white/70 hover:bg-white/15"
+              }
+            `}
+            data-testid={`filter-${category.id}`}
+          >
+            {category.label}
+          </button>
+        ))}
       </div>
 
       {/* Companies Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {companiesLoading ? (
           // Loading skeleton
           Array.from({ length: 6 }).map((_, i) => (

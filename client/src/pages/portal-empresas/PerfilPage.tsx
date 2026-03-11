@@ -32,42 +32,36 @@ export default function PerfilPage() {
 
   if (userLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 p-4 lg:p-6">
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10">
-          <CardContent className="p-8">
-            <div className="animate-pulse">
-              <div className="w-32 h-32 bg-white/20 rounded-full mx-auto mb-4"></div>
-              <div className="h-6 bg-white/20 rounded mb-2"></div>
-              <div className="h-4 bg-white/20 rounded w-3/4 mx-auto"></div>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen p-4 lg:p-6 max-w-3xl mx-auto">
+        <div className="animate-pulse space-y-4 pt-8">
+          <div className="w-20 h-20 bg-white/20 rounded-full mx-auto"></div>
+          <div className="h-5 bg-white/20 rounded w-1/2 mx-auto"></div>
+          <div className="h-4 bg-white/20 rounded w-1/3 mx-auto"></div>
+        </div>
       </div>
     );
   }
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 p-4 lg:p-6">
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10">
-          <CardContent className="p-8 text-center">
-            <h2 className="text-white text-xl mb-2">Error al cargar perfil</h2>
-            <p className="text-white/60">No se pudo cargar la información del perfil</p>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen p-4 lg:p-6 max-w-3xl mx-auto">
+        <div className="text-center pt-16">
+          <h2 className="text-white text-lg mb-2">Error al cargar perfil</h2>
+          <p className="text-white/50 text-sm">No se pudo cargar la información del perfil</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="portal-empresas-content min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 p-4 lg:p-6">
+    <div className="min-h-screen p-4 lg:p-6 max-w-3xl mx-auto">
       {/* Profile Header */}
-      <Card className="bg-white/10 backdrop-blur-xl border-white/20 mb-6">
-        <CardContent className="p-6 lg:p-8">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+      <Card className="bg-white/10 backdrop-blur-xl border-white/20 mb-4">
+        <CardContent className="p-4 lg:p-8">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-6">
             {/* Profile Image */}
             <div className="relative">
-              <Avatar className="w-24 h-24 lg:w-32 lg:h-32 border-4 border-green-400/30">
+              <Avatar className="w-20 h-20 lg:w-32 lg:h-32 border-4 border-green-400/30">
                 <AvatarImage src={currentUser.profileImage} alt={currentUser.firstName} />
                 <AvatarFallback className="bg-green-600/20 text-green-400 text-2xl lg:text-3xl">
                   {currentUser.firstName?.charAt(0) || currentUser.companyName?.charAt(0) || 'U'}
@@ -86,7 +80,7 @@ export default function PerfilPage() {
             <div className="flex-1">
               <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                 <div>
-                  <h1 className="text-2xl lg:text-3xl font-bold text-white mb-2">
+                  <h1 className="text-xl lg:text-3xl font-bold text-white mb-1">
                     {currentUser.companyName || `${currentUser.firstName} ${currentUser.lastName}`}
                   </h1>
                   {currentUser.role && (
@@ -126,7 +120,7 @@ export default function PerfilPage() {
       </Card>
 
       {/* Profile Details Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-4">
         {/* Contact Information */}
         <Card className="bg-white/10 backdrop-blur-xl border-white/20">
           <CardHeader>
@@ -259,7 +253,7 @@ export default function PerfilPage() {
       )}
 
       {/* Services and Certifications Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-4">
         {/* Services Offered */}
         {currentUser?.servicesOffered && Array.isArray(currentUser.servicesOffered) && currentUser.servicesOffered.length > 0 && (
           <Card className="bg-white/10 backdrop-blur-xl border-white/20">

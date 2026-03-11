@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link, useRoute } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { Map, Building2, Star, MessageCircle, Settings, ChevronDown, LogOut, UserIcon, Bell, Home, MapPin, CheckCircle } from "lucide-react";
+import { Map, Building2, MessageCircle, Settings, ChevronDown, LogOut, UserIcon, Bell, Home, MapPin, CheckCircle } from "lucide-react";
 import type { SafeUser } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,7 +39,6 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
     if (location === '/portal-empresas') return 'home';
     if (location.includes('/portal-empresas/mapa')) return 'map';
     if (location.includes('/portal-empresas/red')) return 'network';
-    if (location.includes('/portal-empresas/experiencias')) return 'experiences';
     if (location.includes('/portal-empresas/mensajes')) return 'messages';
     return 'home'; // default to home
   };
@@ -48,9 +47,8 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
 
   const navItems = [
     { id: "home", label: "Inicio", icon: Home },
-    { id: "map", label: "Mapa Interactivo", icon: Map },
-    { id: "network", label: "Red de Contactos", icon: Building2 },
-    { id: "experiences", label: "Experiencias", icon: Star },
+    { id: "map", label: "Mapa", icon: Map },
+    { id: "network", label: "Red", icon: Building2 },
     { id: "messages", label: "Chat", icon: MessageCircle }
   ];
 
@@ -59,7 +57,6 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
       home: '/portal-empresas',
       map: '/portal-empresas/mapa',
       network: '/portal-empresas/red',
-      experiences: '/portal-empresas/experiencias',
       messages: '/portal-empresas/mensajes'
     };
     
@@ -169,16 +166,16 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="relative h-12 w-auto px-3 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20 transition-all duration-300 shadow-lg"
+          className="relative h-10 lg:h-12 w-auto px-2 lg:px-3 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20 transition-all duration-300 shadow-lg"
           data-testid="profile-dropdown-trigger"
         >
-          <Avatar className="h-8 w-8 mr-3">
+          <Avatar className="h-7 w-7 lg:h-8 lg:w-8 lg:mr-3">
             <AvatarImage src={avatar} alt={displayName} />
-            <AvatarFallback className="bg-green-600 text-white font-semibold">
+            <AvatarFallback className="bg-green-600 text-white font-semibold text-xs lg:text-sm">
               {initials}
             </AvatarFallback>
           </Avatar>
-          <div className="flex flex-col items-start mr-2">
+          <div className="hidden lg:flex flex-col items-start mr-2">
             <span className="text-white font-semibold text-sm" data-testid="user-name-display">{displayName}</span>
             <div className="flex items-center gap-1">
               <span className="text-white/60 text-xs" data-testid="company-name-display">{companyInfo}</span>
@@ -187,7 +184,7 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
               )}
             </div>
           </div>
-          <ChevronDown className="h-4 w-4 text-white/60" />
+          <ChevronDown className="h-4 w-4 text-white/60 hidden lg:block" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
@@ -269,18 +266,18 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
         {/* Enhanced Top Menu Bar */}
         <div className="fixed top-0 left-0 right-0 z-50">
           <div className="bg-white/10 backdrop-blur-xl border-b border-white/20 shadow-2xl">
-            <div className="flex items-center justify-between px-6 py-3">
+            <div className="flex items-center justify-between px-4 lg:px-6 py-3">
               {/* Left side - Logo */}
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-600/20 backdrop-blur-lg rounded-xl flex items-center justify-center border border-green-500/30 shadow-lg">
-                    <span className="text-green-400 font-gasoek text-xl font-bold">N</span>
+                <Link href="/portal-empresas" className="flex items-center gap-2 lg:gap-3">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-green-600/20 backdrop-blur-lg rounded-xl flex items-center justify-center border border-green-500/30">
+                    <span className="text-green-400 font-gasoek text-lg lg:text-xl font-bold">N</span>
                   </div>
                   <div>
-                    <h1 className="text-white font-gasoek text-lg font-bold">NATUR</h1>
-                    <p className="text-green-400 text-xs font-medium">Portal Empresas</p>
+                    <h1 className="text-white font-gasoek text-base lg:text-lg font-bold">NATUR</h1>
+                    <p className="text-green-400 text-[10px] lg:text-xs font-medium">Portal Empresas</p>
                   </div>
-                </div>
+                </Link>
                 
                 {/* Current page indicator - Only on desktop */}
                 <div className="hidden lg:flex items-center">
@@ -306,28 +303,8 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
           </div>
         </div>
         
-        {/* Mobile Current Page Indicator */}
-        <div className="fixed top-16 left-0 right-0 z-40 lg:hidden">
-          <div className="bg-white/5 backdrop-blur-lg border-b border-white/10">
-            <div className="px-4 py-2">
-              <div className="flex items-center gap-2">
-                {(() => {
-                  const currentItem = navItems.find(item => item.id === activeView);
-                  const IconComponent = currentItem?.icon || Home;
-                  return (
-                    <>
-                      <IconComponent className="w-4 h-4 text-green-400" />
-                      <span className="text-white text-sm font-medium">{currentItem?.label || 'Inicio'}</span>
-                    </>
-                  );
-                })()}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Enhanced Compact Sidebar */}
-        <div className="fixed left-0 top-16 h-[calc(100vh-4rem)] z-30 w-20">
+        {/* Desktop Sidebar — hidden on mobile */}
+        <div className="hidden lg:block fixed left-0 top-16 h-[calc(100vh-4rem)] z-30 w-20">
           <div className="h-full bg-white/10 backdrop-blur-xl border-r border-white/20 shadow-2xl">
             <div className="p-4">
               {/* Navigation Items with Enhanced Icons */}
@@ -380,16 +357,14 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
           </div>
         </div>
 
-        {/* Enhanced Main Content */}
-        <div className="transition-all duration-300 relative z-10 ml-20">
-          {/* Full-image layout for map page */}
+        {/* Main Content — no left margin on mobile */}
+        <div className="transition-all duration-300 relative z-10 lg:ml-20">
           {activeView === 'map' ? (
-            <div className="fixed inset-0 left-20 top-16">
+            <div className="fixed inset-0 lg:left-20 top-16">
               {children}
             </div>
           ) : (
-            /* Full-width borderless layout for all other pages */
-            <div className="portal-empresas-content pt-24 lg:pt-20 pb-24 lg:pb-6 min-h-screen">
+            <div className="portal-empresas-content pt-16 lg:pt-20 pb-20 lg:pb-6 min-h-screen">
               {children}
             </div>
           )}

@@ -442,36 +442,55 @@ export default function ConfigPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900 p-4 lg:p-6">
+    <div className="min-h-screen p-4 lg:p-6 max-w-3xl mx-auto">
       {/* Header */}
-      <div className="mb-6">
-        <Card className="bg-white/10 backdrop-blur-xl border-white/20">
-          <CardContent className="p-4 lg:p-6">
-            <h1 className="text-2xl lg:text-3xl font-bold text-white mb-2">Configuración</h1>
-            <p className="text-white/70">Gestiona tu perfil y preferencias de cuenta</p>
-          </CardContent>
-        </Card>
+      <div className="mb-4">
+        <h1 className="text-xl lg:text-2xl font-bold text-white">Configuración</h1>
+        <p className="text-white/50 text-sm">Gestiona tu perfil y preferencias</p>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Settings Navigation */}
-        <Card className="lg:w-64 bg-white/5 backdrop-blur-xl border-white/10">
-          <CardContent className="p-4">
-            <nav className="space-y-2">
+      {/* Section tabs — horizontal scroll on mobile, vertical sidebar on desktop */}
+      <div className="flex gap-2 overflow-x-auto pb-3 mb-4 lg:hidden scrollbar-hide">
+        {sections.map((section) => {
+          const Icon = section.icon;
+          return (
+            <button
+              key={section.id}
+              onClick={() => setActiveSection(section.id)}
+              className={`whitespace-nowrap flex items-center gap-2 px-3 py-2 rounded-full text-xs font-medium transition-colors flex-shrink-0
+                ${activeSection === section.id
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-white/10 text-white/70 hover:bg-white/15'
+                }
+              `}
+              data-testid={`nav-${section.id}`}
+            >
+              <Icon className="w-3.5 h-3.5" />
+              {section.label}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-4">
+        {/* Desktop sidebar nav */}
+        <Card className="hidden lg:block lg:w-56 bg-white/5 backdrop-blur-xl border-white/10 h-fit">
+          <CardContent className="p-3">
+            <nav className="space-y-1">
               {sections.map((section) => {
                 const Icon = section.icon;
                 return (
                   <button
                     key={section.id}
                     onClick={() => setActiveSection(section.id)}
-                    className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 text-left ${
+                    className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all duration-200 text-left text-sm ${
                       activeSection === section.id
                         ? 'bg-green-600/20 text-green-400 border border-green-500/30'
                         : 'text-white/80 hover:bg-white/10 hover:text-white'
                     }`}
-                    data-testid={`nav-${section.id}`}
+                    data-testid={`nav-desktop-${section.id}`}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-4 h-4" />
                     <span className="font-medium">{section.label}</span>
                   </button>
                 );
@@ -482,7 +501,7 @@ export default function ConfigPage() {
 
         {/* Settings Content */}
         <Card className="flex-1 bg-white/10 backdrop-blur-xl border-white/20">
-          <CardContent className="p-6">
+          <CardContent className="p-4 lg:p-6">
             {renderContent()}
           </CardContent>
         </Card>
