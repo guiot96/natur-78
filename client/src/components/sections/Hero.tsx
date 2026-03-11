@@ -1,55 +1,63 @@
-
 import React from "react";
 import { Link } from "wouter";
 import { Ticket } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Festival_NATUR from "@assets/2026_1771518463695.png";
+import posterImg from "@assets/WhatsApp_Image_2026-03-10_at_10.00.13_PM_1773257287514.jpeg";
 
 export function Hero() {
   return (
-    <header className="relative min-h-screen w-full overflow-hidden">
+    <header className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
       <a href="#main-content" className="skip-link">Saltar al contenido principal</a>
 
-      {/* Background */}
+      {/* ── Poster — protagonist ── */}
       <img
-        alt="Festival NATUR 2026 — Primer Festival de Turismo Sostenible de Colombia"
-        className="absolute h-full w-full object-cover inset-0"
-        src="/lovable-uploads/96c8e76d-00c8-4cd5-b263-4b779aa85181.jpg"
+        src={posterImg}
+        alt="Festival NATUR 2026 — Primer Festival Nacional de Turismo Responsable y Sostenible"
+        className="absolute inset-0 w-full h-full object-cover object-top"
+        style={{ filter: "brightness(0.96)" }}
       />
-      <div className="absolute inset-0 bg-black/35" />
 
-      {/* Content */}
-      <div id="main-content" className="relative z-10 flex items-center justify-center min-h-screen px-6 pt-20">
-        <div className="text-center flex flex-col items-center gap-10">
-          {/* Logo */}
-          <img
-            src={Festival_NATUR}
-            alt="Festival NATUR 2026"
-            className="w-full h-auto"
-            style={{ maxWidth: "480px" }}
-          />
+      {/* Subtle gradient only at bottom so CTA is readable */}
+      <div
+        className="absolute inset-x-0 bottom-0"
+        style={{
+          height: "45%",
+          background: "linear-gradient(to top, rgba(26,74,30,0.92) 0%, rgba(26,74,30,0.5) 50%, transparent 100%)",
+        }}
+      />
 
-          {/* Single CTA */}
-          <Link to="/tickets">
-            <Button
-              size="lg"
-              className="text-black font-bold text-base sm:text-lg px-10 py-5 rounded-none shadow-xl hover:opacity-90 transition-opacity"
-              style={{
-                backgroundColor: "#cad95e",
-                fontFamily: "Unbounded, sans-serif",
-                fontWeight: "600",
-                letterSpacing: "0.1em",
-              }}
-            >
-              <Ticket className="w-5 h-5 mr-2" />
-              COMPRAR ENTRADAS
-            </Button>
-          </Link>
+      {/* ── Content pinned to bottom ── */}
+      <div
+        id="main-content"
+        className="relative z-10 flex flex-col items-center justify-end px-6 pb-14 sm:pb-20"
+        style={{ minHeight: "100svh" }}
+      >
+        {/* Date badge */}
+        <p
+          className="text-xs tracking-[0.35em] uppercase mb-5 font-bold"
+          style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
+        >
+          14 y 15 de agosto · Kinder, Bogotá
+        </p>
 
-          {/* Sub info */}
-          <p className="text-white/60 text-sm tracking-wider uppercase">
-            14 y 15 de agosto · Kinder, Bogotá
-          </p>
+        {/* CTA */}
+        <Link to="/tickets">
+          <button
+            className="flex items-center gap-2 font-gasoek text-base sm:text-lg uppercase tracking-wider px-12 py-5 shadow-2xl hover:opacity-90 transition-opacity"
+            style={{
+              background: "#cad95e",
+              color: "#191C0F",
+              letterSpacing: "0.12em",
+            }}
+          >
+            <Ticket className="w-5 h-5" />
+            COMPRAR ENTRADAS
+          </button>
+        </Link>
+
+        {/* Scroll hint */}
+        <div className="mt-10 flex flex-col items-center gap-2 opacity-50">
+          <span className="text-white text-xs tracking-widest uppercase">Scroll</span>
+          <div className="w-px h-8 bg-white/40" />
         </div>
       </div>
     </header>
