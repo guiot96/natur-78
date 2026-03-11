@@ -117,43 +117,37 @@ export function HeaderButtons({
         {isMenuOpen && (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0, y: -12 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed top-16 sm:top-18 left-0 right-0 z-40 bg-[#191C0F]/97 backdrop-blur-xl border-b border-white/10 shadow-2xl xl:hidden"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed top-16 left-0 right-0 z-40 bg-[#191C0F]/98 backdrop-blur-xl border-b border-white/10 shadow-xl xl:hidden"
           >
-            <nav className="flex flex-col divide-y divide-white/5 max-h-[calc(100vh-70px)] overflow-y-auto">
+            <nav className="flex flex-col items-center py-4 gap-0.5 max-h-[calc(100vh-70px)] overflow-y-auto">
               {NAV_ITEMS.map((item) => (
-                <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)}>
+                <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="w-full">
                   <button
-                    className={`w-full text-left px-6 py-4 text-base font-gasoek tracking-widest uppercase transition-colors duration-150 ${
+                    className={`w-full text-center px-4 py-2.5 text-sm font-gasoek tracking-wide uppercase transition-colors duration-150 rounded ${
                       isActive(item.href)
-                        ? "text-[#cad95e] bg-white/5"
-                        : "text-white/80 hover:text-[#cad95e] hover:bg-white/5"
-                    } ${item.href === "/portal-empresas" ? "text-[#cad95e]" : ""}`}
+                        ? "text-[#cad95e]"
+                        : item.href === "/portal-empresas"
+                        ? "text-[#cad95e]/80 hover:text-[#cad95e]"
+                        : "text-white/70 hover:text-white"
+                    }`}
                   >
                     {item.label}
                   </button>
                 </Link>
               ))}
 
-              {/* Mobile CTA */}
-              <div className="px-6 py-5">
+              {/* CTA */}
+              <div className="w-full px-8 pt-3 pb-4 mt-1 border-t border-white/10">
                 <Link to="/tickets" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full bg-[#cad95e] hover:bg-[#b8c94d] text-black font-bold tracking-wide uppercase rounded-none font-gasoek text-sm py-3">
-                    <Ticket className="w-4 h-4 mr-2" />
+                  <Button className="w-full bg-[#cad95e] hover:bg-[#b8c94d] text-black font-bold tracking-wide uppercase rounded-none font-gasoek text-xs py-2.5">
+                    <Ticket className="w-3.5 h-3.5 mr-2" />
                     COMPRAR ENTRADAS
                   </Button>
                 </Link>
-              </div>
-
-              {/* Social links */}
-              <div className="px-6 py-4 flex gap-4 text-white/50 text-xs">
-                <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-[#cad95e] transition-colors">Instagram</a>
-                <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[#cad95e] transition-colors">Facebook</a>
-                <a href="https://tiktok.com" target="_blank" rel="noreferrer" className="hover:text-[#cad95e] transition-colors">TikTok</a>
-                <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-[#cad95e] transition-colors">YouTube</a>
               </div>
             </nav>
           </motion.div>
