@@ -1,0 +1,464 @@
+Checklist Desarrollo Web
+Festival NATUR
+1. Objetivo General
+
+ Definir objetivo del sitio web
+
+ Plataforma oficial del festival
+
+ Sistema de venta de entradas
+
+ Información del festival
+
+ Registro de patrocinadores y stands
+
+ Difusión de contenidos
+
+ Posicionamiento digital del festival
+
+2. Estructura Principal del Sitio
+Menú principal
+
+ HOME
+
+ ENTRADAS
+
+ AGENDA
+
+ ¿QUÉ VAS A ENCONTRAR?
+
+ HISTORIAS NATUR
+
+ NOSOTROS
+
+ CONTACTO
+
+ PORTAL EMPRESAS
+
+Requerimientos globales
+
+ Logo dirige siempre a HOME
+
+ Menú visible en todo momento
+
+ Responsive completo
+
+ Desktop
+
+ Tablet
+
+ Mobile
+
+ Integración pasarela de pago
+
+ Integración SendGrid
+
+3. Secciones a Eliminar
+
+Eliminar completamente:
+
+ Portal Viajeros
+
+ Portal Personas
+
+ Premio NATUR
+
+Eliminar también:
+
+ Páginas relacionadas
+
+ Links internos
+
+ Imágenes
+
+ PDFs
+
+ Textos
+
+ Base de datos asociada
+
+4. HOME — Estructura
+Hero
+
+ Imagen o video principal
+
+ Botón COMPRAR ENTRADAS
+
+¿Qué vas a encontrar?
+
+Subsecciones:
+
+ Agenda Académica
+
+ Nuestra rumba y sus manifestaciones
+
+ Historias transformadoras del turismo sostenible
+
+ Botón DESCUBRIR
+
+Entradas
+
+ Sección resumen visual
+
+ Botón COMPRAR
+
+Reserva tu Stand
+
+ Texto de convocatoria
+
+ Botón RESERVAR STAND
+
+Historias
+
+ Preview de artículos
+
+ Botón VER HISTORIAS
+
+Aliados
+
+ Grid de logos
+
+ Categoría aliados principales
+
+ Categoría patrocinadores
+
+ Categoría emprendimientos
+
+ Categoría institucionales
+
+Contacto
+
+ Formulario rápido
+
+5. Página Entradas
+Entrada 1 día
+
+ Precio: 50.000 COP
+
+ Charlas
+
+ Conciertos
+
+ Feria
+
+ Experiencias
+
+Entrada 2 días
+
+ Precio: 70.000 COP
+
+ Acceso completo
+
+ Todas las actividades
+
+ Zona especial
+
+Elementos adicionales
+
+ Poster oficial
+
+ PDF informativo
+
+6. Pasarela de Pago
+
+Integraciones
+
+ Stripe
+
+ Wompi
+
+ MercadoPago
+
+ ePayco
+
+Métodos de pago
+
+ Tarjeta
+
+ PSE
+
+ Nequi
+
+ Daviplata
+
+Automatización
+
+ Confirmación automática de compra
+
+ Envío de email
+
+7. Página Agenda
+
+Día 1
+
+ Horario
+
+ Artista
+
+ Actividad
+
+Día 2
+
+ Horario
+
+ Artista
+
+ Actividad
+
+8. Página ¿Qué vas a encontrar?
+
+Secciones:
+
+ Agenda académica
+
+ Nuestra rumba
+
+ Historias transformadoras
+
+9. Página Nosotros
+
+Contenido
+
+ Texto institucional
+
+ Historia del festival
+
+ Propósito
+
+ Visión
+
+10. Página Historias NATUR
+
+Formato blog
+
+ Artículos
+
+ Entrevistas
+
+ Experiencias
+
+11. Página Contacto
+
+Formulario
+
+ Nombre
+
+ Email
+
+ Teléfono
+
+ Mensaje
+
+Email destino
+
+ info@festivalnatur.com
+
+12. Portal Empresas
+
+Página exclusiva para:
+
+ Patrocinadores
+
+ Stands
+
+ Aliados
+
+Formulario empresas
+
+ Información empresa
+
+ Contacto
+
+ Tipo de participación
+
+ Presupuesto
+
+ Sostenibilidad
+
+ Logística
+
+ Material
+
+ Mensaje
+
+Automatización
+
+ Integración SendGrid
+
+ Email automático
+
+ Confirmación al usuario
+
+13. Sección Reserva tu Stand
+
+Formulario
+
+ Marca
+
+ Contacto
+
+ Email
+
+ Teléfono
+
+ Mensaje
+
+14. Sección Aliados
+
+ Grid responsive
+
+ Logos en SVG o PNG
+
+ Links opcionales
+
+15. Footer
+
+Elementos
+
+ Logo
+
+ Menú completo
+
+Menú footer
+
+ Home
+
+ Entradas
+
+ Agenda
+
+ Qué vas a encontrar
+
+ Historias
+
+ Nosotros
+
+ Contacto
+
+ Portal Empresas
+
+Contacto
+
+ Email
+
+ WhatsApp
+
+ Ciudad
+
+Redes
+
+ Instagram
+
+ Facebook
+
+ YouTube
+
+ TikTok
+
+Legal
+
+ Política de privacidad
+
+ Términos
+
+ Copyright
+
+16. Textos B2C — Tribu
+
+ Conecta con personas que ven el mundo diferente
+
+ Vive experiencias
+
+ Descubre nuevas formas de vivir
+
+ Sé parte del cambio
+
+17. Contenidos a Subir
+
+ Poster oficial
+
+ PDF entradas
+
+ PDF programación
+
+ Logos aliados
+
+ Fotos
+
+ Videos
+
+18. Funcionalidades Técnicas
+
+ Responsive completo
+
+ Optimización de velocidad
+
+ SEO básico
+
+ Integración pagos
+
+ Integración email
+
+ Formularios funcionales
+
+19. Diseño
+
+Estilo visual
+
+ Premium
+
+ Natural
+
+ Editorial
+
+ Contemporáneo
+
+ Inspirado en festivales internacionales
+
+20. Checklist Final
+
+ Eliminar Portal Viajeros
+
+ Eliminar Portal Personas
+
+ Eliminar Premio NATUR
+
+ Crear Home
+
+ Crear Entradas
+
+ Crear Agenda
+
+ Crear Qué vas a encontrar
+
+ Crear Nosotros
+
+ Crear Historias
+
+ Crear Contacto
+
+ Crear Portal Empresas
+
+ Crear sección Stands
+
+ Crear sección Aliados
+
+ Crear Footer
+
+ Integrar pagos
+
+ Integrar SendGrid
+
+ Subir contenidos
+
+Resultado final
+
+ Plataforma oficial del festival
+
+ Sistema de venta de entradas
+
+ Portal comercial
+
+ Portal informativo
+
+ Sitio institucional
