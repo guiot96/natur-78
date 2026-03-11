@@ -1,214 +1,291 @@
-import React, { useState } from 'react';
 import { Link } from 'wouter';
-import { Calendar, MapPin, Ticket, Mail, Leaf, Mic, Music, Store, Sparkles, Check } from 'lucide-react';
+import { Ticket, Mic, Music, Store, Sparkles, Check, MapPin, ArrowRight } from 'lucide-react';
 import { HeaderButtons } from '@/components/layout/HeaderButtons';
-import posterImg from '@assets/WhatsApp_Image_2026-03-10_at_9.37.22_PM_1773257877040.jpeg';
+import portraitImg from '@assets/WhatsApp_Image_2026-03-10_at_10.00.13_PM_1773257287514.jpeg';
+import landscapeImg from '@assets/WhatsApp_Image_2026-03-10_at_9.37.22_PM_1773257877040.jpeg';
 
 const P = {
-  dark: '#191C0F', darkGreen: '#1a4a1e', midGreen: '#2d7a32',
-  lime: '#cad95e', yellow: '#f5e03a', cream: '#FCF8EE',
+  dark:      '#191C0F',
+  darkGreen: '#1a4a1e',
+  midGreen:  '#2d7a32',
+  lime:      '#cad95e',
+  yellow:    '#f5e03a',
+  cream:     '#FCF8EE',
+  rose:      '#f2c4c8',
+  roseDeep:  '#c45870',
 };
 
-function TicketBand({ accent, label }: { accent: string; label: string }) {
-  return (
-    <div className="relative overflow-hidden px-8 py-6 flex items-end justify-between"
-      style={{ background: P.darkGreen, minHeight: '110px' }}>
-      <div className="absolute -top-8 -right-8 w-36 h-36 rounded-full opacity-10" style={{ background: accent }} />
-      <div className="absolute -bottom-6 right-16 w-20 h-20 rounded-full opacity-10" style={{ background: accent }} />
-      <div className="absolute top-3 right-4 opacity-20">
-        <Leaf className="w-10 h-10" style={{ color: accent }} />
-      </div>
-      <div>
-        <p className="text-xs tracking-[0.3em] uppercase mb-1 font-bold"
-          style={{ color: accent, opacity: 0.7, fontFamily: 'Unbounded, sans-serif' }}>
-          Festival NATUR 2026
-        </p>
-        <p className="font-gasoek text-3xl uppercase text-white leading-none">{label}</p>
-      </div>
-      <div className="text-right">
-        <div className="inline-block px-3 py-1" style={{ background: accent }}>
-          <span className="text-xs font-bold uppercase tracking-widest" style={{ color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>14 y 15 AGO</span>
-        </div>
-        <p className="text-white/40 text-xs mt-1">Kinder · Bogotá</p>
-      </div>
-    </div>
-  );
-}
-
-interface TicketProps {
-  id: string; name: string; subtitle: string; price: string; badge?: string;
-  features: { icon: React.ElementType; text: string }[];
-  selected: boolean; onSelect: () => void;
-  accent: string; label: string;
-}
-
-function TicketCard({ id, name, subtitle, price, badge, features, selected, onSelect, accent, label }: TicketProps) {
-  return (
-    <div onClick={onSelect} className="relative cursor-pointer transition-all duration-300 hover:-translate-y-1"
-      style={{ boxShadow: selected ? `0 0 0 3px ${accent}, 0 24px 60px rgba(0,0,0,0.18)` : '0 4px 24px rgba(0,0,0,0.10)' }}>
-      {badge && (
-        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 text-[11px] font-bold tracking-widest px-5 py-1 uppercase"
-          style={{ background: P.yellow, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>
-          {badge}
-        </div>
-      )}
-      <TicketBand accent={accent} label={label} />
-      {/* Perforated line */}
-      <div className="relative flex items-center" style={{ background: P.dark }}>
-        <div className="w-5 h-5 rounded-full absolute -left-2.5" style={{ background: P.cream }} />
-        <div className="flex-1 mx-5 border-t-2 border-dashed" style={{ borderColor: `${accent}30` }} />
-        <div className="w-5 h-5 rounded-full absolute -right-2.5" style={{ background: P.cream }} />
-      </div>
-      {/* Body */}
-      <div className="px-8 py-6 flex flex-col gap-5" style={{ background: P.dark }}>
-        <div className="flex items-start justify-between">
-          <div>
-            <h2 className="font-gasoek text-4xl sm:text-5xl uppercase leading-none" style={{ color: accent }}>{name}</h2>
-            <p className="text-sm mt-1 font-unbounded font-extralight" style={{ color: 'rgba(255,255,255,0.4)' }}>{subtitle}</p>
-          </div>
-          <div className="text-right">
-            <p className="font-gasoek text-4xl sm:text-5xl leading-none" style={{ color: accent }}>${price}</p>
-            <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>COP</p>
-          </div>
-        </div>
-        <ul className="space-y-2.5">
-          {features.map((f, i) => (
-            <li key={i} className="flex items-center gap-3 text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
-              <f.icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: accent }} />
-              {f.text}
-            </li>
-          ))}
-        </ul>
-        <div className="flex gap-1">
-          {Array.from({ length: 30 }).map((_, i) => (
-            <div key={i} className="flex-1 h-px" style={{ background: `${accent}20` }} />
-          ))}
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.2)', letterSpacing: '0.15em' }}>
-            NATUR-2026-{id.toUpperCase()}
-          </span>
-          <div className="flex gap-0.5">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="w-1.5 rounded-sm" style={{ height: `${8 + (i % 3) * 4}px`, background: accent, opacity: 0.3 + (i % 4) * 0.2 }} />
-            ))}
-          </div>
-        </div>
-        <button className="w-full py-4 text-sm font-bold uppercase tracking-wider hover:opacity-85 flex items-center justify-center gap-2 transition-opacity"
-          style={{ background: accent, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>
-          <Ticket className="w-4 h-4" />
-          COMPRAR ENTRADA
-        </button>
-      </div>
-    </div>
-  );
-}
-
 export default function Tickets() {
-  const [selected, setSelected] = useState<string | null>(null);
-
-  const tickets = [
-    {
-      id: 'un-dia', name: '1 DÍA', label: '1 DÍA', subtitle: 'Elige el día que prefieras', price: '50.000',
-      accent: P.lime,
-      features: [
-        { icon: Mic,      text: 'Charlas y conferencias magistrales' },
-        { icon: Music,    text: 'Conciertos y música en vivo' },
-        { icon: Store,    text: 'Feria de emprendimientos sostenibles' },
-        { icon: Sparkles, text: 'Experiencias y actividades culturales' },
-      ],
-    },
-    {
-      id: 'dos-dias', name: '2 DÍAS', label: '2 DÍAS', subtitle: 'Acceso completo al festival', price: '70.000',
-      badge: 'RECOMENDADO',
-      accent: P.yellow,
-      features: [
-        { icon: Check,    text: 'Acceso completo ambos días' },
-        { icon: Mic,      text: 'Toda la programación cultural' },
-        { icon: Sparkles, text: 'Zona especial y networking' },
-        { icon: Music,    text: 'Experiencias premium + rumba nocturna' },
-      ],
-    },
-  ];
-
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: P.cream }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: P.dark }}>
       <HeaderButtons />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-16" style={{ background: P.darkGreen }}>
-        <img src={posterImg} alt="Festival NATUR 2026"
-          className="absolute inset-0 w-full h-full object-cover opacity-20" />
-        <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, rgba(26,74,30,0.5) 0%, rgba(26,74,30,0.96) 75%)' }} />
-        <div className="relative z-10 text-center px-6 py-16 sm:py-24">
-          <p className="text-xs tracking-[0.35em] uppercase mb-4 font-bold"
-            style={{ color: P.lime, fontFamily: 'Unbounded, sans-serif' }}>
-            Festival Nacional de Turismo Sostenible
-          </p>
-          <h1 className="font-gasoek text-6xl sm:text-7xl md:text-8xl uppercase leading-none mb-2 text-white">
-            ENTRADAS
-          </h1>
-          <p className="font-unbounded font-extralight text-xl sm:text-2xl mb-5" style={{ color: 'rgba(255,255,255,0.6)' }}>
-            Elige tu experiencia y vive el festival
-          </p>
-          <h2 className="font-gasoek text-2xl sm:text-3xl uppercase" style={{ color: P.lime }}>NATUR 2026</h2>
-          <div className="mt-6 flex items-center justify-center gap-3 flex-wrap">
-            <span className="text-xs font-bold uppercase tracking-wider px-4 py-1.5"
-              style={{ background: P.yellow, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>
-              14 Y 15 AGOSTO
+      {/* 6-CELL EDITORIAL GRID */}
+      <main className="pt-14 grid grid-cols-1 md:grid-cols-3 grid-rows-auto">
+
+        {/* ─── CELL 1 — Dark green, NATUR identity ─── */}
+        <div
+          className="relative flex flex-col justify-between p-10 min-h-[56vw] md:min-h-[46vw]"
+          style={{ background: P.darkGreen }}
+        >
+          <div>
+            <span
+              className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-6 px-3 py-1"
+              style={{ background: P.lime, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Festival Nacional
             </span>
-            <span className="text-white/40">·</span>
-            <span className="text-white/55 text-sm">Kinder, Chapinero, Bogotá</span>
+            <h1
+              className="font-gasoek text-[13vw] md:text-[5.5vw] uppercase leading-none text-white"
+            >
+              NATUR
+            </h1>
+            <p
+              className="font-unbounded font-extralight text-[4vw] md:text-[1.4vw] mt-2 leading-snug"
+              style={{ color: 'rgba(255,255,255,0.45)' }}
+            >
+              Turismo Sostenible
+            </p>
+          </div>
+          <div className="space-y-1">
+            <p
+              className="font-gasoek text-[8vw] md:text-[3.5vw] uppercase leading-none"
+              style={{ color: P.lime }}
+            >
+              14 y 15
+            </p>
+            <p
+              className="text-xs uppercase tracking-widest"
+              style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Agosto 2026
+            </p>
+            <div className="flex items-center gap-1 mt-2">
+              <MapPin className="w-3 h-3" style={{ color: 'rgba(255,255,255,0.35)' }} />
+              <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                Kinder · Chapinero · Bogotá
+              </span>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* Cards */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-10">
-          {tickets.map((t) => (
-            <TicketCard key={t.id} {...t} selected={selected === t.id} onSelect={() => setSelected(t.id)} />
-          ))}
+        {/* ─── CELL 2 — Festival portrait photo ─── */}
+        <div className="relative overflow-hidden min-h-[60vw] md:min-h-[46vw]">
+          <img
+            src={portraitImg}
+            alt="Festival NATUR 2026"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(25,28,15,0.55) 100%)' }}
+          />
+          <div className="absolute bottom-8 left-8">
+            <span
+              className="inline-block text-[10px] tracking-[0.25em] uppercase font-bold px-3 py-1"
+              style={{ background: P.rose, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Turismo · Cultura
+            </span>
+          </div>
         </div>
 
-        {/* Info strip */}
-        <div className="max-w-4xl mx-auto mt-10 grid sm:grid-cols-3 gap-1">
-          {[
-            { icon: Calendar, label: 'Fechas', value: '14 y 15 de agosto, 2026' },
-            { icon: MapPin,   label: 'Sede',   value: 'Kinder · Calle 59 #6-21, Bogotá' },
-            { icon: Ticket,   label: 'Cupos',  value: 'Limitados — reserva ya' },
-          ].map((item) => (
-            <div key={item.label} className="px-6 py-5 flex items-start gap-4" style={{ background: P.darkGreen }}>
-              <item.icon className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: P.lime }} />
-              <div>
-                <p className="text-xs uppercase tracking-wider font-bold mb-0.5"
-                  style={{ color: P.lime, opacity: 0.6, fontFamily: 'Unbounded, sans-serif' }}>
-                  {item.label}
-                </p>
-                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.8)' }}>{item.value}</p>
+        {/* ─── CELL 3 — Yellow, 2-DÍAS ticket ─── */}
+        <div
+          className="relative flex flex-col justify-between p-10 min-h-[56vw] md:min-h-[46vw]"
+          style={{ background: P.yellow }}
+        >
+          <div>
+            <span
+              className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-6 px-3 py-1"
+              style={{ background: P.dark, color: P.yellow, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Recomendado
+            </span>
+            <h2 className="font-gasoek text-[13vw] md:text-[5.5vw] uppercase leading-none" style={{ color: P.dark }}>
+              2 DÍAS
+            </h2>
+            <p
+              className="font-unbounded font-extralight text-[3.5vw] md:text-[1.3vw] mt-1"
+              style={{ color: 'rgba(25,28,15,0.55)' }}
+            >
+              Acceso completo al festival
+            </p>
+          </div>
+          <div className="space-y-5">
+            <div>
+              <div className="flex items-baseline gap-1">
+                <span className="font-gasoek text-[11vw] md:text-[4.5vw] leading-none" style={{ color: P.dark }}>
+                  $70.000
+                </span>
+                <span className="text-xs font-bold" style={{ color: 'rgba(25,28,15,0.45)', fontFamily: 'Unbounded, sans-serif' }}>
+                  COP
+                </span>
               </div>
+              <ul className="mt-3 space-y-1.5">
+                {[
+                  'Toda la programación ambos días',
+                  'Conciertos y rumba nocturna',
+                  'Zona networking premium',
+                  'Feria de emprendimientos',
+                ].map((f) => (
+                  <li key={f} className="flex items-center gap-2 text-[3vw] md:text-xs" style={{ color: 'rgba(25,28,15,0.7)' }}>
+                    <Check className="w-3 h-3 flex-shrink-0" style={{ color: P.dark }} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
+            <a
+              href="mailto:info@festivalnatur.com?subject=Entrada 2 Días Festival NATUR 2026"
+              className="flex items-center justify-between w-full px-5 py-4 font-bold text-xs uppercase tracking-wider hover:opacity-85 transition-opacity"
+              style={{ background: P.dark, color: P.yellow, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              <span className="flex items-center gap-2">
+                <Ticket className="w-3.5 h-3.5" />
+                Comprar entrada
+              </span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
-      </section>
 
-      {/* Dudas CTA */}
-      <section className="py-16 px-6 text-center" style={{ background: P.darkGreen }}>
-        <h2 className="font-unbounded font-extralight text-3xl sm:text-4xl mb-2 text-white">¿Tienes dudas?</h2>
-        <p className="mb-8 max-w-md mx-auto text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
-          Escríbenos y te ayudamos a elegir la opción perfecta para ti.
-        </p>
-        <a href="mailto:info@festivalnatur.com"
-          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider px-10 py-4 hover:opacity-90 transition-opacity"
-          style={{ background: P.lime, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>
-          <Mail className="w-4 h-4" />
-          info@festivalnatur.com
-        </a>
-      </section>
+        {/* ─── CELL 4 — Landscape festival photo ─── */}
+        <div className="relative overflow-hidden min-h-[60vw] md:min-h-[46vw]">
+          <img
+            src={landscapeImg}
+            alt="Festival NATUR — Experiencias"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to top, rgba(25,28,15,0.6) 0%, transparent 60%)' }}
+          />
+          <div className="absolute bottom-8 left-8 right-8">
+            <p
+              className="text-[3vw] md:text-xs uppercase tracking-widest"
+              style={{ color: 'rgba(255,255,255,0.55)', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              @ Kinder · Calle 59 #6-21
+            </p>
+          </div>
+        </div>
 
-      <footer className="py-6 text-center text-xs" style={{ background: P.dark, color: 'rgba(255,255,255,0.3)' }}>
-        © {new Date().getFullYear()} Festival NATUR · Todos los derechos reservados
+        {/* ─── CELL 5 — Rose/Pink, 1-DÍA ticket ─── */}
+        <div
+          className="relative flex flex-col justify-between p-10 min-h-[56vw] md:min-h-[46vw]"
+          style={{ background: P.rose }}
+        >
+          <div>
+            <span
+              className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-6 px-3 py-1"
+              style={{ background: P.roseDeep, color: 'white', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Un día
+            </span>
+            <h2 className="font-gasoek text-[13vw] md:text-[5.5vw] uppercase leading-none" style={{ color: P.dark }}>
+              1 DÍA
+            </h2>
+            <p
+              className="font-unbounded font-extralight text-[3.5vw] md:text-[1.3vw] mt-1"
+              style={{ color: 'rgba(25,28,15,0.55)' }}
+            >
+              Elige el día que más te llame
+            </p>
+          </div>
+          <div className="space-y-5">
+            <div>
+              <div className="flex items-baseline gap-1">
+                <span className="font-gasoek text-[11vw] md:text-[4.5vw] leading-none" style={{ color: P.dark }}>
+                  $50.000
+                </span>
+                <span className="text-xs font-bold" style={{ color: 'rgba(25,28,15,0.45)', fontFamily: 'Unbounded, sans-serif' }}>
+                  COP
+                </span>
+              </div>
+              <ul className="mt-3 space-y-1.5">
+                {[
+                  'Charlas y conferencias magistrales',
+                  'Conciertos y música en vivo',
+                  'Feria de emprendimientos',
+                  'Experiencias culturales',
+                ].map((f) => (
+                  <li key={f} className="flex items-center gap-2 text-[3vw] md:text-xs" style={{ color: 'rgba(25,28,15,0.7)' }}>
+                    <Check className="w-3 h-3 flex-shrink-0" style={{ color: P.roseDeep }} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <a
+              href="mailto:info@festivalnatur.com?subject=Entrada 1 Día Festival NATUR 2026"
+              className="flex items-center justify-between w-full px-5 py-4 font-bold text-xs uppercase tracking-wider hover:opacity-85 transition-opacity"
+              style={{ background: P.dark, color: P.rose, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              <span className="flex items-center gap-2">
+                <Ticket className="w-3.5 h-3.5" />
+                Comprar entrada
+              </span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+
+        {/* ─── CELL 6 — Cream, festival details + CTA ─── */}
+        <div
+          className="relative flex flex-col justify-between p-10 min-h-[56vw] md:min-h-[46vw]"
+          style={{ background: P.cream }}
+        >
+          <div>
+            <span
+              className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-6 px-3 py-1"
+              style={{ background: P.midGreen, color: 'white', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Info · Venue
+            </span>
+            <h3 className="font-gasoek text-[8vw] md:text-[3vw] uppercase leading-tight" style={{ color: P.darkGreen }}>
+              Kinder<br />Chapinero
+            </h3>
+            <p
+              className="font-unbounded font-extralight text-[3.5vw] md:text-[1.2vw] mt-2 leading-relaxed"
+              style={{ color: 'rgba(25,28,15,0.5)' }}
+            >
+              Calle 59 #6-21<br />Bogotá, Colombia
+            </p>
+          </div>
+          <div className="space-y-4">
+            <p className="text-[3vw] md:text-xs leading-relaxed" style={{ color: 'rgba(25,28,15,0.6)' }}>
+              El primer festival nacional de turismo sostenible conecta viajeros, empresas y comunidades con el futuro del planeta.
+            </p>
+            <div className="flex flex-col gap-2">
+              <a
+                href="mailto:info@festivalnatur.com"
+                className="text-[3vw] md:text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:gap-3 transition-all"
+                style={{ color: P.midGreen, fontFamily: 'Unbounded, sans-serif' }}
+              >
+                <ArrowRight className="w-3.5 h-3.5" />
+                info@festivalnatur.com
+              </a>
+              <Link
+                href="/contacto"
+                className="text-[3vw] md:text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:gap-3 transition-all"
+                style={{ color: P.roseDeep, fontFamily: 'Unbounded, sans-serif' }}
+              >
+                <ArrowRight className="w-3.5 h-3.5" />
+                Más información
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Thin footer */}
+      <footer
+        className="py-5 px-10 flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] uppercase tracking-[0.25em]"
+        style={{ background: P.dark, color: 'rgba(255,255,255,0.2)', fontFamily: 'Unbounded, sans-serif' }}
+      >
+        <span>© 2026 Festival NATUR</span>
+        <span>Cupos limitados · Reserva ya</span>
       </footer>
     </div>
   );
