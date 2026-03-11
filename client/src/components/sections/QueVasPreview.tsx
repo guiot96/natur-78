@@ -150,7 +150,7 @@ export function QueVasPreview() {
           <p className="text-[9px] uppercase tracking-[0.35em] font-bold" style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}>
             Conferencistas &amp; Ponentes
           </p>
-          <p className="font-gasoek text-3xl md:text-5xl uppercase leading-tight text-white max-w-xs">
+          <p className="font-unbounded font-extralight text-xl md:text-3xl uppercase leading-snug tracking-wide text-white max-w-xs">
             Expertos Nacionales e Internacionales
           </p>
         </div>

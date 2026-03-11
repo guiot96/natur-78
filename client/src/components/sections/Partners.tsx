@@ -16,8 +16,8 @@ export function Partners() {
 
       {/* ── Header strip ── */}
       <div className="flex items-center justify-between px-8 md:px-14 py-5 border-b border-black/10">
-        <span className="font-gasoek uppercase leading-none"
-          style={{ fontSize: "clamp(1.4rem, 5vw, 3.5rem)", color: "#191C0F" }}>
+        <span className="font-unbounded font-bold uppercase leading-none tracking-tight"
+          style={{ fontSize: "clamp(1.1rem, 3.8vw, 2.4rem)", color: "#191C0F" }}>
           NUESTROS ALIADOS
         </span>
         <span className="text-[9px] uppercase tracking-widest hidden md:block"

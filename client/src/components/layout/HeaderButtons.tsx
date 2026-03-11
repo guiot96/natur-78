@@ -123,18 +123,18 @@ export function HeaderButtons({}: HeaderButtonsProps) {
           style={{ background: '#191C0F', paddingTop: '56px' }}
         >
           {/* Nav list */}
-          <nav className="flex-1 flex flex-col justify-center px-8 sm:px-16 py-10 max-w-3xl mx-auto w-full">
+          <nav className="flex-1 flex flex-col justify-center px-7 sm:px-16 py-6 sm:py-10 max-w-3xl mx-auto w-full">
             {NAV.map((item, i) => {
               const active = isActive(item.href);
               return (
                 <Link key={item.href} to={item.href} onClick={() => setOpen(false)}>
                   <div
-                    className="group flex items-baseline gap-5 sm:gap-8 py-4 sm:py-5 border-b cursor-pointer transition-all duration-150"
+                    className="group flex items-center gap-4 sm:gap-8 py-[10px] sm:py-5 border-b cursor-pointer transition-all duration-150"
                     style={{ borderColor: 'rgba(255,255,255,0.07)' }}
                   >
                     {/* Number */}
                     <span
-                      className="text-xs w-6 text-right flex-shrink-0 tabular-nums transition-colors"
+                      className="text-[9px] w-5 text-right flex-shrink-0 tabular-nums transition-colors"
                       style={{
                         fontFamily: 'Unbounded, sans-serif',
                         color: active ? '#cad95e' : 'rgba(255,255,255,0.15)',
@@ -145,11 +145,13 @@ export function HeaderButtons({}: HeaderButtonsProps) {
 
                     {/* Label */}
                     <span
-                      className="font-gasoek uppercase leading-none transition-colors flex-1"
+                      className="uppercase leading-none transition-colors flex-1"
                       style={{
-                        fontSize: 'clamp(2rem, 6vw, 4rem)',
-                        color: active ? '#cad95e' : 'rgba(255,255,255,0.85)',
-                        letterSpacing: '-0.01em',
+                        fontFamily: active ? 'Gasoek One, sans-serif' : 'Unbounded, sans-serif',
+                        fontWeight: active ? 400 : 300,
+                        fontSize: 'clamp(1.1rem, 4.5vw, 3.5rem)',
+                        color: active ? '#cad95e' : 'rgba(255,255,255,0.75)',
+                        letterSpacing: active ? '-0.01em' : '0.02em',
                       }}
                     >
                       {item.label}
@@ -157,7 +159,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
 
                     {/* Arrow */}
                     <span
-                      className="text-lg transition-all duration-150 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0"
+                      className="text-base transition-all duration-150 opacity-0 group-hover:opacity-100"
                       style={{ color: '#cad95e' }}
                     >
                       →

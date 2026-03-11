@@ -44,12 +44,12 @@ export function Location() {
           >
             Sede del festival
           </span>
-          <h2 className="font-gasoek text-[8vw] md:text-[3.8vw] uppercase leading-[0.9] mb-4"
+          <h2 className="font-unbounded font-bold text-[6.5vw] md:text-[2.8vw] uppercase leading-[1.1] tracking-tight mb-4"
             style={{ color: "#191C0F" }}>
             ¿CUÁNDO<br />Y DÓNDE?
           </h2>
           <p
-            className="font-gasoek text-[5vw] md:text-[2.2vw] uppercase leading-tight mb-6"
+            className="font-unbounded font-extralight text-[4vw] md:text-[1.8vw] uppercase leading-snug tracking-widest mb-6"
             style={{ color: "#1a4a1e" }}
           >
             14 y 15 de<br />Agosto 2026
