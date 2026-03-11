@@ -9,8 +9,8 @@ export function EntradasPreview() {
         {/* Title */}
         <div className="text-center mb-12">
           <p
-            className="text-[#cad95e] text-xs tracking-[0.3em] uppercase mb-3 font-bold"
-            style={{ fontFamily: "Unbounded, sans-serif" }}
+            className="text-xs tracking-[0.3em] uppercase mb-3 font-bold"
+            style={{ color: '#cad95e', fontFamily: "Unbounded, sans-serif" }}
           >
             14 y 15 de agosto · Bogotá
           </p>
@@ -22,19 +22,19 @@ export function EntradasPreview() {
         {/* Cards */}
         <div className="grid sm:grid-cols-2 gap-6 mb-10">
           {/* 1 día */}
-          <div className="border border-[#cad95e]/20 p-8 flex flex-col gap-6">
+          <div className="p-8 flex flex-col gap-6" style={{ border: '1px solid rgba(202,217,94,0.25)' }}>
             <div>
-              <p className="text-[#cad95e]/60 text-xs uppercase tracking-widest mb-1">Entrada</p>
+              <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(202,217,94,0.6)' }}>Entrada</p>
               <h3 className="font-gasoek text-3xl text-white uppercase">1 DÍA</h3>
             </div>
             <div className="flex items-baseline gap-1">
-              <span className="font-gasoek text-5xl text-[#cad95e]">$50.000</span>
+              <span className="font-gasoek text-5xl" style={{ color: '#cad95e' }}>$50.000</span>
               <span className="text-white/40 text-sm">COP</span>
             </div>
             <ul className="space-y-2 text-white/70 text-sm flex-1">
               {["Charlas y conferencias", "Conciertos en vivo", "Feria de emprendimientos", "Experiencias sostenibles"].map((f) => (
                 <li key={f} className="flex items-center gap-2">
-                  <span className="w-1 h-1 bg-[#cad95e] rounded-full" />
+                  <span className="w-1 h-1 rounded-full" style={{ background: '#cad95e' }} />
                   {f}
                 </li>
               ))}
@@ -42,22 +42,22 @@ export function EntradasPreview() {
           </div>
 
           {/* 2 días */}
-          <div className="bg-[#cad95e] p-8 flex flex-col gap-6 relative">
-            <div className="absolute top-4 right-4 bg-[#191C0F] text-[#cad95e] text-[10px] font-bold px-3 py-1 font-gasoek uppercase tracking-widest">
+          <div className="p-8 flex flex-col gap-6 relative" style={{ background: '#e87fa0' }}>
+            <div className="absolute top-4 right-4 text-[10px] font-bold px-3 py-1 font-gasoek uppercase tracking-widest" style={{ background: '#f5e03a', color: '#191C0F' }}>
               RECOMENDADO
             </div>
             <div>
-              <p className="text-[#191C0F]/60 text-xs uppercase tracking-widest mb-1">Entrada</p>
-              <h3 className="font-gasoek text-3xl text-[#191C0F] uppercase">2 DÍAS</h3>
+              <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.6)' }}>Entrada</p>
+              <h3 className="font-gasoek text-3xl uppercase" style={{ color: 'white' }}>2 DÍAS</h3>
             </div>
             <div className="flex items-baseline gap-1">
-              <span className="font-gasoek text-5xl text-[#191C0F]">$70.000</span>
-              <span className="text-[#191C0F]/50 text-sm">COP</span>
+              <span className="font-gasoek text-5xl" style={{ color: 'white' }}>$70.000</span>
+              <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>COP</span>
             </div>
-            <ul className="space-y-2 text-[#191C0F]/80 text-sm flex-1">
+            <ul className="space-y-2 text-sm flex-1" style={{ color: 'rgba(255,255,255,0.85)' }}>
               {["Acceso completo ambos días", "Todas las actividades", "Conciertos y programación", "Zona especial y networking"].map((f) => (
                 <li key={f} className="flex items-center gap-2">
-                  <span className="w-1 h-1 bg-[#191C0F] rounded-full" />
+                  <span className="w-1 h-1 rounded-full bg-white" />
                   {f}
                 </li>
               ))}

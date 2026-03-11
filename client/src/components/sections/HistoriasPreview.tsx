@@ -31,23 +31,23 @@ const articles = [
 
 export function HistoriasPreview() {
   return (
-    <section className="w-full bg-[#FCF8EE] py-20 px-6">
+    <section className="w-full py-20 px-6" style={{ background: '#f5e03a' }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
           <div>
             <p
-              className="text-[#6D7A4E] text-xs tracking-[0.3em] uppercase mb-2 font-bold"
-              style={{ fontFamily: "Unbounded, sans-serif" }}
+              className="text-xs tracking-[0.3em] uppercase mb-2 font-bold"
+              style={{ color: '#1a4a1e', fontFamily: "Unbounded, sans-serif" }}
             >
               Blog &amp; artículos
             </p>
-            <h2 className="font-gasoek text-4xl sm:text-5xl text-[#191C0F] uppercase leading-tight">
+            <h2 className="font-gasoek text-4xl sm:text-5xl uppercase leading-tight" style={{ color: '#191C0F' }}>
               HISTORIAS<br />NATUR
             </h2>
           </div>
           <Link to="/historias">
-            <button className="flex items-center gap-2 bg-[#191C0F] text-[#cad95e] font-gasoek text-xs uppercase tracking-wider px-6 py-3 hover:opacity-80 transition-opacity whitespace-nowrap">
+            <button className="flex items-center gap-2 font-gasoek text-xs uppercase tracking-wider px-6 py-3 hover:opacity-80 transition-opacity whitespace-nowrap" style={{ background: '#1a4a1e', color: '#f5e03a' }}>
               <ArrowRight className="w-3.5 h-3.5" />
               VER HISTORIAS
             </button>
@@ -55,21 +55,25 @@ export function HistoriasPreview() {
         </div>
 
         {/* Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#191C0F]/10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: 'rgba(26,74,30,0.15)' }}>
           {articles.map((article) => (
             <Link key={article.slug} to={`/historias/${article.slug}`}>
-              <article className="bg-[#FCF8EE] p-8 flex flex-col h-full min-h-[280px] hover:bg-[#cad95e]/10 transition-colors cursor-pointer group">
+              <article className="p-8 flex flex-col h-full min-h-[280px] cursor-pointer group transition-colors" style={{ background: '#f5e03a' }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#1a4a1e')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#f5e03a')}
+              >
                 <div className="flex items-center justify-between mb-6">
-                  <span className="text-xs font-bold text-[#6D7A4E] uppercase tracking-wider">{article.tag}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#1a4a1e' }}
+                  >{article.tag}</span>
                   <span className="text-3xl">{article.emoji}</span>
                 </div>
-                <h3 className="font-gasoek text-xl text-[#191C0F] uppercase leading-tight mb-3 group-hover:text-[#4a5a20] transition-colors">
+                <h3 className="font-gasoek text-xl uppercase leading-tight mb-3 transition-colors" style={{ color: '#191C0F' }}>
                   {article.title}
                 </h3>
-                <p className="text-sm text-[#191C0F]/60 leading-relaxed flex-1">
+                <p className="text-sm leading-relaxed flex-1" style={{ color: 'rgba(25,28,15,0.65)' }}>
                   {article.excerpt}
                 </p>
-                <div className="mt-6 flex items-center gap-2 text-xs font-bold text-[#6D7A4E] uppercase">
+                <div className="mt-6 flex items-center gap-2 text-xs font-bold uppercase" style={{ color: '#1a4a1e' }}>
                   <ArrowRight className="w-3 h-3" />
                   Leer artículo
                 </div>
