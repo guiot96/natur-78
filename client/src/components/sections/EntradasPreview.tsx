@@ -1,77 +1,239 @@
-import React from "react";
 import { Link } from "wouter";
-import { Ticket } from "lucide-react";
+import { Ticket, MapPin, Check, ArrowRight } from "lucide-react";
+import portraitImg from '@assets/generated_images/natur_grid_portrait.png';
+import landscapeImg from '@assets/generated_images/natur_grid_landscape.png';
+
+const P = {
+  dark:      '#191C0F',
+  darkGreen: '#1a4a1e',
+  midGreen:  '#2d7a32',
+  lime:      '#cad95e',
+  yellow:    '#f5e03a',
+  cream:     '#FCF8EE',
+  rose:      '#f2c4c8',
+  roseDeep:  '#c45870',
+};
 
 export function EntradasPreview() {
   return (
-    <section className="w-full bg-[#191C0F] py-20 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-xs tracking-[0.3em] uppercase mb-3 font-bold"
-            style={{ color: '#cad95e', fontFamily: "Unbounded, sans-serif" }}>
-            14 y 15 de agosto · Bogotá
-          </p>
-          <h2 className="font-unbounded font-extralight text-4xl sm:text-5xl text-white leading-tight">
-            Elige tu entrada
+    <section className="w-full grid grid-cols-1 md:grid-cols-3">
+
+      {/* ─── CELL 1 — Dark green, NATUR identity ─── */}
+      <div
+        className="relative flex flex-col justify-between p-10 min-h-[70vw] md:min-h-[36vw]"
+        style={{ background: P.darkGreen }}
+      >
+        <div>
+          <span
+            className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-5 px-3 py-1"
+            style={{ background: P.lime, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}
+          >
+            Festival Nacional
+          </span>
+          <h2 className="font-gasoek text-[14vw] md:text-[5.5vw] uppercase leading-none text-white">
+            NATUR
           </h2>
+          <p
+            className="font-unbounded font-extralight text-[4vw] md:text-[1.3vw] mt-1"
+            style={{ color: 'rgba(255,255,255,0.4)' }}
+          >
+            Turismo Sostenible
+          </p>
         </div>
-
-        <div className="grid sm:grid-cols-2 gap-6 mb-10">
-          {/* 1 día */}
-          <div className="p-8 flex flex-col gap-6" style={{ border: '1px solid rgba(202,217,94,0.25)' }}>
-            <div>
-              <p className="text-[11px] uppercase tracking-widest mb-1 font-bold"
-                style={{ color: 'rgba(202,217,94,0.55)', fontFamily: 'Unbounded, sans-serif' }}>Entrada</p>
-              <h3 className="font-gasoek text-3xl text-white uppercase">1 DÍA</h3>
-            </div>
-            <div className="flex items-baseline gap-1">
-              <span className="font-gasoek text-5xl" style={{ color: '#cad95e' }}>$50.000</span>
-              <span className="text-white/40 text-sm">COP</span>
-            </div>
-            <ul className="space-y-2 text-white/65 text-sm flex-1">
-              {["Charlas y conferencias", "Conciertos en vivo", "Feria de emprendimientos", "Experiencias sostenibles"].map((f) => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: '#cad95e' }} />{f}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 2 días */}
-          <div className="p-8 flex flex-col gap-6 relative" style={{ background: '#cad95e' }}>
-            <div className="absolute top-4 right-4 text-[10px] font-bold px-3 py-1 uppercase tracking-widest"
-              style={{ background: '#191C0F', color: '#cad95e', fontFamily: 'Unbounded, sans-serif' }}>
-              RECOMENDADO
-            </div>
-            <div>
-              <p className="text-[11px] uppercase tracking-widest mb-1 font-bold"
-                style={{ color: 'rgba(25,28,15,0.5)', fontFamily: 'Unbounded, sans-serif' }}>Entrada</p>
-              <h3 className="font-gasoek text-3xl uppercase" style={{ color: '#191C0F' }}>2 DÍAS</h3>
-            </div>
-            <div className="flex items-baseline gap-1">
-              <span className="font-gasoek text-5xl" style={{ color: '#191C0F' }}>$70.000</span>
-              <span className="text-sm" style={{ color: 'rgba(25,28,15,0.5)' }}>COP</span>
-            </div>
-            <ul className="space-y-2 text-sm flex-1" style={{ color: 'rgba(25,28,15,0.75)' }}>
-              {["Acceso completo ambos días", "Todas las actividades", "Conciertos y programación", "Zona especial y networking"].map((f) => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: '#1a4a1e' }} />{f}
-                </li>
-              ))}
-            </ul>
+        <div className="space-y-1">
+          <p
+            className="font-gasoek text-[9vw] md:text-[3.5vw] uppercase leading-none"
+            style={{ color: P.lime }}
+          >
+            14 y 15
+          </p>
+          <p
+            className="text-[2.5vw] md:text-[0.65rem] uppercase tracking-widest"
+            style={{ color: 'rgba(255,255,255,0.38)', fontFamily: 'Unbounded, sans-serif' }}
+          >
+            Agosto 2026
+          </p>
+          <div className="flex items-center gap-1 pt-1">
+            <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: 'rgba(255,255,255,0.3)' }} />
+            <span className="text-[2.5vw] md:text-[0.65rem]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              Kinder · Chapinero · Bogotá
+            </span>
           </div>
         </div>
+      </div>
 
-        <div className="text-center">
+      {/* ─── CELL 2 — Portrait photo ─── */}
+      <div className="relative overflow-hidden min-h-[70vw] md:min-h-[36vw]">
+        <img
+          src={portraitImg}
+          alt="Festival NATUR — naturaleza"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to bottom, transparent 55%, rgba(25,28,15,0.5) 100%)' }}
+        />
+        <div className="absolute bottom-7 left-8">
+          <span
+            className="inline-block text-[1.8vw] md:text-[0.6rem] tracking-[0.25em] uppercase font-bold px-3 py-1"
+            style={{ background: P.rose, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}
+          >
+            Turismo · Cultura
+          </span>
+        </div>
+      </div>
+
+      {/* ─── CELL 3 — Yellow, 2-DÍAS ─── */}
+      <div
+        className="relative flex flex-col justify-between p-10 min-h-[70vw] md:min-h-[36vw]"
+        style={{ background: P.yellow }}
+      >
+        <div>
+          <span
+            className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-5 px-3 py-1"
+            style={{ background: P.dark, color: P.yellow, fontFamily: 'Unbounded, sans-serif' }}
+          >
+            Recomendado
+          </span>
+          <h3 className="font-gasoek text-[13vw] md:text-[5.5vw] uppercase leading-none" style={{ color: P.dark }}>
+            2 DÍAS
+          </h3>
+          <p
+            className="font-unbounded font-extralight text-[3.5vw] md:text-[1.1vw] mt-1"
+            style={{ color: 'rgba(25,28,15,0.5)' }}
+          >
+            Acceso completo
+          </p>
+        </div>
+        <div className="space-y-4">
+          <div className="flex items-baseline gap-1">
+            <span className="font-gasoek text-[11vw] md:text-[4vw] leading-none" style={{ color: P.dark }}>
+              $70.000
+            </span>
+            <span className="text-[2.5vw] md:text-xs font-bold" style={{ color: 'rgba(25,28,15,0.4)', fontFamily: 'Unbounded, sans-serif' }}>
+              COP
+            </span>
+          </div>
           <Link to="/tickets">
-            <button className="text-sm font-bold uppercase tracking-wider px-12 py-4 hover:opacity-90 transition-colors flex items-center gap-2 mx-auto"
-              style={{ background: '#cad95e', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}>
-              <Ticket className="w-4 h-4" />
-              COMPRAR ENTRADAS
-            </button>
+            <div
+              className="flex items-center justify-between w-full px-5 py-3.5 font-bold text-[2.5vw] md:text-xs uppercase tracking-wider hover:opacity-85 transition-opacity cursor-pointer"
+              style={{ background: P.dark, color: P.yellow, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              <span className="flex items-center gap-2">
+                <Ticket className="w-3.5 h-3.5" />
+                Comprar
+              </span>
+              <ArrowRight className="w-4 h-4" />
+            </div>
           </Link>
         </div>
       </div>
+
+      {/* ─── CELL 4 — Landscape photo ─── */}
+      <div className="relative overflow-hidden min-h-[70vw] md:min-h-[36vw]">
+        <img
+          src={landscapeImg}
+          alt="Festival NATUR — ambiente"
+          className="absolute inset-0 w-full h-full object-cover object-top"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to top, rgba(25,28,15,0.55) 0%, transparent 55%)' }}
+        />
+        <div className="absolute bottom-7 left-8 right-8">
+          <p
+            className="text-[2.5vw] md:text-[0.6rem] uppercase tracking-widest"
+            style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Unbounded, sans-serif' }}
+          >
+            @ Kinder · Calle 59 #6-21
+          </p>
+        </div>
+      </div>
+
+      {/* ─── CELL 5 — Rose, 1-DÍA ─── */}
+      <div
+        className="relative flex flex-col justify-between p-10 min-h-[70vw] md:min-h-[36vw]"
+        style={{ background: P.rose }}
+      >
+        <div>
+          <span
+            className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-5 px-3 py-1"
+            style={{ background: P.roseDeep, color: 'white', fontFamily: 'Unbounded, sans-serif' }}
+          >
+            Un día
+          </span>
+          <h3 className="font-gasoek text-[13vw] md:text-[5.5vw] uppercase leading-none" style={{ color: P.dark }}>
+            1 DÍA
+          </h3>
+          <p
+            className="font-unbounded font-extralight text-[3.5vw] md:text-[1.1vw] mt-1"
+            style={{ color: 'rgba(25,28,15,0.5)' }}
+          >
+            El día que más te llame
+          </p>
+        </div>
+        <div className="space-y-4">
+          <div className="flex items-baseline gap-1">
+            <span className="font-gasoek text-[11vw] md:text-[4vw] leading-none" style={{ color: P.dark }}>
+              $50.000
+            </span>
+            <span className="text-[2.5vw] md:text-xs font-bold" style={{ color: 'rgba(25,28,15,0.4)', fontFamily: 'Unbounded, sans-serif' }}>
+              COP
+            </span>
+          </div>
+          <Link to="/tickets">
+            <div
+              className="flex items-center justify-between w-full px-5 py-3.5 font-bold text-[2.5vw] md:text-xs uppercase tracking-wider hover:opacity-85 transition-opacity cursor-pointer"
+              style={{ background: P.dark, color: P.rose, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              <span className="flex items-center gap-2">
+                <Ticket className="w-3.5 h-3.5" />
+                Comprar
+              </span>
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* ─── CELL 6 — Cream, festival info + CTA ─── */}
+      <div
+        className="relative flex flex-col justify-between p-10 min-h-[70vw] md:min-h-[36vw]"
+        style={{ background: P.cream }}
+      >
+        <div>
+          <span
+            className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-5 px-3 py-1"
+            style={{ background: P.midGreen, color: 'white', fontFamily: 'Unbounded, sans-serif' }}
+          >
+            Venue
+          </span>
+          <h3 className="font-gasoek text-[8vw] md:text-[3vw] uppercase leading-tight" style={{ color: P.darkGreen }}>
+            Kinder<br />Chapinero
+          </h3>
+          <p
+            className="font-unbounded font-extralight text-[3.5vw] md:text-[1.1vw] mt-2"
+            style={{ color: 'rgba(25,28,15,0.45)' }}
+          >
+            Calle 59 #6-21 · Bogotá
+          </p>
+        </div>
+        <div className="space-y-3">
+          <p className="text-[3vw] md:text-xs leading-relaxed" style={{ color: 'rgba(25,28,15,0.55)' }}>
+            El primer festival nacional de turismo sostenible en Colombia.
+          </p>
+          <Link to="/tickets">
+            <div
+              className="inline-flex items-center gap-2 text-[2.5vw] md:text-xs font-bold uppercase tracking-wider hover:gap-3 transition-all cursor-pointer"
+              style={{ color: P.midGreen, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              <ArrowRight className="w-3.5 h-3.5" />
+              Ver todas las entradas
+            </div>
+          </Link>
+        </div>
+      </div>
+
     </section>
   );
 }

@@ -1,8 +1,8 @@
 import { Link } from 'wouter';
 import { Ticket, Mic, Music, Store, Sparkles, Check, MapPin, ArrowRight } from 'lucide-react';
 import { HeaderButtons } from '@/components/layout/HeaderButtons';
-import portraitImg from '@assets/WhatsApp_Image_2026-03-10_at_10.00.13_PM_1773257287514.jpeg';
-import landscapeImg from '@assets/WhatsApp_Image_2026-03-10_at_9.37.22_PM_1773257877040.jpeg';
+import portraitImg from '@assets/generated_images/natur_grid_portrait.png';
+import landscapeImg from '@assets/generated_images/natur_grid_landscape.png';
 
 const P = {
   dark:      '#191C0F',
