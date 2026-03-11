@@ -27,28 +27,25 @@ export function QueVasPreview() {
   return (
     <section className="w-full py-20 px-6" style={{ background: '#FCF8EE' }}>
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
           <div>
-            <p
-              className="text-xs tracking-[0.3em] uppercase mb-2 font-bold"
-              style={{ color: '#2d7a32', fontFamily: "Unbounded, sans-serif" }}
-            >
+            <p className="text-xs tracking-[0.3em] uppercase mb-2 font-bold"
+              style={{ color: '#2d7a32', fontFamily: "Unbounded, sans-serif" }}>
               Festival NATUR 2026
             </p>
-            <h2 className="font-gasoek text-4xl sm:text-5xl uppercase leading-tight" style={{ color: '#191C0F' }}>
-              ¿QUÉ VAS A<br />ENCONTRAR?
+            <h2 className="font-unbounded font-extralight text-4xl sm:text-5xl leading-tight" style={{ color: '#191C0F' }}>
+              ¿Qué vas a encontrar?
             </h2>
           </div>
           <Link to="/que-vas-a-encontrar">
-            <button className="flex items-center gap-2 font-gasoek text-xs uppercase tracking-wider px-6 py-3 hover:opacity-80 transition-opacity whitespace-nowrap" style={{ background: '#1a4a1e', color: '#cad95e' }}>
+            <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-6 py-3 hover:opacity-80 transition-opacity whitespace-nowrap"
+              style={{ background: '#1a4a1e', color: '#cad95e', fontFamily: 'Unbounded, sans-serif' }}>
               <ArrowRight className="w-3.5 h-3.5" />
               DESCUBRIR
             </button>
           </Link>
         </div>
 
-        {/* Items */}
         <div className="grid sm:grid-cols-3 gap-px" style={{ background: 'rgba(26,74,30,0.12)' }}>
           {items.map((item) => {
             const Icon = item.icon;
@@ -58,10 +55,13 @@ export function QueVasPreview() {
                   <div className="w-9 h-9 flex items-center justify-center" style={{ background: '#cad95e' }}>
                     <Icon className="w-4 h-4" style={{ color: '#191C0F' }} />
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#2d7a32' }}>{item.tag}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider"
+                    style={{ color: '#2d7a32', fontFamily: 'Unbounded, sans-serif' }}>
+                    {item.tag}
+                  </span>
                 </div>
-                <h3 className="font-gasoek text-xl uppercase leading-tight" style={{ color: '#191C0F' }}>{item.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(25,28,15,0.65)' }}>{item.desc}</p>
+                <h3 className="font-unbounded font-extralight text-lg leading-snug" style={{ color: '#191C0F' }}>{item.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(25,28,15,0.6)' }}>{item.desc}</p>
               </div>
             );
           })}

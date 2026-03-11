@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { HeaderButtons } from '@/components/layout/HeaderButtons';
-import { ArrowRight, Calendar, User } from 'lucide-react';
 import { Footer } from '@/components/sections/Footer';
+import { ArrowRight, Calendar, User } from 'lucide-react';
 
 const P = {
   dark: '#191C0F', darkGreen: '#1a4a1e', midGreen: '#2d7a32',
@@ -30,7 +30,7 @@ const articles = [
   },
   {
     id: 4, slug: 'colombia-lidera-ecoturismo',
-    title: 'Colombia Lidera la Revolución del Ecoturismo en Latinoamérica',
+    title: 'Colombia Lidera la Revolución del Ecoturismo',
     excerpt: 'Con su biodiversidad única y compromiso con la sostenibilidad, Colombia se posiciona como líder regional en ecoturismo.',
     date: '8 Nov 2024', author: 'Diego Torres', category: 'Destinos', readTime: '5 min',
   },
@@ -43,17 +43,17 @@ const articles = [
   {
     id: 6, slug: 'tecnologia-turismo-sostenible',
     title: 'Tecnología al Servicio del Turismo Sostenible',
-    excerpt: 'Desde apps de impacto hasta blockchain para transparencia, las innovaciones tecnológicas están revolucionando el turismo.',
+    excerpt: 'Desde apps de impacto hasta blockchain para transparencia, las innovaciones están revolucionando el turismo.',
     date: '2 Nov 2024', author: 'Andrés López', category: 'Tecnología', readTime: '7 min',
   },
 ];
 
-const categoryColor = (c: string) => {
-  const map: Record<string, string> = {
-    'Sostenibilidad': P.lime, 'Experiencias': P.yellow, 'Innovación': P.lime,
-    'Destinos': P.yellow, 'Festival': P.lime, 'Tecnología': P.yellow,
+const catColor = (c: string) => {
+  const m: Record<string, string> = {
+    Sostenibilidad: P.lime, Experiencias: P.yellow, Innovación: P.lime,
+    Destinos: P.yellow, Festival: P.lime, Tecnología: P.yellow,
   };
-  return map[c] || P.lime;
+  return m[c] || P.lime;
 };
 
 export default function Noticias() {
@@ -70,11 +70,11 @@ export default function Noticias() {
           style={{ color: P.lime, fontFamily: 'Unbounded, sans-serif' }}>
           Blog &amp; Artículos
         </p>
-        <h1 className="font-gasoek text-5xl sm:text-6xl md:text-7xl uppercase text-white leading-none mb-4">
+        <h1 className="font-gasoek text-5xl sm:text-6xl md:text-7xl uppercase text-white leading-none mb-3">
           HISTORIAS<br />NATUR
         </h1>
-        <p className="text-white/55 text-base max-w-lg mx-auto">
-          Contenido editorial sobre turismo sostenible, naturaleza e innovación en Colombia.
+        <p className="font-unbounded font-extralight text-xl sm:text-2xl" style={{ color: 'rgba(255,255,255,0.5)' }}>
+          Turismo sostenible, naturaleza e innovación en Colombia
         </p>
       </section>
 
@@ -87,29 +87,29 @@ export default function Noticias() {
         <div className="grid sm:grid-cols-3 gap-px" style={{ background: 'rgba(26,74,30,0.12)' }}>
           {featured.map((a) => (
             <Link key={a.id} to={`/historias/${a.slug}`}>
-              <article className="p-8 flex flex-col gap-4 h-full min-h-[280px] cursor-pointer transition-colors hover:bg-[#1a4a1e] group"
+              <article className="p-8 flex flex-col gap-4 h-full min-h-[300px] cursor-pointer transition-colors hover:bg-[#1a4a1e] group"
                 style={{ background: P.cream }}>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1"
-                    style={{ background: categoryColor(a.category), color: P.dark }}>
+                  <span className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-1"
+                    style={{ background: catColor(a.category), color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>
                     {a.category}
                   </span>
-                  <span className="text-xs" style={{ color: 'rgba(25,28,15,0.4)' }}>{a.readTime}</span>
+                  <span className="text-xs" style={{ color: 'rgba(25,28,15,0.35)' }}>{a.readTime}</span>
                 </div>
-                <h2 className="font-gasoek text-lg uppercase leading-tight group-hover:text-white transition-colors"
+                <h2 className="font-unbounded font-extralight text-xl leading-snug group-hover:text-white transition-colors"
                   style={{ color: P.dark }}>
                   {a.title}
                 </h2>
-                <p className="text-sm leading-relaxed flex-1 group-hover:text-white/70 transition-colors"
-                  style={{ color: 'rgba(25,28,15,0.6)' }}>
+                <p className="text-sm leading-relaxed flex-1 group-hover:text-white/65 transition-colors"
+                  style={{ color: 'rgba(25,28,15,0.55)' }}>
                   {a.excerpt}
                 </p>
-                <div className="flex items-center justify-between mt-2">
-                  <div className="flex items-center gap-2 text-xs" style={{ color: 'rgba(25,28,15,0.4)' }}>
+                <div className="flex items-center justify-between mt-1">
+                  <div className="flex items-center gap-2 text-xs" style={{ color: 'rgba(25,28,15,0.35)' }}>
                     <User className="w-3 h-3" />{a.author}
                   </div>
                   <ArrowRight className="w-4 h-4 group-hover:text-[#cad95e] transition-colors"
-                    style={{ color: 'rgba(25,28,15,0.3)' }} />
+                    style={{ color: 'rgba(25,28,15,0.25)' }} />
                 </div>
               </article>
             </Link>
@@ -117,7 +117,7 @@ export default function Noticias() {
         </div>
       </section>
 
-      {/* More articles */}
+      {/* More */}
       <section className="py-10 px-6 max-w-6xl mx-auto border-t"
         style={{ borderColor: 'rgba(26,74,30,0.12)' }}>
         <p className="text-xs tracking-[0.3em] uppercase mb-8 font-bold"
@@ -130,21 +130,21 @@ export default function Noticias() {
               <article className="p-6 border cursor-pointer hover:border-[#1a4a1e] transition-all group"
                 style={{ borderColor: 'rgba(26,74,30,0.15)' }}>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5"
-                    style={{ background: categoryColor(a.category), color: P.dark }}>
+                  <span className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-0.5"
+                    style={{ background: catColor(a.category), color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>
                     {a.category}
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs" style={{ color: 'rgba(25,28,15,0.4)' }}>
+                  <div className="flex items-center gap-1.5 text-xs" style={{ color: 'rgba(25,28,15,0.35)' }}>
                     <Calendar className="w-3 h-3" />{a.date}
                   </div>
                 </div>
-                <h2 className="font-gasoek text-base uppercase leading-tight mb-2 group-hover:text-[#1a4a1e] transition-colors"
+                <h2 className="font-unbounded font-extralight text-lg leading-snug mb-2 group-hover:text-[#1a4a1e] transition-colors"
                   style={{ color: P.dark }}>
                   {a.title}
                 </h2>
-                <p className="text-xs leading-relaxed" style={{ color: 'rgba(25,28,15,0.55)' }}>{a.excerpt}</p>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(25,28,15,0.5)' }}>{a.excerpt}</p>
                 <div className="flex items-center gap-1.5 mt-4 text-xs font-bold uppercase"
-                  style={{ color: P.midGreen }}>
+                  style={{ color: P.midGreen, fontFamily: 'Unbounded, sans-serif' }}>
                   <ArrowRight className="w-3 h-3" />Leer artículo
                 </div>
               </article>

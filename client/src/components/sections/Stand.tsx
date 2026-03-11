@@ -31,8 +31,8 @@ export function Stand() {
           >
             Participa como marca
           </p>
-          <h2 className="font-gasoek text-4xl sm:text-5xl md:text-6xl text-white uppercase leading-tight mb-6">
-            RESERVA TU<br />STAND
+          <h2 className="font-unbounded font-extralight text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-6">
+            Reserva tu stand
           </h2>
           <p className="text-base sm:text-lg leading-relaxed max-w-lg" style={{ color: 'rgba(202,217,94,0.75)' }}>
             Sé parte de los emprendimientos y marcas que están construyendo el
@@ -46,10 +46,10 @@ export function Stand() {
         <div className="flex flex-col items-center lg:items-end gap-6">
           <div className="flex items-center gap-3" style={{ color: 'rgba(202,217,94,0.85)' }}>
             <Store className="w-8 h-8" />
-            <span className="font-gasoek text-xl uppercase">Kinder · Agosto 2026</span>
+            <span className="text-sm font-bold uppercase tracking-wider" style={{ fontFamily: 'Unbounded, sans-serif' }}>Kinder · Agosto 2026</span>
           </div>
           <Link to="/contacto">
-            <button className="font-gasoek text-sm uppercase tracking-wider px-10 py-4 hover:opacity-90 transition-opacity flex items-center gap-2" style={{ background: '#f5e03a', color: '#191C0F' }}>
+            <button className="text-sm font-bold uppercase tracking-wider px-10 py-4 hover:opacity-90 transition-opacity flex items-center gap-2" style={{ background: '#f5e03a', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}>
               <ArrowRight className="w-4 h-4" />
               RESERVAR STAND
             </button>

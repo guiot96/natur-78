@@ -7,6 +7,7 @@ export default {
     extend: {
       fontFamily: {
         'gasoek': ['Gasoek One', 'system-ui', 'sans-serif'],
+        'display': ['Playfair Display', 'Georgia', 'serif'],
         'jakarta': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         'jakarta-light': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         'jakarta-bold': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],

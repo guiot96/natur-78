@@ -25,15 +25,15 @@ export default function ContactForm() {
           >
             Escríbenos
           </p>
-          <h2 className="font-gasoek text-4xl sm:text-5xl text-white uppercase leading-tight">
-            CONTACTO
+          <h2 className="font-unbounded font-extralight text-4xl sm:text-5xl text-white leading-tight">
+            Hablemos
           </h2>
         </div>
 
         {sent ? (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">✅</div>
-            <h3 className="font-gasoek text-2xl text-[#cad95e] uppercase mb-2">¡Mensaje enviado!</h3>
+            <h3 className="font-unbounded font-extralight text-2xl text-[#cad95e] mb-2">¡Mensaje enviado!</h3>
             <p className="text-white/60">Te responderemos pronto a través de info@festivalnatur.com</p>
           </div>
         ) : (
@@ -90,7 +90,8 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-[#cad95e] text-[#191C0F] font-gasoek text-sm uppercase tracking-wider px-10 py-3.5 hover:bg-[#b8c94d] transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="bg-[#cad95e] text-[#191C0F] text-sm font-bold uppercase tracking-wider px-10 py-3.5 hover:bg-[#b8c94d] transition-colors disabled:opacity-50 flex items-center gap-2"
+                style={{ fontFamily: 'Unbounded, sans-serif' }}
               >
                 <Send className="w-4 h-4" />
                 {loading ? "ENVIANDO..." : "ENVIAR MENSAJE"}
