@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Ticket, MapPin, Check, ArrowRight } from "lucide-react";
+import { Ticket, ArrowRight, MapPin } from "lucide-react";
 import portraitImg from '@assets/generated_images/natur_grid_portrait.png';
 import landscapeImg from '@assets/generated_images/natur_grid_landscape.png';
 
@@ -14,223 +14,274 @@ const P = {
   roseDeep:  '#c45870',
 };
 
+const mono = { fontFamily: 'monospace' };
+const ub   = { fontFamily: 'Unbounded, sans-serif' };
+
+function Tag({ bg, color, children }: { bg: string; color: string; children: React.ReactNode }) {
+  return (
+    <span className="inline-block text-[9px] tracking-[0.32em] uppercase font-bold px-2.5 py-[3px]"
+      style={{ background: bg, color, ...ub }}>
+      {children}
+    </span>
+  );
+}
+
+function Rule({ color = 'rgba(255,255,255,0.12)' }: { color?: string }) {
+  return <div className="w-full h-px" style={{ background: color }} />;
+}
+
+function InfoRow({ label, value, light }: { label: string; value: string; light?: boolean }) {
+  const col = light ? 'rgba(25,28,15,0.4)' : 'rgba(255,255,255,0.38)';
+  const val = light ? 'rgba(25,28,15,0.72)' : 'rgba(255,255,255,0.72)';
+  return (
+    <div className="flex items-baseline justify-between gap-2">
+      <span className="text-[8px] uppercase tracking-widest" style={{ color: col, ...ub }}>{label}</span>
+      <span className="text-[9px] font-bold" style={{ color: val, ...ub }}>{value}</span>
+    </div>
+  );
+}
+
+function BottomStrip({ tagBg, tagColor, tagText, venueColor, venueText }:
+  { tagBg: string; tagColor: string; tagText: string; venueColor: string; venueText: string }) {
+  return (
+    <div className="flex items-center justify-between">
+      <Tag bg={tagBg} color={tagColor}>{tagText}</Tag>
+      <span className="text-[8px] tracking-[0.2em] uppercase" style={{ color: venueColor, ...ub }}>@ {venueText}</span>
+    </div>
+  );
+}
+
 export function EntradasPreview() {
   return (
     <section className="w-full grid grid-cols-1 md:grid-cols-3">
 
-      {/* ─── CELL 1 — Dark green, NATUR identity ─── */}
-      <div
-        className="relative flex flex-col justify-between p-10 min-h-[70vw] md:min-h-[36vw]"
-        style={{ background: P.darkGreen }}
-      >
-        <div>
-          <span
-            className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-5 px-3 py-1"
-            style={{ background: P.lime, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}
-          >
-            Festival Nacional
-          </span>
-          <h2 className="font-gasoek text-[14vw] md:text-[5.5vw] uppercase leading-none text-white">
+      {/* ═══ CELL 1 — dark green · identity ═══ */}
+      <div className="relative flex flex-col justify-between p-8 md:p-9 min-h-[70vw] md:min-h-[38vw]"
+        style={{ background: P.darkGreen }}>
+
+        <div className="flex items-start justify-between">
+          <Tag bg={P.lime} color={P.dark}>Festival Nacional</Tag>
+          <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.22)', ...mono }}>01/06</span>
+        </div>
+
+        <div className="flex-1 flex flex-col justify-center py-4 md:py-0">
+          <p className="text-[2.2vw] md:text-[0.72vw] uppercase tracking-[0.35em] mb-1"
+            style={{ color: 'rgba(255,255,255,0.32)', ...ub }}>
+            Turismo Sostenible · Col
+          </p>
+          <h2 className="font-gasoek text-[18vw] md:text-[7vw] uppercase leading-[0.88] text-white">
             NATUR
           </h2>
-          <p
-            className="font-unbounded font-extralight text-[4vw] md:text-[1.3vw] mt-1"
-            style={{ color: 'rgba(255,255,255,0.4)' }}
-          >
-            Turismo Sostenible
+          <p className="font-unbounded font-extralight text-[3.8vw] md:text-[1.3vw] mt-2"
+            style={{ color: 'rgba(255,255,255,0.38)' }}>
+            Agosto 2026 · Bogotá
           </p>
         </div>
-        <div className="space-y-1">
-          <p
-            className="font-gasoek text-[9vw] md:text-[3.5vw] uppercase leading-none"
-            style={{ color: P.lime }}
-          >
-            14 y 15
+
+        <div className="space-y-3">
+          <Rule />
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
+            <InfoRow label="Fecha"   value="14 y 15 Ago" />
+            <InfoRow label="Horario" value="10–22:00h" />
+            <InfoRow label="Sede"    value="Kinder" />
+            <InfoRow label="Entrada" value="Desde $50k" />
+          </div>
+          <Rule />
+          <BottomStrip
+            tagBg="rgba(202,217,94,0.15)" tagColor={P.lime} tagText="Bogotá / COL"
+            venueColor="rgba(255,255,255,0.22)" venueText="Calle 59 #6-21" />
+        </div>
+      </div>
+
+      {/* ═══ CELL 2 — portrait photo ═══ */}
+      <div className="relative overflow-hidden min-h-[70vw] md:min-h-[38vw]">
+        <img src={portraitImg} alt="Festival NATUR 2026"
+          className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0"
+          style={{ background: 'linear-gradient(160deg, rgba(25,28,15,0.2) 0%, transparent 40%, rgba(25,28,15,0.65) 100%)' }} />
+
+        <div className="absolute top-7 left-7">
+          <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.38)', ...mono }}>02/06</span>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 p-7 space-y-2.5">
+          <p className="font-gasoek text-[4.5vw] md:text-[1.8vw] uppercase leading-tight text-white">
+            Cultura · Naturaleza
           </p>
-          <p
-            className="text-[2.5vw] md:text-[0.65rem] uppercase tracking-widest"
-            style={{ color: 'rgba(255,255,255,0.38)', fontFamily: 'Unbounded, sans-serif' }}
-          >
-            Agosto 2026
-          </p>
-          <div className="flex items-center gap-1 pt-1">
-            <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: 'rgba(255,255,255,0.3)' }} />
-            <span className="text-[2.5vw] md:text-[0.65rem]" style={{ color: 'rgba(255,255,255,0.3)' }}>
-              Kinder · Chapinero · Bogotá
-            </span>
+          <Rule />
+          <div className="flex items-center justify-between">
+            <Tag bg={P.rose} color={P.dark}>Turismo · Cultura</Tag>
+            <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.38)', ...mono }}>AGO 2026</span>
           </div>
         </div>
       </div>
 
-      {/* ─── CELL 2 — Portrait photo ─── */}
-      <div className="relative overflow-hidden min-h-[70vw] md:min-h-[36vw]">
-        <img
-          src={portraitImg}
-          alt="Festival NATUR — naturaleza"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, transparent 55%, rgba(25,28,15,0.5) 100%)' }}
-        />
-        <div className="absolute bottom-7 left-8">
-          <span
-            className="inline-block text-[1.8vw] md:text-[0.6rem] tracking-[0.25em] uppercase font-bold px-3 py-1"
-            style={{ background: P.rose, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}
-          >
-            Turismo · Cultura
-          </span>
-        </div>
-      </div>
+      {/* ═══ CELL 3 — yellow · 2 días ═══ */}
+      <div className="relative flex flex-col justify-between p-8 md:p-9 min-h-[70vw] md:min-h-[38vw]"
+        style={{ background: P.yellow }}>
 
-      {/* ─── CELL 3 — Yellow, 2-DÍAS ─── */}
-      <div
-        className="relative flex flex-col justify-between p-10 min-h-[70vw] md:min-h-[36vw]"
-        style={{ background: P.yellow }}
-      >
-        <div>
-          <span
-            className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-5 px-3 py-1"
-            style={{ background: P.dark, color: P.yellow, fontFamily: 'Unbounded, sans-serif' }}
-          >
-            Recomendado
-          </span>
-          <h3 className="font-gasoek text-[13vw] md:text-[5.5vw] uppercase leading-none" style={{ color: P.dark }}>
+        <div className="flex items-start justify-between">
+          <Tag bg={P.dark} color={P.yellow}>Recomendado</Tag>
+          <span className="text-[9px]" style={{ color: 'rgba(25,28,15,0.28)', ...mono }}>03/06</span>
+        </div>
+
+        <div className="flex-1 flex flex-col justify-center py-4 md:py-0">
+          <p className="text-[2.2vw] md:text-[0.72vw] uppercase tracking-[0.35em] mb-1"
+            style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>Entrada</p>
+          <h3 className="font-gasoek text-[15vw] md:text-[6.5vw] uppercase leading-[0.88]" style={{ color: P.dark }}>
             2 DÍAS
           </h3>
-          <p
-            className="font-unbounded font-extralight text-[3.5vw] md:text-[1.1vw] mt-1"
-            style={{ color: 'rgba(25,28,15,0.5)' }}
-          >
-            Acceso completo
-          </p>
+          <div className="flex items-baseline justify-between mt-2">
+            <p className="font-unbounded font-extralight text-[3.5vw] md:text-[1.2vw]"
+              style={{ color: 'rgba(25,28,15,0.48)' }}>Acceso completo</p>
+            <div className="text-right">
+              <p className="text-[2vw] md:text-[0.65vw] uppercase" style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>14 Jue — 10h</p>
+              <p className="text-[2vw] md:text-[0.65vw] uppercase" style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>15 Vie — 10h</p>
+            </div>
+          </div>
         </div>
-        <div className="space-y-4">
-          <div className="flex items-baseline gap-1">
-            <span className="font-gasoek text-[11vw] md:text-[4vw] leading-none" style={{ color: P.dark }}>
-              $70.000
-            </span>
-            <span className="text-[2.5vw] md:text-xs font-bold" style={{ color: 'rgba(25,28,15,0.4)', fontFamily: 'Unbounded, sans-serif' }}>
-              COP
-            </span>
+
+        <div className="space-y-3.5">
+          <Rule color="rgba(25,28,15,0.14)" />
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
+            <InfoRow light label="Duración"  value="2 días" />
+            <InfoRow light label="Cupos"     value="Limitados" />
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="font-gasoek text-[10vw] md:text-[4.2vw] leading-none" style={{ color: P.dark }}>$70.000</span>
+            <div className="flex flex-col">
+              <span className="text-[8px] font-bold" style={{ color: 'rgba(25,28,15,0.42)', ...ub }}>COP</span>
+              <span className="text-[8px]" style={{ color: 'rgba(25,28,15,0.32)', ...ub }}>p. persona</span>
+            </div>
           </div>
           <Link to="/tickets">
-            <div
-              className="flex items-center justify-between w-full px-5 py-3.5 font-bold text-[2.5vw] md:text-xs uppercase tracking-wider hover:opacity-85 transition-opacity cursor-pointer"
-              style={{ background: P.dark, color: P.yellow, fontFamily: 'Unbounded, sans-serif' }}
-            >
-              <span className="flex items-center gap-2">
-                <Ticket className="w-3.5 h-3.5" />
-                Comprar
-              </span>
-              <ArrowRight className="w-4 h-4" />
+            <div className="flex items-center justify-between w-full px-4 py-3.5 font-bold text-[9px] uppercase tracking-widest hover:opacity-85 transition-opacity cursor-pointer"
+              style={{ background: P.dark, color: P.yellow, ...ub }}>
+              <span className="flex items-center gap-2"><Ticket className="w-3 h-3" />Comprar</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
+          <BottomStrip
+            tagBg="rgba(25,28,15,0.1)" tagColor="rgba(25,28,15,0.65)" tagText="2 Días / Completo"
+            venueColor="rgba(25,28,15,0.35)" venueText="Kinder" />
         </div>
       </div>
 
-      {/* ─── CELL 4 — Landscape photo ─── */}
-      <div className="relative overflow-hidden min-h-[70vw] md:min-h-[36vw]">
-        <img
-          src={landscapeImg}
-          alt="Festival NATUR — ambiente"
-          className="absolute inset-0 w-full h-full object-cover object-top"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to top, rgba(25,28,15,0.55) 0%, transparent 55%)' }}
-        />
-        <div className="absolute bottom-7 left-8 right-8">
-          <p
-            className="text-[2.5vw] md:text-[0.6rem] uppercase tracking-widest"
-            style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Unbounded, sans-serif' }}
-          >
-            @ Kinder · Calle 59 #6-21
+      {/* ═══ CELL 4 — landscape photo ═══ */}
+      <div className="relative overflow-hidden min-h-[70vw] md:min-h-[38vw]">
+        <img src={landscapeImg} alt="Festival NATUR — Kinder"
+          className="absolute inset-0 w-full h-full object-cover object-top" />
+        <div className="absolute inset-0"
+          style={{ background: 'linear-gradient(to top, rgba(25,28,15,0.72) 0%, transparent 52%)' }} />
+
+        <div className="absolute top-7 right-7">
+          <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.35)', ...mono }}>04/06</span>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 p-7 space-y-2.5">
+          <p className="font-gasoek text-[4.5vw] md:text-[1.8vw] uppercase leading-tight text-white">
+            Kinder · Chapinero
           </p>
+          <Rule />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <MapPin className="w-3 h-3" style={{ color: 'rgba(255,255,255,0.4)' }} />
+              <span className="text-[2vw] md:text-[0.6vw] uppercase tracking-widest"
+                style={{ color: 'rgba(255,255,255,0.4)', ...ub }}>Calle 59 #6-21</span>
+            </div>
+            <Tag bg={P.lime} color={P.dark}>Venue</Tag>
+          </div>
         </div>
       </div>
 
-      {/* ─── CELL 5 — Rose, 1-DÍA ─── */}
-      <div
-        className="relative flex flex-col justify-between p-10 min-h-[70vw] md:min-h-[36vw]"
-        style={{ background: P.rose }}
-      >
-        <div>
-          <span
-            className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-5 px-3 py-1"
-            style={{ background: P.roseDeep, color: 'white', fontFamily: 'Unbounded, sans-serif' }}
-          >
-            Un día
-          </span>
-          <h3 className="font-gasoek text-[13vw] md:text-[5.5vw] uppercase leading-none" style={{ color: P.dark }}>
+      {/* ═══ CELL 5 — rose · 1 día ═══ */}
+      <div className="relative flex flex-col justify-between p-8 md:p-9 min-h-[70vw] md:min-h-[38vw]"
+        style={{ background: P.rose }}>
+
+        <div className="flex items-start justify-between">
+          <Tag bg={P.roseDeep} color="white">Un Día</Tag>
+          <span className="text-[9px]" style={{ color: 'rgba(25,28,15,0.28)', ...mono }}>05/06</span>
+        </div>
+
+        <div className="flex-1 flex flex-col justify-center py-4 md:py-0">
+          <p className="text-[2.2vw] md:text-[0.72vw] uppercase tracking-[0.35em] mb-1"
+            style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>Entrada</p>
+          <h3 className="font-gasoek text-[15vw] md:text-[6.5vw] uppercase leading-[0.88]" style={{ color: P.dark }}>
             1 DÍA
           </h3>
-          <p
-            className="font-unbounded font-extralight text-[3.5vw] md:text-[1.1vw] mt-1"
-            style={{ color: 'rgba(25,28,15,0.5)' }}
-          >
-            El día que más te llame
-          </p>
+          <div className="flex items-baseline justify-between mt-2">
+            <p className="font-unbounded font-extralight text-[3.5vw] md:text-[1.2vw]"
+              style={{ color: 'rgba(25,28,15,0.48)' }}>Elige tu jornada</p>
+            <div className="text-right">
+              <p className="text-[2vw] md:text-[0.65vw] uppercase" style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>14 Jue — 10h</p>
+              <p className="text-[2vw] md:text-[0.65vw] uppercase" style={{ color: 'rgba(25,28,15,0.38)', ...ub }}>15 Vie — 10h</p>
+            </div>
+          </div>
         </div>
-        <div className="space-y-4">
-          <div className="flex items-baseline gap-1">
-            <span className="font-gasoek text-[11vw] md:text-[4vw] leading-none" style={{ color: P.dark }}>
-              $50.000
-            </span>
-            <span className="text-[2.5vw] md:text-xs font-bold" style={{ color: 'rgba(25,28,15,0.4)', fontFamily: 'Unbounded, sans-serif' }}>
-              COP
-            </span>
+
+        <div className="space-y-3.5">
+          <Rule color="rgba(25,28,15,0.14)" />
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
+            <InfoRow light label="Duración"  value="1 día" />
+            <InfoRow light label="Cupos"     value="Limitados" />
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="font-gasoek text-[10vw] md:text-[4.2vw] leading-none" style={{ color: P.dark }}>$50.000</span>
+            <div className="flex flex-col">
+              <span className="text-[8px] font-bold" style={{ color: 'rgba(25,28,15,0.42)', ...ub }}>COP</span>
+              <span className="text-[8px]" style={{ color: 'rgba(25,28,15,0.32)', ...ub }}>p. persona</span>
+            </div>
           </div>
           <Link to="/tickets">
-            <div
-              className="flex items-center justify-between w-full px-5 py-3.5 font-bold text-[2.5vw] md:text-xs uppercase tracking-wider hover:opacity-85 transition-opacity cursor-pointer"
-              style={{ background: P.dark, color: P.rose, fontFamily: 'Unbounded, sans-serif' }}
-            >
-              <span className="flex items-center gap-2">
-                <Ticket className="w-3.5 h-3.5" />
-                Comprar
-              </span>
-              <ArrowRight className="w-4 h-4" />
+            <div className="flex items-center justify-between w-full px-4 py-3.5 font-bold text-[9px] uppercase tracking-widest hover:opacity-85 transition-opacity cursor-pointer"
+              style={{ background: P.dark, color: P.rose, ...ub }}>
+              <span className="flex items-center gap-2"><Ticket className="w-3 h-3" />Comprar</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
+          <BottomStrip
+            tagBg="rgba(196,88,112,0.15)" tagColor={P.roseDeep} tagText="1 Día / Flexible"
+            venueColor="rgba(25,28,15,0.35)" venueText="Kinder" />
         </div>
       </div>
 
-      {/* ─── CELL 6 — Cream, festival info + CTA ─── */}
-      <div
-        className="relative flex flex-col justify-between p-10 min-h-[70vw] md:min-h-[36vw]"
-        style={{ background: P.cream }}
-      >
-        <div>
-          <span
-            className="inline-block text-[10px] tracking-[0.3em] uppercase font-bold mb-5 px-3 py-1"
-            style={{ background: P.midGreen, color: 'white', fontFamily: 'Unbounded, sans-serif' }}
-          >
-            Venue
-          </span>
-          <h3 className="font-gasoek text-[8vw] md:text-[3vw] uppercase leading-tight" style={{ color: P.darkGreen }}>
+      {/* ═══ CELL 6 — cream · venue info ═══ */}
+      <div className="relative flex flex-col justify-between p-8 md:p-9 min-h-[70vw] md:min-h-[38vw]"
+        style={{ background: P.cream }}>
+
+        <div className="flex items-start justify-between">
+          <Tag bg={P.midGreen} color="white">Sede</Tag>
+          <span className="text-[9px]" style={{ color: 'rgba(25,28,15,0.25)', ...mono }}>06/06</span>
+        </div>
+
+        <div className="flex-1 flex flex-col justify-center py-4 md:py-0">
+          <p className="text-[2.2vw] md:text-[0.72vw] uppercase tracking-[0.35em] mb-1"
+            style={{ color: 'rgba(25,28,15,0.32)', ...ub }}>Sede del festival</p>
+          <h3 className="font-gasoek text-[9vw] md:text-[3.8vw] uppercase leading-[0.9]" style={{ color: P.darkGreen }}>
             Kinder<br />Chapinero
           </h3>
-          <p
-            className="font-unbounded font-extralight text-[3.5vw] md:text-[1.1vw] mt-2"
-            style={{ color: 'rgba(25,28,15,0.45)' }}
-          >
-            Calle 59 #6-21 · Bogotá
+          <p className="font-unbounded font-extralight text-[3.5vw] md:text-[1.2vw] mt-3"
+            style={{ color: 'rgba(25,28,15,0.42)' }}>
+            Calle 59 #6-21<br />Bogotá, Colombia
           </p>
         </div>
-        <div className="space-y-3">
-          <p className="text-[3vw] md:text-xs leading-relaxed" style={{ color: 'rgba(25,28,15,0.55)' }}>
-            El primer festival nacional de turismo sostenible en Colombia.
-          </p>
+
+        <div className="space-y-3.5">
+          <Rule color="rgba(25,28,15,0.14)" />
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
+            <InfoRow light label="Ciudad"  value="Bogotá" />
+            <InfoRow light label="Barrio"  value="Chapinero" />
+            <InfoRow light label="País"    value="Colombia" />
+            <InfoRow light label="Año"     value="2026" />
+          </div>
+          <Rule color="rgba(25,28,15,0.14)" />
           <Link to="/tickets">
-            <div
-              className="inline-flex items-center gap-2 text-[2.5vw] md:text-xs font-bold uppercase tracking-wider hover:gap-3 transition-all cursor-pointer"
-              style={{ color: P.midGreen, fontFamily: 'Unbounded, sans-serif' }}
-            >
-              <ArrowRight className="w-3.5 h-3.5" />
-              Ver todas las entradas
+            <div className="inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest hover:gap-3 transition-all cursor-pointer"
+              style={{ color: P.midGreen, ...ub }}>
+              <ArrowRight className="w-3 h-3" />Ver todas las entradas
             </div>
           </Link>
+          <BottomStrip
+            tagBg="rgba(45,122,50,0.1)" tagColor={P.midGreen} tagText="Turismo Sostenible"
+            venueColor="rgba(25,28,15,0.32)" venueText="Chapinero · Bogotá" />
         </div>
       </div>
 
