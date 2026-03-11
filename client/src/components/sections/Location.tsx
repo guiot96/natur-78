@@ -1,58 +1,101 @@
-import React from "react";
 import kinderImage from "@assets/Captura_de_pantalla_2026-02-19_a_la(s)_11.35.23_a._m._1771518928744.png";
+import { MapPin, ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 
 export function Location() {
-  return <section className="w-full font-jakarta bg-[#e6f0c1] py-0 m-0">
-      <div className="flex flex-col lg:flex-row max-w-7xl mx-auto">
-        {/* Left: Background Image with headline */}
-        <div className="relative w-full lg:w-[45%] min-h-[300px] md:min-h-[400px] lg:min-h-[500px] bg-black">
-          <img src={kinderImage} alt="Kinder Venue Architecture" className="w-full h-full object-cover block opacity-85" />
-          <div className="absolute inset-0 flex flex-col justify-end bg-black bg-opacity-25">
-            <div className="p-4 pb-6 sm:p-6 md:p-8">
-              <h1 className="font-gasoek text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal leading-tight tracking-wide uppercase text-zinc-50">
-                KINDER
-              </h1>
-            </div>
-          </div>
-        </div>
-        
-        {/* Right: Info Panel */}
-        <div className="flex items-stretch w-full lg:w-[55%] bg-[#CEDD9F] min-h-[300px]">
-          <div className="flex flex-col justify-center w-full p-4 py-6 sm:p-6 md:p-8 lg:p-10">
-            <h2 style={{
-            letterSpacing: 1.5
-          }} className="font-gasoek text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal leading-tight tracking-wide uppercase mb-4 sm:mb-6 md:mb-8 text-zinc-950">
-              ¿CUÁNDO Y DÓNDE?
-            </h2>
-            
-            <div className="backdrop-blur-sm bg-white/20 rounded-3xl p-4 sm:p-6 border border-[#191C0F]/10 mb-4">
-              <time className="text-sm sm:text-base md:text-lg font-bold text-[#222] tracking-wide uppercase block text-center" dateTime="2026-08-14">
-                14 Y 15 DE AGOSTO / 2026
-              </time>
-              <p className="text-xs sm:text-sm text-center text-[#222] mt-2 font-bold">
-                Calle 59 #6-21, Chapinero, Bogotá, Colombia
-              </p>
-            </div>
-            
-            <div className="text-xs sm:text-sm md:text-base leading-relaxed text-[#13160c] font-medium space-y-3">
-              <div className="backdrop-blur-sm bg-white/20 rounded-3xl p-3 sm:p-4 border border-[#191C0F]/10">
-                <p>
-                  Kinder será la sede del Primer Festival de Turismo Sostenible en Colombia. Un lugar que se ha consolidado como uno de los nuevos referentes culturales de la ciudad, donde convergen arquitectura, memoria, arte y vida nocturna contemporánea.
-                </p>
-              </div>
-              <div className="backdrop-blur-sm bg-white/20 rounded-3xl p-3 sm:p-4 border border-[#191C0F]/10">
-                <p>
-                  Ubicado en el corazón de Chapinero, Kinder nace de la transformación de un antiguo espacio educativo en un escenario que hoy simboliza renovación, encuentro y exploración cultural. Su arquitectura y su identidad lo han posicionado como un punto clave dentro del nuevo mapa cultural de Bogotá.
-                </p>
-              </div>
-              <div className="backdrop-blur-sm bg-white/20 rounded-3xl p-3 sm:p-4 border border-[#191C0F]/10">
-                <p>
-                  Con una programación constante de música, arte y experiencias, Kinder representa el espíritu de una ciudad en evolución: abierta, diversa y conectada con el futuro. El festival llega al lugar ideal para inspirar nuevas formas de viajar y construir una nueva visión del turismo.
-                </p>
-              </div>
-            </div>
+  return (
+    <section className="w-full grid grid-cols-1 md:grid-cols-2" style={{ background: "#191C0F" }}>
+
+      {/* ── Left: full-bleed Kinder photo ── */}
+      <div className="relative overflow-hidden min-h-[60vw] md:min-h-[42vw]">
+        <img
+          src={kinderImage}
+          alt="Kinder — Sede Festival NATUR"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(25,28,15,0.75) 0%, transparent 55%)" }}
+        />
+        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+          <p className="font-gasoek text-[8vw] md:text-[3.5vw] uppercase leading-none text-white mb-2">
+            KINDER
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="w-4 h-px bg-white/35" />
+            <span className="text-[9px] uppercase tracking-widest text-white/40"
+              style={{ fontFamily: "Unbounded, sans-serif" }}>
+              Chapinero · Bogotá
+            </span>
           </div>
         </div>
       </div>
-    </section>;
+
+      {/* ── Right: venue editorial info ── */}
+      <div
+        className="flex flex-col justify-between p-8 md:p-12 min-h-[60vw] md:min-h-[42vw]"
+        style={{ background: "#cad95e" }}
+      >
+        {/* Top */}
+        <div>
+          <span
+            className="inline-block text-[9px] tracking-[0.32em] uppercase font-bold px-2.5 py-[3px] mb-8"
+            style={{ background: "#191C0F", color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
+          >
+            Sede del festival
+          </span>
+          <h2 className="font-gasoek text-[8vw] md:text-[3.8vw] uppercase leading-[0.9] mb-4"
+            style={{ color: "#191C0F" }}>
+            ¿CUÁNDO<br />Y DÓNDE?
+          </h2>
+          <p
+            className="font-gasoek text-[5vw] md:text-[2.2vw] uppercase leading-tight mb-6"
+            style={{ color: "#1a4a1e" }}
+          >
+            14 y 15 de<br />Agosto 2026
+          </p>
+        </div>
+
+        {/* Info rows */}
+        <div className="space-y-3">
+          {[
+            ["Dirección", "Calle 59 #6-21"],
+            ["Barrio",    "Chapinero"],
+            ["Ciudad",    "Bogotá, Colombia"],
+            ["Horario",   "10:00 — 22:00h"],
+          ].map(([label, value]) => (
+            <div
+              key={label}
+              className="flex items-baseline justify-between border-b pb-2"
+              style={{ borderColor: "rgba(25,28,15,0.18)" }}
+            >
+              <span className="text-[9px] uppercase tracking-widest"
+                style={{ color: "rgba(25,28,15,0.45)", fontFamily: "Unbounded, sans-serif" }}>
+                {label}
+              </span>
+              <span className="text-[10px] font-bold"
+                style={{ color: "rgba(25,28,15,0.8)", fontFamily: "Unbounded, sans-serif" }}>
+                {value}
+              </span>
+            </div>
+          ))}
+
+          <div className="pt-4 flex flex-col gap-3">
+            <p className="text-xs leading-relaxed"
+              style={{ color: "rgba(25,28,15,0.55)" }}>
+              Kinder nace de la transformación de un antiguo espacio educativo en un referente cultural de Bogotá — el lugar perfecto para el primer festival de turismo sostenible de Colombia.
+            </p>
+            <Link to="/contacto">
+              <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:gap-3 transition-all cursor-pointer"
+                style={{ color: "#1a4a1e", fontFamily: "Unbounded, sans-serif" }}>
+                <ArrowRight className="w-3 h-3" />
+                Cómo llegar
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  );
 }

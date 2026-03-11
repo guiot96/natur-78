@@ -1,38 +1,38 @@
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, Music, Leaf } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import speakerImg from "@assets/generated_images/natur_speaker.png";
-import botanicaImg from "@assets/generated_images/natur_botanica.png";
 
-const items = [
+/* ── Three giant vertical pillars — like stage modules ── */
+const pillars = [
   {
     num: "01",
-    Icon: BookOpen,
     tag: "Conocimiento",
-    title: "Agenda Académica",
-    desc: "Charlas, paneles y talleres con líderes del turismo sostenible y expertos en naturaleza.",
-    accent: "#cad95e",
+    title: "AGENDA\nACADÉMICA",
+    desc: "Charlas, paneles y talleres con líderes del turismo sostenible.",
     bg: "#191C0F",
+    accent: "#cad95e",
     textColor: "#FCF8EE",
+    detail: "Conferencias · Paneles · Talleres",
   },
   {
     num: "02",
-    Icon: Music,
     tag: "Cultura",
-    title: "Rumba y Manifestaciones",
-    desc: "Música en vivo, arte urbano, gastronomía local y expresiones culturales de Colombia.",
-    accent: "#f5e03a",
+    title: "RUMBA Y\nMANIFES-\nTACIONES",
+    desc: "Música en vivo, arte urbano, gastronomía y cultura colombiana.",
     bg: "#1a4a1e",
+    accent: "#f5e03a",
     textColor: "#FCF8EE",
+    detail: "Música · Arte · Gastronomía",
   },
   {
     num: "03",
-    Icon: Leaf,
     tag: "Inspiración",
-    title: "Historias Transformadoras",
-    desc: "Proyectos reales de impacto positivo que prueban que viajar con conciencia es posible.",
-    accent: "#cad95e",
-    bg: "#2d7a32",
-    textColor: "#FCF8EE",
+    title: "HISTORIAS\nTRANS-\nFORMADORAS",
+    desc: "Proyectos reales que prueban que viajar con conciencia es posible.",
+    bg: "#cad95e",
+    accent: "#191C0F",
+    textColor: "#191C0F",
+    detail: "Testimonios · Impacto · Comunidad",
   },
 ];
 
@@ -40,133 +40,129 @@ export function QueVasPreview() {
   return (
     <section className="w-full" style={{ background: "#FCF8EE" }}>
 
-      {/* ── Full-width header ── */}
-      <div className="px-8 md:px-14 pt-16 pb-8 border-b border-black/10">
-        <p className="text-[10px] tracking-[0.35em] uppercase font-bold mb-4"
-          style={{ color: "#2d7a32", fontFamily: "Unbounded, sans-serif" }}>
-          Festival NATUR 2026
-        </p>
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-          <h2 className="font-gasoek text-[12vw] md:text-[6.5vw] uppercase leading-[0.88]" style={{ color: "#191C0F" }}>
-            ¿QUÉ VAS<br />A ENCONTRAR?
-          </h2>
-          <Link to="/que-vas-a-encontrar">
+      {/* ── Overflowing headline banner ── */}
+      <div className="overflow-hidden border-b border-black/10" style={{ background: "#FCF8EE" }}>
+        <div className="flex items-center gap-0">
+          {/* Rotated label */}
+          <div
+            className="hidden md:flex items-center justify-center flex-shrink-0 px-5 py-3 self-stretch border-r border-black/10"
+            style={{ background: "#1a4a1e", writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+          >
+            <span className="text-[9px] font-bold uppercase tracking-[0.3em]"
+              style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}>
+              Festival NATUR 2026
+            </span>
+          </div>
+
+          <div className="flex-1 px-8 md:px-14 py-10 md:py-12">
+            <h2
+              className="font-gasoek uppercase leading-[0.85] whitespace-nowrap overflow-visible"
+              style={{ fontSize: "clamp(3rem, 10vw, 9rem)", color: "#191C0F" }}
+            >
+              ¿QUÉ VAS&nbsp;
+              <span style={{ WebkitTextStroke: "2px #1a4a1e", color: "transparent" }}>
+                A ENCONTRAR?
+              </span>
+            </h2>
+          </div>
+
+          <Link to="/que-vas-a-encontrar" className="hidden md:block flex-shrink-0 pr-8">
             <button
-              className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest px-7 py-4 hover:opacity-80 transition-opacity whitespace-nowrap mb-1"
+              className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-6 py-3.5 hover:opacity-80 transition-opacity whitespace-nowrap"
               style={{ background: "#1a4a1e", color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}
             >
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3 h-3" />
               Descubrir
             </button>
           </Link>
         </div>
       </div>
 
-      {/* ── Mosaic grid: photo + 3 cards ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 border-b border-black/10">
-
-        {/* Left: speaker photo + botanical */}
-        <div className="grid grid-rows-2 border-r border-black/10">
-          {/* Speaker portrait */}
-          <div className="relative overflow-hidden min-h-[55vw] md:min-h-[28vw]">
-            <img
-              src={speakerImg}
-              alt="Ponentes Festival NATUR"
-              className="absolute inset-0 w-full h-full object-cover object-top"
-            />
-            <div
-              className="absolute inset-0"
-              style={{ background: "linear-gradient(to top, rgba(25,28,15,0.7) 0%, transparent 50%)" }}
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="font-gasoek text-[4.5vw] md:text-[2.2vw] uppercase leading-tight text-white">
-                Conferencistas<br />&amp; Ponentes
-              </p>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="w-4 h-px bg-white/40" />
-                <span className="text-[10px] uppercase tracking-widest text-white/40"
-                  style={{ fontFamily: "Unbounded, sans-serif" }}>
-                  Expertos nacionales e internacionales
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Botanical square */}
-          <div className="relative overflow-hidden min-h-[55vw] md:min-h-[28vw]">
-            <img
-              src={botanicaImg}
-              alt="Naturaleza NATUR"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-            />
-            <div
-              className="absolute inset-0"
-              style={{ background: "rgba(26,74,30,0.45)" }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <p
-                className="font-gasoek text-[7vw] md:text-[3.5vw] uppercase leading-none text-center"
-                style={{ color: "#cad95e" }}
+      {/* ── Three vertical stage pillars ── */}
+      <div className="grid grid-cols-1 md:grid-cols-3 border-b border-black/10">
+        {pillars.map((p, i) => (
+          <div
+            key={p.num}
+            className="relative flex flex-col justify-between p-8 md:p-10 min-h-[70vw] md:min-h-[42vw]"
+            style={{
+              background: p.bg,
+              borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : undefined,
+            }}
+          >
+            {/* Top: number + tag */}
+            <div className="flex items-start justify-between">
+              <span
+                className="text-[9px] font-bold uppercase tracking-widest px-2.5 py-[3px]"
+                style={{ background: `${p.accent}22`, color: p.accent, border: `1px solid ${p.accent}33`, fontFamily: "Unbounded, sans-serif" }}
               >
-                Naturaleza<br />&amp; Cultura
+                {p.tag}
+              </span>
+              <span
+                className="font-gasoek text-5xl leading-none opacity-15"
+                style={{ color: p.textColor }}
+              >
+                {p.num}
+              </span>
+            </div>
+
+            {/* Middle: giant title */}
+            <div className="flex-1 flex items-center py-4">
+              <h3
+                className="font-gasoek uppercase leading-[0.88] whitespace-pre-line"
+                style={{
+                  fontSize: "clamp(2rem, 6vw, 4.5rem)",
+                  color: p.textColor,
+                }}
+              >
+                {p.title}
+              </h3>
+            </div>
+
+            {/* Bottom: desc + detail */}
+            <div className="space-y-3">
+              <div className="w-full h-px" style={{ background: `${p.textColor}18` }} />
+              <p className="text-xs leading-relaxed" style={{ color: `${p.textColor}70`, fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
+                {p.desc}
               </p>
+              <span
+                className="inline-block text-[9px] font-bold uppercase tracking-widest px-2.5 py-[3px]"
+                style={{ background: p.accent, color: p.bg, fontFamily: "Unbounded, sans-serif" }}
+              >
+                {p.detail}
+              </span>
             </div>
           </div>
+        ))}
+      </div>
+
+      {/* ── Photo band: speaker image full-bleed with stat row ── */}
+      <div className="relative overflow-hidden" style={{ height: "38vw", minHeight: "240px", maxHeight: "480px" }}>
+        <img
+          src={speakerImg}
+          alt="Ponentes NATUR"
+          className="absolute inset-0 w-full h-full object-cover object-top"
+          style={{ filter: "grayscale(25%)" }}
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(25,28,15,0.82) 0%, rgba(25,28,15,0.3) 60%, transparent 100%)" }} />
+
+        {/* Left overlay */}
+        <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-center px-8 md:px-14 gap-2">
+          <p className="text-[9px] uppercase tracking-[0.35em] font-bold" style={{ color: "#cad95e", fontFamily: "Unbounded, sans-serif" }}>
+            Conferencistas &amp; Ponentes
+          </p>
+          <p className="font-gasoek text-3xl md:text-5xl uppercase leading-tight text-white max-w-xs">
+            Expertos Nacionales e Internacionales
+          </p>
         </div>
 
-        {/* Right: 3 stacked cards */}
-        <div className="flex flex-col divide-y"
-          style={{ borderColor: "rgba(25,28,15,0.1)" }}>
-          {items.map((item) => {
-            const Icon = item.Icon;
-            return (
-              <div
-                key={item.title}
-                className="flex-1 flex flex-col justify-between p-9 md:p-10 min-h-[200px]"
-                style={{ background: item.bg }}
-              >
-                {/* Top row */}
-                <div className="flex items-start justify-between mb-5">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-8 h-8 flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${item.accent}22`, border: `1px solid ${item.accent}44` }}
-                    >
-                      <Icon className="w-3.5 h-3.5" style={{ color: item.accent }} />
-                    </div>
-                    <span
-                      className="text-[9px] font-bold uppercase tracking-widest"
-                      style={{ color: item.accent, fontFamily: "Unbounded, sans-serif" }}
-                    >
-                      {item.tag}
-                    </span>
-                  </div>
-                  <span
-                    className="font-gasoek text-4xl leading-none opacity-15"
-                    style={{ color: item.textColor }}
-                  >
-                    {item.num}
-                  </span>
-                </div>
-
-                {/* Title + desc */}
-                <div>
-                  <h3
-                    className="font-gasoek text-2xl md:text-3xl uppercase leading-tight mb-3"
-                    style={{ color: item.textColor }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ color: `${item.textColor}80` }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+        {/* Right stat strip */}
+        <div className="absolute right-0 top-0 bottom-0 hidden md:flex flex-col justify-center gap-6 px-14">
+          {[["3", "Escenarios"], ["20+", "Ponentes"], ["2", "Días"]].map(([n, l]) => (
+            <div key={l} className="text-right">
+              <p className="font-gasoek text-4xl leading-none text-white">{n}</p>
+              <p className="text-[9px] uppercase tracking-widest text-white/35 mt-0.5" style={{ fontFamily: "Unbounded, sans-serif" }}>{l}</p>
+            </div>
+          ))}
         </div>
       </div>
 

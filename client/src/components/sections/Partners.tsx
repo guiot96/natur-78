@@ -14,39 +14,59 @@ export function Partners() {
   return (
     <section className="w-full" style={{ background: "#FCF8EE" }}>
 
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-8 md:px-14 pt-14 pb-10 border-b border-black/10">
-        <div>
-          <p className="text-[10px] tracking-[0.35em] uppercase font-bold mb-3"
-            style={{ color: "#2d7a32", fontFamily: "Unbounded, sans-serif" }}>
-            Aliados &amp; patrocinadores
-          </p>
-          <h2 className="font-gasoek text-5xl sm:text-6xl md:text-7xl uppercase leading-none" style={{ color: "#191C0F" }}>
-            NUESTROS<br />
-            <span style={{ color: "#1a4a1e" }}>ALIADOS</span>
-          </h2>
-        </div>
-        <p className="text-sm max-w-xs leading-relaxed text-right"
-          style={{ color: "rgba(25,28,15,0.45)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
-          Organizaciones comprometidas con el turismo sostenible y la conservación en Colombia
-        </p>
+      {/* ── Full-width label strip ── */}
+      <div
+        className="flex items-center justify-between px-8 md:px-14 py-5 border-b border-black/10"
+        style={{ background: "#FCF8EE" }}
+      >
+        <span
+          className="font-gasoek text-[6vw] md:text-[3vw] uppercase leading-none"
+          style={{ color: "#191C0F" }}
+        >
+          NUESTROS ALIADOS
+        </span>
+        <span
+          className="text-[9px] uppercase tracking-widest hidden md:block"
+          style={{ color: "rgba(25,28,15,0.3)", fontFamily: "Unbounded, sans-serif" }}
+        >
+          Turismo sostenible · Colombia
+        </span>
       </div>
 
-      {/* Logo grid — brutalist row, no cards */}
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 border-b border-black/10"
+      {/* ── Logo strip — no rounded cards, pure brutalist row ── */}
+      <div className="flex flex-wrap border-b border-black/10"
         style={{ borderLeft: "1px solid rgba(25,28,15,0.08)" }}>
         {partnerLogos.map((logo, i) => (
           <div
             key={i}
-            className="flex items-center justify-center p-8 md:p-10 border-r border-b border-black/10 hover:bg-black/5 transition-colors cursor-pointer"
+            className="flex items-center justify-center border-r border-b border-black/8 hover:bg-black/4 transition-colors cursor-pointer"
+            style={{
+              width: "calc(100% / 3)",
+              minWidth: "120px",
+              padding: "clamp(1.5rem, 3vw, 2.5rem)",
+            }}
           >
             <img
               src={logo}
               alt={`Aliado ${i + 1}`}
-              className="h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
+              className="object-contain opacity-60 hover:opacity-100 transition-opacity"
+              style={{ height: "clamp(24px, 3vw, 40px)", maxWidth: "120px" }}
             />
           </div>
         ))}
+
+        {/* Fill empty cell if odd count */}
+        <div
+          className="flex-1 border-r border-b border-black/8 flex items-center justify-center"
+          style={{ minWidth: "120px", padding: "clamp(1.5rem, 3vw, 2.5rem)", background: "#1a4a1e" }}
+        >
+          <span
+            className="text-[9px] uppercase tracking-widest text-center"
+            style={{ color: "rgba(202,217,94,0.4)", fontFamily: "Unbounded, sans-serif" }}
+          >
+            Tu marca<br />aquí
+          </span>
+        </div>
       </div>
 
     </section>
