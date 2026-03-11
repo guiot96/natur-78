@@ -95,12 +95,12 @@ export function HeaderButtons({}: HeaderButtonsProps) {
               </button>
             </Link>
 
-            {/* Burger / close */}
+            {/* Burger / close — visible on ALL screen sizes */}
             <button
               onClick={() => setOpen(v => !v)}
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
-              className="flex items-center gap-1.5 transition-colors duration-150 md:hidden"
-              style={{ color: open ? '#f5e03a' : 'rgba(255,255,255,0.7)' }}
+              className="flex items-center justify-center w-9 h-9 transition-colors duration-150"
+              style={{ color: open ? '#f5e03a' : 'rgba(255,255,255,0.65)' }}
             >
               {open ? (
                 <X className="w-5 h-5" />
