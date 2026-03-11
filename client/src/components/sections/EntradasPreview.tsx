@@ -42,22 +42,22 @@ export function EntradasPreview() {
           </div>
 
           {/* 2 días */}
-          <div className="p-8 flex flex-col gap-6 relative" style={{ background: '#e87fa0' }}>
-            <div className="absolute top-4 right-4 text-[10px] font-bold px-3 py-1 font-gasoek uppercase tracking-widest" style={{ background: '#f5e03a', color: '#191C0F' }}>
+          <div className="p-8 flex flex-col gap-6 relative" style={{ background: '#cad95e' }}>
+            <div className="absolute top-4 right-4 text-[10px] font-bold px-3 py-1 font-gasoek uppercase tracking-widest" style={{ background: '#191C0F', color: '#cad95e' }}>
               RECOMENDADO
             </div>
             <div>
-              <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.6)' }}>Entrada</p>
-              <h3 className="font-gasoek text-3xl uppercase" style={{ color: 'white' }}>2 DÍAS</h3>
+              <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(25,28,15,0.55)' }}>Entrada</p>
+              <h3 className="font-gasoek text-3xl uppercase" style={{ color: '#191C0F' }}>2 DÍAS</h3>
             </div>
             <div className="flex items-baseline gap-1">
-              <span className="font-gasoek text-5xl" style={{ color: 'white' }}>$70.000</span>
-              <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>COP</span>
+              <span className="font-gasoek text-5xl" style={{ color: '#191C0F' }}>$70.000</span>
+              <span className="text-sm" style={{ color: 'rgba(25,28,15,0.5)' }}>COP</span>
             </div>
-            <ul className="space-y-2 text-sm flex-1" style={{ color: 'rgba(255,255,255,0.85)' }}>
+            <ul className="space-y-2 text-sm flex-1" style={{ color: 'rgba(25,28,15,0.8)' }}>
               {["Acceso completo ambos días", "Todas las actividades", "Conciertos y programación", "Zona especial y networking"].map((f) => (
                 <li key={f} className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-white" />
+                  <span className="w-1 h-1 rounded-full" style={{ background: '#1a4a1e' }} />
                   {f}
                 </li>
               ))}

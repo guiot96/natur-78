@@ -25,18 +25,18 @@ const items = [
 
 export function QueVasPreview() {
   return (
-    <section className="w-full py-20 px-6" style={{ background: '#e87fa0' }}>
+    <section className="w-full py-20 px-6" style={{ background: '#FCF8EE' }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
           <div>
             <p
               className="text-xs tracking-[0.3em] uppercase mb-2 font-bold"
-              style={{ color: '#1a4a1e', fontFamily: "Unbounded, sans-serif" }}
+              style={{ color: '#2d7a32', fontFamily: "Unbounded, sans-serif" }}
             >
               Festival NATUR 2026
             </p>
-            <h2 className="font-gasoek text-4xl sm:text-5xl uppercase leading-tight" style={{ color: 'white' }}>
+            <h2 className="font-gasoek text-4xl sm:text-5xl uppercase leading-tight" style={{ color: '#191C0F' }}>
               ¿QUÉ VAS A<br />ENCONTRAR?
             </h2>
           </div>
@@ -49,19 +49,19 @@ export function QueVasPreview() {
         </div>
 
         {/* Items */}
-        <div className="grid sm:grid-cols-3 gap-px" style={{ background: 'rgba(255,255,255,0.2)' }}>
+        <div className="grid sm:grid-cols-3 gap-px" style={{ background: 'rgba(26,74,30,0.12)' }}>
           {items.map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.title} className="p-8 flex flex-col gap-4" style={{ background: '#e87fa0' }}>
+              <div key={item.title} className="p-8 flex flex-col gap-4" style={{ background: '#FCF8EE' }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.25)' }}>
-                    <Icon className="w-4 h-4" style={{ color: 'white' }} />
+                  <div className="w-9 h-9 flex items-center justify-center" style={{ background: '#cad95e' }}>
+                    <Icon className="w-4 h-4" style={{ color: '#191C0F' }} />
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.7)' }}>{item.tag}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider" style={{ color: '#2d7a32' }}>{item.tag}</span>
                 </div>
-                <h3 className="font-gasoek text-xl uppercase leading-tight" style={{ color: 'white' }}>{item.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.8)' }}>{item.desc}</p>
+                <h3 className="font-gasoek text-xl uppercase leading-tight" style={{ color: '#191C0F' }}>{item.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(25,28,15,0.65)' }}>{item.desc}</p>
               </div>
             );
           })}

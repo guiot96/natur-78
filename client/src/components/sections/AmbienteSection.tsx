@@ -17,7 +17,7 @@ export function AmbienteSection() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(26,74,30,0.75) 0%, rgba(26,74,30,0.4) 50%, rgba(232,127,160,0.35) 100%)",
+            "linear-gradient(135deg, rgba(26,74,30,0.80) 0%, rgba(26,74,30,0.45) 55%, rgba(26,74,30,0.20) 100%)",
         }}
       />
 

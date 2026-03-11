@@ -20,21 +20,21 @@ function SunDecor() {
 
 export function Stand() {
   return (
-    <section className="w-full py-20 px-6 relative overflow-hidden" style={{ background: '#c62828' }}>
+    <section className="w-full py-20 px-6 relative overflow-hidden" style={{ background: '#1a4a1e' }}>
       <SunDecor />
       <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 relative z-10">
         {/* Left */}
         <div className="flex-1">
           <p
             className="text-xs tracking-[0.3em] uppercase mb-4 font-bold"
-            style={{ color: 'rgba(255,220,200,0.8)', fontFamily: "Unbounded, sans-serif" }}
+            style={{ color: 'rgba(202,217,94,0.85)', fontFamily: "Unbounded, sans-serif" }}
           >
             Participa como marca
           </p>
           <h2 className="font-gasoek text-4xl sm:text-5xl md:text-6xl text-white uppercase leading-tight mb-6">
             RESERVA TU<br />STAND
           </h2>
-          <p className="text-base sm:text-lg leading-relaxed max-w-lg" style={{ color: 'rgba(255,220,200,0.85)' }}>
+          <p className="text-base sm:text-lg leading-relaxed max-w-lg" style={{ color: 'rgba(202,217,94,0.75)' }}>
             Sé parte de los emprendimientos y marcas que están construyendo el
             futuro del turismo sostenible. Conecta directamente con viajeros,
             aliados e inversores en el primer festival de turismo sostenible de
@@ -44,7 +44,7 @@ export function Stand() {
 
         {/* Right */}
         <div className="flex flex-col items-center lg:items-end gap-6">
-          <div className="flex items-center gap-3" style={{ color: 'rgba(255,220,200,0.8)' }}>
+          <div className="flex items-center gap-3" style={{ color: 'rgba(202,217,94,0.85)' }}>
             <Store className="w-8 h-8" />
             <span className="font-gasoek text-xl uppercase">Kinder · Agosto 2026</span>
           </div>
