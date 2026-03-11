@@ -1,5 +1,7 @@
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Feather } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const pillars = [
   {
@@ -25,7 +27,50 @@ const pillars = [
   },
 ];
 
+const CYCLE_MS = 4000;
+const TICK_MS = 50;
+
 export function HistoriasPreview() {
+  const [active, setActive] = useState(0);
+  const [progressDisplay, setProgressDisplay] = useState(0);
+  const startTimeRef = useRef(Date.now());
+  const rafRef = useRef<number | null>(null);
+  const mountedRef = useRef(true);
+
+  const tick = useCallback(() => {
+    if (!mountedRef.current) return;
+    const elapsed = Date.now() - startTimeRef.current;
+    const p = Math.min(elapsed / CYCLE_MS, 1);
+    setProgressDisplay(p);
+    if (p >= 1) {
+      startTimeRef.current = Date.now();
+      setActive((a) => (a + 1) % pillars.length);
+      setProgressDisplay(0);
+    }
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  const goTo = useCallback((idx: number) => {
+    setActive(idx);
+    startTimeRef.current = Date.now();
+    setProgressDisplay(0);
+  }, []);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    startTimeRef.current = Date.now();
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      mountedRef.current = false;
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [tick]);
+
+  const current = pillars[active];
+  const inactiveIndices = pillars
+    .map((_, i) => i)
+    .filter((i) => i !== active);
+
   return (
     <section className="w-full" style={{ background: "#191C0F" }}>
 
@@ -86,54 +131,144 @@ export function HistoriasPreview() {
         </div>
       </div>
 
-      {/* ── Three thematic pillars ── */}
-      <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/8">
-        {pillars.map((p, i) => (
-          <div
-            key={p.num}
-            className="flex flex-col justify-between p-8 sm:p-10 md:p-12 min-h-[52vw] md:min-h-[34vw]"
-            style={{
-              background: p.bg,
-              borderRight: i < 2 ? "1px solid rgba(255,255,255,0.06)" : undefined,
-              borderBottom: "1px solid rgba(255,255,255,0.06)",
-            }}
-          >
-            {/* Top */}
-            <div className="flex items-start justify-between">
-              <span
-                className="text-[9px] font-bold uppercase tracking-widest px-2 py-[2px]"
-                style={{ background: `${p.accent}18`, color: p.accent, border: `1px solid ${p.accent}30`, fontFamily: "Unbounded, sans-serif" }}
-              >
-                Eje temático
-              </span>
-              <span
-                className="text-4xl leading-none opacity-10 text-white tabular-nums"
-                style={{ fontFamily: "monospace" }}
-              >
-                {p.num}
-              </span>
-            </div>
+      {/* ── Animated thematic pillars ── */}
+      <div className="border-b border-white/8">
+        <div className="flex flex-col md:flex-row">
 
-            {/* Middle: giant category name */}
-            <div className="py-6">
-              <h3
-                className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
-                style={{ fontSize: "clamp(1.4rem, 4vw, 2.8rem)", color: "rgba(255,255,255,0.9)" }}
+          {/* Featured card */}
+          <div className="relative flex-1 min-h-[56vw] md:min-h-[34vw] overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                data-testid="featured-card"
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.45, ease: "easeInOut" }}
+                className="absolute inset-0 flex flex-col justify-between p-8 sm:p-10 md:p-12"
+                style={{ background: current.bg }}
               >
-                {p.title}
-              </h3>
-            </div>
+                <div className="flex items-start justify-between">
+                  <span
+                    className="text-[9px] font-bold uppercase tracking-widest px-2 py-[2px]"
+                    style={{
+                      background: `${current.accent}18`,
+                      color: current.accent,
+                      border: `1px solid ${current.accent}30`,
+                      fontFamily: "Unbounded, sans-serif",
+                    }}
+                  >
+                    Eje temático
+                  </span>
+                  <span
+                    className="text-5xl md:text-7xl leading-none opacity-10 text-white tabular-nums"
+                    style={{ fontFamily: "monospace" }}
+                  >
+                    {current.num}
+                  </span>
+                </div>
 
-            {/* Bottom */}
-            <div>
-              <div className="w-full h-px mb-4" style={{ background: "rgba(255,255,255,0.08)" }} />
-              <p className="text-xs leading-relaxed"
-                style={{ color: "rgba(255,255,255,0.38)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}>
-                {p.desc}
-              </p>
+                <div className="py-6">
+                  <motion.h3
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.15, duration: 0.35 }}
+                    className="font-unbounded font-bold uppercase leading-[0.9] tracking-tight"
+                    style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)", color: "rgba(255,255,255,0.9)" }}
+                  >
+                    {current.title}
+                  </motion.h3>
+                </div>
+
+                <div>
+                  <div className="w-full h-px mb-4" style={{ background: "rgba(255,255,255,0.08)" }} />
+                  <motion.p
+                    initial={{ y: 12, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.25, duration: 0.35 }}
+                    className="text-xs md:text-sm leading-relaxed max-w-lg"
+                    style={{ color: "rgba(255,255,255,0.45)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+                  >
+                    {current.desc}
+                  </motion.p>
+                </div>
+
+                {/* Progress bar */}
+                <div
+                  role="progressbar"
+                  aria-valuenow={Math.round(progressDisplay * 100)}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  className="absolute bottom-0 left-0 right-0 h-[3px]"
+                  style={{ background: "rgba(255,255,255,0.06)" }}
+                >
+                  <div
+                    className="h-full"
+                    style={{ background: current.accent, width: `${progressDisplay * 100}%`, transition: "width 50ms linear" }}
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Compact selector tabs — vertical on desktop, horizontal pills on mobile */}
+          <div className="flex flex-row md:flex-col md:w-[260px] lg:w-[300px] border-t md:border-t-0 md:border-l border-white/8">
+            {inactiveIndices.map((idx) => {
+              const p = pillars[idx];
+              return (
+                <button
+                  key={p.num}
+                  data-testid={`pillar-tab-${p.title.toLowerCase()}`}
+                  onClick={() => goTo(idx)}
+                  className="flex-1 md:flex-none flex items-center gap-4 px-5 py-5 md:px-7 md:py-8 text-left transition-colors duration-200 hover:bg-white/[0.04] group"
+                  style={{
+                    borderBottom: "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <span
+                    className="text-lg md:text-2xl tabular-nums opacity-20 group-hover:opacity-40 transition-opacity text-white"
+                    style={{ fontFamily: "monospace" }}
+                  >
+                    {p.num}
+                  </span>
+                  <div className="min-w-0">
+                    <span
+                      className="block text-xs md:text-sm font-bold uppercase tracking-wide text-white/60 group-hover:text-white/80 transition-colors"
+                      style={{ fontFamily: "Unbounded, sans-serif" }}
+                    >
+                      {p.title}
+                    </span>
+                    <span
+                      className="hidden md:block text-[10px] leading-relaxed mt-1 text-white/25 group-hover:text-white/35 transition-colors line-clamp-2"
+                      style={{ fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+                    >
+                      {p.desc}
+                    </span>
+                  </div>
+                  <div
+                    className="ml-auto w-1.5 h-1.5 rounded-full flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ background: p.accent }}
+                  />
+                </button>
+              );
+            })}
+
+            {/* Dot indicators */}
+            <div className="hidden md:flex items-center justify-center gap-2 py-4 px-7">
+              {pillars.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  className="w-2 h-2 rounded-full transition-all duration-300"
+                  style={{
+                    background: i === active ? "#f5e03a" : "rgba(255,255,255,0.15)",
+                    transform: i === active ? "scale(1.3)" : "scale(1)",
+                  }}
+                />
+              ))}
             </div>
           </div>
-        ))}
+        </div>
       </div>
 
       {/* ── CTA strip ── */}
