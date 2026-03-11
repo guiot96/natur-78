@@ -16,7 +16,7 @@ export default function ExperienciasPage() {
 
   // Fetch user's experiences
   const { data: experiences = [], isLoading: experiencesLoading } = useQuery({
-    queryKey: ['/api/experiences/my'],
+    queryKey: ['/api/experiences/me'],
     staleTime: 5 * 60 * 1000,
   }) as { data: any[]; isLoading: boolean };
 
@@ -86,7 +86,7 @@ export default function ExperienciasPage() {
                   <div className="p-6">
                     <ExperienceForm onClose={() => {
                       setShowExperienceForm(false);
-                      queryClient.invalidateQueries({ queryKey: ['/api/experiences/my'] });
+                      queryClient.invalidateQueries({ queryKey: ['/api/experiences/me'] });
                     }} />
                   </div>
                 </SheetContent>

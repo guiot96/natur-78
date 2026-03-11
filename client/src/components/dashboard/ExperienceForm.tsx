@@ -654,6 +654,7 @@ const ExperienceForm = ({ onClose }: { onClose: () => void }) => {
         description: "Tu experiencia ha sido creada exitosamente.",
       });
       queryClient.invalidateQueries({ queryKey: ['/api/experiences'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/experiences/me'] });
       onClose();
     },
     onError: (error: any) => {

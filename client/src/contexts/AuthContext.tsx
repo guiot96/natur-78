@@ -49,16 +49,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const checkSession = async () => {
       try {
         const response = await apiRequest('/api/auth/me', { method: 'GET' });
-        if (response.user) {
-          setUser(response.user);
-          localStorage.setItem('user', JSON.stringify(response.user));
-        } else {
-          setUser(null);
-          localStorage.removeItem('user');
+        // /api/auth/me returns the user object directly (not nested)
+        if (response && response.id) {
+          setUser(response);
+          localStorage.setItem('user', JSON.stringify(response));
         }
+        // If no valid response, keep existing localStorage user
       } catch (error) {
-        // If 401, session is invalid
-        console.log("Session invalid or not found");
+        // If 401, session is invalid — clear state
+        setUser(null);
+        localStorage.removeItem('user');
       } finally {
         setLoading(false);
       }

@@ -54,48 +54,27 @@ export default function HomePage() {
   const [selectedCity, setSelectedCity] = useState("");
   const [showFilters, setShowFilters] = useState(false);
 
-  // Redirección si no es empresa
+  // Compute effective user before any hooks (cannot call hooks conditionally)
+  const effectiveUser = user || (typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null);
+
+  // Auth redirect effect
   useEffect(() => {
-    if (!authLoading && (!user || (user.role !== 'empresa' && user.role !== 'admin'))) {
+    if (!authLoading && (!effectiveUser || (effectiveUser.role !== 'empresa' && effectiveUser.role !== 'admin'))) {
       window.location.replace('/auth/empresas');
     }
-  }, [user, authLoading]);
+  }, [effectiveUser, authLoading]);
 
-  // Fetch portal statistics
+  // ALL queries must be declared before any conditional returns
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['/api/portal/stats'],
     staleTime: 5 * 60 * 1000,
   }) as { data: PortalStats; isLoading: boolean };
 
-  if (authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-[#0a1a0a]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#cad95e]"></div>
-      </div>
-    );
-  }
-
-  // Si no hay usuario en el contexto, intentar recuperar de localStorage para rapidez
-  const effectiveUser = user || (typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null);
-
-  if (!effectiveUser) {
-    window.location.replace('/auth/empresas');
-    return null;
-  }
-
-  // Redirección si no es empresa
-  if (effectiveUser.role !== 'empresa' && effectiveUser.role !== 'admin') {
-    window.location.replace('/auth/empresas');
-    return null;
-  }
-
-  // Fetch featured blogs
   const { data: blogs, isLoading: blogsLoading } = useQuery({
     queryKey: ['/api/portal/blogs'],
     staleTime: 10 * 60 * 1000,
   }) as { data: BlogPost[]; isLoading: boolean };
 
-  // Fetch filter options
   const { data: categoriesData = [] } = useQuery({
     queryKey: ['/api/search/filters/categories'],
     staleTime: 15 * 60 * 1000,
@@ -122,19 +101,12 @@ export default function HomePage() {
   });
   const cities = Array.isArray(citiesData) ? citiesData : [];
 
-  // Build search params
-  const buildSearchParams = () => {
-    const params: Record<string, string> = {};
-    if (searchQuery) params.query = searchQuery;
-    if (selectedCategory) params.category = selectedCategory;
-    if (selectedSubcategory) params.subcategory = selectedSubcategory;
-    if (selectedCountry) params.country = selectedCountry;
-    if (selectedCity) params.city = selectedCity;
-    return params;
-  };
-
-  // Enhanced search with filters
-  const searchParams = buildSearchParams();
+  const searchParams: Record<string, string> = {};
+  if (searchQuery) searchParams.query = searchQuery;
+  if (selectedCategory) searchParams.category = selectedCategory;
+  if (selectedSubcategory) searchParams.subcategory = selectedSubcategory;
+  if (selectedCountry) searchParams.country = selectedCountry;
+  if (selectedCity) searchParams.city = selectedCity;
   const hasActiveFilters = Object.keys(searchParams).length > 0;
 
   const { data: searchResults = [] } = useQuery({
@@ -156,6 +128,19 @@ export default function HomePage() {
       setSelectedCity("");
     }
   }, [selectedCountry]);
+
+  // Now safe to do conditional returns (all hooks are above)
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#0a1a0a]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#cad95e]"></div>
+      </div>
+    );
+  }
+
+  if (!effectiveUser || (effectiveUser.role !== 'empresa' && effectiveUser.role !== 'admin')) {
+    return null;
+  }
 
   // Clear all filters
   const clearAllFilters = () => {

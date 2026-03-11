@@ -58,8 +58,8 @@ export default function ConfigPage() {
   // Update profile mutation
   const updateProfileMutation = useMutation({
     mutationFn: async (data: any) => {
-      return apiRequest('/api/users/profile', {
-        method: 'PATCH',
+      return apiRequest('/api/auth/update-profile', {
+        method: 'PUT',
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
       });

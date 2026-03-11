@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, Link, useRoute } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Map, Building2, Star, MessageCircle, Settings, ChevronDown, LogOut, UserIcon, Bell, Home, MapPin, CheckCircle } from "lucide-react";
@@ -93,6 +93,13 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
   });
 
   const { toast } = useToast();
+
+  // Central auth guard — redirect to login if not authenticated
+  useEffect(() => {
+    if (!userLoading && !currentUser) {
+      navigate('/auth/empresas');
+    }
+  }, [userLoading, currentUser, navigate]);
 
   const handleLogout = async () => {
     try {

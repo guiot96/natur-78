@@ -146,19 +146,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(401).json({ error: "Invalid credentials" });
       }
 
-      // Check if email is verified AND registration complete for empresa users
-      if (user.role === 'empresa' && (!user.emailVerified || !user.registrationComplete)) {
-        return res.status(403).json({ 
-          error: user.emailVerified 
-            ? "Complete company registration is required for portal access"
-            : "Email not verified", 
-          message: user.emailVerified 
-            ? "Please complete your company registration to access the portal"
-            : "Please verify your email before logging in",
-          requiresVerification: !user.emailVerified,
-          requiresRegistration: !user.registrationComplete
-        });
-      }
+      // Check email verification (registrationComplete no longer blocks login)
 
       // Verify password (using bcrypt for hashed passwords or plain comparison for legacy)
       const isPasswordValid = user.password?.startsWith('$2') 
@@ -179,7 +167,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           return res.status(500).json({ error: "Session save failed" });
         } else {
           console.log("✅ Session saved successfully");
-          res.json({ user: { id: user.id, email: user.email } });
+          const { password: _pw, verificationToken: _vt, verificationTokenExpiry: _vte, ...safeUser } = user;
+          res.json({ user: safeUser });
         }
       });
     } catch (error) {
@@ -486,6 +475,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(experiences);
     } catch (error) {
       console.error("Get user experiences error:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.get("/api/experiences/me", requireAuth, async (req: any, res) => {
+    try {
+      const experiences = await storage.getExperiences(req.user.id);
+      res.json(experiences);
+    } catch (error) {
+      console.error("Get my experiences error:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });

@@ -93,6 +93,16 @@ Preferred communication style: Simple, everyday language.
 - Enhanced map view with improved mobile map point visibility and coordinate validation
 - Automated default values for removed registration steps to maintain data integrity
 
+### Portal Empresas Bug Fixes (March 2026)
+- **AuthContext session check bug** — Fixed: `/api/auth/me` returns user directly, not `{user: ...}`. Now checks `response.id` to validate session.
+- **Login no longer blocks without `registrationComplete`** — Empresa users can log in immediately after registering; removed the `registrationComplete` gate.
+- **Login returns full user data** — Response now includes all safe user fields (role, name, company, etc.), not just id+email.
+- **Added `/api/experiences/me` backend endpoint** — Authenticated endpoint to fetch current user's own experiences.
+- **Fixed `ExperienciasPage`** — Changed query from non-existent `/api/experiences/my` to `/api/experiences/me`; fixed cache invalidation keys.
+- **React hooks violation in `HomePage`** — Restructured to call all hooks before any conditional returns.
+- **Central auth guard in `PortalEmpresasLayout`** — Redirects unauthenticated users to `/auth/empresas` centrally.
+- **Fixed `ConfigPage` profile update** — Changed endpoint from non-existent `/api/users/profile` to `/api/auth/update-profile`.
+
 ## External Dependencies
 
 - `@neondatabase/serverless`: Serverless PostgreSQL connection
