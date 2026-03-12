@@ -54,9 +54,12 @@ export function Manifiesto() {
                 className="text-base md:text-lg leading-relaxed"
                 style={{ color: "rgba(25,28,15,0.60)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
               >
-                Un espacio donde la industria, las comunidades y los viajeros se
-                encuentran para construir el futuro del turismo consciente en
-                Colombia y el mundo.
+                El Festival NATUR nace del amor profundo por Colombia y de la
+                convicción de que viajar también puede ser una forma de cuidar.
+                Es un lugar común donde se encuentran las historias más
+                transformadoras del turismo responsable del país: comunidades,
+                viajeros, emprendedores y artistas que han decidido habitar el
+                territorio desde la cultura del cuidado.
               </p>
             </div>
             <div className="px-8 md:px-14 py-8 md:py-10">
@@ -64,10 +67,10 @@ export function Manifiesto() {
                 className="text-base md:text-lg leading-relaxed"
                 style={{ color: "rgba(25,28,15,0.60)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
               >
-                Festival NATUR nace de la convicción de que el turismo puede ser
-                una fuerza transformadora. Reunimos a emprendedores, líderes de la
-                industria, comunidades locales y viajeros conscientes en un festival
-                que celebra y acelera el turismo sostenible.
+                Durante dos días, NATUR se convierte en un espacio para aprender,
+                bailar, compartir y volver a mirar a Colombia con otros ojos.
+                Porque viajar también es un acto de sanar, transformar y
+                enseñarnos a vivir juntos.
               </p>
             </div>
           </div>

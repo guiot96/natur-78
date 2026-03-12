@@ -41,7 +41,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="overflow-x-hidden w-full pb-16 md:pb-0">
+    <div className="overflow-x-hidden w-full">
       <HeaderButtons />
 
       {/* 1. Hero */}

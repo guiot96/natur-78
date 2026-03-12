@@ -61,7 +61,7 @@ function BottomStrip({ tagBg, tagColor, tagText, venueBg, venueColor, venueText 
 
 export default function Tickets() {
   return (
-    <div className="min-h-screen overflow-x-hidden pb-16 md:pb-0" style={{ background: P.dark }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: P.dark }}>
       <HeaderButtons />
 
       <main className="pt-14 grid grid-cols-1 md:grid-cols-3">

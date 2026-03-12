@@ -31,7 +31,7 @@ const team = [
 
 export default function About() {
   return (
-    <div className="min-h-screen overflow-x-hidden pb-16 md:pb-0" style={{ background: P.cream }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: P.cream }}>
       <HeaderButtons />
 
       {/* Hero */}
