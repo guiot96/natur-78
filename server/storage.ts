@@ -1,5 +1,5 @@
 import { users, userProfiles, experiences, companies, type User, type InsertUser, type UserProfile, type InsertUserProfile, type Experience, type InsertExperience, type Company, type InsertCompany } from "@shared/schema";
-import { messages, conversations, type Message, type InsertMessage, type Conversation, type InsertConversation } from "@shared/messaging-schema";
+import { messages, conversations, forumPosts, type Message, type InsertMessage, type Conversation, type InsertConversation, type ForumPost, type InsertForumPost } from "@shared/messaging-schema";
 import { db, pool } from "./db";
 import { eq, desc, or, and } from "drizzle-orm";
 
@@ -48,18 +48,24 @@ export interface IStorage {
   markMessageAsRead(messageId: number): Promise<void>;
   getOrCreateConversation(userId1: number, userId2: number): Promise<Conversation>;
   searchUsers(query: string): Promise<User[]>;
+  
+  // Forum methods
+  getForumPosts(): Promise<ForumPost[]>;
+  createForumPost(post: InsertForumPost): Promise<ForumPost>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private userProfiles: Map<number, UserProfile>;
   private experiences: Map<number, Experience>;
+  private forumPostsList: ForumPost[];
   currentId: number;
 
   constructor() {
     this.users = new Map();
     this.userProfiles = new Map();
     this.experiences = new Map();
+    this.forumPostsList = [];
     this.currentId = 1;
   }
 
@@ -460,6 +466,7 @@ export class MemStorage implements IStorage {
       content: messageData.content,
       messageType: messageData.messageType || "text",
       isRead: messageData.isRead || false,
+      mentions: messageData.mentions || null,
       createdAt: new Date()
     };
     return message;
@@ -514,6 +521,23 @@ export class MemStorage implements IStorage {
       user.registrationComplete &&
       user.coordinates
     );
+  }
+
+  async getForumPosts(): Promise<ForumPost[]> {
+    return [...this.forumPostsList].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  }
+
+  async createForumPost(postData: InsertForumPost): Promise<ForumPost> {
+    const id = this.currentId++;
+    const post: ForumPost = {
+      id,
+      userId: postData.userId,
+      content: postData.content,
+      mentions: postData.mentions || null,
+      createdAt: new Date(),
+    };
+    this.forumPostsList.push(post);
+    return post;
   }
 }
 
@@ -892,8 +916,21 @@ export class DatabaseStorage implements IStorage {
       .orderBy(desc(users.createdAt));
     return result;
   }
-}
 
-// Use DatabaseStorage for production, MemStorage for development/testing
+  async getForumPosts(): Promise<ForumPost[]> {
+    try {
+      const result = await db.select().from(forumPosts).orderBy(desc(forumPosts.createdAt));
+      return result;
+    } catch (error) {
+      console.error("DB Error in getForumPosts:", error);
+      return [];
+    }
+  }
+
+  async createForumPost(postData: InsertForumPost): Promise<ForumPost> {
+    const result = await db.insert(forumPosts).values(postData).returning();
+    return result[0];
+  }
+}
 
 export const storage = new DatabaseStorage();

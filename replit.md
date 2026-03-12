@@ -61,7 +61,7 @@ Preferred communication style: Simple, everyday language.
 - **Comprehensive Directories**:
     - **Portal Empresas (B2B)**: Minimalist, mobile-first dashboard with full-screen interactive map, transparent header navigation, and optimized mobile views. Includes a 6-step wizard for businesses to create and manage offerings.
     - **Portal Viajeros (B2C)**: Marketplace for browsing, filtering, and booking sustainable tourism experiences.
-- **Messaging System**: Simple, B2B-focused chat system.
+- **Messaging System**: B2B chat system with private conversations, a public Foro General for all companies, and @mention support with autocomplete dropdown and visual highlighting.
 - **Event Agenda**: Two-division agenda (VIVE NATUR and NATUR PRO) with filtering and brutalist design.
 - **Ticket Sales**: Dedicated page with different access tiers.
 - **User Categories**: Robust classification for various tourism sector roles with specialized subcategories.
@@ -122,6 +122,15 @@ Preferred communication style: Simple, everyday language.
 - **ProfileMap WebGL crash** — Added try-catch around Mapbox initialization; shows coordinate/name fallback card when WebGL is unavailable.
 - **ProfileMap accent color** — Updated marker color from `#CAD95E` (lime) to `#f5e03a` (NATUR yellow).
 - **Test user** — `96studio.live96@gmail.com` / `natur2026` (empresa role, 96 Studio company, Bogotá coordinates).
+
+### Chat: Foro General y @Menciones (March 2026)
+- **Forum General tab** — Added "Foro" tab alongside "Chats" in MensajesPage sidebar. Forum shows all public posts from portal companies.
+- **Forum posts backend** — New `forum_posts` table (id, user_id, content, mentions[], created_at) with REST routes GET/POST `/api/forum/posts`.
+- **@Mentions autocomplete** — Typing "@" in any message input (chat or forum) shows dropdown of users/companies to tag. Mentions rendered with cyan highlight.
+- **Real user names in conversations** — GET `/api/conversations` now returns `otherUser` with firstName, lastName, companyName, profilePicture instead of generic "Usuario N".
+- **Message read status** — Messages display single check (sent) or double check (read) icons.
+- **Enter to send / Shift+Enter for newline** — Textarea-based input supports multi-line and keyboard shortcuts.
+- **Mention notification badge** — Foro tab shows red badge count when user has been mentioned in forum posts.
 
 ## External Dependencies
 

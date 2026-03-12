@@ -1392,11 +1392,110 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/mentions/unread-count", requireAuth, async (req: any, res) => {
+    try {
+      const forumPostsList = await storage.getForumPosts();
+      const forumMentions = forumPostsList.filter(
+        (p) => p.mentions && p.mentions.includes(req.user.id) && p.userId !== req.user.id
+      ).length;
+
+      const allConversations = await storage.getConversations(req.user.id);
+      let chatMentions = 0;
+      for (const conv of allConversations) {
+        const msgs = await storage.getMessages(conv.id);
+        chatMentions += msgs.filter(
+          (m) => m.mentions && m.mentions.includes(req.user.id) && m.senderId !== req.user.id && !m.isRead
+        ).length;
+      }
+
+      res.json({ forumMentions, chatMentions, total: forumMentions + chatMentions });
+    } catch (error) {
+      console.error("Error fetching mention count:", error);
+      res.status(500).json({ error: "Failed to fetch mention count" });
+    }
+  });
+
+  // Forum routes
+  app.get("/api/forum/posts", requireAuth, async (req: any, res) => {
+    try {
+      const posts = await storage.getForumPosts();
+      const allUsers = await storage.getUsers();
+      const enrichedPosts = posts.map(post => {
+        const author = allUsers.find(u => u.id === post.userId);
+        return {
+          ...post,
+          author: author ? {
+            id: author.id,
+            firstName: author.firstName,
+            lastName: author.lastName,
+            companyName: author.companyName,
+            profilePicture: author.profilePicture,
+          } : null,
+        };
+      });
+      res.json(enrichedPosts);
+    } catch (error) {
+      console.error("Error fetching forum posts:", error);
+      res.status(500).json({ error: "Failed to fetch forum posts" });
+    }
+  });
+
+  app.post("/api/forum/posts", requireAuth, async (req: any, res) => {
+    try {
+      const { content, mentions } = req.body;
+      if (!content || !content.trim()) {
+        return res.status(400).json({ error: "Content is required" });
+      }
+      const post = await storage.createForumPost({
+        userId: req.user.id,
+        content: content.trim(),
+        mentions: mentions || null,
+      });
+      const author = await storage.getUser(req.user.id);
+      res.json({
+        ...post,
+        author: author ? {
+          id: author.id,
+          firstName: author.firstName,
+          lastName: author.lastName,
+          companyName: author.companyName,
+          profilePicture: author.profilePicture,
+        } : null,
+      });
+    } catch (error) {
+      console.error("Error creating forum post:", error);
+      res.status(500).json({ error: "Failed to create forum post" });
+    }
+  });
+
   // Messaging routes
   app.get("/api/conversations", requireAuth, async (req: any, res) => {
     try {
-      const conversations = await storage.getConversations(req.user.id);
-      res.json(conversations);
+      const convs = await storage.getConversations(req.user.id);
+      const allUsers = await storage.getUsers();
+      const enriched = convs.map(conv => {
+        const otherId = conv.participant1Id === req.user.id ? conv.participant2Id : conv.participant1Id;
+        const otherUser = allUsers.find(u => u.id === otherId);
+        return {
+          ...conv,
+          otherUser: otherUser ? {
+            id: otherUser.id,
+            email: otherUser.email,
+            firstName: otherUser.firstName,
+            lastName: otherUser.lastName,
+            companyName: otherUser.companyName,
+            profilePicture: otherUser.profilePicture,
+          } : {
+            id: otherId,
+            email: `user${otherId}@example.com`,
+            firstName: 'Usuario',
+            lastName: `${otherId}`,
+            companyName: null,
+            profilePicture: null,
+          },
+        };
+      });
+      res.json(enriched);
     } catch (error) {
       console.error("Error fetching conversations:", error);
       res.status(500).json({ error: "Failed to fetch conversations" });
@@ -1444,18 +1543,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/messages", requireAuth, async (req: any, res) => {
     try {
-      const { receiverId, content, messageType = "text" } = req.body;
+      const { receiverId, content, messageType = "text", mentions } = req.body;
       
-      // Create or get conversation
       const conversation = await storage.getOrCreateConversation(req.user.id, receiverId);
       
-      // Send message
       const message = await storage.sendMessage({
         senderId: req.user.id,
         receiverId,
         content,
         messageType,
-        isRead: false
+        isRead: false,
+        mentions: mentions || null,
       });
 
       res.json(message);
@@ -1494,11 +1592,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const query = req.query.q as string;
       if (!query) {
-        return res.json([]);
+        const allUsers = await storage.getUsers();
+        const safe = allUsers
+          .filter((u: any) => u.id !== req.user.id)
+          .map((u: any) => ({
+            id: u.id,
+            email: u.email,
+            firstName: u.firstName,
+            lastName: u.lastName,
+            companyName: u.companyName,
+            profilePicture: u.profilePicture,
+          }));
+        return res.json(safe);
       }
 
       const users = await storage.searchUsers(query);
-      res.json(users.filter((user: any) => user.id !== req.user.id)); // Exclude current user
+      const safe = users
+        .filter((user: any) => user.id !== req.user.id)
+        .map((u: any) => ({
+          id: u.id,
+          email: u.email,
+          firstName: u.firstName,
+          lastName: u.lastName,
+          companyName: u.companyName,
+          profilePicture: u.profilePicture,
+        }));
+      res.json(safe);
     } catch (error) {
       console.error("Error searching users:", error);
       res.status(500).json({ error: "Failed to search users" });
