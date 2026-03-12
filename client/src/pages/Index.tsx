@@ -8,7 +8,6 @@ import { Participation } from "@/components/sections/Participation";
 import { Manifiesto } from "@/components/sections/Manifiesto";
 import { AmbienteSection } from "@/components/sections/AmbienteSection";
 import { Stand } from "@/components/sections/Stand";
-import { HistoriasPreview } from "@/components/sections/HistoriasPreview";
 import { Location } from "@/components/sections/Location";
 import { Footer } from "@/components/sections/Footer";
 import { HeaderButtons } from "@/components/layout/HeaderButtons";
@@ -61,15 +60,6 @@ const Index = () => {
       <EntradasPreview />
 
       {/* Ticker between sections — reversed */}
-      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
-
-      {/* Divisor animado */}
-      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
-
-      {/* Historias Reales */}
-      <HistoriasPreview />
-
-      {/* Divisor animado */}
       <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
 
       {/* Divisor animado */}
