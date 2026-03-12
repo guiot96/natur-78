@@ -69,7 +69,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6">
+          <nav className="hidden lg:flex items-center gap-4 lg:gap-5 xl:gap-6">
             {NAV.map((item) => (
               <Link key={item.href} to={item.href}>
                 <span
@@ -89,7 +89,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
 
           {/* Right: CTA + burger (desktop only) */}
           <div className="flex items-center gap-3">
-            <Link to="/tickets" className="hidden md:block">
+            <Link to="/tickets" className="hidden lg:block">
               <button
                 className="flex items-center gap-1.5 text-[9px] xl:text-[10px] font-bold uppercase tracking-[0.12em] px-3.5 py-2 transition-opacity hover:opacity-80"
                 style={{ background: '#f5e03a', color: '#191C0F', fontFamily: 'Unbounded, sans-serif' }}
@@ -103,7 +103,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
             <button
               onClick={() => setOpen(v => !v)}
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
-              className="hidden md:flex items-center justify-center w-9 h-9 transition-colors duration-150"
+              className="hidden lg:flex items-center justify-center w-9 h-9 transition-colors duration-150"
               style={{ color: open ? '#f5e03a' : 'rgba(255,255,255,0.65)' }}
             >
               {open ? (
@@ -195,7 +195,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
 
       {/* ── Mobile bottom navigation bar ── */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex items-center justify-around"
+        className="fixed bottom-0 left-0 right-0 z-50 lg:hidden flex items-center justify-around"
         style={{
           background: '#191C0F',
           borderTop: '1px solid rgba(255,255,255,0.08)',
