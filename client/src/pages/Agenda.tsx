@@ -124,20 +124,44 @@ const academicSessions: { dia1: AcademicSession[]; dia2: AcademicSession[] } = {
   ],
 };
 
-const tallerSessions = {
-  dia1: [
-    { time: '10:00', title: 'Bioconstrucción', speakers: ['Colectivo de construcción natural'] },
-    { time: '11:30', title: 'Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
-    { time: '13:00', title: 'Yoga', speakers: ['Instructores de bienestar'] },
-    { time: '15:00', title: 'Percusión con Señas', speakers: ['Artistas e intérpretes'] },
-  ],
-  dia2: [
-    { time: '10:00', title: 'Mapas Interactivos', speakers: ['Cartógrafos y geógrafos'] },
-    { time: '11:30', title: 'Vibecoding para Sostenibilidad', speakers: ['Desarrolladores eco-tech'] },
-    { time: '13:00', title: 'Yoga', speakers: ['Instructores de bienestar'] },
-    { time: '15:00', title: 'Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
-  ],
-};
+const talleres = [
+  {
+    num: '01',
+    title: 'Bioconstrucción',
+    tag: 'Territorio',
+    desc: 'Introducción a técnicas de construcción con materiales naturales y sostenibles, inspiradas en saberes tradicionales y soluciones contemporáneas para habitar el territorio de manera responsable.',
+  },
+  {
+    num: '02',
+    title: 'Bombas de Semillas',
+    tag: 'Biodiversidad',
+    desc: 'Un taller práctico para aprender a crear bombas de semillas que ayudan a regenerar espacios verdes y a promover la biodiversidad en entornos urbanos.',
+  },
+  {
+    num: '03',
+    title: 'Yoga y Bienestar',
+    tag: 'Bienestar',
+    desc: 'Un espacio para conectar cuerpo, respiración y naturaleza a través de una práctica de yoga abierta a todos los niveles.',
+  },
+  {
+    num: '04',
+    title: 'Automasajes',
+    tag: 'Autocuidado',
+    desc: 'Técnicas sencillas de autocuidado para liberar tensiones, mejorar la circulación y reconectar con el cuerpo en medio del ritmo del festival.',
+  },
+  {
+    num: '05',
+    title: 'Percusión con Señas',
+    tag: 'Música',
+    desc: 'Una experiencia colectiva de música y ritmo donde los participantes crean una orquesta espontánea guiada por un lenguaje de señas musicales.',
+  },
+  {
+    num: '06',
+    title: 'Mapas Interactivos',
+    tag: 'Territorio',
+    desc: 'Exploración de herramientas digitales y participativas para crear mapas que cuentan historias del territorio, las comunidades y el turismo sostenible.',
+  },
+];
 
 const rumbaSessions = {
   dia1: [
@@ -374,7 +398,6 @@ function SectionHeader({ num, label, sub, accent }: { num: string; label: string
 /* ─── PAGE ──────────────────────────────────────────────────── */
 export default function Agenda() {
   const [academicDay, setAcademicDay] = useState(0);
-  const [tallerDay, setTallerDay] = useState(0);
   const [rumbaDay, setRumbaDay] = useState(0);
   const [historiasDay, setHistoriasDay] = useState(0);
 
@@ -388,7 +411,6 @@ export default function Agenda() {
   };
 
   const currentAcademic = academicDay === 0 ? academicSessions.dia1 : academicSessions.dia2;
-  const currentTaller = tallerDay === 0 ? tallerSessions.dia1 : tallerSessions.dia2;
   const rumbaDaySessions = rumbaDay === 0 ? rumbaSessions.dia1 : rumbaSessions.dia2;
   const historiasDaySessions = historiasDay === 0 ? historiasSessions.dia1 : historiasSessions.dia2;
 
@@ -429,8 +451,8 @@ export default function Agenda() {
         <PilarCard
           num="02" cat="Vivencial"
           titulo={['TALLE-', 'RES']}
-          desc="Experiencias prácticas: bioconstrucción, yoga, percusión y más."
-          tags={['Bioconstrucción', 'Yoga', 'Vibecoding']}
+          desc="Aprender haciendo: prácticas sostenibles, bienestar y conexión con la naturaleza."
+          tags={['Bioconstrucción', 'Yoga', 'Percusión', 'Automasajes']}
           bg={P.darkGreen} tagBg={P.lime} tagColor={P.dark} textColor="#fff"
           onClick={() => scrollTo(tallerRef)}
         />
@@ -482,16 +504,36 @@ export default function Agenda() {
 
       {/* ── 02 TALLERES ── */}
       <section ref={tallerRef} className="w-full" style={{ background: '#111408' }}>
-        <div className="max-w-4xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
-          <SectionHeader num="02" label="TALLERES" sub="Bioconstrucción · Yoga · Percusión · Vibecoding" accent={P.lime} />
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="02" label="TALLERES" sub="Aprender haciendo" accent={P.lime} />
 
-          <div className="mb-8">
-            <DayToggle day={tallerDay} setDay={setTallerDay} accent={P.lime} labels={['Día 1 — 13 Ago', 'Día 2 — 15 Ago']} />
-          </div>
+          {/* Intro */}
+          <p className="text-sm leading-relaxed max-w-2xl mb-12"
+            style={{ color: 'rgba(255,255,255,0.45)', ...ub, fontWeight: 200 }}>
+            Espacios participativos para explorar prácticas sostenibles, bienestar, creatividad y
+            conexión con la naturaleza. Los talleres del Festival NATUR invitan a experimentar,
+            crear y compartir conocimientos de forma práctica.
+          </p>
 
-          <div className="border overflow-hidden" style={{ borderColor: 'rgba(245,224,58,0.12)', background: 'rgba(255,255,255,0.02)' }}>
-            {currentTaller.map((s, i) => (
-              <SessionRow key={i} time={s.time} title={s.title} speakers={s.speakers} />
+          {/* Cards grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border"
+            style={{ borderColor: 'rgba(245,224,58,0.1)' }}>
+            {talleres.map((t) => (
+              <div key={t.num}
+                className="flex flex-col justify-between p-7 border-b sm:border-r last:border-r-0"
+                style={{ borderColor: 'rgba(245,224,58,0.08)', background: 'rgba(255,255,255,0.015)' }}>
+                <div>
+                  <div className="flex items-start justify-between mb-5">
+                    <span className="inline-block text-[8px] font-bold uppercase tracking-[0.25em] px-2 py-[3px]"
+                      style={{ background: 'rgba(245,224,58,0.1)', color: P.lime, ...ub }}>{t.tag}</span>
+                    <span className="text-[10px] font-bold tabular-nums"
+                      style={{ color: 'rgba(255,255,255,0.1)', ...ub }}>{t.num}</span>
+                  </div>
+                  <h4 className="font-bold text-lg leading-tight text-white mb-4" style={ub}>{t.title}</h4>
+                  <p className="text-sm leading-relaxed"
+                    style={{ color: 'rgba(255,255,255,0.45)', ...ub, fontWeight: 200 }}>{t.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
