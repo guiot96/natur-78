@@ -1,135 +1,146 @@
-import React, { useState } from 'react';
-import { Clock, Calendar, Ticket } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Clock, Calendar, Ticket, ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
 import { HeaderButtons } from '@/components/layout/HeaderButtons';
+import { Ticker } from '@/components/sections/Ticker';
 import posterImg from '@assets/WhatsApp_Image_2026-03-10_at_9.37.22_PM_1773257877040.jpeg';
 
 const P = {
-  dark: '#191C0F', darkGreen: '#1a4a1e', midGreen: '#2d7a32',
-  lime: '#f5e03a', yellow: '#f5e03a', cream: '#FCF8EE',
+  dark: '#191C0F',
+  darkGreen: '#1a4a1e',
+  midGreen: '#2d7a32',
+  lime: '#f5e03a',
+  cream: '#FCF8EE',
 };
+const ub = { fontFamily: 'Unbounded, sans-serif' };
+const mono = { fontFamily: 'monospace' };
 
-const typeConfig: Record<string, { label: string; color: string }> = {
-  charla:         { label: 'Charla',        color: P.lime },
-  experiencia:    { label: 'Experiencia',   color: P.midGreen },
-  taller:         { label: 'Taller',        color: P.yellow },
-  showcase:       { label: 'Showcase',      color: P.lime },
-  foro:           { label: 'Foro',          color: P.yellow },
-  bienestar:      { label: 'Bienestar',     color: P.midGreen },
-  vip:            { label: 'VIP',           color: P.yellow },
-  arte:           { label: 'Arte',          color: P.lime },
-  startup:        { label: 'Startup',       color: P.yellow },
-  wellness:       { label: 'Wellness',      color: P.midGreen },
-  musica:         { label: 'Música',        color: P.lime },
-  rumba:          { label: 'Rumba',         color: P.yellow },
-  ritual:         { label: 'Ritual',        color: P.midGreen },
-  pitch:          { label: 'Pitch',         color: P.yellow },
-  gastronomia:    { label: 'Gastronomía',   color: P.lime },
-  ceremonia:      { label: 'Ceremonia',     color: P.yellow },
-  entretenimiento:{ label: 'Cultura',       color: P.lime },
-};
-
-const agendaData = {
-  'vive': {
-    label: 'VIVE NATUR',
-    subtitle: 'Agenda Abierta — 9:00 a.m. a 6:00 p.m.',
-    desc: 'Charlas · Talleres · Feria de Emprendimientos · Cultura · Zona Chill',
-    accent: P.lime,
-    days: [
-      {
-        label: 'Jueves 14 de agosto',
-        sessions: [
-          { time: '9:00',  title: 'Apertura del Festival — Charlas NATUR', speakers: ['Brigitte Baptiste', 'Equipo NATUR'], type: 'charla' },
-          { time: '10:00', title: 'Networking Gastronómico — Rooftop', speakers: ['Chefs Sostenibles', 'Productores Locales'], type: 'gastronomia' },
-          { time: '10:00', title: 'Taller: Tintes naturales y estampados', speakers: ['Artesanos textiles'], type: 'taller' },
-          { time: '11:00', title: 'Taller: Bombas de Semillas', speakers: ['Facilitadores ambientales'], type: 'taller' },
-          { time: '11:00', title: 'Taller: Crea tu propio terrario', speakers: ['Jardineros urbanos'], type: 'taller' },
-          { time: '11:00', title: 'Origami del agua', speakers: ['Artistas del papel'], type: 'arte' },
-          { time: '11:30', title: 'Showcase de Emprendimientos Sostenibles', speakers: ['Startups Verdes', 'Emprendedores'], type: 'showcase' },
-          { time: '14:00', title: 'Zona Chill: Música y Relajación', speakers: ['Artistas Locales', 'DJs Orgánicos'], type: 'musica' },
-          { time: '14:00', title: 'Círculo de tambores', speakers: ['Músicos tradicionales'], type: 'musica' },
-          { time: '16:00', title: 'Foro Colombia Sostenible 2026: Panel Nacional', speakers: ['Expertos en Sostenibilidad', 'Gobierno', 'Academia'], type: 'foro' },
-          { time: '16:00', title: 'Ritual colectivo del agua', speakers: ['Sabedores del agua'], type: 'ritual' },
-        ],
-      },
-      {
-        label: 'Viernes 15 de agosto',
-        sessions: [
-          { time: '9:00',  title: 'Charlas NATUR: Turismo Regenerativo', speakers: ['Expertos Internacionales', 'Comunidades Locales'], type: 'charla' },
-          { time: '11:00', title: 'Pitch Session — Emprendimientos Sostenibles', speakers: ['Emprendedores', 'Inversionistas'], type: 'pitch' },
-          { time: '11:00', title: 'Taller: Bombas de Semillas', speakers: ['Facilitadores ambientales'], type: 'taller' },
-          { time: '13:00', title: 'Almuerzo Sostenible — Rooftop', speakers: ['Restaurantes Km0', 'Cocineros Tradicionales'], type: 'gastronomia' },
-          { time: '14:00', title: 'Círculo de tambores', speakers: ['Músicos tradicionales'], type: 'musica' },
-          { time: '15:00', title: 'Zona Chill: Actividades de Cierre', speakers: ['Artistas', 'Facilitadores Wellness'], type: 'bienestar' },
-          { time: '16:00', title: 'Ritual colectivo del agua', speakers: ['Sabedores del agua'], type: 'ritual' },
-          { time: '17:00', title: 'Ceremonia de Clausura VIVE NATUR', speakers: ['Equipo NATUR', 'Participantes'], type: 'ceremonia' },
-        ],
-      },
+/* ─── DATA ─────────────────────────────────────────────────── */
+const conocimientoSessions = {
+  'paneles':  {
+    dia1: [
+      { time: '9:00',  title: 'Apertura del Festival — Charlas NATUR', speakers: ['Brigitte Baptiste', 'Equipo NATUR'] },
+      { time: '11:30', title: 'Showcase de Emprendimientos Sostenibles', speakers: ['Startups Verdes', 'Emprendedores'] },
+      { time: '16:00', title: 'Foro Colombia Sostenible 2026: Panel Nacional', speakers: ['Expertos en Sostenibilidad', 'Gobierno'] },
+    ],
+    dia2: [
+      { time: '9:00',  title: 'Charlas NATUR: Turismo Regenerativo', speakers: ['Expertos Internacionales', 'Comunidades Locales'] },
+      { time: '11:00', title: 'Pitch Session — Emprendimientos Sostenibles', speakers: ['Emprendedores', 'Inversionistas'] },
     ],
   },
-  'pro': {
-    label: 'NATUR PRO',
-    subtitle: 'Agenda Especializada — 8:00 a.m. a 10:00 p.m.',
-    desc: 'Todo VIVE NATUR + VIP Breakfasts · Startups · Wellness · Rumba · Zona VIP',
-    accent: P.yellow,
-    days: [
-      {
-        label: 'Jueves 14 de agosto',
-        sessions: [
-          { time: '8:00',  title: 'Desayuno VIP + Coffee Talks Exclusivos', speakers: ['Líderes del sector turístico'], type: 'vip' },
-          { time: '9:00',  title: 'Cartel de Artistas: Presentaciones Matutinas', speakers: ['Artistas Nacionales', 'Músicos Sostenibles'], type: 'arte' },
-          { time: '10:00', title: 'Taller: Tintes naturales y estampados (VIP)', speakers: ['Artesanos textiles'], type: 'taller' },
-          { time: '10:30', title: 'Talleres Especializados: Turismo Regenerativo', speakers: ['Facilitadores Expertos', 'Consultores Internacionales'], type: 'taller' },
-          { time: '12:00', title: 'Zona Startups: Pitch y Demo Day', speakers: ['Startups Seleccionadas', 'Fondos de Inversión'], type: 'startup' },
-          { time: '14:00', title: 'Zona Wellness: Bienestar y Naturaleza', speakers: ['Instructores Wellness', 'Terapeutas Holísticos'], type: 'wellness' },
-          { time: '16:00', title: 'Experiencia NATUR: Actividad Inmersiva', speakers: ['Guías Especializados', 'Comunidades Locales'], type: 'experiencia' },
-          { time: '19:00', title: 'Rumba y Manifestaciones Culturales', speakers: ['DJs', 'Grupos Folclóricos'], type: 'rumba' },
-        ],
-      },
-      {
-        label: 'Viernes 15 de agosto',
-        sessions: [
-          { time: '8:00',  title: 'Coffee Talks VIP: Desayuno de Cierre', speakers: ['Panelistas Destacados', 'Invitados Especiales'], type: 'vip' },
-          { time: '9:00',  title: 'Talleres Especializados: Implementación de Proyectos', speakers: ['Mentores Expertos', 'Facilitadores'], type: 'taller' },
-          { time: '10:30', title: 'Zona Startups: Demo Final y Premiación', speakers: ['Jurado de Expertos', 'Startups Finalistas'], type: 'startup' },
-          { time: '12:00', title: 'Experiencia NATUR: Inmersión Completa', speakers: ['Guías Especializados', 'Comunidades Anfitrionas'], type: 'experiencia' },
-          { time: '14:00', title: 'Zona Wellness: Sesión de Integración', speakers: ['Terapeutas', 'Instructores Certificados'], type: 'wellness' },
-          { time: '16:00', title: 'Cartel de Artistas: Presentaciones de Cierre', speakers: ['Artistas Principales', 'Invitados Especiales'], type: 'arte' },
-          { time: '18:00', title: 'Zona VIP: Cena de Gala y After Party', speakers: ['Chefs Estrella', 'DJs Internacionales'], type: 'vip' },
-        ],
-      },
+  'dialogos': {
+    dia1: [
+      { time: '9:00',  title: 'Apertura del Festival — Charlas NATUR', speakers: ['Brigitte Baptiste', 'Equipo NATUR'] },
+      { time: '16:00', title: 'Foro Colombia Sostenible 2026', speakers: ['Expertos en Sostenibilidad', 'Gobierno', 'Academia'] },
+    ],
+    dia2: [
+      { time: '9:00',  title: 'Turismo Regenerativo: Conversaciones con Comunidades', speakers: ['Expertos Internacionales', 'Comunidades Locales'] },
+      { time: '15:00', title: 'Diálogo: Biodiversidad y Viaje Consciente', speakers: ['Científicos', 'Viajeros'] },
+    ],
+  },
+  'talleres': {
+    dia1: [
+      { time: '10:00', title: 'Taller: Tintes naturales y estampados', speakers: ['Artesanos textiles'] },
+      { time: '11:00', title: 'Taller: Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
+      { time: '11:00', title: 'Taller: Crea tu propio terrario', speakers: ['Jardineros urbanos'] },
+    ],
+    dia2: [
+      { time: '11:00', title: 'Taller: Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
+      { time: '9:00',  title: 'Talleres Especializados: Turismo Regenerativo', speakers: ['Facilitadores Expertos'] },
     ],
   },
 };
 
-function SessionRow({ session, accent }: { session: any; accent: string }) {
-  const cfg = typeConfig[session.type] || { label: session.type, color: P.lime };
+const rumbaSessions = {
+  dia1: [
+    { time: '11:00', title: 'Origami del agua', tag: 'Arte', speakers: ['Artistas del papel'] },
+    { time: '14:00', title: 'Zona Chill: Música y Relajación', tag: 'Música', speakers: ['Artistas Locales', 'DJs Orgánicos'] },
+    { time: '14:00', title: 'Círculo de tambores', tag: 'Música', speakers: ['Músicos tradicionales'] },
+    { time: '16:00', title: 'Ritual colectivo del agua', tag: 'Ritual', speakers: ['Sabedores del agua'] },
+    { time: '19:00', title: 'Rumba y Manifestaciones Culturales', tag: 'Rumba', speakers: ['DJs', 'Grupos Folclóricos'] },
+  ],
+  dia2: [
+    { time: '14:00', title: 'Círculo de tambores', tag: 'Música', speakers: ['Músicos tradicionales'] },
+    { time: '15:00', title: 'Zona Chill: Actividades de Cierre', tag: 'Bienestar', speakers: ['Artistas', 'Facilitadores'] },
+    { time: '16:00', title: 'Ritual colectivo del agua', tag: 'Ritual', speakers: ['Sabedores del agua'] },
+    { time: '17:00', title: 'Ceremonia de Clausura', tag: 'Ceremonia', speakers: ['Equipo NATUR', 'Participantes'] },
+    { time: '18:00', title: 'Cartel de Artistas: Presentaciones de Cierre', tag: 'Arte', speakers: ['Artistas Principales'] },
+  ],
+};
+
+const historiasSessions = {
+  dia1: [
+    { title: 'Senderos que Sanan', desc: 'Comunidad indígena Wayuu — turismo de base comunitaria en La Guajira.', tag: 'Comunidad' },
+    { title: 'De la Finca a la Mesa', desc: 'Proyecto de agricultura regenerativa en el Huila que conecta productores con viajeros.', tag: 'Impacto' },
+    { title: 'Mares Vivos', desc: 'Iniciativa de conservación marina en el Pacífico colombiano con turismo científico.', tag: 'Territorio' },
+  ],
+  dia2: [
+    { title: 'La Ruta del Cacao', desc: 'Emprendimiento familiar que transforma el cacao colombiano en experiencias de viaje.', tag: 'Testimonios' },
+    { title: 'Páramos en Pie', desc: 'Proyecto de senderismo responsable que financia la conservación de ecosistemas de alta montaña.', tag: 'Impacto' },
+    { title: 'Selva Adentro', desc: 'Operadora de turismo amazónico gestionada por comunidades locales con cero impacto.', tag: 'Comunidad' },
+  ],
+};
+
+/* ─── COMPONENTS ───────────────────────────────────────────── */
+function PilarCard({ num, cat, titulo, desc, tags, bg, tagBg, tagColor, textColor, onClick }:
+  { num: string; cat: string; titulo: string[]; desc: string; tags: string[]; bg: string; tagBg: string; tagColor: string; textColor: string; onClick: () => void }) {
   return (
-    <div className="flex gap-4 sm:gap-6 py-5 border-b last:border-b-0 hover:bg-black/[0.02] transition-colors px-4 sm:px-8"
-      style={{ borderColor: 'rgba(26,74,30,0.1)' }}>
-      {/* Time */}
-      <div className="flex-shrink-0 w-12 sm:w-16 pt-0.5">
-        <span className="text-sm font-semibold tabular-nums" style={{ color: P.darkGreen }}>
-          {session.time}
-        </span>
+    <div
+      className="group relative flex flex-col justify-between min-h-[380px] md:min-h-[460px] p-7 md:p-10 cursor-pointer transition-all duration-300 hover:brightness-110"
+      style={{ background: bg }}
+      onClick={onClick}
+    >
+      <div className="flex items-start justify-between">
+        <span className="inline-block text-[9px] font-bold uppercase tracking-[0.2em] px-2.5 py-1"
+          style={{ background: tagBg, color: tagColor, ...ub }}>{cat}</span>
+        <span className="text-[11px] font-bold tabular-nums"
+          style={{ color: textColor === '#fff' ? 'rgba(255,255,255,0.18)' : 'rgba(25,28,15,0.18)', ...ub }}>{num}</span>
       </div>
-      {/* Dot timeline */}
-      <div className="flex flex-col items-center pt-2 gap-1 flex-shrink-0">
-        <div className="w-2 h-2 rounded-full" style={{ background: accent }} />
-        <div className="w-px flex-1 min-h-[20px]" style={{ background: 'rgba(26,74,30,0.12)' }} />
-      </div>
-      {/* Content */}
-      <div className="flex-1 min-w-0 pb-4">
-        <h3 className="font-semibold text-base leading-snug mb-2" style={{ color: P.dark }}>
-          {session.title}
+      <div className="flex-1 flex items-end pb-6">
+        <h3 className="font-bold uppercase leading-[0.92] tracking-tight"
+          style={{ ...ub, fontSize: 'clamp(2rem, 4.5vw, 3.4rem)', color: textColor }}>
+          {titulo.map((line, i) => <span key={i} className="block">{line}</span>)}
         </h3>
+      </div>
+      <div className="flex flex-col gap-4">
+        <p className="text-sm leading-relaxed"
+          style={{ color: textColor === '#fff' ? 'rgba(255,255,255,0.55)' : 'rgba(25,28,15,0.6)', ...ub, fontWeight: 200 }}>
+          {desc}
+        </p>
+        <div className="flex items-center flex-wrap gap-1.5">
+          {tags.map((tag, i) => (
+            <span key={tag} className="text-[8px] font-bold uppercase tracking-[0.2em] px-2 py-[3px] inline-block"
+              style={{ background: tagBg, color: tagColor, ...ub }}>{tag}</span>
+          ))}
+        </div>
+        <div className="flex items-center gap-1.5 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+          <ChevronDown className="w-3 h-3" style={{ color: textColor }} />
+          <span className="text-[9px] uppercase tracking-widest"
+            style={{ color: textColor, ...ub }}>ver programa</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SessionRow({ time, title, speakers, tag }: { time?: string; title: string; speakers: string[]; tag?: string }) {
+  return (
+    <div className="flex gap-4 sm:gap-6 py-5 border-b last:border-b-0 hover:bg-white/5 transition-colors px-6 sm:px-8"
+      style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+      {time && (
+        <div className="flex-shrink-0 w-12 pt-0.5">
+          <span className="text-sm font-bold tabular-nums" style={{ color: P.lime, ...mono }}>{time}</span>
+        </div>
+      )}
+      <div className="flex-1 min-w-0">
+        <h4 className="font-bold text-sm leading-snug mb-2 text-white" style={ub}>{title}</h4>
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[11px] px-2 py-0.5 font-bold uppercase tracking-widest"
-            style={{ background: cfg.color, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>
-            {cfg.label}
-          </span>
-          {session.speakers?.map((s: string, i: number) => (
-            <span key={i} className="text-xs" style={{ color: 'rgba(25,28,15,0.45)', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+          {tag && (
+            <span className="text-[9px] font-bold uppercase tracking-widest px-2 py-[3px]"
+              style={{ background: P.lime, color: P.dark, ...ub }}>{tag}</span>
+          )}
+          {speakers.map((s, i) => (
+            <span key={i} className="text-xs" style={{ color: 'rgba(255,255,255,0.38)', ...ub }}>
               {i > 0 ? '· ' : ''}{s}
             </span>
           ))}
@@ -139,209 +150,257 @@ function SessionRow({ session, accent }: { session: any; accent: string }) {
   );
 }
 
-const CATEGORIAS = [
-  { id: 'todas',    label: 'Todas',    types: null },
-  { id: 'paneles',  label: 'Paneles',  types: ['foro', 'pitch', 'startup', 'showcase'] },
-  { id: 'dialogos', label: 'Diálogos', types: ['charla', 'vip', 'foro'] },
-  { id: 'talleres', label: 'Talleres', types: ['taller', 'bienestar', 'wellness'] },
-] as const;
+function HistoriaCard({ title, desc, tag }: { title: string; desc: string; tag: string }) {
+  return (
+    <div className="flex flex-col justify-between p-7 border"
+      style={{ borderColor: 'rgba(245,224,58,0.15)', background: 'rgba(255,255,255,0.03)' }}>
+      <div>
+        <span className="inline-block text-[9px] font-bold uppercase tracking-widest px-2 py-[3px] mb-4"
+          style={{ background: 'rgba(245,224,58,0.12)', color: P.lime, ...ub }}>{tag}</span>
+        <h4 className="font-bold text-base leading-snug mb-3 text-white" style={ub}>{title}</h4>
+        <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)', ...ub, fontWeight: 200 }}>{desc}</p>
+      </div>
+    </div>
+  );
+}
 
-type CategoriaId = typeof CATEGORIAS[number]['id'];
+function DayToggle({ day, setDay, accent }: { day: number; setDay: (d: number) => void; accent: string }) {
+  return (
+    <div className="flex gap-0">
+      {['Día 1 — Jue 14', 'Día 2 — Vie 15'].map((label, i) => (
+        <button key={i} onClick={() => setDay(i)}
+          className="px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all"
+          style={{ ...ub, background: day === i ? accent : 'rgba(255,255,255,0.05)', color: day === i ? P.dark : 'rgba(255,255,255,0.35)' }}>
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
 
+function SectionHeader({ num, label, sub, accent }: { num: string; label: string; sub: string; accent: string }) {
+  return (
+    <div className="flex items-start justify-between mb-10 pb-6 border-b" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+      <div>
+        <span className="text-[9px] uppercase tracking-[0.35em] mb-3 block" style={{ color: 'rgba(255,255,255,0.3)', ...ub }}>{sub}</span>
+        <h2 className="font-bold uppercase leading-[0.92] tracking-tight text-white"
+          style={{ ...ub, fontSize: 'clamp(1.8rem, 5vw, 3.5rem)' }}>
+          {label}
+        </h2>
+      </div>
+      <span className="text-[11px] font-bold tabular-nums mt-1" style={{ color: 'rgba(255,255,255,0.12)', ...ub }}>{num}</span>
+    </div>
+  );
+}
+
+/* ─── PAGE ──────────────────────────────────────────────────── */
 export default function Agenda() {
-  const [track, setTrack] = useState<'vive' | 'pro'>('vive');
-  const [day, setDay] = useState(0);
-  const [categoria, setCategoria] = useState<CategoriaId>('todas');
-  const current = agendaData[track];
-  const currentDay = current.days[day];
-  const catConfig = CATEGORIAS.find(c => c.id === categoria)!;
-  const filteredSessions = catConfig.types
-    ? currentDay.sessions.filter(s => (catConfig.types as readonly string[]).includes(s.type))
-    : currentDay.sessions;
+  const [conocimientoFilter, setConocimientoFilter] = useState<'paneles' | 'dialogos' | 'talleres'>('paneles');
+  const [conocimientoDay, setConocimientoDay] = useState(0);
+  const [rumbaDay, setRumbaDay] = useState(0);
+  const [historiasDay, setHistoriasDay] = useState(0);
+
+  const conocRef = useRef<HTMLDivElement>(null);
+  const rumbaRef = useRef<HTMLDivElement>(null);
+  const historiasRef = useRef<HTMLDivElement>(null);
+
+  const scrollTo = (ref: React.RefObject<HTMLDivElement>) => {
+    setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  };
+
+  const conocSessions = conocimientoSessions[conocimientoFilter][conocimientoDay === 0 ? 'dia1' : 'dia2'];
+  const rumbaDaySessions = rumbaDay === 0 ? rumbaSessions.dia1 : rumbaSessions.dia2;
+  const historiasDaySessions = historiasDay === 0 ? historiasSessions.dia1 : historiasSessions.dia2;
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: P.cream }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: P.dark }}>
       <HeaderButtons />
 
-      {/* ── Hero ── */}
+      {/* ── HERO ── */}
       <section className="relative overflow-hidden pt-16" style={{ background: P.darkGreen }}>
-        <img src={posterImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-15" />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(26,74,30,0.55) 0%, rgba(26,74,30,0.97) 80%)' }} />
-        <div className="relative z-10 text-center px-6 py-14 sm:py-20">
-          <p className="text-xs tracking-[0.35em] uppercase mb-4 font-bold"
-            style={{ color: P.lime, fontFamily: 'Unbounded, sans-serif' }}>
-            Festival NATUR 2026
+        <img src={posterImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-10" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(26,74,30,0.6) 0%, #191C0F 100%)' }} />
+        <div className="relative z-10 px-8 sm:px-14 py-14 sm:py-24">
+          <p className="text-[9px] tracking-[0.4em] uppercase mb-6 font-bold" style={{ color: P.lime, ...ub }}>
+            Festival NATUR 2026 · Bogotá
           </p>
-          <h1 className="font-gasoek text-6xl sm:text-7xl md:text-8xl uppercase leading-none mb-3 text-white">
+          <h1 className="font-gasoek uppercase leading-none text-white mb-6"
+            style={{ fontSize: 'clamp(4rem, 14vw, 10rem)' }}>
             AGENDA
           </h1>
-          <p className="font-unbounded font-extralight text-xl sm:text-2xl mb-5" style={{ color: 'rgba(255,255,255,0.65)' }}>
-            Dos días de turismo sostenible, cultura y conexión
-          </p>
-          <div className="flex items-center justify-center gap-3 flex-wrap">
-            <span className="text-xs font-bold uppercase tracking-wider px-4 py-1.5"
-              style={{ background: P.yellow, color: P.dark, fontFamily: 'Unbounded, sans-serif' }}>
-              14 Y 15 AGOSTO
-            </span>
-            <span className="text-white/40">·</span>
-            <span className="text-white/55 text-sm">Kinder, Chapinero, Bogotá</span>
+          <div className="flex items-center gap-4 flex-wrap">
+            <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5"
+              style={{ background: P.lime, color: P.dark, ...ub }}>14 Y 15 AGOSTO 2026</span>
+            <span className="text-sm" style={{ color: 'rgba(255,255,255,0.4)', ...ub }}>Kinder · Chapinero · Bogotá</span>
           </div>
         </div>
       </section>
 
-      {/* ── Track selector ── */}
-      <div className="sticky top-16 z-30 border-b" style={{ background: P.dark, borderColor: 'rgba(255,255,255,0.08)' }}>
-        <div className="max-w-5xl mx-auto flex">
-          {(['vive', 'pro'] as const).map((t) => {
-            const a = agendaData[t];
-            const isActive = track === t;
-            return (
-              <button key={t} onClick={() => setTrack(t)}
-                className="flex-1 py-4 px-4 sm:px-8 flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-3 transition-all"
-                style={{ borderBottom: isActive ? `2px solid ${a.accent}` : '2px solid transparent' }}>
-                <span className="font-gasoek text-base sm:text-xl uppercase leading-none"
-                  style={{ color: isActive ? a.accent : 'rgba(255,255,255,0.4)' }}>
-                  {a.label}
-                </span>
-                <span className="text-xs hidden sm:block" style={{ color: isActive ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.2)' }}>
-                  {a.subtitle}
-                </span>
+      {/* ── PILARES GRID (3 tarjetas clicables) ── */}
+      <section className="w-full grid grid-cols-1 md:grid-cols-3">
+        <PilarCard
+          num="01" cat="Conocimiento"
+          titulo={['CONO-', 'CIMIENTO']}
+          desc="Paneles, diálogos y talleres con líderes del turismo sostenible."
+          tags={['Paneles', 'Diálogos', 'Talleres']}
+          bg="#191C0F" tagBg={P.lime} tagColor={P.dark} textColor="#fff"
+          onClick={() => scrollTo(conocRef)}
+        />
+        <PilarCard
+          num="02" cat="Cultura"
+          titulo={['NUESTRA', 'RUMBA Y SUS', 'MANIFES-', 'TACIONES']}
+          desc="Música en vivo, arte urbana y cultura colombiana."
+          tags={['Música', 'Arte', 'Inspiración']}
+          bg={P.darkGreen} tagBg={P.lime} tagColor={P.dark} textColor="#fff"
+          onClick={() => scrollTo(rumbaRef)}
+        />
+        <PilarCard
+          num="03" cat="Inspiración"
+          titulo={['HISTORIAS', 'REALES']}
+          desc="Proyectos reales que prueban que viajar con conciencia es posible."
+          tags={['Testimonios', 'Impacto', 'Comunidad']}
+          bg={P.lime} tagBg={P.dark} tagColor={P.lime} textColor={P.dark}
+          onClick={() => scrollTo(historiasRef)}
+        />
+      </section>
+
+      {/* ── TICKER ── */}
+      <Ticker bg={P.darkGreen} color={P.lime} />
+
+      {/* ── 01 CONOCIMIENTO ── */}
+      <section ref={conocRef} className="w-full" style={{ background: '#111408' }}>
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="01" label="CONOCIMIENTO" sub="Paneles · Diálogos · Talleres" accent={P.lime} />
+
+          {/* Filtros de formato */}
+          <div className="flex gap-0 mb-6 flex-wrap">
+            {([
+              { id: 'paneles',  label: 'Paneles' },
+              { id: 'dialogos', label: 'Diálogos' },
+              { id: 'talleres', label: 'Talleres' },
+            ] as const).map(f => (
+              <button key={f.id} onClick={() => setConocimientoFilter(f.id)}
+                className="px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all"
+                style={{ ...ub, background: conocimientoFilter === f.id ? P.lime : 'rgba(255,255,255,0.05)', color: conocimientoFilter === f.id ? P.dark : 'rgba(255,255,255,0.35)' }}>
+                {f.label}
               </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ── Content ── */}
-      <div className="max-w-5xl mx-auto px-0 sm:px-6 py-10">
-        <div className="px-4 sm:px-0 mb-8">
-          <p className="text-sm" style={{ color: 'rgba(25,28,15,0.5)', fontFamily: 'Unbounded, sans-serif' }}>
-            {current.desc}
-          </p>
-        </div>
-
-        {/* Bloque CONOCIMIENTO */}
-        <div className="mb-8 border overflow-hidden" style={{ borderColor: 'rgba(26,74,30,0.15)' }}>
-          {/* Header strip */}
-          <div
-            className="flex items-center justify-between px-6 py-3 border-b"
-            style={{ background: P.dark, borderColor: 'rgba(255,255,255,0.06)' }}
-          >
-            <span
-              className="text-[9px] font-bold uppercase tracking-[0.35em]"
-              style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'Unbounded, sans-serif' }}
-            >
-              Conocimiento
-            </span>
-            <span
-              className="text-[9px] font-bold uppercase tracking-[0.3em]"
-              style={{ color: P.lime, fontFamily: 'Unbounded, sans-serif' }}
-            >
-              3 formatos
-            </span>
+            ))}
           </div>
-          {/* Sub-category buttons */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0"
-            style={{ divideColor: 'rgba(26,74,30,0.12)' }}>
-            {CATEGORIAS.map(c => {
-              const isActive = categoria === c.id;
-              return (
-                <button
-                  key={c.id}
-                  onClick={() => setCategoria(c.id)}
-                  className="flex flex-col items-start px-5 py-4 transition-all text-left"
-                  style={{
-                    background: isActive ? P.dark : 'white',
-                    borderBottom: '1px solid rgba(26,74,30,0.1)',
-                  }}
-                >
-                  <span
-                    className="text-xs font-bold uppercase tracking-widest leading-none"
-                    style={{
-                      fontFamily: 'Unbounded, sans-serif',
-                      color: isActive ? P.lime : P.darkGreen,
-                    }}
-                  >
-                    {c.label}
-                  </span>
-                  {isActive && (
-                    <span
-                      className="mt-1 text-[9px] uppercase tracking-wider"
-                      style={{ color: 'rgba(245,224,58,0.5)', fontFamily: 'Unbounded, sans-serif' }}
-                    >
-                      seleccionado
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+
+          {/* Day toggle */}
+          <div className="mb-8">
+            <DayToggle day={conocimientoDay} setDay={setConocimientoDay} accent={P.lime} />
+          </div>
+
+          {/* Sessions */}
+          <div className="border overflow-hidden" style={{ borderColor: 'rgba(245,224,58,0.12)', background: 'rgba(255,255,255,0.02)' }}>
+            {conocSessions.length > 0
+              ? conocSessions.map((s, i) => (
+                  <SessionRow key={i} time={s.time} title={s.title} speakers={s.speakers} />
+                ))
+              : (
+                <div className="py-16 text-center">
+                  <p className="text-sm font-bold uppercase tracking-widest"
+                    style={{ color: 'rgba(255,255,255,0.2)', ...ub }}>Sin sesiones en este formato</p>
+                </div>
+              )
+            }
           </div>
         </div>
+      </section>
 
-        {/* Day tabs */}
-        <div className="flex gap-2 mb-8 px-4 sm:px-0">
-          {current.days.map((d, i) => (
-            <button key={i} onClick={() => setDay(i)}
-              className="px-5 py-2.5 text-sm font-semibold transition-all"
-              style={day === i
-                ? { background: current.accent, color: P.dark }
-                : { background: 'transparent', color: P.darkGreen, border: `1px solid rgba(26,74,30,0.3)` }
-              }>
-              Día {i + 1}
-            </button>
-          ))}
+      {/* ── TICKER ── */}
+      <Ticker bg={P.lime} color={P.dark} reverse />
+
+      {/* ── 02 NUESTRA RUMBA ── */}
+      <section ref={rumbaRef} className="w-full" style={{ background: '#0d1a0f' }}>
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="02" label="NUESTRA RUMBA Y SUS MANIFESTACIONES" sub="Música · Arte · Cultura" accent={P.lime} />
+
+          <div className="mb-8">
+            <DayToggle day={rumbaDay} setDay={setRumbaDay} accent={P.lime} />
+          </div>
+
+          <div className="border overflow-hidden" style={{ borderColor: 'rgba(245,224,58,0.1)', background: 'rgba(255,255,255,0.02)' }}>
+            {rumbaDaySessions.map((s, i) => (
+              <SessionRow key={i} time={s.time} title={s.title} speakers={s.speakers} tag={s.tag} />
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Day label */}
-        <div className="mb-6 px-4 sm:px-0 flex items-center gap-3">
-          <Calendar className="w-4 h-4 flex-shrink-0" style={{ color: current.accent }} />
-          <h2 className="font-unbounded font-extralight text-xl sm:text-2xl" style={{ color: P.darkGreen }}>
-            {currentDay.label}
-          </h2>
+      {/* ── TICKER ── */}
+      <Ticker bg={P.dark} color={P.lime} />
+
+      {/* ── 03 HISTORIAS REALES ── */}
+      <section ref={historiasRef} className="w-full" style={{ background: '#111408' }}>
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="03" label="HISTORIAS REALES" sub="Testimonios · Impacto · Comunidad" accent={P.lime} />
+
+          <div className="mb-8">
+            <DayToggle day={historiasDay} setDay={setHistoriasDay} accent={P.lime} />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border" style={{ borderColor: 'rgba(245,224,58,0.1)' }}>
+            {historiasDaySessions.map((h, i) => (
+              <HistoriaCard key={i} title={h.title} desc={h.desc} tag={h.tag} />
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Sessions */}
-        <div className="border overflow-hidden" style={{ borderColor: 'rgba(26,74,30,0.15)', background: 'white' }}>
-          {filteredSessions.length > 0
-            ? filteredSessions.map((s, i) => (
-                <SessionRow key={i} session={s} accent={current.accent} />
-              ))
-            : (
-              <div className="py-16 text-center px-8">
-                <p className="text-sm font-bold uppercase tracking-widest mb-2"
-                  style={{ color: 'rgba(25,28,15,0.25)', fontFamily: 'Unbounded, sans-serif' }}>
-                  Sin sesiones en esta categoría
-                </p>
-                <p className="text-xs" style={{ color: 'rgba(25,28,15,0.35)' }}>
-                  Prueba con otro día o categoría
-                </p>
-              </div>
-            )
-          }
-        </div>
+      {/* ── TICKER ── */}
+      <Ticker bg={P.lime} color={P.dark} reverse />
 
-        {/* CTA */}
-        <div className="mt-12 px-4 sm:px-0 flex flex-col sm:flex-row items-start sm:items-center gap-5 justify-between py-8 border-t"
-          style={{ borderColor: 'rgba(26,74,30,0.15)' }}>
+      {/* ── CTA ── */}
+      <section className="w-full grid grid-cols-1 md:grid-cols-2" style={{ background: P.darkGreen }}>
+        <div className="flex flex-col justify-between p-10 md:p-16">
           <div>
-            <h3 className="font-unbounded font-extralight text-2xl sm:text-3xl" style={{ color: P.darkGreen }}>
-              ¿Listo para vivir el festival?
-            </h3>
-            <p className="text-sm mt-1" style={{ color: 'rgba(25,28,15,0.5)' }}>
-              Asegura tu lugar en NATUR 2026 — cupos limitados.
+            <span className="inline-block text-[9px] font-bold uppercase tracking-widest px-2.5 py-[3px] mb-8"
+              style={{ background: 'rgba(245,224,58,0.12)', color: P.lime, ...ub }}>Asegura tu lugar</span>
+            <h2 className="font-unbounded font-bold uppercase leading-[0.95] tracking-tight text-white mb-4"
+              style={{ fontSize: 'clamp(1.8rem, 5vw, 3.5rem)' }}>
+              ¿LISTO PARA<br />VIVIRLO?
+            </h2>
+            <p className="text-sm leading-relaxed max-w-sm" style={{ color: 'rgba(255,255,255,0.5)', ...ub, fontWeight: 200 }}>
+              Cupos limitados. Dos días de turismo sostenible, cultura y conexión en Bogotá.
             </p>
           </div>
-          <Link to="/tickets">
-            <button className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider px-8 py-4 hover:opacity-90 transition-opacity flex-shrink-0"
-              style={{ background: P.darkGreen, color: P.lime, fontFamily: 'Unbounded, sans-serif' }}>
-              <Ticket className="w-4 h-4" />
-              COMPRAR ENTRADAS
-            </button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 mt-10">
+            <Link to="/tickets">
+              <button className="flex items-center gap-3 font-bold text-[11px] uppercase tracking-widest px-8 py-4 hover:opacity-85 transition-opacity"
+                style={{ background: P.lime, color: P.dark, ...ub }}>
+                <Ticket className="w-3.5 h-3.5" />
+                Comprar Entradas
+              </button>
+            </Link>
+            <Link to="/contacto">
+              <button className="flex items-center gap-3 font-bold text-[11px] uppercase tracking-widest px-8 py-4 hover:opacity-85 transition-opacity"
+                style={{ background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)', ...ub }}>
+                <ArrowRight className="w-3.5 h-3.5" />
+                Reservar Stand
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
+        {/* Info cols */}
+        <div className="grid grid-cols-2 divide-x" style={{ divideColor: 'rgba(255,255,255,0.06)' }}>
+          {[
+            { label: 'Fecha', value: '14 y 15\nAgosto 2026' },
+            { label: 'Sede', value: 'Kinder\nChapinero, Bogotá' },
+            { label: 'Horario', value: '10:00 —\n22:00 h' },
+            { label: 'Entrada', value: 'Desde\n$50.000 COP' },
+          ].map(({ label, value }) => (
+            <div key={label} className="flex flex-col justify-between p-7 border-b last:border-b-0"
+              style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+              <span className="text-[9px] uppercase tracking-widest mb-3 block" style={{ color: 'rgba(255,255,255,0.3)', ...ub }}>{label}</span>
+              <span className="text-sm font-bold leading-snug text-white whitespace-pre-line" style={ub}>{value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <footer className="py-6 text-center text-xs" style={{ background: P.dark, color: 'rgba(255,255,255,0.3)' }}>
+      <footer className="py-6 text-center text-xs" style={{ background: P.dark, color: 'rgba(255,255,255,0.25)', ...ub }}>
         © {new Date().getFullYear()} Festival NATUR · Todos los derechos reservados
       </footer>
     </div>
