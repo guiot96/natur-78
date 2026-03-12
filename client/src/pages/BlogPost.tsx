@@ -178,7 +178,7 @@ const BlogPost = () => {
               </div>
             </Link>
             <Button asChild variant="ghost" className="text-white/70 hover:text-white">
-              <Link to="/noticias">
+              <Link to="/historias">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Volver al Blog
               </Link>
