@@ -19,8 +19,6 @@ import Noticias from "./pages/Noticias";
 import BlogPost from "./pages/BlogPost";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import QueVasAEncontrar from "./pages/QueVasAEncontrar";
-
 // Portal Empresas
 import MinimalistPortalEmpresas from "./pages/MinimalistPortalEmpresas";
 import AuthEmpresas from "./pages/AuthEmpresas";
@@ -60,7 +58,6 @@ const App = () => {
                 <Route path="/" component={Index} />
                 <Route path="/tickets" component={Tickets} />
                 <Route path="/agenda" component={Agenda} />
-                <Route path="/que-vas-a-encontrar" component={QueVasAEncontrar} />
                 <Route path="/historias" component={Noticias} />
                 <Route path="/historias/:slug" component={BlogPost} />
                 <Route path="/nosotros" component={About} />

@@ -3,11 +3,10 @@
 ## Overview
 Festival NATUR is the official website for the first sustainable tourism festival in Colombia, taking place on August 14–15, 2026 at Kinder (Calle 59 #6-21, Chapinero, Bogotá). The platform serves as a public-facing festival site with ticket sales, agenda, editorial content, and a B2B portal for companies and sponsors.
 
-## Site Structure (8 pages only)
-- **HOME** — `/` — 7 sections: Hero, ¿Qué vas a encontrar?, Entradas, Stand, Historias, Aliados, Contacto + Footer
+## Site Structure (7 pages)
+- **HOME** — `/` — sections: Hero, Entradas, Stand, Historias, Aliados, Contacto + Footer
 - **ENTRADAS** — `/tickets` — 1 día $50.000 / 2 días $70.000 (NO tickets gratis)
 - **AGENDA** — `/agenda`
-- **¿QUÉ VAS A ENCONTRAR?** — `/que-vas-a-encontrar`
 - **HISTORIAS NATUR** — `/historias` (Noticias.tsx)
 - **NOSOTROS** — `/nosotros` (About.tsx)
 - **CONTACTO** — `/contacto` (Contact.tsx)

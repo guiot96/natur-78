@@ -7,7 +7,6 @@ const NAV = [
   { label: "Home",                  short: "Home",      href: "/" },
   { label: "Entradas",              short: "Entradas",  href: "/tickets" },
   { label: "Agenda",                short: "Agenda",    href: "/agenda" },
-  { label: "¿Qué vas a encontrar?", short: "Qué vas",  href: "/que-vas-a-encontrar" },
   { label: "Historias NATUR",       short: "Historias", href: "/historias" },
   { label: "Nosotros",              short: "Nosotros",  href: "/nosotros" },
   { label: "Contacto",              short: "Contacto",  href: "/contacto" },

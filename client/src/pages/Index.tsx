@@ -4,7 +4,6 @@ import { Ticket } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { Ticker } from "@/components/sections/Ticker";
 import { Countdown } from "@/components/sections/Countdown";
-import { QueVasPreview } from "@/components/sections/QueVasPreview";
 import { EntradasPreview } from "@/components/sections/EntradasPreview";
 import { Participation } from "@/components/sections/Participation";
 import { Benefits } from "@/components/sections/Benefits";
@@ -56,9 +55,6 @@ const Index = () => {
 
       {/* Manifiesto — ¿Qué es Festival NATUR? */}
       <Manifiesto />
-
-      {/* 2. ¿Qué vas a encontrar? */}
-      <QueVasPreview />
 
       {/* Para quién es NATUR */}
       <Participation />
