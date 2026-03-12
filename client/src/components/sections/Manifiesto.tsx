@@ -48,25 +48,16 @@ export function Manifiesto() {
           <div className="w-full h-px" style={{ background: "rgba(25,28,15,0.08)" }} />
 
           <div className="px-8 md:px-14 py-8 md:py-10">
-            <div className="flex items-start gap-3 flex-wrap">
-              <p
-                className="text-sm md:text-base leading-relaxed max-w-2xl"
-                style={{ color: "rgba(25,28,15,0.60)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
-              >
-                Un espacio donde comunidades, viajeros y emprendedores se encuentran
-                para aprender, bailar y volver a mirar a Colombia con otros ojos.
-              </p>
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest hover:gap-1.5 transition-all cursor-pointer flex-shrink-0 pt-0.5"
-                style={{ color: "#2d7a32", fontFamily: "Unbounded, sans-serif" }}
-              >
-                <span>{isExpanded ? "Ver menos" : "Ver más"}</span>
-                <ChevronDown
-                  className={`w-2.5 h-2.5 transition-transform ${isExpanded ? "rotate-180" : ""}`}
-                />
-              </button>
-            </div>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest hover:gap-1.5 transition-all cursor-pointer"
+              style={{ color: "#2d7a32", fontFamily: "Unbounded, sans-serif" }}
+            >
+              <span>{isExpanded ? "Ver menos" : "Ver más"}</span>
+              <ChevronDown
+                className={`w-2.5 h-2.5 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+              />
+            </button>
 
             {isExpanded && (
               <div
