@@ -1,8 +1,4 @@
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-
 export function Manifiesto() {
-  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <section className="w-full" style={{ background: "#FCF8EE" }}>
@@ -47,31 +43,19 @@ export function Manifiesto() {
 
           <div className="w-full h-px" style={{ background: "rgba(25,28,15,0.08)" }} />
 
-          <div className="px-8 md:px-14 py-8 md:py-10">
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest hover:gap-1.5 transition-all cursor-pointer"
-              style={{ color: "#2d7a32", fontFamily: "Unbounded, sans-serif" }}
+          <div className="px-8 md:px-14 py-8 md:py-10 space-y-4">
+            <p
+              className="text-sm md:text-base leading-relaxed"
+              style={{ color: "rgba(25,28,15,0.55)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
             >
-              <span>{isExpanded ? "Ver menos" : "Ver más"}</span>
-              <ChevronDown
-                className={`w-2.5 h-2.5 transition-transform ${isExpanded ? "rotate-180" : ""}`}
-              />
-            </button>
-
-            {isExpanded && (
-              <div
-                className="space-y-4 mt-4"
-                style={{ color: "rgba(25,28,15,0.55)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
-              >
-                <p className="text-sm md:text-base leading-relaxed">
-                  El Festival NATUR nace del amor profundo por Colombia y de la convicción de que viajar también puede ser una forma de cuidar. No es una feria de viajes. No es una cumbre corporativa. Es un lugar común donde se encuentran las historias más transformadoras del turismo responsable del país: comunidades, viajeros, emprendedores y artistas que han decidido habitar el territorio desde la cultura del cuidado.
-                </p>
-                <p className="text-sm md:text-base leading-relaxed">
-                  Durante dos días, NATUR se convierte en un espacio para aprender, bailar, compartir y volver a mirar a Colombia con otros ojos. Porque viajar también es un acto de sanar, transformar y enseñarnos a vivir juntos.
-                </p>
-              </div>
-            )}
+              El Festival NATUR nace del amor profundo por Colombia y de la convicción de que viajar también puede ser una forma de cuidar. Es un lugar común donde se encuentran las historias más transformadoras del turismo responsable del país: comunidades, viajeros, emprendedores y artistas que han decidido habitar el territorio desde la cultura del cuidado.
+            </p>
+            <p
+              className="text-sm md:text-base leading-relaxed"
+              style={{ color: "rgba(25,28,15,0.55)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+            >
+              Durante dos días, NATUR se convierte en un espacio para aprender, bailar, compartir y volver a mirar a Colombia con otros ojos. Porque viajar también es un acto de sanar, transformar y enseñarnos a vivir juntos.
+            </p>
           </div>
 
           <div className="w-full h-px" style={{ background: "rgba(25,28,15,0.08)" }} />
