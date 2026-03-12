@@ -41,11 +41,11 @@ const Index = () => {
       {/* Ticker — lime on dark green */}
       <Ticker />
 
-      {/* Countdown */}
-      <Countdown />
-
       {/* Manifiesto — ¿Qué es Festival NATUR? */}
       <Manifiesto />
+
+      {/* Countdown */}
+      <Countdown />
 
       {/* Pilares: Agenda Académica · Rumba y Cultura · Historias Reales */}
       <Pilares />
