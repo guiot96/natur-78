@@ -350,7 +350,7 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
         {/* Main Content — no left margin on mobile */}
         <div className="transition-all duration-300 relative z-10 lg:ml-20">
           {activeView === 'map' ? (
-            <div className="fixed inset-0 lg:left-20 top-16">
+            <div className="fixed inset-0 lg:left-20 top-16 bottom-[72px] lg:bottom-0">
               {children}
             </div>
           ) : (
@@ -360,8 +360,7 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
           )}
         </div>
 
-        {activeView !== 'map' && (
-          <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
+        <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
             <div className="bg-white/15 backdrop-blur-xl border-t border-white/25 shadow-2xl">
               <div className="flex justify-around items-center py-3 px-2">
                 {navItems.map((item) => {
@@ -393,7 +392,6 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
               </div>
             </div>
           </div>
-        )}
       </div>
     </TooltipProvider>
   );
