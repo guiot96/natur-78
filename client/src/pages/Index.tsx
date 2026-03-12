@@ -44,6 +44,9 @@ const Index = () => {
       {/* Manifiesto — ¿Qué es Festival NATUR? */}
       <Manifiesto />
 
+      {/* VIVE LA EXPERIENCIA */}
+      <AmbienteSection />
+
       {/* Pilares: Agenda Académica · Rumba y Cultura · Historias Reales */}
       <Pilares />
 
@@ -61,9 +64,6 @@ const Index = () => {
 
       {/* Ticker between sections — reversed */}
       <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
-
-      {/* 4. Ambiente — foto del festival */}
-      <AmbienteSection />
 
       {/* Divisor animado */}
       <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
