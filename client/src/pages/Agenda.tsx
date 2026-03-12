@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Clock, Calendar, Ticket, ArrowRight, ChevronDown } from 'lucide-react';
+import { Clock, Calendar, Ticket, ArrowRight, ChevronDown, Coffee } from 'lucide-react';
 import { Link } from 'wouter';
 import { HeaderButtons } from '@/components/layout/HeaderButtons';
 import { Ticker } from '@/components/sections/Ticker';
@@ -16,42 +16,127 @@ const ub = { fontFamily: 'Unbounded, sans-serif' };
 const mono = { fontFamily: 'monospace' };
 
 /* ─── DATA ─────────────────────────────────────────────────── */
-const conocimientoSessions = {
-  'paneles':  {
-    dia1: [
-      { time: '9:00',  title: 'Apertura del Festival — Charlas NATUR', speakers: ['Brigitte Baptiste', 'Equipo NATUR'] },
-      { time: '11:30', title: 'Showcase de Emprendimientos Sostenibles', speakers: ['Startups Verdes', 'Emprendedores'] },
-      { time: '16:00', title: 'Foro Colombia Sostenible 2026: Panel Nacional', speakers: ['Expertos en Sostenibilidad', 'Gobierno'] },
-    ],
-    dia2: [
-      { time: '9:00',  title: 'Charlas NATUR: Turismo Regenerativo', speakers: ['Expertos Internacionales', 'Comunidades Locales'] },
-      { time: '11:00', title: 'Pitch Session — Emprendimientos Sostenibles', speakers: ['Emprendedores', 'Inversionistas'] },
-    ],
-  },
-  'dialogos': {
-    dia1: [
-      { time: '9:00',  title: 'Apertura del Festival — Charlas NATUR', speakers: ['Brigitte Baptiste', 'Equipo NATUR'] },
-      { time: '16:00', title: 'Foro Colombia Sostenible 2026', speakers: ['Expertos en Sostenibilidad', 'Gobierno', 'Academia'] },
-    ],
-    dia2: [
-      { time: '9:00',  title: 'Turismo Regenerativo: Conversaciones con Comunidades', speakers: ['Expertos Internacionales', 'Comunidades Locales'] },
-      { time: '15:00', title: 'Diálogo: Biodiversidad y Viaje Consciente', speakers: ['Científicos', 'Viajeros'] },
-    ],
-  },
-  'talleres': {
-    dia1: [
-      { time: '10:00', title: 'Bioconstrucción', speakers: ['Colectivo de construcción natural'] },
-      { time: '11:30', title: 'Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
-      { time: '13:00', title: 'Yoga', speakers: ['Instructores de bienestar'] },
-      { time: '15:00', title: 'Percusión con Señas', speakers: ['Artistas e intérpretes'] },
-    ],
-    dia2: [
-      { time: '10:00', title: 'Mapas Interactivos', speakers: ['Cartógrafos y geógrafos'] },
-      { time: '11:30', title: 'Vibecoding para Sostenibilidad', speakers: ['Desarrolladores eco-tech'] },
-      { time: '13:00', title: 'Yoga', speakers: ['Instructores de bienestar'] },
-      { time: '15:00', title: 'Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
-    ],
-  },
+
+interface AcademicSession {
+  time: string;
+  format: string;
+  title: string;
+  desc?: string;
+  speakers?: { name: string; org?: string }[];
+  isBreak?: boolean;
+  isRelatos?: boolean;
+  participants?: string[];
+}
+
+const academicSessions: { dia1: AcademicSession[]; dia2: AcademicSession[] } = {
+  dia1: [
+    {
+      time: '9:00 — 9:15',
+      format: 'Ceremonia de apertura',
+      title: 'Bienvenida al Lugar Común',
+      desc: 'Participación de comunidades invitadas',
+      speakers: [{ name: 'Brigitte Baptiste', org: 'Speaker invitada' }],
+    },
+    {
+      time: '9:15 — 10:05',
+      format: 'Panel',
+      title: 'Viajar con sentido: hacia un turismo que cuida',
+      speakers: [
+        { name: 'Parques Nacionales Naturales de Colombia' },
+        { name: 'Andrés Rodríguez', org: 'Festival NATUR' },
+        { name: 'Camilo Robledo', org: 'Live Happy' },
+      ],
+    },
+    {
+      time: '10:05 — 10:20',
+      format: 'Pausa',
+      title: 'Pausa café',
+      isBreak: true,
+    },
+    {
+      time: '10:20 — 10:50',
+      format: 'Charla',
+      title: 'Aspectos legales del turismo en Colombia: lo que todo proyecto debe saber',
+      speakers: [{ name: 'Navegantes' }],
+    },
+    {
+      time: '10:50 — 11:20',
+      format: 'Conversatorio',
+      title: 'Gentrificación, turismo y derecho a la ciudad',
+      speakers: [{ name: 'Alejandro Rogelis', org: 'Arquitecto CEFE' }],
+    },
+    {
+      time: '11:20 — 11:50',
+      format: 'Conversatorio',
+      title: '¿Es posible un turismo más responsable?',
+      speakers: [{ name: 'Simón Vélez', org: 'Parques Nacionales Naturales' }],
+    },
+    {
+      time: '11:50 — 13:00',
+      format: 'Relatos vivos',
+      title: 'Historias reales de proyectos que están transformando el turismo en Colombia',
+      isRelatos: true,
+      participants: ['Emprendedores', 'Líderes territoriales', 'Iniciativas de turismo responsable y sostenible'],
+    },
+  ],
+  dia2: [
+    {
+      time: '9:00 — 9:15',
+      format: 'Charla de apertura',
+      title: 'El Lugar Común',
+      speakers: [{ name: 'Jorge Andrés Rodríguez', org: 'Festival NATUR' }],
+    },
+    {
+      time: '9:15 — 10:15',
+      format: 'Panel',
+      title: 'La sostenibilidad más allá del marketing',
+      speakers: [
+        { name: 'Dago Ospina', org: 'Tornus Agencia' },
+        { name: 'Juan Fernando Rubio', org: 'Green Destinations' },
+        { name: 'Invitado internacional' },
+      ],
+    },
+    {
+      time: '10:15 — 10:30',
+      format: 'Pausa',
+      title: 'Pausa café',
+      isBreak: true,
+    },
+    {
+      time: '10:30 — 11:15',
+      format: 'Conferencia',
+      title: 'El poder de contar historias',
+      speakers: [{ name: 'Dago Ospina', org: 'Tornus' }],
+    },
+    {
+      time: '11:15 — 12:00',
+      format: 'Conversatorio',
+      title: 'Eco Festivales: festivales que transforman territorios',
+      speakers: [{ name: 'Quena Leonel', org: 'Idartes' }],
+    },
+    {
+      time: '12:00 — 13:00',
+      format: 'Relatos vivos',
+      title: 'Historias inspiradoras del turismo sostenible',
+      isRelatos: true,
+      participants: ['Emprendedores', 'Comunidades', 'Proyectos de impacto territorial'],
+    },
+  ],
+};
+
+const tallerSessions = {
+  dia1: [
+    { time: '10:00', title: 'Bioconstrucción', speakers: ['Colectivo de construcción natural'] },
+    { time: '11:30', title: 'Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
+    { time: '13:00', title: 'Yoga', speakers: ['Instructores de bienestar'] },
+    { time: '15:00', title: 'Percusión con Señas', speakers: ['Artistas e intérpretes'] },
+  ],
+  dia2: [
+    { time: '10:00', title: 'Mapas Interactivos', speakers: ['Cartógrafos y geógrafos'] },
+    { time: '11:30', title: 'Vibecoding para Sostenibilidad', speakers: ['Desarrolladores eco-tech'] },
+    { time: '13:00', title: 'Yoga', speakers: ['Instructores de bienestar'] },
+    { time: '15:00', title: 'Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
+  ],
 };
 
 const rumbaSessions = {
@@ -84,43 +169,88 @@ const historiasSessions = {
   ],
 };
 
+/* ─── FORMAT COLORS ─────────────────────────────────────────── */
+const formatStyle: Record<string, { bg: string; color: string }> = {
+  'Ceremonia de apertura': { bg: P.lime, color: P.dark },
+  'Charla de apertura':    { bg: P.lime, color: P.dark },
+  'Panel':                 { bg: 'rgba(45,122,50,0.25)', color: '#7ecf83' },
+  'Charla':                { bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.65)' },
+  'Conferencia':           { bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.65)' },
+  'Conversatorio':         { bg: 'rgba(245,224,58,0.1)', color: P.lime },
+  'Relatos vivos':         { bg: 'rgba(26,74,30,0.5)', color: '#a3e6a7' },
+  'Pausa':                 { bg: 'transparent', color: 'rgba(255,255,255,0.2)' },
+};
+
 /* ─── COMPONENTS ───────────────────────────────────────────── */
-function PilarCard({ num, cat, titulo, desc, tags, bg, tagBg, tagColor, textColor, onClick }:
-  { num: string; cat: string; titulo: string[]; desc: string; tags: string[]; bg: string; tagBg: string; tagColor: string; textColor: string; onClick: () => void }) {
+
+function AcademicRow({ session }: { session: AcademicSession }) {
+  if (session.isBreak) {
+    return (
+      <div className="flex items-center gap-4 px-6 sm:px-8 py-3 border-b"
+        style={{ borderColor: 'rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
+        <span className="text-[10px] tabular-nums w-28 flex-shrink-0" style={{ color: 'rgba(255,255,255,0.2)', ...mono }}>{session.time}</span>
+        <Coffee className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'rgba(255,255,255,0.2)' }} />
+        <span className="text-[10px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.2)', ...ub }}>Pausa café</span>
+      </div>
+    );
+  }
+
+  const fs = formatStyle[session.format] || formatStyle['Charla'];
+
   return (
-    <div
-      className="group relative flex flex-col justify-between min-h-[380px] md:min-h-[460px] p-7 md:p-10 cursor-pointer transition-all duration-300 hover:brightness-110"
-      style={{ background: bg }}
-      onClick={onClick}
-    >
-      <div className="flex items-start justify-between">
-        <span className="inline-block text-[9px] font-bold uppercase tracking-[0.2em] px-2.5 py-1"
-          style={{ background: tagBg, color: tagColor, ...ub }}>{cat}</span>
-        <span className="text-[11px] font-bold tabular-nums"
-          style={{ color: textColor === '#fff' ? 'rgba(255,255,255,0.18)' : 'rgba(25,28,15,0.18)', ...ub }}>{num}</span>
+    <div className="flex gap-4 sm:gap-6 py-6 border-b last:border-b-0 px-6 sm:px-8 hover:bg-white/[0.02] transition-colors"
+      style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+      {/* Time */}
+      <div className="flex-shrink-0 w-28 pt-0.5">
+        <span className="text-[10px] tabular-nums leading-relaxed block" style={{ color: P.lime, ...mono }}>{session.time}</span>
       </div>
-      <div className="flex-1 flex items-end pb-6">
-        <h3 className="font-bold uppercase leading-[0.92] tracking-tight"
-          style={{ ...ub, fontSize: 'clamp(2rem, 4.5vw, 3.4rem)', color: textColor }}>
-          {titulo.map((line, i) => <span key={i} className="block">{line}</span>)}
-        </h3>
-      </div>
-      <div className="flex flex-col gap-4">
-        <p className="text-sm leading-relaxed"
-          style={{ color: textColor === '#fff' ? 'rgba(255,255,255,0.55)' : 'rgba(25,28,15,0.6)', ...ub, fontWeight: 200 }}>
-          {desc}
-        </p>
-        <div className="flex items-center flex-wrap gap-1.5">
-          {tags.map((tag, i) => (
-            <span key={tag} className="text-[8px] font-bold uppercase tracking-[0.2em] px-2 py-[3px] inline-block"
-              style={{ background: tagBg, color: tagColor, ...ub }}>{tag}</span>
-          ))}
-        </div>
-        <div className="flex items-center gap-1.5 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
-          <ChevronDown className="w-3 h-3" style={{ color: textColor }} />
-          <span className="text-[9px] uppercase tracking-widest"
-            style={{ color: textColor, ...ub }}>ver programa</span>
-        </div>
+
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        {/* Format tag */}
+        <span className="inline-block text-[8px] font-bold uppercase tracking-[0.25em] px-2 py-[3px] mb-3"
+          style={{ background: fs.bg, color: fs.color, ...ub }}>
+          {session.format}
+        </span>
+
+        {/* Title */}
+        <h4 className="font-bold text-base leading-snug text-white mb-3" style={ub}>
+          {session.title}
+        </h4>
+
+        {/* Description */}
+        {session.desc && (
+          <p className="text-sm mb-3" style={{ color: 'rgba(255,255,255,0.4)', ...ub, fontWeight: 200 }}>
+            {session.desc}
+          </p>
+        )}
+
+        {/* Speakers */}
+        {session.speakers && session.speakers.length > 0 && (
+          <div className="flex flex-col gap-1">
+            {session.speakers.map((sp, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: P.lime }} />
+                <span className="text-sm font-semibold text-white" style={ub}>{sp.name}</span>
+                {sp.org && (
+                  <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', ...ub }}>— {sp.org}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Relatos participants */}
+        {session.isRelatos && session.participants && (
+          <div className="mt-3 p-4 border-l-2" style={{ borderColor: P.lime, background: 'rgba(245,224,58,0.04)' }}>
+            <p className="text-[9px] uppercase tracking-widest mb-2 font-bold" style={{ color: P.lime, ...ub }}>Participan</p>
+            <div className="flex flex-col gap-1">
+              {session.participants.map((p, i) => (
+                <span key={i} className="text-sm" style={{ color: 'rgba(255,255,255,0.55)', ...ub, fontWeight: 200 }}>· {p}</span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -167,10 +297,55 @@ function HistoriaCard({ title, desc, tag }: { title: string; desc: string; tag: 
   );
 }
 
-function DayToggle({ day, setDay, accent }: { day: number; setDay: (d: number) => void; accent: string }) {
+function PilarCard({ num, cat, titulo, desc, tags, bg, tagBg, tagColor, textColor, onClick }:
+  { num: string; cat: string; titulo: string[]; desc: string; tags: string[]; bg: string; tagBg: string; tagColor: string; textColor: string; onClick: () => void }) {
+  return (
+    <div
+      className="group relative flex flex-col justify-between min-h-[380px] md:min-h-[460px] p-7 md:p-10 cursor-pointer transition-all duration-300 hover:brightness-110"
+      style={{ background: bg }}
+      onClick={onClick}
+    >
+      <div className="flex items-start justify-between">
+        <span className="inline-block text-[9px] font-bold uppercase tracking-[0.2em] px-2.5 py-1"
+          style={{ background: tagBg, color: tagColor, ...ub }}>{cat}</span>
+        <span className="text-[11px] font-bold tabular-nums"
+          style={{ color: textColor === '#fff' ? 'rgba(255,255,255,0.18)' : 'rgba(25,28,15,0.18)', ...ub }}>{num}</span>
+      </div>
+      <div className="flex-1 flex items-end pb-6">
+        <h3 className="font-bold uppercase leading-[0.92] tracking-tight"
+          style={{ ...ub, fontSize: 'clamp(2rem, 4.5vw, 3.4rem)', color: textColor }}>
+          {titulo.map((line, i) => <span key={i} className="block">{line}</span>)}
+        </h3>
+      </div>
+      <div className="flex flex-col gap-4">
+        <p className="text-sm leading-relaxed"
+          style={{ color: textColor === '#fff' ? 'rgba(255,255,255,0.55)' : 'rgba(25,28,15,0.6)', ...ub, fontWeight: 200 }}>
+          {desc}
+        </p>
+        <div className="flex items-center flex-wrap gap-1.5">
+          {tags.map((tag) => (
+            <span key={tag} className="text-[8px] font-bold uppercase tracking-[0.2em] px-2 py-[3px] inline-block"
+              style={{ background: tagBg, color: tagColor, ...ub }}>{tag}</span>
+          ))}
+        </div>
+        <div className="flex items-center gap-1.5 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+          <ChevronDown className="w-3 h-3" style={{ color: textColor }} />
+          <span className="text-[9px] uppercase tracking-widest"
+            style={{ color: textColor, ...ub }}>ver programa</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DayToggle({ day, setDay, accent, labels }: {
+  day: number; setDay: (d: number) => void; accent: string; labels?: [string, string];
+}) {
+  const defaultLabels: [string, string] = ['Día 1 — Jue 14', 'Día 2 — Vie 15'];
+  const l = labels || defaultLabels;
   return (
     <div className="flex gap-0">
-      {['Día 1 — Jue 14', 'Día 2 — Vie 15'].map((label, i) => (
+      {l.map((label, i) => (
         <button key={i} onClick={() => setDay(i)}
           className="px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all"
           style={{ ...ub, background: day === i ? accent : 'rgba(255,255,255,0.05)', color: day === i ? P.dark : 'rgba(255,255,255,0.35)' }}>
@@ -198,12 +373,13 @@ function SectionHeader({ num, label, sub, accent }: { num: string; label: string
 
 /* ─── PAGE ──────────────────────────────────────────────────── */
 export default function Agenda() {
-  const [conocimientoFilter, setConocimientoFilter] = useState<'paneles' | 'dialogos' | 'talleres'>('paneles');
-  const [conocimientoDay, setConocimientoDay] = useState(0);
+  const [academicDay, setAcademicDay] = useState(0);
+  const [tallerDay, setTallerDay] = useState(0);
   const [rumbaDay, setRumbaDay] = useState(0);
   const [historiasDay, setHistoriasDay] = useState(0);
 
-  const conocRef = useRef<HTMLDivElement>(null);
+  const academicRef = useRef<HTMLDivElement>(null);
+  const tallerRef = useRef<HTMLDivElement>(null);
   const rumbaRef = useRef<HTMLDivElement>(null);
   const historiasRef = useRef<HTMLDivElement>(null);
 
@@ -211,7 +387,8 @@ export default function Agenda() {
     setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   };
 
-  const conocSessions = conocimientoSessions[conocimientoFilter][conocimientoDay === 0 ? 'dia1' : 'dia2'];
+  const currentAcademic = academicDay === 0 ? academicSessions.dia1 : academicSessions.dia2;
+  const currentTaller = tallerDay === 0 ? tallerSessions.dia1 : tallerSessions.dia2;
   const rumbaDaySessions = rumbaDay === 0 ? rumbaSessions.dia1 : rumbaSessions.dia2;
   const historiasDaySessions = historiasDay === 0 ? historiasSessions.dia1 : historiasSessions.dia2;
 
@@ -233,32 +410,40 @@ export default function Agenda() {
           </h1>
           <div className="flex items-center gap-4 flex-wrap">
             <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5"
-              style={{ background: P.lime, color: P.dark, ...ub }}>14 Y 15 AGOSTO 2026</span>
+              style={{ background: P.lime, color: P.dark, ...ub }}>13 Y 15 AGOSTO 2026</span>
             <span className="text-sm" style={{ color: 'rgba(255,255,255,0.4)', ...ub }}>Kinder · Chapinero · Bogotá</span>
           </div>
         </div>
       </section>
 
-      {/* ── PILARES GRID (3 tarjetas clicables) ── */}
-      <section className="w-full grid grid-cols-1 md:grid-cols-3">
+      {/* ── PILARES GRID ── */}
+      <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         <PilarCard
-          num="01" cat="Conocimiento"
+          num="01" cat="Académico"
           titulo={['CONO-', 'CIMIENTO']}
-          desc="Paneles, diálogos y talleres con líderes del turismo sostenible."
-          tags={['Paneles', 'Diálogos', 'Talleres']}
+          desc="Paneles, charlas y conversatorios con líderes del turismo sostenible."
+          tags={['Paneles', 'Charlas', 'Conversatorios']}
           bg="#191C0F" tagBg={P.lime} tagColor={P.dark} textColor="#fff"
-          onClick={() => scrollTo(conocRef)}
+          onClick={() => scrollTo(academicRef)}
         />
         <PilarCard
-          num="02" cat="Cultura"
-          titulo={['NUESTRA', 'RUMBA Y SUS', 'MANIFES-', 'TACIONES']}
-          desc="Música en vivo, arte urbana y cultura colombiana."
-          tags={['Música', 'Arte', 'Inspiración']}
+          num="02" cat="Vivencial"
+          titulo={['TALLE-', 'RES']}
+          desc="Experiencias prácticas: bioconstrucción, yoga, percusión y más."
+          tags={['Bioconstrucción', 'Yoga', 'Vibecoding']}
           bg={P.darkGreen} tagBg={P.lime} tagColor={P.dark} textColor="#fff"
+          onClick={() => scrollTo(tallerRef)}
+        />
+        <PilarCard
+          num="03" cat="Cultura"
+          titulo={['NUESTRA', 'RUMBA']}
+          desc="Música en vivo, arte urbano y cultura colombiana."
+          tags={['Música', 'Arte', 'Ritual']}
+          bg="#0a1a0c" tagBg="rgba(245,224,58,0.12)" tagColor={P.lime} textColor="#fff"
           onClick={() => scrollTo(rumbaRef)}
         />
         <PilarCard
-          num="03" cat="Inspiración"
+          num="04" cat="Inspiración"
           titulo={['HISTORIAS', 'REALES']}
           desc="Proyectos reales que prueban que viajar con conciencia es posible."
           tags={['Testimonios', 'Impacto', 'Comunidad']}
@@ -270,44 +455,24 @@ export default function Agenda() {
       {/* ── TICKER ── */}
       <Ticker bg={P.darkGreen} color={P.lime} />
 
-      {/* ── 01 CONOCIMIENTO ── */}
-      <section ref={conocRef} className="w-full" style={{ background: '#111408' }}>
-        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
-          <SectionHeader num="01" label="CONOCIMIENTO" sub="Paneles · Diálogos · Talleres" accent={P.lime} />
+      {/* ── 01 AGENDA ACADÉMICA ── */}
+      <section ref={academicRef} className="w-full" style={{ background: '#0e1509' }}>
+        <div className="max-w-4xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="01" label="AGENDA ACADÉMICA" sub="Paneles · Charlas · Conversatorios · Relatos vivos" accent={P.lime} />
 
-          {/* Filtros de formato */}
-          <div className="flex gap-0 mb-6 flex-wrap">
-            {([
-              { id: 'paneles',  label: 'Paneles' },
-              { id: 'dialogos', label: 'Diálogos' },
-              { id: 'talleres', label: 'Talleres' },
-            ] as const).map(f => (
-              <button key={f.id} onClick={() => setConocimientoFilter(f.id)}
-                className="px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all"
-                style={{ ...ub, background: conocimientoFilter === f.id ? P.lime : 'rgba(255,255,255,0.05)', color: conocimientoFilter === f.id ? P.dark : 'rgba(255,255,255,0.35)' }}>
-                {f.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Day toggle */}
           <div className="mb-8">
-            <DayToggle day={conocimientoDay} setDay={setConocimientoDay} accent={P.lime} />
+            <DayToggle
+              day={academicDay}
+              setDay={setAcademicDay}
+              accent={P.lime}
+              labels={['Día 1 — 13 Ago', 'Día 2 — 15 Ago']}
+            />
           </div>
 
-          {/* Sessions */}
-          <div className="border overflow-hidden" style={{ borderColor: 'rgba(245,224,58,0.12)', background: 'rgba(255,255,255,0.02)' }}>
-            {conocSessions.length > 0
-              ? conocSessions.map((s, i) => (
-                  <SessionRow key={i} time={s.time} title={s.title} speakers={s.speakers} />
-                ))
-              : (
-                <div className="py-16 text-center">
-                  <p className="text-sm font-bold uppercase tracking-widest"
-                    style={{ color: 'rgba(255,255,255,0.2)', ...ub }}>Sin sesiones en este formato</p>
-                </div>
-              )
-            }
+          <div className="border overflow-hidden" style={{ borderColor: 'rgba(245,224,58,0.1)', background: 'rgba(255,255,255,0.015)' }}>
+            {currentAcademic.map((session, i) => (
+              <AcademicRow key={i} session={session} />
+            ))}
           </div>
         </div>
       </section>
@@ -315,10 +480,30 @@ export default function Agenda() {
       {/* ── TICKER ── */}
       <Ticker bg={P.lime} color={P.dark} reverse />
 
-      {/* ── 02 NUESTRA RUMBA ── */}
+      {/* ── 02 TALLERES ── */}
+      <section ref={tallerRef} className="w-full" style={{ background: '#111408' }}>
+        <div className="max-w-4xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="02" label="TALLERES" sub="Bioconstrucción · Yoga · Percusión · Vibecoding" accent={P.lime} />
+
+          <div className="mb-8">
+            <DayToggle day={tallerDay} setDay={setTallerDay} accent={P.lime} labels={['Día 1 — 13 Ago', 'Día 2 — 15 Ago']} />
+          </div>
+
+          <div className="border overflow-hidden" style={{ borderColor: 'rgba(245,224,58,0.12)', background: 'rgba(255,255,255,0.02)' }}>
+            {currentTaller.map((s, i) => (
+              <SessionRow key={i} time={s.time} title={s.title} speakers={s.speakers} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TICKER ── */}
+      <Ticker bg={P.dark} color={P.lime} />
+
+      {/* ── 03 NUESTRA RUMBA ── */}
       <section ref={rumbaRef} className="w-full" style={{ background: '#0d1a0f' }}>
-        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
-          <SectionHeader num="02" label="NUESTRA RUMBA Y SUS MANIFESTACIONES" sub="Música · Arte · Cultura" accent={P.lime} />
+        <div className="max-w-4xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="03" label="NUESTRA RUMBA Y SUS MANIFESTACIONES" sub="Música · Arte · Cultura" accent={P.lime} />
 
           <div className="mb-8">
             <DayToggle day={rumbaDay} setDay={setRumbaDay} accent={P.lime} />
@@ -333,12 +518,12 @@ export default function Agenda() {
       </section>
 
       {/* ── TICKER ── */}
-      <Ticker bg={P.dark} color={P.lime} />
+      <Ticker bg={P.lime} color={P.dark} reverse />
 
-      {/* ── 03 HISTORIAS REALES ── */}
+      {/* ── 04 HISTORIAS REALES ── */}
       <section ref={historiasRef} className="w-full" style={{ background: '#111408' }}>
-        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
-          <SectionHeader num="03" label="HISTORIAS REALES" sub="Testimonios · Impacto · Comunidad" accent={P.lime} />
+        <div className="max-w-4xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="04" label="HISTORIAS REALES" sub="Testimonios · Impacto · Comunidad" accent={P.lime} />
 
           <div className="mb-8">
             <DayToggle day={historiasDay} setDay={setHistoriasDay} accent={P.lime} />
@@ -353,7 +538,7 @@ export default function Agenda() {
       </section>
 
       {/* ── TICKER ── */}
-      <Ticker bg={P.lime} color={P.dark} reverse />
+      <Ticker bg={P.darkGreen} color={P.lime} />
 
       {/* ── CTA ── */}
       <section className="w-full grid grid-cols-1 md:grid-cols-2" style={{ background: P.darkGreen }}>
@@ -373,25 +558,22 @@ export default function Agenda() {
             <Link to="/tickets">
               <button className="flex items-center gap-3 font-bold text-[11px] uppercase tracking-widest px-8 py-4 hover:opacity-85 transition-opacity"
                 style={{ background: P.lime, color: P.dark, ...ub }}>
-                <Ticket className="w-3.5 h-3.5" />
-                Comprar Entradas
+                <Ticket className="w-3.5 h-3.5" />Comprar Entradas
               </button>
             </Link>
             <Link to="/contacto">
               <button className="flex items-center gap-3 font-bold text-[11px] uppercase tracking-widest px-8 py-4 hover:opacity-85 transition-opacity"
                 style={{ background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.6)', ...ub }}>
-                <ArrowRight className="w-3.5 h-3.5" />
-                Reservar Stand
+                <ArrowRight className="w-3.5 h-3.5" />Reservar Stand
               </button>
             </Link>
           </div>
         </div>
-        {/* Info cols */}
         <div className="grid grid-cols-2 divide-x" style={{ divideColor: 'rgba(255,255,255,0.06)' }}>
           {[
-            { label: 'Fecha', value: '14 y 15\nAgosto 2026' },
-            { label: 'Sede', value: 'Kinder\nChapinero, Bogotá' },
-            { label: 'Horario', value: '10:00 —\n22:00 h' },
+            { label: 'Fecha',   value: '13 y 15\nAgosto 2026' },
+            { label: 'Sede',    value: 'Kinder\nChapinero, Bogotá' },
+            { label: 'Horario', value: '9:00 —\n13:00 h' },
             { label: 'Entrada', value: 'Desde\n$50.000 COP' },
           ].map(({ label, value }) => (
             <div key={label} className="flex flex-col justify-between p-7 border-b last:border-b-0"
