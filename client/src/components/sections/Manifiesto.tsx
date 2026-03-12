@@ -1,7 +1,9 @@
-import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export function Manifiesto() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <section className="w-full" style={{ background: "#FCF8EE" }}>
 
@@ -47,32 +49,48 @@ export function Manifiesto() {
 
           <div className="px-8 md:px-14 py-8 md:py-10">
             <p
-              className="text-base md:text-lg leading-relaxed max-w-2xl"
+              className="text-base md:text-lg leading-relaxed max-w-2xl mb-4"
               style={{ color: "rgba(25,28,15,0.60)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
             >
               Un espacio donde comunidades, viajeros y emprendedores se encuentran
               para aprender, bailar y volver a mirar a Colombia con otros ojos.
             </p>
+
+            {isExpanded && (
+              <div
+                className="space-y-4 mb-6"
+                style={{ color: "rgba(25,28,15,0.55)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
+              >
+                <p className="text-base md:text-lg leading-relaxed">
+                  El Festival NATUR nace del amor profundo por Colombia y de la convicción de que viajar también puede ser una forma de cuidar. No es una feria de viajes. No es una cumbre corporativa. Es un lugar común donde se encuentran las historias más transformadoras del turismo responsable del país: comunidades, viajeros, emprendedores y artistas que han decidido habitar el territorio desde la cultura del cuidado.
+                </p>
+                <p className="text-base md:text-lg leading-relaxed">
+                  Durante dos días, NATUR se convierte en un espacio para aprender, bailar, compartir y volver a mirar a Colombia con otros ojos. Porque viajar también es un acto de sanar, transformar y enseñarnos a vivir juntos.
+                </p>
+              </div>
+            )}
+
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:gap-3 transition-all cursor-pointer"
+              style={{ color: "#2d7a32", fontFamily: "Unbounded, sans-serif" }}
+            >
+              <span>{isExpanded ? "Ver menos" : "Ver más"}</span>
+              <ChevronDown
+                className={`w-3 h-3 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+              />
+            </button>
           </div>
 
           <div className="w-full h-px" style={{ background: "rgba(25,28,15,0.08)" }} />
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 px-8 md:px-14 py-7">
+          <div className="flex items-center px-8 md:px-14 py-7">
             <p
               className="text-[10px] font-bold uppercase tracking-[0.2em]"
               style={{ color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
             >
               14–15 AGO 2026 · KINDER, CHAPINERO · BOGOTÁ
             </p>
-            <Link to="/historias/que-es-festival-natur">
-              <span
-                className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:gap-3 transition-all cursor-pointer"
-                style={{ color: "#2d7a32", fontFamily: "Unbounded, sans-serif" }}
-              >
-                <ArrowRight className="w-3 h-3" />
-                Ver artículo completo
-              </span>
-            </Link>
           </div>
         </div>
       </div>
