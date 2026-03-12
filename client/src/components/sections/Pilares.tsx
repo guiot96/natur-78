@@ -4,7 +4,7 @@ const PILARES = [
   {
     categoria: "Conocimiento",
     numero: "01",
-    titulo: ["AGENDA", "ACADÉMICA"],
+    titulo: ["CONOCIMIENTO"],
     descripcion: "Charlas, paneles y talleres con líderes del turismo sostenible.",
     tags: ["Conferencias", "Paneles", "Talleres"],
     bg: "#191C0F",
