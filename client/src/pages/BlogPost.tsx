@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import posterImg from '@assets/WhatsApp_Image_2026-03-10_at_9.37.22_PM_1773257877040.jpeg';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,11 +9,12 @@ import {
   TreePine, ArrowLeft, Calendar, User, Clock, 
   Share2, Bookmark, Heart, MessageCircle,
   Facebook, Twitter, Instagram, Copy,
-  ChevronRight, ArrowRight
+  ChevronRight, ArrowRight, ChevronDown
 } from 'lucide-react';
 
 const BlogPost = () => {
   const { slug } = useParams();
+  const [isExpanded, setIsExpanded] = useState(false);
   
   // Sample blog posts data
   const blogPosts = {
@@ -309,13 +310,41 @@ const BlogPost = () => {
           <div className="max-w-4xl mx-auto">
             <Card className="bg-white/10 backdrop-blur-sm border-white/20">
               <CardContent className="p-8 md:p-12">
-                <div 
-                  className="prose prose-lg prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{ __html: currentPost.content }}
-                  style={{
-                    color: 'rgba(255, 255, 255, 0.9)',
-                  }}
-                />
+                {/* Toggle para artículo del festival */}
+                {slug === 'que-es-festival-natur' ? (
+                  <div className="space-y-4">
+                    <button
+                      onClick={() => setIsExpanded(!isExpanded)}
+                      className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded transition-colors"
+                    >
+                      <span className="text-white font-semibold uppercase tracking-wide text-sm">
+                        {isExpanded ? 'Ocultar' : 'Leer'} artículo completo
+                      </span>
+                      <ChevronDown
+                        className={`w-5 h-5 text-white/60 transition-transform ${
+                          isExpanded ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    {isExpanded && (
+                      <div 
+                        className="prose prose-lg prose-invert max-w-none"
+                        dangerouslySetInnerHTML={{ __html: currentPost.content }}
+                        style={{
+                          color: 'rgba(255, 255, 255, 0.9)',
+                        }}
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <div 
+                    className="prose prose-lg prose-invert max-w-none"
+                    dangerouslySetInnerHTML={{ __html: currentPost.content }}
+                    style={{
+                      color: 'rgba(255, 255, 255, 0.9)',
+                    }}
+                  />
+                )}
                 
                 {/* Tags */}
                 <div className="mt-12 pt-8 border-t border-white/10">
