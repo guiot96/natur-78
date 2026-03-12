@@ -44,11 +44,11 @@ const Index = () => {
       {/* Manifiesto — ¿Qué es Festival NATUR? */}
       <Manifiesto />
 
-      {/* Countdown */}
-      <Countdown />
-
       {/* Pilares: Agenda Académica · Rumba y Cultura · Historias Reales */}
       <Pilares />
+
+      {/* Countdown — barra minimalista */}
+      <Countdown />
 
       {/* Para quién es NATUR */}
       <Participation />

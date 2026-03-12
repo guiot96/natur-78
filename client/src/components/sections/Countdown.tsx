@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
-import { Ticket } from "lucide-react";
 
 const FESTIVAL_DATE = new Date("2026-08-14T10:00:00-05:00");
 
@@ -16,9 +14,7 @@ function getTimeLeft() {
   };
 }
 
-function Pad({ n }: { n: number }) {
-  return <>{String(n).padStart(2, "0")}</>;
-}
+function pad(n: number) { return String(n).padStart(2, "0"); }
 
 export function Countdown() {
   const [t, setT] = useState(getTimeLeft);
@@ -28,82 +24,49 @@ export function Countdown() {
     return () => clearInterval(id);
   }, []);
 
-  const units = [
-    { label: "Días",     value: t.days    },
-    { label: "Horas",    value: t.hours   },
-    { label: "Minutos",  value: t.minutes },
-    { label: "Segundos", value: t.seconds },
-  ];
-
   return (
-    <section className="w-full" style={{ background: "#191C0F" }}>
-      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/8">
+    <section
+      className="w-full border-t border-b"
+      style={{ background: "#191C0F", borderColor: "rgba(255,255,255,0.06)" }}
+    >
+      <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
 
-        {/* ── Left: copy ── */}
-        <div className="flex flex-col justify-between px-8 md:px-14 py-14 md:py-18 border-b md:border-b-0 border-r-0 md:border-r border-white/8">
-          <div>
-            <span
-              className="inline-block text-[9px] tracking-[0.35em] uppercase font-bold px-2.5 py-[3px] mb-6"
-              style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
-            >
-              Cuenta regresiva
+        <span
+          className="text-[9px] uppercase tracking-[0.3em] font-bold"
+          style={{ color: "rgba(255,255,255,0.25)", fontFamily: "Unbounded, sans-serif" }}
+        >
+          Festival NATUR · 14 ago 2026
+        </span>
+
+        <div className="flex items-center gap-3">
+          {[
+            { v: t.days,    l: "d" },
+            { v: t.hours,   l: "h" },
+            { v: t.minutes, l: "m" },
+            { v: t.seconds, l: "s" },
+          ].map(({ v, l }, i) => (
+            <span key={l} className="flex items-baseline gap-0.5">
+              {i > 0 && (
+                <span
+                  className="text-xs mr-2"
+                  style={{ color: "rgba(255,255,255,0.12)", fontFamily: "Unbounded, sans-serif" }}
+                >
+                  ·
+                </span>
+              )}
+              <span
+                className="text-sm font-bold tabular-nums"
+                style={{ color: "#f5e03a", fontFamily: "Unbounded, sans-serif" }}
+              >
+                {pad(v)}
+              </span>
+              <span
+                className="text-[9px] uppercase"
+                style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Unbounded, sans-serif" }}
+              >
+                {l}
+              </span>
             </span>
-            <h2 className="uppercase leading-[1.08] mb-5" style={{ fontFamily: "Unbounded, sans-serif" }}>
-              <span
-                className="block font-extralight tracking-widest mb-1"
-                style={{ fontSize: "clamp(0.7rem, 2vw, 1.1rem)", color: "rgba(255,255,255,0.4)" }}
-              >
-                El festival
-              </span>
-              <span
-                className="block font-bold tracking-tight"
-                style={{ fontSize: "clamp(1.3rem, 3.8vw, 3rem)", color: "#f5e03a" }}
-              >
-                SE ACERCA
-              </span>
-            </h2>
-            <p
-              className="text-sm leading-relaxed max-w-xs"
-              style={{ color: "rgba(255,255,255,0.38)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
-            >
-              14 y 15 de agosto de 2026<br />
-              Kinder · Chapinero · Bogotá
-            </p>
-          </div>
-
-          <div className="mt-8 md:mt-0">
-            <Link to="/tickets">
-              <button
-                className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-widest px-7 py-3.5 hover:brightness-110 transition-all"
-                style={{ background: "#f5e03a", color: "#191C0F", fontFamily: "Unbounded, sans-serif" }}
-              >
-                <Ticket className="w-3.5 h-3.5" />
-                Comprar entradas
-              </button>
-            </Link>
-          </div>
-        </div>
-
-        {/* ── Right: clock ── */}
-        <div className="grid grid-cols-2 divide-x divide-y divide-white/8">
-          {units.map(({ label, value }) => (
-            <div
-              key={label}
-              className="flex flex-col items-center justify-center py-10 sm:py-12 px-4"
-            >
-              <span
-                className="font-unbounded font-bold text-[8vw] sm:text-[7vw] md:text-[4vw] leading-none tabular-nums"
-                style={{ color: "#f5e03a" }}
-              >
-                <Pad n={value} />
-              </span>
-              <span
-                className="text-[8px] uppercase tracking-[0.3em] mt-3"
-                style={{ color: "rgba(255,255,255,0.22)", fontFamily: "Unbounded, sans-serif" }}
-              >
-                {label}
-              </span>
-            </div>
           ))}
         </div>
 
