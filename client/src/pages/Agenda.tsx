@@ -40,13 +40,16 @@ const conocimientoSessions = {
   },
   'talleres': {
     dia1: [
-      { time: '10:00', title: 'Taller: Tintes naturales y estampados', speakers: ['Artesanos textiles'] },
-      { time: '11:00', title: 'Taller: Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
-      { time: '11:00', title: 'Taller: Crea tu propio terrario', speakers: ['Jardineros urbanos'] },
+      { time: '10:00', title: 'Bioconstrucción', speakers: ['Colectivo de construcción natural'] },
+      { time: '11:30', title: 'Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
+      { time: '13:00', title: 'Yoga', speakers: ['Instructores de bienestar'] },
+      { time: '15:00', title: 'Percusión con Señas', speakers: ['Artistas e intérpretes'] },
     ],
     dia2: [
-      { time: '11:00', title: 'Taller: Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
-      { time: '9:00',  title: 'Talleres Especializados: Turismo Regenerativo', speakers: ['Facilitadores Expertos'] },
+      { time: '10:00', title: 'Mapas Interactivos', speakers: ['Cartógrafos y geógrafos'] },
+      { time: '11:30', title: 'Vibecoding para Sostenibilidad', speakers: ['Desarrolladores eco-tech'] },
+      { time: '13:00', title: 'Yoga', speakers: ['Instructores de bienestar'] },
+      { time: '15:00', title: 'Bombas de Semillas', speakers: ['Facilitadores ambientales'] },
     ],
   },
 };
