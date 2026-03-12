@@ -5,12 +5,9 @@ import { Ticker } from "@/components/sections/Ticker";
 import { Countdown } from "@/components/sections/Countdown";
 import { EntradasPreview } from "@/components/sections/EntradasPreview";
 import { Participation } from "@/components/sections/Participation";
-import { Benefits } from "@/components/sections/Benefits";
 import { Manifiesto } from "@/components/sections/Manifiesto";
 import { AmbienteSection } from "@/components/sections/AmbienteSection";
 import { Stand } from "@/components/sections/Stand";
-import { HistoriasPreview } from "@/components/sections/HistoriasPreview";
-import { Partners } from "@/components/sections/Partners";
 import { Location } from "@/components/sections/Location";
 import { Footer } from "@/components/sections/Footer";
 import { HeaderButtons } from "@/components/layout/HeaderButtons";
@@ -68,32 +65,14 @@ const Index = () => {
       {/* Divisor animado */}
       <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
 
-      {/* ¿Por qué ser parte de esta tribu? */}
-      <Benefits />
-
-      {/* Divisor animado */}
-      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
-
-      {/* 5. Reserva tu Stand */}
-      <Stand />
-
-      {/* Divisor animado */}
-      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
-
-      {/* 6. Historias */}
-      <HistoriasPreview />
-
-      {/* Divisor animado */}
-      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
-
-      {/* 7. Aliados */}
-      <Partners />
-
-      {/* Divisor animado */}
-      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
-
-      {/* 8. Ubicación */}
+      {/* Ubicación */}
       <Location />
+
+      {/* Divisor animado */}
+      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
+
+      {/* 4. Reserva tu Stand */}
+      <Stand />
 
       {/* Divisor animado */}
       <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
