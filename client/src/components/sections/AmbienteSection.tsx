@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Ticket, ArrowRight } from "lucide-react";
-import crowdImg from "@assets/generated_images/natur_crowd.png";
+import crowdImg from "@assets/stock_images/whale_landscape.jpg";
 
 export function AmbienteSection() {
   return (
@@ -8,7 +8,7 @@ export function AmbienteSection() {
 
       <img
         src={crowdImg}
-        alt="Ambiente Festival NATUR 2026"
+        alt="Ballena jorobada — Festival NATUR 2026"
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
       <div
