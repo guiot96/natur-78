@@ -4,10 +4,7 @@ import { Globe, Award, Radio, Leaf, TrendingUp, Zap, ArrowRight } from "lucide-r
 const benefits = [
   { icon: Globe, text: "Conecta con miles de viajeros nacionales e internacionales" },
   { icon: Award, text: "Posiciona tu marca como líder en turismo responsable" },
-  { icon: Radio, text: "Logra visibilidad en medios, redes y plataformas especializadas" },
   { icon: Leaf, text: "Obtén el Premio NATUR de sostenibilidad" },
-  { icon: TrendingUp, text: "Accede a ruedas de negocio y oportunidades comerciales" },
-  { icon: Zap, text: "Sé parte del movimiento que está cambiando el turismo en Colombia" },
 ];
 
 export function Benefits() {
@@ -47,7 +44,7 @@ export function Benefits() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-3">
         {benefits.map((b, idx) => {
           const Icon = b.icon;
           return (
