@@ -1,11 +1,18 @@
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import standImg from "@assets/generated_images/natur_stand.png";
 import gastroImg from "@assets/stock_images/colombian_food.jpg";
 
 export function Stand() {
   const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % 2);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
 
   const slides = [
     // SLIDE 1 — RESERVA TU STAND
