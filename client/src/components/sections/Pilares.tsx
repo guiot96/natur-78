@@ -20,7 +20,7 @@ const PILARES = [
     numero: "02",
     titulo: ["RUMBA Y", "CULTURA"],
     descripcion: "Música en vivo, arte urbana, gastronomía y cultura colombiana.",
-    tags: ["Música", "Arte", "Gastronomía"],
+    tags: ["Música", "Arte"],
     bg: "#1a4a1e",
     tagBg: "#f5e03a",
     tagColor: "#191C0F",
