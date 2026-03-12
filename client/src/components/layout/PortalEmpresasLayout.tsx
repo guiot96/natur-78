@@ -360,39 +360,40 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
           )}
         </div>
 
-        {/* Enhanced Mobile Bottom Navigation - Hide on map page for full immersion */}
-        <div className={`fixed bottom-0 left-0 right-0 z-50 lg:hidden ${activeView === 'map' ? 'hidden' : ''}`}>
-          <div className="bg-white/15 backdrop-blur-xl border-t border-white/25 shadow-2xl">
-            <div className="flex justify-around items-center py-3 px-2">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeView === item.id;
-                
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleNavigation(item.id)}
-                    className={`flex flex-col items-center p-3 rounded-2xl transition-all duration-300 min-w-[60px]
-                      ${isActive 
-                        ? 'text-green-400 bg-green-600/30 scale-105 shadow-lg' 
-                        : 'text-white/60 hover:text-white hover:bg-white/15 hover:scale-105'
-                      }
-                    `}
-                  >
-                    <Icon className={`h-6 w-6 transition-all duration-300 ${
-                      isActive ? 'scale-110' : ''
-                    }`} />
-                    <span className={`text-xs mt-1 font-medium transition-all duration-300 ${
-                      isActive ? 'text-green-400' : ''
-                    }`}>
-                      {item.label.split(' ')[0]}
-                    </span>
-                  </button>
-                );
-              })}
+        {activeView !== 'map' && (
+          <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
+            <div className="bg-white/15 backdrop-blur-xl border-t border-white/25 shadow-2xl">
+              <div className="flex justify-around items-center py-3 px-2">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = activeView === item.id;
+                  
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavigation(item.id)}
+                      className={`flex flex-col items-center p-3 rounded-2xl transition-all duration-300 min-w-[60px]
+                        ${isActive 
+                          ? 'text-green-400 bg-green-600/30 scale-105 shadow-lg' 
+                          : 'text-white/60 hover:text-white hover:bg-white/15 hover:scale-105'
+                        }
+                      `}
+                    >
+                      <Icon className={`h-6 w-6 transition-all duration-300 ${
+                        isActive ? 'scale-110' : ''
+                      }`} />
+                      <span className={`text-xs mt-1 font-medium transition-all duration-300 ${
+                        isActive ? 'text-green-400' : ''
+                      }`}>
+                        {item.label.split(' ')[0]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </TooltipProvider>
   );
