@@ -28,7 +28,7 @@ const OTROS = [
   {
     categoria: "Cultura",
     numero: "04",
-    titulo: ["RUMBA Y", "CULTURA"],
+    titulo: ["NUESTRA", "RUMBA Y SUS", "MANIFESTACIONES"],
     descripcion: "Música en vivo, arte urbana, gastronomía y cultura colombiana.",
     tags: ["Música", "Arte"],
     bg: "#1a4a1e",
