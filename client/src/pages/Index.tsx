@@ -50,6 +50,12 @@ const Index = () => {
       {/* Divisor animado */}
       <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
 
+      {/* Ubicación */}
+      <Location />
+
+      {/* Divisor animado */}
+      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
+
       {/* Countdown — barra minimalista */}
       <Countdown />
 
@@ -58,18 +64,6 @@ const Index = () => {
 
       {/* 3. Entradas */}
       <EntradasPreview />
-
-      {/* Ticker between sections — reversed */}
-      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
-
-      {/* Divisor animado */}
-      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
-
-      {/* Ubicación */}
-      <Location />
-
-      {/* Divisor animado */}
-      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
 
       {/* Reserva tu Stand */}
       <Stand />
