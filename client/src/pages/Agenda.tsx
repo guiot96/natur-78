@@ -139,11 +139,25 @@ function SessionRow({ session, accent }: { session: any; accent: string }) {
   );
 }
 
+const CATEGORIAS = [
+  { id: 'todas',    label: 'Todas',    types: null },
+  { id: 'paneles',  label: 'Paneles',  types: ['foro', 'pitch', 'startup', 'showcase'] },
+  { id: 'dialogos', label: 'Diálogos', types: ['charla', 'vip', 'foro'] },
+  { id: 'talleres', label: 'Talleres', types: ['taller', 'bienestar', 'wellness'] },
+] as const;
+
+type CategoriaId = typeof CATEGORIAS[number]['id'];
+
 export default function Agenda() {
   const [track, setTrack] = useState<'vive' | 'pro'>('vive');
   const [day, setDay] = useState(0);
+  const [categoria, setCategoria] = useState<CategoriaId>('todas');
   const current = agendaData[track];
   const currentDay = current.days[day];
+  const catConfig = CATEGORIAS.find(c => c.id === categoria)!;
+  const filteredSessions = catConfig.types
+    ? currentDay.sessions.filter(s => (catConfig.types as readonly string[]).includes(s.type))
+    : currentDay.sessions;
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: P.cream }}>
@@ -206,6 +220,26 @@ export default function Agenda() {
           </p>
         </div>
 
+        {/* Categoria filter */}
+        <div className="mb-6 px-4 sm:px-0">
+          <p className="text-[9px] uppercase tracking-[0.3em] font-bold mb-3"
+            style={{ color: 'rgba(25,28,15,0.35)', fontFamily: 'Unbounded, sans-serif' }}>
+            Tipo de sesión
+          </p>
+          <div className="flex gap-2 flex-wrap">
+            {CATEGORIAS.map(c => (
+              <button key={c.id} onClick={() => setCategoria(c.id)}
+                className="px-5 py-2 text-sm font-bold uppercase tracking-wider transition-all"
+                style={categoria === c.id
+                  ? { background: P.dark, color: P.lime, fontFamily: 'Unbounded, sans-serif' }
+                  : { background: 'transparent', color: P.darkGreen, border: `1px solid rgba(26,74,30,0.25)`, fontFamily: 'Unbounded, sans-serif' }
+                }>
+                {c.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Day tabs */}
         <div className="flex gap-2 mb-8 px-4 sm:px-0">
           {current.days.map((d, i) => (
@@ -230,9 +264,22 @@ export default function Agenda() {
 
         {/* Sessions */}
         <div className="border overflow-hidden" style={{ borderColor: 'rgba(26,74,30,0.15)', background: 'white' }}>
-          {currentDay.sessions.map((s, i) => (
-            <SessionRow key={i} session={s} accent={current.accent} />
-          ))}
+          {filteredSessions.length > 0
+            ? filteredSessions.map((s, i) => (
+                <SessionRow key={i} session={s} accent={current.accent} />
+              ))
+            : (
+              <div className="py-16 text-center px-8">
+                <p className="text-sm font-bold uppercase tracking-widest mb-2"
+                  style={{ color: 'rgba(25,28,15,0.25)', fontFamily: 'Unbounded, sans-serif' }}>
+                  Sin sesiones en esta categoría
+                </p>
+                <p className="text-xs" style={{ color: 'rgba(25,28,15,0.35)' }}>
+                  Prueba con otro día o categoría
+                </p>
+              </div>
+            )
+          }
         </div>
 
         {/* CTA */}
