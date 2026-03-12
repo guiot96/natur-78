@@ -45,34 +45,14 @@ export function Manifiesto() {
 
           <div className="w-full h-px" style={{ background: "rgba(25,28,15,0.08)" }} />
 
-          <div className="grid md:grid-cols-2 gap-0">
-            <div
-              className="px-8 md:px-14 py-8 md:py-10 md:border-r"
-              style={{ borderColor: "rgba(25,28,15,0.08)" }}
+          <div className="px-8 md:px-14 py-8 md:py-10">
+            <p
+              className="text-base md:text-lg leading-relaxed max-w-2xl"
+              style={{ color: "rgba(25,28,15,0.60)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
             >
-              <p
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: "rgba(25,28,15,0.60)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
-              >
-                El Festival NATUR nace del amor profundo por Colombia y de la
-                convicción de que viajar también puede ser una forma de cuidar.
-                Es un lugar común donde se encuentran las historias más
-                transformadoras del turismo responsable del país: comunidades,
-                viajeros, emprendedores y artistas que han decidido habitar el
-                territorio desde la cultura del cuidado.
-              </p>
-            </div>
-            <div className="px-8 md:px-14 py-8 md:py-10">
-              <p
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: "rgba(25,28,15,0.60)", fontFamily: "Unbounded, sans-serif", fontWeight: 200 }}
-              >
-                Durante dos días, NATUR se convierte en un espacio para aprender,
-                bailar, compartir y volver a mirar a Colombia con otros ojos.
-                Porque viajar también es un acto de sanar, transformar y
-                enseñarnos a vivir juntos.
-              </p>
-            </div>
+              Un espacio donde comunidades, viajeros y emprendedores se encuentran
+              para aprender, bailar y volver a mirar a Colombia con otros ojos.
+            </p>
           </div>
 
           <div className="w-full h-px" style={{ background: "rgba(25,28,15,0.08)" }} />
@@ -84,13 +64,13 @@ export function Manifiesto() {
             >
               14–15 AGO 2026 · KINDER, CHAPINERO · BOGOTÁ
             </p>
-            <Link to="/nosotros">
+            <Link to="/historias/que-es-festival-natur">
               <span
                 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:gap-3 transition-all cursor-pointer"
                 style={{ color: "#2d7a32", fontFamily: "Unbounded, sans-serif" }}
               >
                 <ArrowRight className="w-3 h-3" />
-                Conócenos
+                Ver artículo completo
               </span>
             </Link>
           </div>

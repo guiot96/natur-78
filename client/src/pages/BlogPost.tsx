@@ -16,6 +16,41 @@ const BlogPost = () => {
   
   // Sample blog posts data
   const blogPosts = {
+    'que-es-festival-natur': {
+      title: '¿Qué es Festival NATUR?',
+      excerpt: 'El primer festival nacional de turismo sostenible de Colombia nace del amor por el territorio y la convicción de que viajar también puede ser una forma de cuidar.',
+      content: `
+        <p>El Festival NATUR nace del amor profundo por Colombia y de la convicción de que viajar también puede ser una forma de cuidar. No es una feria de viajes. No es una cumbre corporativa. Es un lugar común donde se encuentran las historias más transformadoras del turismo responsable del país.</p>
+
+        <h2>Un encuentro entre mundos</h2>
+        <p>Durante dos días, Kinder en Chapinero se convierte en el corazón de un movimiento que ya existe en cada rincón de Colombia: comunidades que abren sus territorios, viajeros que quieren conocer de verdad, emprendedores que construyen desde la ética del cuidado, y artistas que recuerdan que la cultura también es raíz.</p>
+
+        <p>NATUR no inventa nada nuevo. Recoge lo que ya está vivo y lo pone en diálogo. Porque el turismo sostenible en Colombia no es una tendencia que llega de afuera — es una práctica que ya existe en los Andes, en el Pacífico, en la Amazonia, en los valles y en los páramos. Solo necesitaba un lugar para verse.</p>
+
+        <h2>¿Por qué agosto de 2026?</h2>
+        <p>Porque Colombia está lista. La industria del turismo está en un momento de transformación acelerada, y este festival llega para marcar un antes y un después en cómo entendemos el viaje responsable en el país.</p>
+
+        <p>El 14 y 15 de agosto de 2026, Kinder (Calle 59 #6-21, Chapinero, Bogotá) será el escenario de paneles, diálogos, talleres, música en vivo, arte y mucho más. Todo bajo la misma convicción: que viajar también es un acto de sanar, transformar y enseñarnos a vivir juntos.</p>
+
+        <h2>¿Qué vas a encontrar?</h2>
+        <p><strong>Conocimiento:</strong> Paneles con líderes del turismo sostenible, diálogos íntimos entre comunidades y viajeros, y talleres prácticos donde aprender haciendo.</p>
+
+        <p><strong>Nuestra rumba y sus manifestaciones:</strong> Música en vivo, arte urbano, y toda la cultura colombiana que nos define y nos une.</p>
+
+        <p><strong>Historias reales:</strong> Proyectos que ya existen, que ya funcionan, y que prueban que viajar con conciencia no solo es posible — es mejor.</p>
+
+        <h2>Para quién es NATUR</h2>
+        <p>Para el viajero que quiere más que una foto. Para el emprendedor que construye desde la ética. Para la comunidad que quiere ser vista. Para el artista que entiende que la cultura es territorio. Para cualquiera que sienta que Colombia merece ser cuidada mientras es recorrida.</p>
+
+        <p>Si algo de esto resuena contigo, ya eres parte de NATUR.</p>
+      `,
+      author: 'Equipo NATUR',
+      date: 'Agosto 2026',
+      readTime: '4 min lectura',
+      category: 'Festival',
+      tags: ['Festival NATUR', 'Turismo Sostenible', 'Colombia', 'Bogotá'],
+      image: '🌿',
+    },
     'turismo-regenerativo-futuro': {
       title: 'Turismo Regenerativo: El Futuro del Viaje Consciente',
       excerpt: 'Descubre cómo el turismo regenerativo está transformando la industria hacia prácticas que no solo minimizan el impacto, sino que activamente benefician destinos y comunidades.',
