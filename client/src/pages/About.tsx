@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'wouter';
 import { HeaderButtons } from '@/components/layout/HeaderButtons';
 import { Footer } from '@/components/sections/Footer';
+import { AmbienteSection } from '@/components/sections/AmbienteSection';
 import { Leaf, Users, Globe, Lightbulb, Handshake, Calendar, MapPin, Mail, ArrowRight } from 'lucide-react';
 
 const P = {
@@ -179,6 +180,8 @@ export default function About() {
           </a>
         </div>
       </section>
+
+      <AmbienteSection />
 
       <Footer />
     </div>
