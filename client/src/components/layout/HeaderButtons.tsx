@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { X, Ticket } from "lucide-react";
+import { X, Ticket, Home, Calendar, BookOpen, Menu } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import logoImg from "@assets/2026_1771518463695.png";
 
@@ -11,6 +11,13 @@ const NAV = [
   { label: "Nosotros",              short: "Nosotros",  href: "/nosotros" },
   { label: "Contacto",              short: "Contacto",  href: "/contacto" },
   { label: "Portal Empresas",       short: "Empresas",  href: "/portal-empresas" },
+];
+
+const BOTTOM_TABS = [
+  { label: "Home",      href: "/",          icon: Home },
+  { label: "Agenda",    href: "/agenda",    icon: Calendar },
+  { label: "Entradas",  href: "/tickets",   icon: Ticket, accent: true },
+  { label: "Historias", href: "/historias", icon: BookOpen },
 ];
 
 interface HeaderButtonsProps {
@@ -46,7 +53,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
     <>
       {/* ── Top bar ── */}
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-colors duration-200"
+        className="fixed top-0 left-0 right-0 z-[70] transition-colors duration-200"
         style={{
           background: scrolled || open ? '#191C0F' : 'rgba(25,28,15,0.55)',
           borderBottom: '1px solid rgba(255,255,255,0.07)',
@@ -61,7 +68,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
               className="h-7 sm:h-8 w-auto object-contain" />
           </Link>
 
-          {/* Desktop nav — all items compact */}
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6">
             {NAV.map((item) => (
               <Link key={item.href} to={item.href}>
@@ -80,9 +87,8 @@ export function HeaderButtons({}: HeaderButtonsProps) {
             ))}
           </nav>
 
-          {/* Right: CTA + burger */}
+          {/* Right: CTA + burger (desktop only) */}
           <div className="flex items-center gap-3">
-            {/* Buy tickets */}
             <Link to="/tickets" className="hidden md:block">
               <button
                 className="flex items-center gap-1.5 text-[9px] xl:text-[10px] font-bold uppercase tracking-[0.12em] px-3.5 py-2 transition-opacity hover:opacity-80"
@@ -93,11 +99,11 @@ export function HeaderButtons({}: HeaderButtonsProps) {
               </button>
             </Link>
 
-            {/* Burger / close — visible on ALL screen sizes */}
+            {/* Burger — desktop only; mobile uses bottom nav Menú tab */}
             <button
               onClick={() => setOpen(v => !v)}
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
-              className="flex items-center justify-center w-9 h-9 transition-colors duration-150"
+              className="hidden md:flex items-center justify-center w-9 h-9 transition-colors duration-150"
               style={{ color: open ? '#f5e03a' : 'rgba(255,255,255,0.65)' }}
             >
               {open ? (
@@ -114,13 +120,12 @@ export function HeaderButtons({}: HeaderButtonsProps) {
         </div>
       </header>
 
-      {/* ── Full-screen menu ── */}
+      {/* ── Full-screen menu overlay ── */}
       {open && (
         <div
-          className="fixed inset-0 z-40 flex flex-col overflow-y-auto"
+          className="fixed inset-0 z-[60] flex flex-col overflow-y-auto"
           style={{ background: '#191C0F', paddingTop: '56px' }}
         >
-          {/* Nav list */}
           <nav className="flex-1 flex flex-col justify-center px-7 sm:px-16 py-6 sm:py-10 max-w-3xl mx-auto w-full">
             {NAV.map((item, i) => {
               const active = isActive(item.href);
@@ -130,7 +135,6 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                     className="group flex items-center gap-4 sm:gap-8 py-[10px] sm:py-5 border-b cursor-pointer transition-all duration-150"
                     style={{ borderColor: 'rgba(255,255,255,0.07)' }}
                   >
-                    {/* Number */}
                     <span
                       className="text-[9px] w-5 text-right flex-shrink-0 tabular-nums transition-colors"
                       style={{
@@ -140,8 +144,6 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                     >
                       {String(i + 1).padStart(2, '0')}
                     </span>
-
-                    {/* Label */}
                     <span
                       className="uppercase leading-none transition-colors flex-1"
                       style={{
@@ -154,8 +156,6 @@ export function HeaderButtons({}: HeaderButtonsProps) {
                     >
                       {item.label}
                     </span>
-
-                    {/* Arrow */}
                     <span
                       className="text-base transition-all duration-150 opacity-0 group-hover:opacity-100"
                       style={{ color: '#f5e03a' }}
@@ -192,6 +192,52 @@ export function HeaderButtons({}: HeaderButtonsProps) {
           </div>
         </div>
       )}
+
+      {/* ── Mobile bottom navigation bar ── */}
+      <nav
+        className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex items-center justify-around"
+        style={{
+          background: '#191C0F',
+          borderTop: '1px solid rgba(255,255,255,0.08)',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        }}
+      >
+        {BOTTOM_TABS.map((tab) => {
+          const Icon = tab.icon;
+          const active = isActive(tab.href);
+          const color = active ? '#f5e03a' : tab.accent ? '#f5e03a' : 'rgba(255,255,255,0.4)';
+          return (
+            <Link key={tab.href} to={tab.href}>
+              <button className="flex flex-col items-center gap-0.5 py-2.5 px-3 min-w-[56px]">
+                <Icon className="w-5 h-5" style={{ color }} />
+                <span
+                  className="text-[10px] font-semibold uppercase tracking-wide"
+                  style={{ fontFamily: 'Unbounded, sans-serif', color }}
+                >
+                  {tab.label}
+                </span>
+              </button>
+            </Link>
+          );
+        })}
+
+        {/* Menú tab */}
+        <button
+          onClick={() => setOpen(v => !v)}
+          className="flex flex-col items-center gap-0.5 py-2.5 px-3 min-w-[56px]"
+        >
+          {open
+            ? <X className="w-5 h-5" style={{ color: '#f5e03a' }} />
+            : <Menu className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.4)' }} />
+          }
+          <span
+            className="text-[10px] font-semibold uppercase tracking-wide"
+            style={{ fontFamily: 'Unbounded, sans-serif', color: open ? '#f5e03a' : 'rgba(255,255,255,0.4)' }}
+          >
+            Menú
+          </span>
+        </button>
+      </nav>
     </>
   );
 }
