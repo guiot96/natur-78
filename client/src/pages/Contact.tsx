@@ -25,7 +25,7 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSent(true); };
 
   return (
-    <div className="min-h-screen overflow-x-hidden pb-16 md:pb-0" style={{ background: P.cream }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: P.cream }}>
       <HeaderButtons />
 
       {/* Hero */}

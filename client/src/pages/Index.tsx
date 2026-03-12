@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Pilares } from "@/components/sections/Pilares";
 import { Hero } from "@/components/sections/Hero";
 import { Ticker } from "@/components/sections/Ticker";
 import { Countdown } from "@/components/sections/Countdown";
@@ -31,7 +32,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="overflow-x-hidden w-full pb-16 md:pb-0">
+    <div className="overflow-x-hidden w-full">
       <HeaderButtons />
 
       {/* 1. Hero */}
@@ -45,6 +46,9 @@ const Index = () => {
 
       {/* Manifiesto — ¿Qué es Festival NATUR? */}
       <Manifiesto />
+
+      {/* Pilares: Agenda Académica · Rumba y Cultura · Historias Reales */}
+      <Pilares />
 
       {/* Para quién es NATUR */}
       <Participation />

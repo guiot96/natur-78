@@ -10,7 +10,6 @@ import {
   Facebook, Twitter, Instagram, Copy,
   ChevronRight, ArrowRight
 } from 'lucide-react';
-import { HeaderButtons } from '@/components/layout/HeaderButtons';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -164,10 +163,9 @@ const BlogPost = () => {
     .map(([key, post]) => ({ slug: key, ...post }));
 
   return (
-    <div className="min-h-screen pb-16 md:pb-0 bg-gradient-to-br from-gray-900 via-black to-green-900">
-      <HeaderButtons />
-      {/* Inner header */}
-      <div className="bg-black/50 backdrop-blur-sm border-b border-white/10 mt-14">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900">
+      {/* Header */}
+      <div className="bg-black/50 backdrop-blur-sm border-b border-white/10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link to="/historias" className="flex items-center space-x-3">
