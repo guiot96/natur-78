@@ -1,4 +1,5 @@
 import React from 'react';
+import posterImg from '@assets/WhatsApp_Image_2026-03-10_at_9.37.22_PM_1773257877040.jpeg';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -240,9 +241,20 @@ const BlogPost = () => {
               {currentPost.title}
             </h1>
             
-            <p className="text-xl text-white/80 mb-8 leading-relaxed">
+            <p className="text-xl text-white/80 mb-6 leading-relaxed">
               {currentPost.excerpt}
             </p>
+
+            {/* Imagen mobile — solo artículo principal del festival */}
+            {slug === 'que-es-festival-natur' && (
+              <div className="block md:hidden mb-6 overflow-hidden rounded-none">
+                <img
+                  src={posterImg}
+                  alt="Festival NATUR 2026"
+                  className="w-full h-48 object-cover object-top"
+                />
+              </div>
+            )}
 
             <div className="flex flex-wrap items-center gap-6 text-white/60 text-sm mb-8">
               <div className="flex items-center space-x-2">
