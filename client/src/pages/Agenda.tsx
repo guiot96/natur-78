@@ -397,12 +397,12 @@ function SectionHeader({ num, label, sub, accent }: { num: string; label: string
 
 /* ─── PAGE ──────────────────────────────────────────────────── */
 export default function Agenda() {
+  const [conocTab, setConocTab] = useState<'academica' | 'talleres'>('academica');
   const [academicDay, setAcademicDay] = useState(0);
   const [rumbaDay, setRumbaDay] = useState(0);
   const [historiasDay, setHistoriasDay] = useState(0);
 
-  const academicRef = useRef<HTMLDivElement>(null);
-  const tallerRef = useRef<HTMLDivElement>(null);
+  const conocRef = useRef<HTMLDivElement>(null);
   const rumbaRef = useRef<HTMLDivElement>(null);
   const historiasRef = useRef<HTMLDivElement>(null);
 
@@ -438,34 +438,26 @@ export default function Agenda() {
         </div>
       </section>
 
-      {/* ── PILARES GRID ── */}
-      <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+      {/* ── PILARES GRID (3) ── */}
+      <section className="w-full grid grid-cols-1 md:grid-cols-3">
         <PilarCard
-          num="01" cat="Académico"
+          num="01" cat="Conocimiento"
           titulo={['CONO-', 'CIMIENTO']}
-          desc="Paneles, charlas y conversatorios con líderes del turismo sostenible."
-          tags={['Paneles', 'Charlas', 'Conversatorios']}
+          desc="Agenda académica y talleres vivenciales con líderes del turismo sostenible."
+          tags={['Paneles', 'Charlas', 'Talleres']}
           bg="#191C0F" tagBg={P.lime} tagColor={P.dark} textColor="#fff"
-          onClick={() => scrollTo(academicRef)}
+          onClick={() => { setConocTab('academica'); scrollTo(conocRef); }}
         />
         <PilarCard
-          num="02" cat="Vivencial"
-          titulo={['TALLE-', 'RES']}
-          desc="Aprender haciendo: prácticas sostenibles, bienestar y conexión con la naturaleza."
-          tags={['Bioconstrucción', 'Yoga', 'Percusión', 'Automasajes']}
-          bg={P.darkGreen} tagBg={P.lime} tagColor={P.dark} textColor="#fff"
-          onClick={() => scrollTo(tallerRef)}
-        />
-        <PilarCard
-          num="03" cat="Cultura"
+          num="02" cat="Cultura"
           titulo={['NUESTRA', 'RUMBA']}
           desc="Música en vivo, arte urbano y cultura colombiana."
           tags={['Música', 'Arte', 'Ritual']}
-          bg="#0a1a0c" tagBg="rgba(245,224,58,0.12)" tagColor={P.lime} textColor="#fff"
+          bg={P.darkGreen} tagBg={P.lime} tagColor={P.dark} textColor="#fff"
           onClick={() => scrollTo(rumbaRef)}
         />
         <PilarCard
-          num="04" cat="Inspiración"
+          num="03" cat="Inspiración"
           titulo={['HISTORIAS', 'REALES']}
           desc="Proyectos reales que prueban que viajar con conciencia es posible."
           tags={['Testimonios', 'Impacto', 'Comunidad']}
@@ -477,75 +469,83 @@ export default function Agenda() {
       {/* ── TICKER ── */}
       <Ticker bg={P.darkGreen} color={P.lime} />
 
-      {/* ── 01 AGENDA ACADÉMICA ── */}
-      <section ref={academicRef} className="w-full" style={{ background: '#0e1509' }}>
-        <div className="max-w-4xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
-          <SectionHeader num="01" label="AGENDA ACADÉMICA" sub="Paneles · Charlas · Conversatorios · Relatos vivos" accent={P.lime} />
+      {/* ── 01 CONOCIMIENTO ── */}
+      <section ref={conocRef} className="w-full" style={{ background: '#0e1509' }}>
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+          <SectionHeader num="01" label="CONOCIMIENTO" sub="Agenda académica · Talleres" accent={P.lime} />
 
-          <div className="mb-8">
-            <DayToggle
-              day={academicDay}
-              setDay={setAcademicDay}
-              accent={P.lime}
-              labels={['Día 1 — 13 Ago', 'Día 2 — 15 Ago']}
-            />
-          </div>
-
-          <div className="border overflow-hidden" style={{ borderColor: 'rgba(245,224,58,0.1)', background: 'rgba(255,255,255,0.015)' }}>
-            {currentAcademic.map((session, i) => (
-              <AcademicRow key={i} session={session} />
+          {/* Format tabs */}
+          <div className="flex gap-0 mb-8 flex-wrap">
+            {([
+              { id: 'academica', label: 'Agenda académica' },
+              { id: 'talleres',  label: 'Talleres' },
+            ] as const).map(f => (
+              <button key={f.id} onClick={() => setConocTab(f.id)}
+                className="px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all"
+                style={{ ...ub, background: conocTab === f.id ? P.lime : 'rgba(255,255,255,0.05)', color: conocTab === f.id ? P.dark : 'rgba(255,255,255,0.35)' }}>
+                {f.label}
+              </button>
             ))}
           </div>
+
+          {/* ── Agenda académica ── */}
+          {conocTab === 'academica' && (
+            <>
+              <div className="mb-8">
+                <DayToggle
+                  day={academicDay}
+                  setDay={setAcademicDay}
+                  accent={P.lime}
+                  labels={['Día 1 — 13 Ago', 'Día 2 — 15 Ago']}
+                />
+              </div>
+              <div className="border overflow-hidden" style={{ borderColor: 'rgba(245,224,58,0.1)', background: 'rgba(255,255,255,0.015)' }}>
+                {currentAcademic.map((session, i) => (
+                  <AcademicRow key={i} session={session} />
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* ── Talleres ── */}
+          {conocTab === 'talleres' && (
+            <>
+              <p className="text-sm leading-relaxed max-w-2xl mb-10"
+                style={{ color: 'rgba(255,255,255,0.45)', ...ub, fontWeight: 200 }}>
+                Espacios participativos para explorar prácticas sostenibles, bienestar, creatividad y
+                conexión con la naturaleza. Los talleres del Festival NATUR invitan a experimentar,
+                crear y compartir conocimientos de forma práctica.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border"
+                style={{ borderColor: 'rgba(245,224,58,0.1)' }}>
+                {talleres.map((t) => (
+                  <div key={t.num}
+                    className="flex flex-col p-7 border-b sm:border-r"
+                    style={{ borderColor: 'rgba(245,224,58,0.08)', background: 'rgba(255,255,255,0.015)' }}>
+                    <div className="flex items-start justify-between mb-5">
+                      <span className="inline-block text-[8px] font-bold uppercase tracking-[0.25em] px-2 py-[3px]"
+                        style={{ background: 'rgba(245,224,58,0.1)', color: P.lime, ...ub }}>{t.tag}</span>
+                      <span className="text-[10px] font-bold tabular-nums"
+                        style={{ color: 'rgba(255,255,255,0.1)', ...ub }}>{t.num}</span>
+                    </div>
+                    <h4 className="font-bold text-lg leading-tight text-white mb-4" style={ub}>{t.title}</h4>
+                    <p className="text-sm leading-relaxed"
+                      style={{ color: 'rgba(255,255,255,0.45)', ...ub, fontWeight: 200 }}>{t.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
       {/* ── TICKER ── */}
       <Ticker bg={P.lime} color={P.dark} reverse />
 
-      {/* ── 02 TALLERES ── */}
-      <section ref={tallerRef} className="w-full" style={{ background: '#111408' }}>
-        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
-          <SectionHeader num="02" label="TALLERES" sub="Aprender haciendo" accent={P.lime} />
-
-          {/* Intro */}
-          <p className="text-sm leading-relaxed max-w-2xl mb-12"
-            style={{ color: 'rgba(255,255,255,0.45)', ...ub, fontWeight: 200 }}>
-            Espacios participativos para explorar prácticas sostenibles, bienestar, creatividad y
-            conexión con la naturaleza. Los talleres del Festival NATUR invitan a experimentar,
-            crear y compartir conocimientos de forma práctica.
-          </p>
-
-          {/* Cards grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border"
-            style={{ borderColor: 'rgba(245,224,58,0.1)' }}>
-            {talleres.map((t) => (
-              <div key={t.num}
-                className="flex flex-col justify-between p-7 border-b sm:border-r last:border-r-0"
-                style={{ borderColor: 'rgba(245,224,58,0.08)', background: 'rgba(255,255,255,0.015)' }}>
-                <div>
-                  <div className="flex items-start justify-between mb-5">
-                    <span className="inline-block text-[8px] font-bold uppercase tracking-[0.25em] px-2 py-[3px]"
-                      style={{ background: 'rgba(245,224,58,0.1)', color: P.lime, ...ub }}>{t.tag}</span>
-                    <span className="text-[10px] font-bold tabular-nums"
-                      style={{ color: 'rgba(255,255,255,0.1)', ...ub }}>{t.num}</span>
-                  </div>
-                  <h4 className="font-bold text-lg leading-tight text-white mb-4" style={ub}>{t.title}</h4>
-                  <p className="text-sm leading-relaxed"
-                    style={{ color: 'rgba(255,255,255,0.45)', ...ub, fontWeight: 200 }}>{t.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── TICKER ── */}
-      <Ticker bg={P.dark} color={P.lime} />
-
-      {/* ── 03 NUESTRA RUMBA ── */}
+      {/* ── 02 NUESTRA RUMBA ── */}
       <section ref={rumbaRef} className="w-full" style={{ background: '#0d1a0f' }}>
         <div className="max-w-4xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
-          <SectionHeader num="03" label="NUESTRA RUMBA Y SUS MANIFESTACIONES" sub="Música · Arte · Cultura" accent={P.lime} />
+          <SectionHeader num="02" label="NUESTRA RUMBA Y SUS MANIFESTACIONES" sub="Música · Arte · Cultura" accent={P.lime} />
 
           <div className="mb-8">
             <DayToggle day={rumbaDay} setDay={setRumbaDay} accent={P.lime} />
@@ -560,12 +560,12 @@ export default function Agenda() {
       </section>
 
       {/* ── TICKER ── */}
-      <Ticker bg={P.lime} color={P.dark} reverse />
+      <Ticker bg={P.dark} color={P.lime} />
 
-      {/* ── 04 HISTORIAS REALES ── */}
+      {/* ── 03 HISTORIAS REALES ── */}
       <section ref={historiasRef} className="w-full" style={{ background: '#111408' }}>
         <div className="max-w-4xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
-          <SectionHeader num="04" label="HISTORIAS REALES" sub="Testimonios · Impacto · Comunidad" accent={P.lime} />
+          <SectionHeader num="03" label="HISTORIAS REALES" sub="Testimonios · Impacto · Comunidad" accent={P.lime} />
 
           <div className="mb-8">
             <DayToggle day={historiasDay} setDay={setHistoriasDay} accent={P.lime} />
