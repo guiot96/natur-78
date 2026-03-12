@@ -47,6 +47,9 @@ const Index = () => {
       {/* Pilares: Agenda Académica · Rumba y Cultura · Historias Reales */}
       <Pilares />
 
+      {/* Divisor animado */}
+      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
+
       {/* Countdown — barra minimalista */}
       <Countdown />
 
@@ -62,20 +65,38 @@ const Index = () => {
       {/* 4. Ambiente — foto del festival */}
       <AmbienteSection />
 
+      {/* Divisor animado */}
+      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
+
       {/* ¿Por qué ser parte de esta tribu? */}
       <Benefits />
+
+      {/* Divisor animado */}
+      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
 
       {/* 5. Reserva tu Stand */}
       <Stand />
 
+      {/* Divisor animado */}
+      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
+
       {/* 6. Historias */}
       <HistoriasPreview />
+
+      {/* Divisor animado */}
+      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
 
       {/* 7. Aliados */}
       <Partners />
 
+      {/* Divisor animado */}
+      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
+
       {/* 8. Ubicación */}
       <Location />
+
+      {/* Divisor animado */}
+      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
 
       {/* 9. Contacto */}
       <ContactForm />
