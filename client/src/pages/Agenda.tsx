@@ -220,23 +220,61 @@ export default function Agenda() {
           </p>
         </div>
 
-        {/* Categoria filter */}
-        <div className="mb-6 px-4 sm:px-0">
-          <p className="text-[9px] uppercase tracking-[0.3em] font-bold mb-3"
-            style={{ color: 'rgba(25,28,15,0.35)', fontFamily: 'Unbounded, sans-serif' }}>
-            Tipo de sesión
-          </p>
-          <div className="flex gap-2 flex-wrap">
-            {CATEGORIAS.map(c => (
-              <button key={c.id} onClick={() => setCategoria(c.id)}
-                className="px-5 py-2 text-sm font-bold uppercase tracking-wider transition-all"
-                style={categoria === c.id
-                  ? { background: P.dark, color: P.lime, fontFamily: 'Unbounded, sans-serif' }
-                  : { background: 'transparent', color: P.darkGreen, border: `1px solid rgba(26,74,30,0.25)`, fontFamily: 'Unbounded, sans-serif' }
-                }>
-                {c.label}
-              </button>
-            ))}
+        {/* Bloque CONOCIMIENTO */}
+        <div className="mb-8 border overflow-hidden" style={{ borderColor: 'rgba(26,74,30,0.15)' }}>
+          {/* Header strip */}
+          <div
+            className="flex items-center justify-between px-6 py-3 border-b"
+            style={{ background: P.dark, borderColor: 'rgba(255,255,255,0.06)' }}
+          >
+            <span
+              className="text-[9px] font-bold uppercase tracking-[0.35em]"
+              style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'Unbounded, sans-serif' }}
+            >
+              Conocimiento
+            </span>
+            <span
+              className="text-[9px] font-bold uppercase tracking-[0.3em]"
+              style={{ color: P.lime, fontFamily: 'Unbounded, sans-serif' }}
+            >
+              3 formatos
+            </span>
+          </div>
+          {/* Sub-category buttons */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0"
+            style={{ divideColor: 'rgba(26,74,30,0.12)' }}>
+            {CATEGORIAS.map(c => {
+              const isActive = categoria === c.id;
+              return (
+                <button
+                  key={c.id}
+                  onClick={() => setCategoria(c.id)}
+                  className="flex flex-col items-start px-5 py-4 transition-all text-left"
+                  style={{
+                    background: isActive ? P.dark : 'white',
+                    borderBottom: '1px solid rgba(26,74,30,0.1)',
+                  }}
+                >
+                  <span
+                    className="text-xs font-bold uppercase tracking-widest leading-none"
+                    style={{
+                      fontFamily: 'Unbounded, sans-serif',
+                      color: isActive ? P.lime : P.darkGreen,
+                    }}
+                  >
+                    {c.label}
+                  </span>
+                  {isActive && (
+                    <span
+                      className="mt-1 text-[9px] uppercase tracking-wider"
+                      style={{ color: 'rgba(245,224,58,0.5)', fontFamily: 'Unbounded, sans-serif' }}
+                    >
+                      seleccionado
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
