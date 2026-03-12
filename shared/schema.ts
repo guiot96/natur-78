@@ -392,7 +392,11 @@ export const companies = pgTable("companies", {
   isVerified: boolean("is_verified").default(false),
   rating: integer("rating").default(0),
   totalReviews: integer("total_reviews").default(0),
-  status: text("status").default("active"), // active, inactive, suspended
+  status: text("status").default("active"),
+  employeeCount: text("employee_count"),
+  socialLinks: jsonb("social_links"),
+  mainServices: text("main_services").array(),
+  festivalExpectations: text("festival_expectations"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
@@ -432,6 +436,10 @@ export const insertCompanySchema = createInsertSchema(companies).omit({
   services: z.array(z.string()).optional().nullable(),
   logo: z.string().optional().nullable(),
   coverImage: z.string().optional().nullable(),
+  employeeCount: z.string().optional().nullable(),
+  socialLinks: z.any().optional().nullable(),
+  mainServices: z.array(z.string()).optional().nullable(),
+  festivalExpectations: z.string().optional().nullable(),
 });
 
 // Admin activity logs table

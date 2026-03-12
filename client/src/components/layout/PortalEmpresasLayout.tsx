@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useLocation, Link, useRoute } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Map, Building2, MessageCircle, Settings, ChevronDown, LogOut, UserIcon, Bell, Home, MapPin, CheckCircle } from "lucide-react";
@@ -44,23 +44,23 @@ export function PortalEmpresasLayout({ children }: PortalEmpresasLayoutProps) {
 
   const activeView = getActiveView();
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: "home", label: "Inicio", icon: Home },
     { id: "map", label: "Mapa", icon: Map },
     { id: "network", label: "Red", icon: Building2 },
     { id: "messages", label: "Chat", icon: MessageCircle }
-  ];
+  ], []);
 
-  const handleNavigation = (viewId: string) => {
-    const routeMap = {
+  const handleNavigation = useCallback((viewId: string) => {
+    const routeMap: Record<string, string> = {
       home: '/portal-empresas',
       map: '/portal-empresas/mapa',
       network: '/portal-empresas/red',
       messages: '/portal-empresas/mensajes'
     };
     
-    navigate(routeMap[viewId as keyof typeof routeMap] || '/portal-empresas');
-  };
+    navigate(routeMap[viewId] || '/portal-empresas');
+  }, [navigate]);
 
   // Fetch current user data from auth endpoint
   const { data: currentUser, isLoading: userLoading, error: userError } = useQuery<SafeUser>({

@@ -9,36 +9,43 @@ import NotFound from "./pages/NotFound";
 import Agenda from "./pages/Agenda";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { setupGlobalErrorHandlers } from "@/lib/errorHandler";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { AuthProvider } from "./contexts/AuthContext";
 import React from "react";
+import { PortalSkeleton } from "@/components/ui/PortalSkeleton";
 
-// Main public pages
 import Tickets from "./pages/Tickets";
 import Noticias from "./pages/Noticias";
 import BlogPost from "./pages/BlogPost";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-// Portal Empresas
-import MinimalistPortalEmpresas from "./pages/MinimalistPortalEmpresas";
+
 import AuthEmpresas from "./pages/AuthEmpresas";
 import ComprehensiveCompanyRegistration from "./pages/ComprehensiveCompanyRegistration";
-import HomePage from "./pages/portal-empresas/HomePage";
-import MapaPage from "./pages/portal-empresas/MapaPage";
-import RedPage from "./pages/portal-empresas/RedPage";
-import ExperienciasPage from "./pages/portal-empresas/ExperienciasPage";
-import MensajesPage from "./pages/portal-empresas/MensajesPage";
-import PerfilPage from "./pages/portal-empresas/PerfilPage";
-import ConfigPage from "./pages/portal-empresas/ConfigPage";
 import { PortalEmpresasLayout } from "./components/layout/PortalEmpresasLayout";
 
-// Misc
-import AdminDashboard from "./pages/AdminDashboard";
+const HomePage = lazy(() => import("./pages/portal-empresas/HomePage"));
+const MapaPage = lazy(() => import("./pages/portal-empresas/MapaPage"));
+const RedPage = lazy(() => import("./pages/portal-empresas/RedPage"));
+const ExperienciasPage = lazy(() => import("./pages/portal-empresas/ExperienciasPage"));
+const MensajesPage = lazy(() => import("./pages/portal-empresas/MensajesPage"));
+const PerfilPage = lazy(() => import("./pages/portal-empresas/PerfilPage"));
+const ConfigPage = lazy(() => import("./pages/portal-empresas/ConfigPage"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+
 import SessionDetail from "./pages/SessionDetail";
 import VerificationPending from "./pages/VerificationPending";
 import EmailVerification from "./pages/EmailVerification";
 
 const queryClient = new QueryClient();
+
+const PortalPage = ({ children }: { children: React.ReactNode }) => (
+  <PortalEmpresasLayout>
+    <Suspense fallback={<PortalSkeleton />}>
+      {children}
+    </Suspense>
+  </PortalEmpresasLayout>
+);
 
 const App = () => {
   useEffect(() => {
@@ -67,34 +74,40 @@ const App = () => {
                 <Route path="/auth/empresas" component={AuthEmpresas} />
                 <Route path="/registro-empresa" component={ComprehensiveCompanyRegistration} />
                 <Route path="/portal-empresas/mapa">
-                  <PortalEmpresasLayout><MapaPage /></PortalEmpresasLayout>
+                  <PortalPage><MapaPage /></PortalPage>
                 </Route>
                 <Route path="/portal-empresas/red">
-                  <PortalEmpresasLayout><RedPage /></PortalEmpresasLayout>
+                  <PortalPage><RedPage /></PortalPage>
                 </Route>
                 <Route path="/portal-empresas/experiencias">
-                  <PortalEmpresasLayout><ExperienciasPage /></PortalEmpresasLayout>
+                  <PortalPage><ExperienciasPage /></PortalPage>
                 </Route>
                 <Route path="/portal-empresas/mensajes">
-                  <PortalEmpresasLayout><MensajesPage /></PortalEmpresasLayout>
+                  <PortalPage><MensajesPage /></PortalPage>
                 </Route>
                 <Route path="/portal-empresas/perfil">
-                  <PortalEmpresasLayout><PerfilPage /></PortalEmpresasLayout>
+                  <PortalPage><PerfilPage /></PortalPage>
                 </Route>
                 <Route path="/portal-empresas/config">
-                  <PortalEmpresasLayout><ConfigPage /></PortalEmpresasLayout>
+                  <PortalPage><ConfigPage /></PortalPage>
                 </Route>
                 <Route path="/portal-empresas">
-                  <PortalEmpresasLayout><HomePage /></PortalEmpresasLayout>
+                  <PortalPage><HomePage /></PortalPage>
                 </Route>
 
                 {/* ── Auth & utility ── */}
                 <Route path="/verificacion-pendiente" component={VerificationPending} />
                 <Route path="/verificar-email" component={EmailVerification} />
-                <Route path="/admin" component={AdminDashboard} />
+                <Route path="/admin">
+                  {() => (
+                    <Suspense fallback={<PortalSkeleton />}>
+                      <AdminDashboard />
+                    </Suspense>
+                  )}
+                </Route>
                 <Route path="/sesion/:sessionId" component={SessionDetail} />
 
-                {/* ── Legacy redirects — keep old blog URLs working ── */}
+                {/* ── Legacy redirects ── */}
                 <Route path="/noticias" component={Noticias} />
                 <Route path="/blog/:slug" component={BlogPost} />
                 <Route path="/about" component={About} />

@@ -11,6 +11,7 @@ Festival NATUR is the official website for the first sustainable tourism festiva
 - **NOSOTROS** — `/nosotros` (About.tsx)
 - **CONTACTO** — `/contacto` (Contact.tsx)
 - **PORTAL EMPRESAS** — `/portal-empresas`
+- **REGISTRO EMPRESA** — `/registro-empresa` — Typeform-style interactive registration (13 steps, fullscreen, animated transitions)
 
 ### Homepage Sections (Index.tsx)
 1. Hero — full-screen bg image + logo + botón COMPRAR ENTRADAS
@@ -70,6 +71,11 @@ Preferred communication style: Simple, everyday language.
 - **Visuals & UX**: Consistent application of glassmorphism, brutalist design elements, and white/dark theme contrast, focusing on high contrast and simplified typography.
 - **7-Step User Flow System**: Complete user journey from registration to traveler map visibility with automatic feature activation, progress tracking, and verification levels.
 - **Facebook-Style Profile System**: Redesigned profile view with cover photo, circular profile picture, and Facebook-inspired layout. Includes a 4-tab edit profile system and a dedicated configuration page for account management, notifications, and privacy settings.
+
+### Performance Optimizations
+- **Lazy Loading**: Portal Empresas pages (Mapa, Red, Experiencias, Mensajes, Perfil, Config) and Admin Dashboard use React.lazy + Suspense with skeleton loading fallbacks for faster initial page loads.
+- **Companies Table Extended**: Added `employeeCount`, `socialLinks` (jsonb), `mainServices` (text array), `festivalExpectations` columns.
+- **Typeform Registration**: Interactive 13-step fullscreen registration at `/registro-empresa` with framer-motion animations, visual business-type cards, keyboard navigation (Enter/Backspace), and animated success/welcome screen with confetti.
 
 ## Recent Changes
 

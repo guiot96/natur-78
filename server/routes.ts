@@ -259,7 +259,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
             coordinates: userData.coordinates || { lat: 4.6097, lng: -74.0817 },
             phone: userData.phone || '',
             website: userData.website || '',
-            isVerified: true
+            isVerified: true,
+            employeeCount: userData.employeeCount || null,
+            socialLinks: userData.socialLinks || null,
+            mainServices: userData.mainServices || null,
+            festivalExpectations: userData.festivalExpectations || null,
           });
         } catch (companyError) {
           console.error("Company creation error:", companyError);

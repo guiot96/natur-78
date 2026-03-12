@@ -438,6 +438,10 @@ export class MemStorage implements IStorage {
       rating: companyData.rating || 0,
       totalReviews: companyData.totalReviews || 0,
       status: companyData.status || "active",
+      employeeCount: companyData.employeeCount || null,
+      socialLinks: companyData.socialLinks || null,
+      mainServices: companyData.mainServices || null,
+      festivalExpectations: companyData.festivalExpectations || null,
       createdAt: new Date(),
       updatedAt: new Date()
     };
