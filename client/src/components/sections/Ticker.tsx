@@ -21,7 +21,11 @@ export function Ticker({ bg = "#1a4a1e", color = "#f5e03a", reverse = false }: {
     >
       <div
         className={`flex whitespace-nowrap ${reverse ? "animate-ticker-reverse" : "animate-ticker"}`}
-        style={{ color, fontFamily: "Unbounded, sans-serif" }}
+        style={{ 
+          color, 
+          fontFamily: "Unbounded, sans-serif",
+          textShadow: `0 2px 8px rgba(0,0,0,0.4)`
+        }}
       >
         {[0, 1].map((i) => (
           <span key={i} className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.28em] pr-16">

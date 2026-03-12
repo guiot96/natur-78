@@ -48,7 +48,7 @@ const Index = () => {
       <Pilares />
 
       {/* Divisor animado */}
-      <Ticker bg="#FCF8EE" color="rgba(25,28,15,0.08)" />
+      <Ticker bg="#FCF8EE" color="#191C0F" />
 
       {/* Ubicación */}
       <Location />
@@ -69,7 +69,7 @@ const Index = () => {
       <Stand />
 
       {/* Divisor animado */}
-      <Ticker bg="#191C0F" color="rgba(202,217,94,0.3)" reverse />
+      <Ticker bg="#FCF8EE" color="#2d7a32" reverse />
 
       {/* 9. Contacto */}
       <ContactForm />
