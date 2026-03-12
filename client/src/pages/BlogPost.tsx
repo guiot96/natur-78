@@ -10,6 +10,7 @@ import {
   Facebook, Twitter, Instagram, Copy,
   ChevronRight, ArrowRight
 } from 'lucide-react';
+import { HeaderButtons } from '@/components/layout/HeaderButtons';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -163,12 +164,13 @@ const BlogPost = () => {
     .map(([key, post]) => ({ slug: key, ...post }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900">
+    <div className="min-h-screen pb-16 md:pb-0 bg-gradient-to-br from-gray-900 via-black to-green-900">
+      <HeaderButtons />
       {/* Header */}
-      <div className="bg-black/50 backdrop-blur-sm border-b border-white/10">
+      <div className="bg-black/50 backdrop-blur-sm border-b border-white/10 mt-14">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-3">
+            <Link to="/historias" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
                 <TreePine className="w-5 h-5 text-white" />
               </div>

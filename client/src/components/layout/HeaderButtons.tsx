@@ -53,7 +53,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
     <>
       {/* ── Top bar ── */}
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-colors duration-200"
+        className="fixed top-0 left-0 right-0 z-[70] transition-colors duration-200"
         style={{
           background: scrolled || open ? '#191C0F' : 'rgba(25,28,15,0.55)',
           borderBottom: '1px solid rgba(255,255,255,0.07)',
@@ -123,7 +123,7 @@ export function HeaderButtons({}: HeaderButtonsProps) {
       {/* ── Full-screen menu overlay ── */}
       {open && (
         <div
-          className="fixed inset-0 z-40 flex flex-col overflow-y-auto"
+          className="fixed inset-0 z-[60] flex flex-col overflow-y-auto"
           style={{ background: '#191C0F', paddingTop: '56px' }}
         >
           <nav className="flex-1 flex flex-col justify-center px-7 sm:px-16 py-6 sm:py-10 max-w-3xl mx-auto w-full">
